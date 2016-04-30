@@ -1,0 +1,38 @@
+# Permalinks
+permalink:           pretty
+
+# Setup
+title:               Aqua-Vis
+tagline:             Visualising Water
+url:                 http://getpoole.com
+paginate:            1
+baseurl:             ""
+
+# Assets
+#
+# We specify the directory for Jekyll so we can use @imports.
+sass:
+  sass_dir:          _sass
+  style:            :compressed
+
+# About/contact
+author:
+  name:              James
+  url:               https://twitter.com/batch21
+  email:             jamesbatchelor@outlook.com
+
+# Custom vars
+version:             1.0.0
+github:
+  repo:              https://github.com/poole/poole
+
+# Gems
+gems:
+  - jekyll-paginate
+  - jekyll-gist
+
+pages_list:
+  Home: '/index'
+  Case Studies: '/case_studies'
+  Blog: '/blog'
+  About: '/about'
