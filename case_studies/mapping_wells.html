@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Adding data points (circles) to the map</title>
+		<script type="text/javascript" src="..assets/js/d3.js"></script>
+		<style type="text/css">
+		
+			circle{
+				-moz-transition: all 0.3s;
+				-o-transition: all 0.3s;
+				-webkit-transition: all 0.3s;
+				transition: all 0.3s;
+			}
+			
+			circle:hover {
+				fill: blue;
+			}
+	
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			//Width and height
+			var w = 600;
+			var h = 800;
+
+			//Define map projection
+			var projection = d3.geo.transverseMercator()
+			      				   .rotate([-77.826, -15.381, 0])
+			      				   .translate([300, 400])
+			      				   .scale(400000);
+
+
+			//Define path generator
+			var path = d3.geo.path()
+							 .projection(projection);
+
+			var color = d3.scale.quantize()
+								.range(["rgb(248,202,140)", "rgb(240,168,72)","rgb(192,120,96)",
+									"rgb(168,96,96)", "rgb(120,72,96)"]);
+							 
+			
+			//Create SVG element
+			var svg_map = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+			d3.json("dhone_area.json", function(json) {
+				
+				//Bind data and create one path per GeoJSON feature
+				svg_map.selectAll("path")
+				   .data(json.features)
+				   .enter()
+				   .append("path")
+				   .attr("d", path)
+				   .attr("fill", "none")
+				   .attr("stroke", "black");
+
+				 });
+				   
+			d3.csv("dhone_wells.csv", function(data) {
+
+				color.domain([d3.min(data, function(d) { return d.depth; }), 
+					d3.max(data, function(d) { return d.depth; })
+				]);
+						
+				svg_map.selectAll("circle")
+				   .data(data)
+				   .enter()
+				   .append("circle")
+				   .attr("cx", function(d) {
+						return projection([d.lon, d.lat])[0];
+				    })
+					.attr("cy", function(d) {
+						return projection([d.lon, d.lat])[1];
+					})
+					.attr("r", 3)
+					.style("fill", function(d){
+					   	var depth = d.depth;
+						if (depth){
+						   	return color(depth);
+						}else{
+						   	return "#ccc";
+						}
+					})
+					.style("opacity", 0.85)
+					.on("mouseover", function(d){
+						d3.select(this).attr("r", 6)
+						svg_map.append("text")
+							.attr("id", "tooltip")
+					   		.attr("x", parseFloat(projection([d.lon, d.lat])[0]))
+					   		.attr("y", parseFloat(projection([d.lon, d.lat])[1]))
+					   		.attr("text-anchor", "middle")
+					  		.attr("font-family", "sans-serif")
+					  		.attr("font-size", "11px")
+					   		.attr("font-weight", "bold")
+					  		.attr("fill", "black")
+					  		.attr("background", "#FFF4C2")
+					   		.text("Well depth: " + d.depth);
+					})  		
+					.on("mouseout", function(){
+						d3.select(this).attr("r", 3)
+						d3.select('#tooltip').remove();
+					});
+										
+					});
+  
+				  
+		
+
+
+			
+		</script>
+	</body>
+</html>
