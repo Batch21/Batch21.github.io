@@ -4,8 +4,9 @@ permalink:           pretty
 # Setup
 title:               Aqua-Vis
 tagline:             Visualising Water
-url:                 http://getpoole.com
-paginate:            1
+url:                 http://aqua-vis.com
+paginate:            5
+paginate_path:       "blog/page:num"
 baseurl:             ""
 
 # Assets
@@ -34,5 +35,6 @@ gems:
 pages_list:
   Home: '/index'
   Case Studies: '/case_studies'
-  Blog: '/blog'
+  Blog: '/blog/index'
   About: '/about'
+
