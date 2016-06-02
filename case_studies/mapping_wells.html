@@ -4,13 +4,14 @@
 		<meta charset="utf-8">
 		<title>D3: Adding data points (circles) to the map</title>
 		<script type="text/javascript" src="/assets/js/d3.js"></script>
+		<script type="text/javascript" src="/assets/js/d3.slider.js"></script>
 		<style type="text/css">
 		
 			circle{
 				-moz-transition: all 0.3s;
 				-o-transition: all 0.3s;
 				-webkit-transition: all 0.3s;
-				transition: all 0.3s;
+				transition: all 0.5s;
 			}
 			
 			circle:hover {
@@ -18,21 +19,33 @@
 			}
 
 			.con{
-				margin: auto;
+				margin: 20px;
+				margin-left: 30px;
 				width: 100%;
+			}
+
+			#slider{
+				width: 600px;
 			}
 	
 		</style>
 		<link rel="stylesheet" type="text/css" href="/styles.css">
+		<link rel="stylesheet" type="text/css" href="/assets/css/d3.slider.css">
 	</head>
 	<body>
-      	<div class="con">
+      <div class="con">
       	<header class="masthead">
         	<h3 class="masthead-title">
 			Visualising Water Scarity in Andhra Pradesh
         	</h3>
         </header>
+        <h2>Year: <span id="slidertext">1970</span></h2>
+    	 <div id="slider"></div>
 		<script type="text/javascript">
+
+			var slider = d3.slider().axis(true).min(1970).max(2012).value(1970).step(1);
+
+			d3.select('#slider').call(slider);
 
 			//Width and height
 			var w = 600;
@@ -55,7 +68,7 @@
 							 
 			
 			//Create SVG element
-			var svg_map = d3.select("body")
+			var svg_map = d3.select(".con")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h)
@@ -80,7 +93,7 @@
 					d3.max(data, function(d) { return d.depth; })
 				]);
 						
-				svg_map.selectAll("circle")
+				var wells = svg_map.selectAll("circle")
 				   .data(data)
 				   .enter()
 				   .append("circle")
@@ -90,7 +103,13 @@
 					.attr("cy", function(d) {
 						return projection([d.lon, d.lat])[1];
 					})
-					.attr("r", 3)
+					.attr("r", function(d){
+						if(d.year <= 1970){
+							return 3;
+						}else{
+							return 0;
+						}
+					})
 					.style("fill", function(d){
 					   	var depth = d.depth;
 						if (depth){
@@ -113,7 +132,7 @@
 					   		.attr("font-weight", "bold")
 					  		.attr("fill", "black")
 					  		.attr("background", "#FFF4C2")
-					   		.text("Well depth: " + d.depth + " metres");	
+					   		.text("Well depth: " + d.year + " metres");	
 					})
 					.on("mouseout", function(){
 						d3.select(this).attr("r", 3);
@@ -121,7 +140,22 @@
 						d3.select('#tooltip').remove();
 					});
 
-				});			
+					slider.on("slide", function(evt, value){
+						d3.select('#slidertext').text(value);
+						wells.attr("r", function(d){
+										//console.log(value)
+										//console.log(d.year)
+										//console.log(" ")
+										if(d.year <= value){
+											return 3;
+										}
+				                    })
+					});
+				});	
+
+			
+
+						
 		</script>
 		</div>
 	</div>
