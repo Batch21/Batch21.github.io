@@ -2,9 +2,11 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>D3: Adding data points (circles) to the map</title>
+		<title>Water Scacity Mapping</title>
+		<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
 		<script type="text/javascript" src="/assets/js/d3.js"></script>
 		<script type="text/javascript" src="/assets/js/d3.slider.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery-3.0.0.js"></script>
 		<style type="text/css">
 		
 			circle{
@@ -18,44 +20,104 @@
 				fill: blue;
 			}
 
-			.con{
-				margin: 20px;
-				margin-left: 30px;
-				width: 100%;
-			}
+            #col{
+            	width:100%;
+            }
 
 			#slider{
-				width: 600px;
+				width: auto;
+				margin-bottom: 20px;
+				margin-left: auto;
+				margin-right: auto;
 			}
+
 	
 		</style>
 		<link rel="stylesheet" type="text/css" href="/styles.css">
 		<link rel="stylesheet" type="text/css" href="/assets/css/d3.slider.css">
 	</head>
 	<body>
-      <div class="con">
-      	<header class="masthead">
-        	<h3 class="masthead-title">
-			Visualising Water Scarity in Andhra Pradesh
-        	</h3>
+      <div class="container">
+       <div class="content">
+      	<header>
+        <h3>Visualising Water Scarity in Andhra Pradesh </h3>
         </header>
         <h2>Year: <span id="slidertext">1970</span></h2>
     	 <div id="slider"></div>
+    	 <div id="con"></div>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+		 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>	
+		 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+		 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+		 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>	
+		 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+		 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+    	 <p> The above map shows....</p>
+       </div>
 		<script type="text/javascript">
+
+			$(function(){
+
+				var $title = $('h3');
+				var $para = $('p');
+				var $window = $("window");
+			
+				$title.on('mouseover', function(e){
+					console.log(e.pageX);
+					$title.css({
+						'color': 'red'
+					});
+				})	
+
+				$title.on("mouseout", function(){
+					$title.css({
+						'color': 'black'
+					});
+				})
+
+				$para.on("mouseover", function(e){
+					console.log($(window).scrollTop());
+				});
+			
+			});
 
 			var slider = d3.slider().axis(true).min(1970).max(2012).value(1970).step(1);
 
 			d3.select('#slider').call(slider);
 
 			//Width and height
-			var w = 600;
-			var h = 800;
+			var w = 380;
+			var h = 700;
 
 			//Define map projection
 			var projection = d3.geo.transverseMercator()
-			      				   .rotate([-77.826, -15.381, 0])
-			      				   .translate([300, 400])
-			      				   .scale(400000);
+			      				   .rotate([-77.82519, -15.39099, 0])
+			      				   .translate([w/2, h/2])
+			      				   .scale(420000);
 
 
 			//Define path generator
@@ -68,15 +130,13 @@
 							 
 			
 			//Create SVG element
-			var svg_map = d3.select(".con")
+			var svg_map = d3.select("#con")
 						.append("svg")
 						.attr("width", w)
-						.attr("height", h)
-						.attr("align", "center");
+						.attr("height", h);
 
 			d3.json("/assets/data/dhone_area.json", function(json) {
 				
-				//Bind data and create one path per GeoJSON feature
 				svg_map.selectAll("path")
 				   .data(json.features)
 				   .enter()
@@ -132,7 +192,7 @@
 					   		.attr("font-weight", "bold")
 					  		.attr("fill", "black")
 					  		.attr("background", "#FFF4C2")
-					   		.text("Well depth: " + d.year + " metres");	
+					   		.text("Well depth: " + d.depth + " metres");	
 					})
 					.on("mouseout", function(){
 						d3.select(this).attr("r", 3);
@@ -143,13 +203,10 @@
 					slider.on("slide", function(evt, value){
 						d3.select('#slidertext').text(value);
 						wells.attr("r", function(d){
-										//console.log(value)
-										//console.log(d.year)
-										//console.log(" ")
-										if(d.year <= value){
-											return 3;
-										}
-				                    })
+							if(d.year <= value){
+								return 3;
+							}
+				        })
 					});
 				});	
 

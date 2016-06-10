@@ -16,10 +16,17 @@
 
   a {
     color: inherit;
-  }
+
+     &:hover,
+     &:focus {
+       text-decoration: none;
+       color: #4D74B3;
+     }
+}
+
 
   small {
-    margin-right: 2rem;
+    margin-right: 1.5rem;
     font-size: 75%;
     font-weight: 400;
     opacity: .5;
@@ -30,6 +37,7 @@
     font-size: 75%;
     font-weight: 400;
     opacity: .9;
-    color: black;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
   }
 }
