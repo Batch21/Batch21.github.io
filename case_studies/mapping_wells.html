@@ -26,9 +26,21 @@
 
 			#slider{
 				width: auto;
-				margin-bottom: 20px;
+				margin-bottom: 40px;
 				margin-left: auto;
 				margin-right: auto;
+			}
+
+			.well-viz-com{
+				display: inline-block;
+			}
+
+			.well-viz-com{
+				margin-right: 50px;
+			}
+
+			.charts{
+				display: float;
 			}
 
 	
@@ -42,40 +54,16 @@
       	<header>
         <h3>Visualising Water Scarity in Andhra Pradesh </h3>
         </header>
-        <h2>Year: <span id="slidertext">1970</span></h2>
-    	 <div id="slider"></div>
-    	 <div id="con"></div>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-		 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>	
-		 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-		 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-		 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>	
-		 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-		 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
-    	 <p> The above map shows....</p>
+        
+    	 <div id="well-viz">
+    	 	<h2>Year: <span id="slidertext">1970</span></h2>
+    	    <div id="slider"></div>
+    	    <div id="well-viz-map" class="well-viz-com"></div>
+    	 	<div class="well-viz-com" >
+    	 		<div id="well-viz-chart1" class="charts"></div>
+    	 		<div id="well-viz-chart2" class="charts"></div>
+    	 	</div>
+    	 </div>
     	 <p> The above map shows....</p>
        </div>
 		<script type="text/javascript">
@@ -110,8 +98,9 @@
 			d3.select('#slider').call(slider);
 
 			//Width and height
-			var w = 380;
+			var w = 380; 
 			var h = 700;
+			var h2 = 350;
 
 			//Define map projection
 			var projection = d3.geo.transverseMercator()
@@ -127,13 +116,14 @@
 			var color = d3.scale.quantize()
 								.range(["rgb(248,202,140)", "rgb(240,168,72)","rgb(192,120,96)",
 									"rgb(168,96,96)", "rgb(120,72,96)"]);
-							 
 			
 			//Create SVG element
-			var svg_map = d3.select("#con")
+			var svg_map = d3.select("#well-viz-map")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
+
+			
 
 			d3.json("/assets/data/dhone_area.json", function(json) {
 				
@@ -146,8 +136,82 @@
 				   .attr("stroke", "black");
 
 				 });
+
+            
+
+            var svg_chart1 = d3.select("#well-viz-chart1")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h2);
+
+			var svg_chart2 = d3.select("#well-viz-chart2")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h2);
+
+            xType = d3.scale.ordinal()
+            	.rangeRoundBands([0, w], 0.05);
+		 	yType = d3.scale.linear()
+		 		.range([0, h2]);
+
+		 	xDepth = d3.scale.ordinal()
+            	.rangeRoundBands([0, w], 0.05);
+		 	yDepth = d3.scale.linear()
+		 		.range([0, h2]);
 				   
 			d3.csv("/assets/data/dhone_wells.csv", function(data) {
+
+			
+				var key = function(d) {
+					return d.key;
+				};
+
+				var wellTypes = countWellTypes(data, 2014);
+				xType.domain(d3.range(wellTypes.length))
+				yType.domain([0, d3.max(wellTypes, function(d) { return d.value; })])
+
+				wellTypes = countWellTypes(data, 1970);
+				
+				var chart1 = svg_chart1.selectAll("rect")
+			   		.data(wellTypes, key)		
+			   		.enter()
+			   		.append("rect")
+			   		.attr("x", function(d, i) {
+			   			return xType(i);
+			   		})
+			   		.attr("y", function(d) {
+			   			return h2 - yType(d.value);
+			   		})
+			   		.attr("width", xType.rangeBand())
+			   		.attr("height", function(d) {
+			   			return yType(d.value);
+			   		});
+
+
+			   	var wellDepths = countWellDepths(data, 2014);
+			   	console.log(wellDepths);
+				xDepth.domain(d3.range(wellDepths.length))
+				yDepth.domain([0, d3.max(wellDepths, function(d) { return d.value; })])
+
+				wellDepths = countWellDepths(data, 1970);
+				console.log(wellDepths)
+				var chart1 = svg_chart2.selectAll("rect")
+			   		.data(wellDepths, key)		
+			   		.enter()
+			   		.append("rect")
+			   		.attr("x", function(d, i) {
+			   			return xDepth(i);
+			   		})
+			   		.attr("y", function(d) {
+			   			return h2 - yDepth(d.value);
+			   		})
+			   		.attr("width", xDepth.rangeBand())
+			   		.attr("height", function(d) {
+			   			return yDepth(d.value);
+			   		});
+
+
+
 
 				color.domain([d3.min(data, function(d) { return d.depth; }), 
 					d3.max(data, function(d) { return d.depth; })
@@ -207,8 +271,99 @@
 								return 3;
 							}
 				        })
+
+						wellTypes = countWellTypes(data, value);
+
+						var bars1 = svg_chart1.selectAll("rect")
+							.data(wellTypes, key);
+
+
+						bars1.transition()
+							.duration(400)
+							.attr("y", function(d) {
+								return h2 - yType(d.value);
+							})
+							.attr("height", function(d) {
+								return yType(d.value);
+							})
+
+						wellDepths = countWellDepths(data, value);
+
+						var bars2 = svg_chart2.selectAll("rect")
+							.data(wellDepths, key);
+
+
+						bars2.transition()
+							.duration(400)
+							.attr("y", function(d) {
+								return h2 - yDepth(d.value);
+							})
+							.attr("height", function(d) {
+								return yDepth(d.value);
+							})
+
+				        var count = 0;
+						for (var i = 0; i < data.length; i++) {
+							//console.log(data[i].year)
+							if(data[i].year <= value){
+								count += 1;
+					        }
+						}
+						//console.log(count);
 					});
-				});	
+				});
+
+				function countWellTypes(data, year){
+
+					var entries = new Set()
+					var types = [];
+
+					for (var i = 0; i < data.length; i++) {
+						entries.add(data[i].type)			      
+					}
+
+					for (let item of entries){
+						entry = {}
+						count = 0
+						for (var i = 0; i < data.length; i++) {
+							if(data[i].year <= year){
+								if(data[i].type == item){
+				    				count += 1;
+								}
+		   					}	 			      
+						}
+						entry.key = item;
+						entry.value = count;
+						types.push(entry)
+					}
+					return types;
+				}
+
+				function countWellDepths(data, year){
+
+					var entries = new Set()
+					var depth = [];
+
+					for (var i = 0; i < data.length; i++) {
+						entries.add(data[i].depth_bin)			      
+					}
+
+					for (let item of entries){
+						entry = {}
+						count = 0
+						for (var i = 0; i < data.length; i++) {
+							if(data[i].year <= year){
+								if(data[i].depth_bin == item){
+				    				count += 1;
+								}
+		   					}	 			      
+						}
+						entry.key = item;
+						entry.value = count;
+						depth.push(entry)
+					}
+					return depth;
+				}	
 
 			
 
