@@ -35,12 +35,26 @@
 				display: inline-block;
 			}
 
-			.well-viz-map{
-				margin-right: 50px;
+			.mapBorder{
+				stroke: black;
+				fill: none;
+				stroke-width: 1;
 			}
 
 			.charts{
 				display: float;
+			}
+
+			.axis path,
+			.axis line {
+				fill: none;
+				stroke: black;
+				shape-margin: crispEdges;
+			}
+
+			.axis text {
+				font-family: sans-serif;
+				font-size: 10px;
 			}
 
 	
@@ -97,13 +111,14 @@
 
 			d3.select('#slider').call(slider);
 
-			var margin = {top: 20, right: 10, bottom: 20, left: 10};
+			var margin_map = {top: 20, right: 10, bottom: 20, left: 10};
+			var margin_bar = {top: 20, right: 20, bottom: 20, left: 40};
 
 			//Width and height
-			var w = 400 - margin.left - margin.right,
-				w2 = 400 - margin.left - margin.right,
-			    h = 740 - margin.top - margin.bottom,
-			    h2 = 350 - margin.left - margin.right;
+			var w = 400 - margin_map.left - margin_map.right,
+				w2 = 280 - margin_bar.left - margin_bar.right,
+			    h = 740 - margin_map.top - margin_map.bottom,
+			    h2 = 370 - margin_bar.left - margin_bar.right;
 
 			//Define map projection
 			var projection = d3.geo.transverseMercator()
@@ -122,12 +137,18 @@
 			
 			//Create SVG element
 			var svg_map = d3.select("#well-viz-map").append("svg")
-				.attr("width", w + margin.left + margin.right)
-    			.attr("height", h + margin.top + margin.bottom)
+				.attr("width", w + margin_map.left + margin_map.right)
+    			.attr("height", h + margin_map.top + margin_map.bottom)
   				.append("g")
-    			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    			.attr("transform", "translate(" + margin_map.left + "," + margin_map.top + ")");
 
-			
+    		svg_map.append("rect")
+    			.attr("class", "mapBorder")
+    			.attr("x", 0)
+    			.attr("y", 0)
+    			.attr("height", h)
+    			.attr("width", w)
+
 
 			d3.json("/assets/data/dhone_area.json", function(json) {
 				
@@ -144,26 +165,28 @@
             
 
             var svg_chart1 = d3.select("#well-viz-chart1").append("svg")
-						.attr("width", w2 + margin.left + margin.right)
-    					.attr("height", h2 + margin.top + margin.bottom)
+						.attr("width", w2 + margin_bar.left + margin_bar.right)
+    					.attr("height", h2 + margin_bar.top + margin_bar.bottom)
   						.append("g")
-    					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    					.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
 
 			var svg_chart2 = d3.select("#well-viz-chart2").append("svg")
-						.attr("width", w2 + margin.left + margin.right)
-    					.attr("height", h2 + margin.top + margin.bottom)
+						.attr("width", w2 + margin_bar.left + margin_bar.right)
+    					.attr("height", h2 + margin_bar.top + margin_bar.bottom)
   						.append("g")
-    					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    					.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
 
             xType = d3.scale.ordinal()
-            	.rangeRoundBands([0, w], 0.05);
+            	.rangeRoundBands([0, w2], 0.05);
 		 	yType = d3.scale.linear()
-		 		.range([0, h2]);
+		 		.range([h2, 0]);
 
 		 	xDepth = d3.scale.ordinal()
-            	.rangeRoundBands([0, w], 0.05);
+            	.rangeRoundBands([0, w2], 0.05);
 		 	yDepth = d3.scale.linear()
-		 		.range([0, h2]);
+		 		.range([h2, 0]);
+
+		 	
 				   
 			d3.csv("/assets/data/dhone_wells.csv", function(data) {
 
@@ -193,6 +216,20 @@
 				xType.domain(d3.range(wellTypes.length))
 				yType.domain([0, d3.max(wellTypes,
 				 function(d) { return d.values.count; })])
+
+				svg_chart1.append("g")
+				.attr("class", "axis")
+		 		.call(d3.svg.axis()
+		 		.scale(yType)
+		 		.orient("left"));
+
+		 		svg_chart1.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(0, " + h2 + ")")
+		 		.call(d3.svg.axis()
+		 		.scale(xType)
+		 		.orient("bottom"));
+
                 wellTypes = countWells(data, "type", 1970);
 				
 				var chart1 = svg_chart1.selectAll("rect")
@@ -203,11 +240,11 @@
 			   			return xType(i);
 			   		})
 			   		.attr("y", function(d) {
-			   			return h2 - yType(d.values.count);
+			   			return yType(d.values.count);
 			   		})
 			   		.attr("width", xType.rangeBand())
 			   		.attr("height", function(d) {
-			   			return yType(d.values.count);
+			   			return h2 - yType(d.values.count);
 			   		});
 
 
@@ -215,9 +252,23 @@
 				xDepth.domain(d3.range(wellDepths.length))
 				yDepth.domain([0, d3.max(wellDepths,
 					function(d) { return d.values.count; })])
+
+				svg_chart2.append("g")
+				.attr("class", "axis")
+		 		.call(d3.svg.axis()
+		 		.scale(yDepth)
+		 		.orient("left"));
+
+		 		svg_chart2.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(0, " + h2 + ")")
+		 		.call(d3.svg.axis()
+		 		.scale(xDepth)
+		 		.orient("bottom"));
+
 				wellDepths = countWells(data, "depth_bin", 1970);
 				
-				var chart1 = svg_chart2.selectAll("rect")
+				var chart2 = svg_chart2.selectAll("rect")
 			   		.data(wellDepths)		
 			   		.enter()
 			   		.append("rect")
@@ -225,11 +276,11 @@
 			   			return xDepth(i);
 			   		})
 			   		.attr("y", function(d) {
-			   			return h2 - yDepth(d.values.count);
+			   			return yDepth(d.values.count);
 			   		})
 			   		.attr("width", xDepth.rangeBand())
 			   		.attr("height", function(d) {
-			   			return yDepth(d.values.count);
+			   			return h2 - yDepth(d.values.count);
 			   		});
 
 
@@ -303,10 +354,11 @@
 						bars1.transition()
 							.duration(100)
 							.attr("y", function(d) {
-								return h2 - yType(d.values.count);
+								return yType(d.values.count);
 							})
 							.attr("height", function(d) {
-								return yType(d.values.count);
+								
+								return h2 - yType(d.values.count);
 							})
 
 						wellDepths = countWells(data, "depth_bin", value);
@@ -318,10 +370,10 @@
 						bars2.transition()
 							.duration(100)
 							.attr("y", function(d) {
-								return h2 - yDepth(d.values.count);
+								return yDepth(d.values.count);
 							})
 							.attr("height", function(d) {
-								return yDepth(d.values.count);
+								return h2 - yDepth(d.values.count);
 							})
 
 				        var count = 0;
