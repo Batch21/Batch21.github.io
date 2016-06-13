@@ -14,24 +14,27 @@
 				-o-transition: all 0.3s;
 				-webkit-transition: all 0.3s;
 				transition: all 0.5s;
+				transition-property: all;
+				transition-duration: 0.5s;
 			}
 			
 			circle:hover {
 				fill: blue;
 			}
-
+            
             #col{
             	width:100%;
             }
 
 			#slider{
-				width: auto;
+				
 				margin-bottom: 40px;
 				margin-left: auto;
 				margin-right: auto;
 			}
 
-			.well-viz-com{
+			#well-viz-map,
+			#well-viz-charts{
 				display: inline-block;
 			}
 
@@ -49,6 +52,7 @@
 			.axis line {
 				fill: none;
 				stroke: black;
+				stroke-width: 0.5;
 				shape-margin: crispEdges;
 			}
 
@@ -70,12 +74,14 @@
         </header>
         
     	 <div id="well-viz">
-    	 	<h2>Year: <span id="slidertext">1970</span></h2>
+    	 	<h4>Year: <span id="slidertext">1980</span></h4>
     	    <div id="slider"></div>
-    	    <div id="well-viz-map" class="well-viz-com"></div>
-    	 	<div class="well-viz-com" >
-    	 		<div id="well-viz-chart1" class="charts"></div>
-    	 		<div id="well-viz-chart2" class="charts"></div>
+    	    <div class="well-viz-com">
+    	     <div id="well-viz-map"></div>
+    	 	 <div id="well-viz-charts" >
+    	 		 <div id="well-viz-chart2" class="charts"></div>
+    	 		 <div id="well-viz-chart1" class="charts"></div>
+    	 	 </div>
     	 	</div>
     	 </div>
     	 <p> The above map shows....</p>
@@ -107,16 +113,17 @@
 			
 			});
 
-			var slider = d3.slider().axis(true).min(1970).max(2012).value(1970).step(1);
+			var startYear = 1980;	
 
+			// Add slider
+			var slider = d3.slider().axis(true).min(startYear).max(2012).value(startYear).step(1);
 			d3.select('#slider').call(slider);
 
-			var margin_map = {top: 20, right: 10, bottom: 20, left: 10};
-			var margin_bar = {top: 20, right: 20, bottom: 20, left: 40};
-
-			//Width and height
-			var w = 400 - margin_map.left - margin_map.right,
-				w2 = 280 - margin_bar.left - margin_bar.right,
+			// Define Widths and heights and margins
+			var margin_map = {top: 10, right: 10, bottom: 10, left: 10},
+				margin_bar = {top: 10, right: 20, bottom: 50, left: 45};
+			var w = 580 - margin_map.left - margin_map.right,
+				w2 = 300 - margin_bar.left - margin_bar.right,
 			    h = 740 - margin_map.top - margin_map.bottom,
 			    h2 = 370 - margin_bar.left - margin_bar.right;
 
@@ -131,11 +138,12 @@
 			var path = d3.geo.path()
 							 .projection(projection);
 
-			var color = d3.scale.quantize()
-								.range(["rgb(248,202,140)", "rgb(240,168,72)","rgb(192,120,96)",
-									"rgb(168,96,96)", "rgb(120,72,96)"]);
+
+			var color = d3.scale.threshold()
+								.domain([10, 50, 100, 300])
+								.range(["#FEECAE", "#F0A848","#C07860", "#604860"]);
 			
-			//Create SVG element
+			//Create map SVG elements
 			var svg_map = d3.select("#well-viz-map").append("svg")
 				.attr("width", w + margin_map.left + margin_map.right)
     			.attr("height", h + margin_map.top + margin_map.bottom)
@@ -150,6 +158,7 @@
     			.attr("width", w)
 
 
+			// Add village boundary to map
 			d3.json("/assets/data/dhone_area.json", function(json) {
 				
 				svg_map.selectAll("path")
@@ -160,10 +169,10 @@
 				   .attr("fill", "none")
 				   .attr("stroke", "black");
 
+
 				 });
 
-            
-
+            // Create chart SVGs
             var svg_chart1 = d3.select("#well-viz-chart1").append("svg")
 						.attr("width", w2 + margin_bar.left + margin_bar.right)
     					.attr("height", h2 + margin_bar.top + margin_bar.bottom)
@@ -176,6 +185,7 @@
   						.append("g")
     					.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
 
+            // Create chart scales
             xType = d3.scale.ordinal()
             	.rangeRoundBands([0, w2], 0.05);
 		 	yType = d3.scale.linear()
@@ -187,51 +197,53 @@
 		 		.range([h2, 0]);
 
 		 	
-				   
+			// Add Well Data	   
 			d3.csv("/assets/data/dhone_wells.csv", function(data) {
 
-			    function countWells(data, attr, year){
-					
-					var nested = d3.nest()
-                    	.key(function(d) {
-                        	return d[attr];
-                        	})
-                    	.rollup(function(leaves) {
-                        	var count = d3.sum(leaves, function(d) {
-                        		if(d['year'] <= year){;
-                            		return d['count'];
-                            	}		
-                        });
-                        return {
-                        	'count': count
-                        };
-                    })
-                    .entries(data);
-
-                    return nested;
-                }
-                
-
+				// Group data and define scale domains for type bar chart using complete dataset
 				var wellTypes = countWells(data, "type", 2012);
 				xType.domain(d3.range(wellTypes.length))
 				yType.domain([0, d3.max(wellTypes,
-				 function(d) { return d.values.count; })])
-
+				 function(d) { return d.values; })])
+				
+				// Add axes for type bar chart
 				svg_chart1.append("g")
-				.attr("class", "axis")
+				.attr("class", "y axis")
 		 		.call(d3.svg.axis()
 		 		.scale(yType)
 		 		.orient("left"));
 
 		 		svg_chart1.append("g")
-				.attr("class", "axis")
+				.attr("class", "x axis")
 				.attr("transform", "translate(0, " + h2 + ")")
 		 		.call(d3.svg.axis()
 		 		.scale(xType)
-		 		.orient("bottom"));
+		 		.orient("bottom")
+		 		.tickFormat(function(d){return wellTypes[d].key;}))
+		 		.selectAll(".tick text")
+		 			.call(wrap, xType.rangeBand());
 
-                wellTypes = countWells(data, "type", 1970);
-				
+		 		// Add axes titles for type chart 
+		 		svg_chart1.append("text")
+        			.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 5) + ")")
+        			.style("text-anchor", "middle")
+        			.style("font-size", "12px")
+        			.style("font-weight", "bold")
+        			.text("Well Type")
+
+        		svg_chart1.append("text")
+        			.attr("transform", "rotate(-90)")
+        			.attr("y", 0 - margin_bar.left + 10)
+        			.attr("x",0 - (h2 / 2))
+        			.style("text-anchor", "middle")
+        			.style("font-size", "12px")
+        			.style("font-weight", "bold")
+        			.text("Number of Wells");
+
+        		// Regroup data	for start year
+                wellTypes = countWells(data, "type", startYear);
+
+                // Add bars for type chart
 				var chart1 = svg_chart1.selectAll("rect")
 			   		.data(wellTypes)		
 			   		.enter()
@@ -240,34 +252,64 @@
 			   			return xType(i);
 			   		})
 			   		.attr("y", function(d) {
-			   			return yType(d.values.count);
+			   			return yType(d.values);
 			   		})
 			   		.attr("width", xType.rangeBand())
 			   		.attr("height", function(d) {
-			   			return h2 - yType(d.values.count);
+			   			return h2 - yType(d.values);
+			   		})
+			   		.style("fill", function(d){
+			   			if(d.key === "Open Well"){
+			   				return "#C4ED68"
+			   			} else if(d.key === "Agricultural Borewell"){
+			   				return "#59A80F"
+			   			} else if(d.key === "Domestic Borewell"){
+			   				return "1E9EB8"
+			   			}
 			   		});
 
-
+			   	// Group data and define scale domains for depth bar chart using complete dataset
 			   	var wellDepths = countWells(data, "depth_bin", 2012);
 				xDepth.domain(d3.range(wellDepths.length))
 				yDepth.domain([0, d3.max(wellDepths,
-					function(d) { return d.values.count; })])
-
+					function(d) {return d.values; })])
+				
+				// Add axes for depth bar chart
 				svg_chart2.append("g")
-				.attr("class", "axis")
+				.attr("class", "y axis")
 		 		.call(d3.svg.axis()
 		 		.scale(yDepth)
 		 		.orient("left"));
 
 		 		svg_chart2.append("g")
-				.attr("class", "axis")
+				.attr("class", "x axis")
 				.attr("transform", "translate(0, " + h2 + ")")
 		 		.call(d3.svg.axis()
 		 		.scale(xDepth)
-		 		.orient("bottom"));
+		 		.orient("bottom")
+		 		.tickFormat(function(d){return wellDepths[d].key;}));
 
-				wellDepths = countWells(data, "depth_bin", 1970);
+		 		// Add axes titles for depth chart 
+		 		svg_chart2.append("text")
+        			.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 15) + ")")
+        			.style("text-anchor", "middle")
+        			.style("font-size", "12px")
+        			.style("font-weight", "bold")
+        			.text("Well Depth (metres)")
+
+        		svg_chart2.append("text")
+        			.attr("transform", "rotate(-90)")
+        			.attr("y", 0 - margin_bar.left + 10)
+        			.attr("x",0 - (h2 / 2))
+        			.style("text-anchor", "middle")
+        			.style("font-size", "12px")
+        			.style("font-weight", "bold")
+        			.text("Number of Wells");
+
+        		// Regroup data	for start year	
+				wellDepths = countWells(data, "depth_bin", startYear);
 				
+				// Add bars for depth chart
 				var chart2 = svg_chart2.selectAll("rect")
 			   		.data(wellDepths)		
 			   		.enter()
@@ -276,20 +318,25 @@
 			   			return xDepth(i);
 			   		})
 			   		.attr("y", function(d) {
-			   			return yDepth(d.values.count);
+			   			return yDepth(d.values);
 			   		})
 			   		.attr("width", xDepth.rangeBand())
 			   		.attr("height", function(d) {
-			   			return h2 - yDepth(d.values.count);
+			   			return h2 - yDepth(d.values);
+			   		})
+			   		.style("fill", function(d){
+			   			if(d.key === "0 - 10"){
+			   				return "#F8CA8C";
+			   			} else if (d.key === "10 - 50"){
+			   				return "#F0A848";
+			   			} else if (d.key === "50 - 100"){
+			   				return "#C07860";
+			   			} else if(d.key === "100 +"){
+			   				return "#604860";
+			   			}
 			   		});
 
-
-
-
-				color.domain([d3.min(data, function(d) { return d.depth; }), 
-					d3.max(data, function(d) { return d.depth; })
-				]);
-						
+				// Add wells to map		
 				var wells = svg_map.selectAll("circle")
 				   .data(data)
 				   .enter()
@@ -301,7 +348,7 @@
 						return projection([d.lon, d.lat])[1];
 					})
 					.attr("r", function(d){
-						if(d.year <= 1970){
+						if(d.year <= startYear){
 							return 3;
 						}else{
 							return 0;
@@ -337,55 +384,89 @@
 						d3.select('#tooltip').remove();
 					});
 
+					// slider event 
 					slider.on("slide", function(evt, value){
+						
+						// update wells on map
 						d3.select('#slidertext').text(value);
 						wells.attr("r", function(d){
-							if(d.year <= value){
-								return 3;
-							}
-				        })
+								if(d.year <= value){
+									return 3;
+								}
+				        	 })
 
+						// Update type chart
 						wellTypes = countWells(data, "type", value);
-
 						var bars1 = svg_chart1.selectAll("rect")
 							.data(wellTypes);
-
-
 						bars1.transition()
 							.duration(100)
 							.attr("y", function(d) {
-								return yType(d.values.count);
+								return yType(d.values);
 							})
 							.attr("height", function(d) {
 								
-								return h2 - yType(d.values.count);
+								return h2 - yType(d.values);
 							})
 
+						//Update depth chart	
 						wellDepths = countWells(data, "depth_bin", value);
-
 						var bars2 = svg_chart2.selectAll("rect")
 							.data(wellDepths);
-
-
 						bars2.transition()
 							.duration(100)
 							.attr("y", function(d) {
-								return yDepth(d.values.count);
+								return yDepth(d.values);
 							})
 							.attr("height", function(d) {
-								return h2 - yDepth(d.values.count);
+								return h2 - yDepth(d.values);
 							})
 
-				        var count = 0;
-						for (var i = 0; i < data.length; i++) {
-							//console.log(data[i].year)
-							if(data[i].year <= value){
-								count += 1;
-					        }
-						}
-						//console.log(count);
 					});
 				});
+
+	function countWells(data, attr, year){
+					
+					var nested = d3.nest()
+                    	.key(function(d) {
+                        	return d[attr];
+                        	})
+                    	.rollup(function(wells) {
+
+                        	var count = d3.sum(wells, function(d) {
+                        		if(d['year'] <= year){;
+                            		return d['count'];
+                            	}		
+                        });
+                        return count;
+                    })
+                    .entries(data);
+                    return nested;
+                }
+
+    function wrap(text, width) {
+  		text.each(function() {
+    	var text = d3.select(this),
+        	words = text.text().split(/\s+/).reverse(),
+        	word,
+        	line = [],
+        	lineNumber = 0,
+        	lineHeight = 1.1, // ems
+        	y = text.attr("y"),
+        	dy = parseFloat(text.attr("dy")),
+        	tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    	while (word = words.pop()) {
+      		line.push(word);
+      		tspan.text(line.join(" "));
+      		if (tspan.node().getComputedTextLength() > width) {
+        	line.pop();
+        	tspan.text(line.join(" "));
+        	line = [word];
+        	tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
 
 						
 		</script>
