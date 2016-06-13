@@ -1,8 +1,4 @@
 
-		 		.tickFormat(function(d){return d.values.count;}
-
-
-
 function countWellTypes(data, year){
 
 	var entries = new Set()

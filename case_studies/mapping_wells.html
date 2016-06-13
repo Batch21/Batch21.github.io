@@ -9,13 +9,11 @@
 		<script type="text/javascript" src="/assets/js/jquery-3.0.0.js"></script>
 		<style type="text/css">
 		
-			circle{
+			.well{
 				-moz-transition: all 0.3s;
 				-o-transition: all 0.3s;
 				-webkit-transition: all 0.3s;
 				transition: all 0.5s;
-				transition-property: all;
-				transition-duration: 0.5s;
 			}
 			
 			circle:hover {
@@ -113,7 +111,8 @@
 			
 			});
 
-			var startYear = 1980;	
+			var startYear = 1980;
+			var sliderYear = 1980;	
 
 			// Add slider
 			var slider = d3.slider().axis(true).min(startYear).max(2012).value(startYear).step(1);
@@ -137,6 +136,11 @@
 			//Define path generator
 			var path = d3.geo.path()
 							 .projection(projection);
+
+			var pathWells = d3.geo.path()
+							 .projection(projection);
+
+
 
 
 			var color = d3.scale.threshold()
@@ -168,9 +172,7 @@
 				   .attr("d", path)
 				   .attr("fill", "none")
 				   .attr("stroke", "black");
-
-
-				 });
+				 
 
             // Create chart SVGs
             var svg_chart1 = d3.select("#well-viz-chart1").append("svg")
@@ -199,6 +201,83 @@
 		 	
 			// Add Well Data	   
 			d3.csv("/assets/data/dhone_wells.csv", function(data) {
+
+				// Add wells to map		
+				var wells = svg_map.selectAll("path")
+				   .data(data)
+				   .enter()
+				   .append("path")
+				   .attr("transform", function(d){ return "translate(" + projection([d.lon, d.lat])[0] + "," + projection([d.lon, d.lat])[1] + ")";})
+				   .attr("d", d3.svg.symbol()
+				   	.size(function(d){
+				   		if(d.year <= startYear){
+				   			return 30;
+				   		} else{
+				   			return 0;
+				   		}
+				   	})
+					.type(function(d){
+				   		if(d.type === "Open Well"){
+				   			return "square";
+				   		} else if (d.type === "Agricultural Borewell"){
+				   			return "circle";
+				   		} else if(d.type === "Domestic Borewell"){
+				   			return "triangle-up";
+				   		}
+				   	}))
+					.attr("class", "well")
+					.style("fill", function(d){
+					   	var depth = d.depth;
+						if (depth){
+						   	return color(depth);
+						}else{
+						   	return "#ccc";
+						}
+					})
+					.style("opacity", 0.85)
+					.on("mouseover", function(d){
+						d3.select(this)
+							.style("stroke", "black")
+							.attr("d", d3.svg.symbol()
+				   			.size(150)
+				   			.type(function(d){
+				   				if(d.type === "Open Well"){
+				   					return "square";
+				   				} else if (d.type === "Agricultural Borewell"){
+				   					return "circle";
+				   				} else if(d.type === "Domestic Borewell"){
+				   					return "triangle-up";
+				   				}
+				   		}));
+						d3.select(this).attr("stroke", "black");
+						svg_map.append("text")	
+							.attr("id", "tooltip")
+					   		.attr("x", parseFloat(projection([d.lon, d.lat])[0]) + 7)
+					   		.attr("y", parseFloat(projection([d.lon, d.lat])[1]) - 7)
+					   		.attr("text-anchor", "left")
+					  		.attr("font-family", "sans-serif")
+					  		.attr("font-size", "16px")
+					   		.attr("font-weight", "bold")
+					  		.attr("fill", "black")
+					   		.text("Well depth: " + d.depth + " metres");	
+					})
+					.on("mouseout", function(){
+						d3.select(this)
+							.style("stroke", "none")
+							.attr("d", d3.svg.symbol()
+				   			.size(35)
+				   			.type(function(d){
+				   				if(d.type === "Open Well"){
+				   					return "square";
+				   				} else if (d.type === "Agricultural Borewell"){
+				   					return "circle";
+				   				} else if(d.type === "Domestic Borewell"){
+				   					return "triangle-up";
+				   				}
+				   		}));
+						d3.select(this).attr("stroke", "none");
+						d3.select('#tooltip').remove();
+					});
 
 				// Group data and define scale domains for type bar chart using complete dataset
 				var wellTypes = countWells(data, "type", 2012);
@@ -266,7 +345,66 @@
 			   			} else if(d.key === "Domestic Borewell"){
 			   				return "1E9EB8"
 			   			}
-			   		});
+			   		})
+			   		.style("opacity", 0.7)
+			   		.on("mouseover", function(d){
+							d3.select(this)
+							//.style("stroke", "black")
+							.style("opacity", 1);
+
+							svg_map.selectAll(".well")
+							.style("stroke", function(j){
+								if(j.year <= sliderYear & d.key === j.type){
+									return "black";
+								}
+							})
+							.attr("d", d3.svg.symbol()
+				   			.size(function(j){
+				   				if (j.year <= sliderYear){
+				   					if(d.key === j.type){
+				   						return 40;
+				   					}else{
+				   						return 0;
+				   					}
+				   				}else{
+				   					return 0;
+				   				}
+				   			})
+				   			.type(function(j){
+				   				if(j.type === "Open Well"){
+				   					return "square";
+				   				} else if (j.type === "Agricultural Borewell"){
+				   					return "circle";
+				   				} else if(j.type === "Domestic Borewell"){
+				   					return "triangle-up";
+				   				}
+							}));
+					})
+					.on("mouseout", function(d){
+							d3.select(this)
+							//.style("stroke", "none")
+							.style("opacity", 0.7);
+
+							svg_map.selectAll(".well")
+							.style("stroke", "none")
+							.attr("d", d3.svg.symbol()
+				   			.size(function(j){
+				   				if(j.year <= sliderYear){
+				   					return 30;
+				   				}else{
+				   					return 0;
+				   				}
+				   			})
+				   			.type(function(j){
+				   				if(j.type === "Open Well"){
+				   					return "square";
+				   				} else if (j.type === "Agricultural Borewell"){
+				   					return "circle";
+				   				} else if(j.type === "Domestic Borewell"){
+				   					return "triangle-up";
+				   				}
+							}));
+					});
 
 			   	// Group data and define scale domains for depth bar chart using complete dataset
 			   	var wellDepths = countWells(data, "depth_bin", 2012);
@@ -334,66 +472,88 @@
 			   			} else if(d.key === "100 +"){
 			   				return "#604860";
 			   			}
-			   		});
+			   		})
+			   		.style("opacity", 0.7)
+			   		.on("mouseover", function(d){
+							d3.select(this)
+							.style("opacity", 1);
 
-				// Add wells to map		
-				var wells = svg_map.selectAll("circle")
-				   .data(data)
-				   .enter()
-				   .append("circle")
-				   .attr("cx", function(d) {
-						return projection([d.lon, d.lat])[0];
-				    })
-					.attr("cy", function(d) {
-						return projection([d.lon, d.lat])[1];
+							svg_map.selectAll(".well")
+							.style("stroke", function(j){
+								if(j.year <= sliderYear & d.key === j.depth_bin){
+									return "black";
+								}
+							})
+							.attr("d", d3.svg.symbol()
+				   			.size(function(j){
+				   				if (j.year <= sliderYear){
+				   					if(d.key === j.depth_bin){
+				   						return 40;
+				   					}else{
+				   						return 0;
+				   					}
+				   				}else{
+				   					return 0;
+				   				}
+				   			})
+				   			.type(function(j){
+				   				if(j.type === "Open Well"){
+				   					return "square";
+				   				} else if (j.type === "Agricultural Borewell"){
+				   					return "circle";
+				   				} else if(j.type === "Domestic Borewell"){
+				   					return "triangle-up";
+				   				}
+							}));
 					})
-					.attr("r", function(d){
-						if(d.year <= startYear){
-							return 3;
-						}else{
-							return 0;
-						}
-					})
-					.style("fill", function(d){
-					   	var depth = d.depth;
-						if (depth){
-						   	return color(depth);
-						}else{
-						   	return "#ccc";
-						}
-					})
-					.style("opacity", 0.85)
-					.on("mouseover", function(d){
-						d3.select(this).attr("r", 10);
-						d3.select(this).attr("stroke", "black");
-						svg_map.append("text")	
-							.attr("id", "tooltip")
-					   		.attr("x", parseFloat(projection([d.lon, d.lat])[0]) + 7)
-					   		.attr("y", parseFloat(projection([d.lon, d.lat])[1]) - 7)
-					   		.attr("text-anchor", "left")
-					  		.attr("font-family", "sans-serif")
-					  		.attr("font-size", "16px")
-					   		.attr("font-weight", "bold")
-					  		.attr("fill", "black")
-					  		.attr("background", "#FFF4C2")
-					   		.text("Well depth: " + d.depth + " metres");	
-					})
-					.on("mouseout", function(){
-						d3.select(this).attr("r", 3);
-						d3.select(this).attr("stroke", "none");
-						d3.select('#tooltip').remove();
+					.on("mouseout", function(d){
+							d3.select(this)
+							.style("opacity", 0.7);
+
+							svg_map.selectAll(".well")
+							.style("stroke", "none")
+							.attr("d", d3.svg.symbol()
+				   			.size(function(j){
+				   				if(j.year <= sliderYear){
+				   					return 30;
+				   				}else{
+				   					return 0;
+				   				}
+				   			})
+				   			.type(function(j){
+				   				if(j.type === "Open Well"){
+				   					return "square";
+				   				} else if (j.type === "Agricultural Borewell"){
+				   					return "circle";
+				   				} else if(j.type === "Domestic Borewell"){
+				   					return "triangle-up";
+				   				}
+							}));
 					});
 
 					// slider event 
 					slider.on("slide", function(evt, value){
 						
+						sliderYear = value;
 						// update wells on map
 						d3.select('#slidertext').text(value);
-						wells.attr("r", function(d){
+						wells.attr("d", d3.svg.symbol()
+							.size(function(d){
 								if(d.year <= value){
-									return 3;
+									return 30;
+								} else{
+									return 0;
 								}
-				        	 })
+							})
+							.type(function(d){
+				   				if(d.type === "Open Well"){
+				   					return "square";
+				   				} else if (d.type === "Agricultural Borewell"){
+				   					return "circle";
+				   				} else if(d.type === "Domestic Borewell"){
+				   					return "triangle-up";
+				   				}
+				   			}))
 
 						// Update type chart
 						wellTypes = countWells(data, "type", value);
@@ -405,7 +565,6 @@
 								return yType(d.values);
 							})
 							.attr("height", function(d) {
-								
 								return h2 - yType(d.values);
 							})
 
@@ -423,7 +582,9 @@
 							})
 
 					});
+						
 				});
+			});
 
 	function countWells(data, attr, year){
 					
