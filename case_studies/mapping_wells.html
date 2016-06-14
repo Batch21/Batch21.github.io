@@ -16,6 +16,26 @@
 				transition: all 0.5s;
 			}
 			
+			.buttons{
+				position: absolute;
+				margin-top: 12px;
+				margin-left: 13px;
+			}
+			
+			.button{
+				display: inline;
+				font-size: 14px;
+				color: black;
+				padding: 5px;
+				margin: 1px;
+				background-color: #DDDDDD;
+				opacity: 0.8;
+				border-style: solid;
+				border-width: 1px;
+				box-shadow: 1px 1px 1px;
+
+			}
+			
 			circle:hover {
 				fill: blue;
 			}
@@ -75,7 +95,13 @@
     	 	<h4>Year: <span id="slidertext">1980</span></h4>
     	    <div id="slider"></div>
     	    <div class="well-viz-com">
-    	     <div id="well-viz-map"></div>
+    	     <div id="well-viz-map">
+    	     	<div class="buttons">
+    	     	  <div class="button">Well Depth</div>
+    	     	  <div class="button">Well Type</div>
+    	     	  <div class="button">Well Status (2012)</div>
+    	     	</div>
+    	     </div>
     	 	 <div id="well-viz-charts" >
     	 		 <div id="well-viz-chart2" class="charts"></div>
     	 		 <div id="well-viz-chart1" class="charts"></div>
@@ -85,31 +111,6 @@
     	 <p> The above map shows....</p>
        </div>
 		<script type="text/javascript">
-
-			$(function(){
-
-				var $title = $('h3');
-				var $para = $('p');
-				var $window = $("window");
-			
-				$title.on('mouseover', function(e){
-					console.log(e.pageX);
-					$title.css({
-						'color': 'red'
-					});
-				})	
-
-				$title.on("mouseout", function(){
-					$title.css({
-						'color': 'black'
-					});
-				})
-
-				$para.on("mouseover", function(e){
-					console.log($(window).scrollTop());
-				});
-			
-			});
 
 			var startYear = 1980;
 			var sliderYear = 1980;	
@@ -146,6 +147,14 @@
 			var color = d3.scale.threshold()
 								.domain([10, 50, 100, 300])
 								.range(["#FEECAE", "#F0A848","#C07860", "#604860"]);
+
+			var colorType = d3.scale.ordinal()
+									.domain(["Open Well", "Agricultural Borewell", "Domestic Borewell"])
+									.range(["#C4ED68", "#59A80F", "#1E9EB8"])
+
+			var colorStatus = d3.scale.ordinal()
+									  .domain(["Defunct", "Fails every summer", "Fails during droughts", "Has never failed"])
+									  .range(["#FF3D3D", "#F09838", "#F8E663", "#94C11C"])	
 			
 			//Create map SVG elements
 			var svg_map = d3.select("#well-viz-map").append("svg")
@@ -227,9 +236,8 @@
 				   	}))
 					.attr("class", "well")
 					.style("fill", function(d){
-					   	var depth = d.depth;
-						if (depth){
-						   	return color(depth);
+						if (d.depth){
+						   	return color(d.depth);
 						}else{
 						   	return "#ccc";
 						}
@@ -278,6 +286,54 @@
 						d3.select(this).attr("stroke", "none");
 						d3.select('#tooltip').remove();
 					});
+
+				d3.selectAll(".button")
+					.on("mouseover", function(){
+						d3.select(this).style("opacity", 1)
+									   .style("border-width", "2px")
+									   .style("margin", "0px");
+					})
+					.on("mouseout", function(){
+						d3.select(this).style("opacity", 0.8)
+									   .style("border-width", "1px")
+									   .style("margin", "1px");
+					})
+					.on("click", function(){
+						var buttonText = this.textContent;
+
+						d3.selectAll(".button").style("background-color", "#DDDDDD")
+											   .style("border-width", "1px");						   
+						d3.select(this).style("background-color", "#FAE9BD")
+									   .style("border-width", "2px");
+									   
+						svg_map.selectAll(".well")
+							.style("fill", function(d){
+								if (buttonText === "Well Type"){
+									if (d.type){
+						   				return colorType(d.type);
+									}
+									else{
+										return "#ccc";
+									}
+								}else if(buttonText === "Well Depth"){
+									if (d.depth){
+						   				return color(d.depth);
+									}
+									else{
+										return "#ccc";
+									}
+								}else if(buttonText == "Well Status (2012)"){
+									if(d.status){
+										return colorStatus(d.status);
+									}else{
+										return "#ccc";
+									}
+								}
+								else{
+									return "#ccc"
+								}
+							})
+					})
 
 				// Group data and define scale domains for type bar chart using complete dataset
 				var wellTypes = countWells(data, "type", 2012);
@@ -343,7 +399,7 @@
 			   			} else if(d.key === "Agricultural Borewell"){
 			   				return "#59A80F"
 			   			} else if(d.key === "Domestic Borewell"){
-			   				return "1E9EB8"
+			   				return "#1E9EB8"
 			   			}
 			   		})
 			   		.style("opacity", 0.7)
@@ -353,11 +409,6 @@
 							.style("opacity", 1);
 
 							svg_map.selectAll(".well")
-							.style("stroke", function(j){
-								if(j.year <= sliderYear & d.key === j.type){
-									return "black";
-								}
-							})
 							.attr("d", d3.svg.symbol()
 				   			.size(function(j){
 				   				if (j.year <= sliderYear){
@@ -464,7 +515,7 @@
 			   		})
 			   		.style("fill", function(d){
 			   			if(d.key === "0 - 10"){
-			   				return "#F8CA8C";
+			   				return "#FEECAE";
 			   			} else if (d.key === "10 - 50"){
 			   				return "#F0A848";
 			   			} else if (d.key === "50 - 100"){
@@ -479,11 +530,6 @@
 							.style("opacity", 1);
 
 							svg_map.selectAll(".well")
-							.style("stroke", function(j){
-								if(j.year <= sliderYear & d.key === j.depth_bin){
-									return "black";
-								}
-							})
 							.attr("d", d3.svg.symbol()
 				   			.size(function(j){
 				   				if (j.year <= sliderYear){
