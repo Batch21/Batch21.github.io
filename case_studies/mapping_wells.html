@@ -9,11 +9,16 @@
 		<script type="text/javascript" src="/assets/js/jquery-3.0.0.js"></script>
 		<style type="text/css">
 		
+			#well-viz{
+				border-style: solid;
+				border-width: 1px;
+			}
+
 			.well{
 				-moz-transition: all 0.3s;
 				-o-transition: all 0.3s;
 				-webkit-transition: all 0.3s;
-				transition: all 0.5s;
+				transition: all 0.3s;
 			}
 			
 			.buttons{
@@ -26,7 +31,7 @@
 				display: inline;
 				font-size: 15px;
 				color: black;
-				padding: 8px;
+				padding: 6px;
 				margin: 1px;
 				background-color: #DDDDDD;
 				opacity: 0.8;
@@ -34,6 +39,13 @@
 				border-width: 1px;
 				box-shadow: 1px 1px 1px;
 
+			}
+
+			#yearCount{
+				display: inline;
+				padding: 8px;
+				font-weight: bold;
+				margin-left: 105px;
 			}
 			
 			circle:hover {
@@ -44,11 +56,12 @@
             	width:100%;
             }
 
-			#slider{
+			#slider-con{
 				
-				margin-bottom: 40px;
-				margin-left: auto;
-				margin-right: auto;
+				margin-bottom: 30px;
+				margin-top: 10px;
+				margin-left: 20px;
+				width: 550px;
 			}
 
 			#well-viz-map,
@@ -70,8 +83,8 @@
 			.axis line {
 				fill: none;
 				stroke: black;
-				stroke-width: 0.5;
-				shape-margin: crispEdges;
+				stroke-width: 1.5;
+				shape-rendering: auto;
 			}
 
 			.axis text {
@@ -96,20 +109,23 @@
         </header>
         
     	 <div id="well-viz">
-    	 	<h4>Year: <span id="slidertext">1980</span></h4>
-    	    <div id="slider"></div>
     	    <div class="well-viz-com">
     	     <div id="well-viz-map">
+    	      <div id="slider-con">
+    	     	<div id="slider"></div>
+    	      </div>
     	     	<div class="buttons">
     	     	  <div class="button" id="wellDepthButton">Well Depth</div>
     	     	  <div class="button">Well Type</div>
     	     	  <div class="button">Well Status (2012)</div>
+    	     	  <div id="yearCount">Year: <span id="slidertext">1980</span></div>
     	     	</div>
     	     </div>
     	 	 <div id="well-viz-charts" >
     	 		 <div id="well-viz-chart1" class="charts"></div>
     	 		 <div id="well-viz-chart2" class="charts"></div>
     	 		 <div id="well-viz-chart3" class="charts"></div>
+    	 		 
     	 	 </div>
     	 	</div>
     	 </div>
@@ -124,13 +140,16 @@
 			var slider = d3.slider().axis(true).min(startYear).max(2012).value(startYear).step(1);
 			d3.select('#slider').call(slider);
 
+			
+
 			// Define Widths and heights and margins
 			var margin_map = {top: 5, right: 10, bottom: 5, left: 10},
-				margin_bar = {top: 10, right: 20, bottom: 50, left: 45};
+				margin_bar = {top: 20, right: 0, bottom: 50, left: 55};
 			var w = 580 - margin_map.left - margin_map.right,
 				w2 = 300 - margin_bar.left - margin_bar.right,
 			    h = 740 - margin_map.top - margin_map.bottom,
-			    h2 = 240 - margin_bar.top - margin_bar.bottom;
+			    h2 = 262 - margin_bar.top - margin_bar.bottom;
+  
 
 			//Define map projection
 			var projection = d3.geo.transverseMercator()
@@ -151,11 +170,11 @@
 
 			var colorDepth = d3.scale.threshold()
 								.domain([10, 50, 100, 300])
-								.range(["#BCDBAD", "#75A07D","#579093", "#252C5F"]);
+								.range(["#deebf7", "#6baed6","#2171b5", "#08306b"]);
 
 			var colorType = d3.scale.ordinal()
 									.domain(["Open Well", "Agricultural Borewell", "Domestic Borewell"])
-									.range(["#C4ED68", "#59A80F", "#1E9EB8"])
+									.range(["#C4ED68", "#59A80F", "#ba831f"])
 
 			var colorStatus = d3.scale.ordinal()
 									  .domain(["Defunct", "Fails every summer", "Fails during droughts", "Has never failed"])
@@ -186,7 +205,27 @@
 				   .attr("d", path)
 				   .attr("fill", "none")
 				   .attr("stroke", "black");
-				 
+
+
+			var legend = svg_map.append("g")
+							.attr("id", "boundaryLegend")
+							.attr("transform", "translate(" + 13 + "," + 60 + ")")
+			
+			legend.append("line")
+						.attr("x1", 0)
+						.attr("y1", 0)
+						.attr("x2", 14)
+						.attr("y2", 0)
+						.style("stroke", "black")
+						.style("stroke-width", 1.5)
+						.style("shape-rendering", "auto");
+
+			legend.append("text")
+					.attr("x", 30)
+					.attr("y", 5)
+					.text("Village boundary")
+					.style("font-size", "12px");				
+
 
             // Create chart SVGs
             var svg_type = d3.select("#well-viz-chart2").append("svg")
@@ -273,6 +312,55 @@
 						d3.select('#tooltip').remove();
 					});
 
+				var wellLegend = svg_map.append("g").attr("id", "legendGroup")
+
+				function updateLegend(attr){
+					
+					svg_map.select("#legendGroup").remove();			
+				
+					wellLegend = svg_map.append("g")
+						.attr("id", "legendGroup")
+          				.attr("transform", "translate(" + 20 + "," + 83 + ")")
+          				.selectAll("g")
+          				.data(attr.domain())
+          				.enter()
+          				.append("g")
+            			.attr("class", "legend")
+            			.attr("transform", function(d, i) {
+              				var height = 25;
+              				var horz = 0;
+              				var vert = i * height;
+              				return "translate(" + horz + "," + vert + ")";
+          				});
+
+            		wellLegend.append("circle")
+          				.attr("r", 8)
+          				.style("fill", attr)
+          				.style("stroke", attr);
+
+          			wellLegend.append("text")
+          				.attr("x", 25)
+          				.attr("y", 6)
+          				.text(function(d) { 
+          					if(attr === colorDepth){
+          						if(d === 10){
+          							return "0 - 10 metres";
+          						} else if (d === 50){
+          							return "10 - 50 metres";
+          						}else if (d === 100){
+          							return "50 - 100 metres";
+          						}else if (d === 300){
+          							return "100 + metres";
+          						}
+          					} else{
+          						return d
+          					}
+          				})
+          				.style("font-size", "12px");
+          		}
+
+          		updateLegend(colorDepth);
+
 				//Add button functionality
 				d3.select("#wellDepthButton").style("background-color", "#FAE9BD")
 									   		 .style("border-width", "2px");
@@ -296,6 +384,7 @@
 						d3.select(this).style("background-color", "#FAE9BD")
 									   .style("border-width", "2px");
 									   
+						// Update well color scheme
 						svg_map.selectAll(".well")
 							.style("fill", function(d){
 								if (buttonText === "Well Type"){
@@ -323,7 +412,16 @@
 									return "#ccc"
 								}
 							})
-					})
+
+						// Update legend
+						if(buttonText === "Well Depth"){
+							updateLegend(colorDepth);
+						}else if(buttonText === "Well Type"){
+							updateLegend(colorType);
+						}else if(buttonText === "Well Status (2012)"){
+							updateLegend(colorStatus);
+						}
+					})	
 
 				// Group data and define scale domains for type bar chart using complete dataset
 				var wellTypes = countWells(data, "type", 2012);
@@ -352,16 +450,16 @@
 		 		svg_type.append("text")
         			.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 5) + ")")
         			.style("text-anchor", "middle")
-        			.style("font-size", "12px")
+        			.style("font-size", "14px")
         			.style("font-weight", "bold")
         			.text("Well Type")
 
         		svg_type.append("text")
         			.attr("transform", "rotate(-90)")
-        			.attr("y", 0 - margin_bar.left + 10)
+        			.attr("y", 0 - margin_bar.left + 20)
         			.attr("x",0 - (h2 / 2))
         			.style("text-anchor", "middle")
-        			.style("font-size", "12px")
+        			.style("font-size", "14px")
         			.style("font-weight", "bold")
         			.text("Number of Wells");
 
@@ -389,7 +487,7 @@
 			   			} else if(d.key === "Agricultural Borewell"){
 			   				return "#59A80F"
 			   			} else if(d.key === "Domestic Borewell"){
-			   				return "#1E9EB8"
+			   				return "#ba831f"
 			   			}
 			   		})
 			   		.style("opacity", 0.7)
@@ -401,7 +499,7 @@
 							.attr("r", function(j){
 				   				if (j.year <= sliderYear){
 				   					if(d.key === j.type){
-				   						return 4;
+				   						return 3.5;
 				   					}else{
 				   						return 0;
 				   					}
@@ -450,16 +548,16 @@
 		 		svg_depth.append("text")
         			.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 15) + ")")
         			.style("text-anchor", "middle")
-        			.style("font-size", "12px")
+        			.style("font-size", "14px")
         			.style("font-weight", "bold")
         			.text("Well Depth (metres)")
 
         		svg_depth.append("text")
         			.attr("transform", "rotate(-90)")
-        			.attr("y", 0 - margin_bar.left + 10)
+        			.attr("y", 0 - margin_bar.left + 20)
         			.attr("x",0 - (h2 / 2))
         			.style("text-anchor", "middle")
-        			.style("font-size", "12px")
+        			.style("font-size", "14px")
         			.style("font-weight", "bold")
         			.text("Number of Wells");
 
@@ -483,13 +581,13 @@
 			   		})
 			   		.style("fill", function(d){
 			   			if(d.key === "0 - 10"){
-			   				return "#BCDBAD";
+			   				return "#deebf7";
 			   			} else if (d.key === "10 - 50"){
-			   				return "#75A07D";
+			   				return "#6baed6";
 			   			} else if (d.key === "50 - 100"){
-			   				return "#597093";
+			   				return "#2171b5";
 			   			} else if(d.key === "100 +"){
-			   				return "#252C5F";
+			   				return "#08306b";
 			   			}
 			   		})
 			   		.style("opacity", 0.7)
@@ -550,16 +648,16 @@
 		 		svg_status.append("text")
         			.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 5) + ")")
         			.style("text-anchor", "middle")
-        			.style("font-size", "12px")
+        			.style("font-size", "14px")
         			.style("font-weight", "bold")
         			.text("Well Status (2012)")
 
         		svg_status.append("text")
         			.attr("transform", "rotate(-90)")
-        			.attr("y", 0 - margin_bar.left + 10)
+        			.attr("y", 0 - margin_bar.left + 20)
         			.attr("x",0 - (h2 / 2))
         			.style("text-anchor", "middle")
-        			.style("font-size", "12px")
+        			.style("font-size", "14px")
         			.style("font-weight", "bold")
         			.text("Number of Wells");
 
