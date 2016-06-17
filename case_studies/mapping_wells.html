@@ -37,7 +37,7 @@
 				opacity: 0.8;
 				border-style: solid;
 				border-width: 1px;
-				box-shadow: 1px 1px 1px;
+				box-shadow: 2px 2px 2px;
 
 			}
 
@@ -45,7 +45,16 @@
 				display: inline;
 				padding: 8px;
 				font-weight: bold;
-				margin-left: 105px;
+				margin-left: 115px;
+			}
+
+			#legend{
+				position: absolute;
+				margin-top: 50px;
+				margin-left: 13px;
+				background-color: rgba(220, 220, 217, 0.7);
+				border-style: solid;
+				border-width: 1px;
 			}
 			
 			circle:hover {
@@ -72,7 +81,7 @@
 			.mapBorder{
 				stroke: black;
 				fill: none;
-				stroke-width: 1;
+				stroke-width: 1.2;
 			}
 
 			.charts{
@@ -119,7 +128,8 @@
     	     	  <div class="button">Well Type</div>
     	     	  <div class="button">Well Status (2012)</div>
     	     	  <div id="yearCount">Year: <span id="slidertext">1980</span></div>
-    	     	</div>
+    	      </div>
+    	      <div id="legend"></div>
     	     </div>
     	 	 <div id="well-viz-charts" >
     	 		 <div id="well-viz-chart1" class="charts"></div>
@@ -194,6 +204,19 @@
     			.attr("height", h)
     			.attr("width", w)
 
+    		svg_map.append("svg:image")
+      			.attr("xlink:href", "/assets/data/background.jpg")
+      			.attr("x", 0)
+      			.attr("y", 0)
+      			.attr("width", 560)
+      			.attr("height", 730);
+
+      		var legend = d3.select("#legend").append("svg")
+      			   .attr("id", "legendSVG")
+      			   .attr("width", 195)
+      			   .attr("height", 200)
+      	           .append("g")
+      	           .attr("id", "legendBox");
 
 			// Add village boundary to map
 			d3.json("/assets/data/dhone_area.json", function(json) {
@@ -203,28 +226,60 @@
 				   .enter()
 				   .append("path")
 				   .attr("d", path)
-				   .attr("fill", "none")
-				   .attr("stroke", "black");
+				   .style("fill", "none")
+				   .style("class", "rev-boundary")
+				   .style("stroke", "black");
 
 
-			var legend = svg_map.append("g")
-							.attr("id", "boundaryLegend")
-							.attr("transform", "translate(" + 13 + "," + 60 + ")")
+				var boundaryLegend = legend.append("g")
+										   .attr("id", "boundaryLegend")
+										   .attr("transform", "translate(" + 13 + "," + 20 + ")")
+
 			
-			legend.append("line")
-						.attr("x1", 0)
-						.attr("y1", 0)
-						.attr("x2", 14)
-						.attr("y2", 0)
-						.style("stroke", "black")
-						.style("stroke-width", 1.5)
-						.style("shape-rendering", "auto");
+				boundaryLegend.append("line")
+					.attr("x1", 0)
+					.attr("y1", 0)
+					.attr("x2", 15)
+					.attr("y2", 0)
+					.style("stroke", "black")
+					.style("stroke-width", 1.5)
+					.style("shape-rendering", "auto");
 
-			legend.append("text")
-					.attr("x", 30)
+				boundaryLegend.append("text")
+					.attr("x", 32)
 					.attr("y", 5)
-					.text("Village boundary")
+					.text("Revenue village boundary")
 					.style("font-size", "12px");				
+
+			d3.json("/assets/data/village_areas.json", function(json2) {
+			
+				svg_map.selectAll("path.features")
+				   .data(json2.features)
+				   .enter()
+				   .append("path")
+				   .attr("d", path)
+				   .attr("class", "village-boundaries")
+				   .style("fill", "#DF837D")
+				   .style("opacity", 0.5)
+				   .style("stroke", "red");
+
+			var villageLegend = legend.append("g")
+									   .attr("id", "boundaryLegend")
+									   .attr("transform", "translate(" + 13 + "," + 39 + ")")
+			
+			villageLegend.append("rect")
+						  .attr("width", 15)
+						  .attr("height", 10)
+						  .style("stroke", "red")
+						  .style("fill", "#DF837D")
+						  .style("opacity", 0.5)
+						  .style("shape-rendering", "auto");
+
+			villageLegend.append("text")
+						  .attr("x", 32)
+						  .attr("y", 10)
+						  .text("Village areas")
+						  .style("font-size", "12px");
 
 
             // Create chart SVGs
@@ -312,15 +367,17 @@
 						d3.select('#tooltip').remove();
 					});
 
-				var wellLegend = svg_map.append("g").attr("id", "legendGroup")
+				var wellLegend = legend.append("g").attr("id", "legendGroup")
+				var legendHeight,
+					legendWidth
 
 				function updateLegend(attr){
 					
-					svg_map.select("#legendGroup").remove();			
+					legend.select("#legendGroup").remove();			
 				
-					wellLegend = svg_map.append("g")
+					wellLegend = legend.append("g")
 						.attr("id", "legendGroup")
-          				.attr("transform", "translate(" + 20 + "," + 83 + ")")
+          				.attr("transform", "translate(" + 20 + "," + 67 + ")")
           				.selectAll("g")
           				.data(attr.domain())
           				.enter()
@@ -334,7 +391,7 @@
           				});
 
             		wellLegend.append("circle")
-          				.attr("r", 8)
+          				.attr("r", 7)
           				.style("fill", attr)
           				.style("stroke", attr);
 
@@ -357,13 +414,17 @@
           					}
           				})
           				.style("font-size", "12px");
+
+          			height = document.getElementById("legendBox").getBBox().height;	
+					width = document.getElementById("legendBox").getBBox().width;
+					d3.select("#legendSVG").attr("height", height + 20).attr("width", width + 26);
           		}
 
           		updateLegend(colorDepth);
 
 				//Add button functionality
 				d3.select("#wellDepthButton").style("background-color", "#FAE9BD")
-									   		 .style("border-width", "2px");
+									   		 .style("border-width", "1px");
 
 				d3.selectAll(".button")
 					.on("mouseover", function(){
@@ -426,8 +487,7 @@
 				// Group data and define scale domains for type bar chart using complete dataset
 				var wellTypes = countWells(data, "type", 2012);
 				xType.domain(d3.range(wellTypes.length))
-				yType.domain([0, d3.max(wellTypes,
-				 function(d) { return d.values; })])
+				yType.domain([0, 280])
 				
 				// Add axes for type bar chart
 				svg_type.append("g")
@@ -526,8 +586,7 @@
 			   	// Group data and define scale domains for depth bar chart using complete dataset
 			   	var wellDepths = countWells(data, "depth_bin", 2012);
 				xDepth.domain(d3.range(wellDepths.length))
-				yDepth.domain([0, d3.max(wellDepths,
-					function(d) {return d.values; })])
+				yDepth.domain([0, 280])
 				
 				// Add axes for depth bar chart
 				svg_depth.append("g")
@@ -599,7 +658,7 @@
 							.attr("r", function(j){
 				   				if (j.year <= sliderYear){
 				   					if(d.key === j.depth_bin){
-				   						return 4;
+				   						return 3.5;
 				   					}else{
 				   						return 0;
 				   					}
@@ -625,7 +684,7 @@
 				// Group data and define scale domains for status bar chart using complete dataset
 				var wellStatus = countWells(data, "status", 2012);
 				xStatus.domain(d3.range(wellStatus.length))
-				yStatus.domain([0, d3.max(wellStatus, function(d) { return d.values; })])
+				yStatus.domain([0, 280])
 				
 				// Add axes for status bar chart
 				svg_status.append("g")
@@ -699,7 +758,7 @@
 							.attr("r", function(j){
 				   				if (j.year <= sliderYear){
 				   					if(d.key === j.status){
-				   						return 4;
+				   						return 3.5;
 				   					}else{
 				   						return 0;
 				   					}
@@ -779,6 +838,7 @@
 					});
 						
 				});
+			});
 			});
 
 	function countWells(data, attr, year){
