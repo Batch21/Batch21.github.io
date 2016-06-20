@@ -1,9 +1,10 @@
-var startYear = 1980;
-var sliderYear = 1980;	
-
+var startYear = 1980,
+	step = startYear,
+	sliderStatus = "paused",
+	interval;
 // define slider
-var slider = d3.slider().axis(true).min(startYear).max(2012).value(startYear).step(1);
-d3.select('#slider').call(slider);			
+var slider = d3.slider().axis(true).min(startYear).max(2013).value(startYear).step(1);
+d3.select('#slider').call(slider);
 
 // Define Widths and heights and margins
 var margin_map = {top: 5, right: 10, bottom: 5, left: 10},
@@ -212,9 +213,9 @@ function drawFeatures() {
 			  	 .attr("y", 10)
 			  	 .text("Village areas")
 			  	 .style("font-size", "12px");
-	});
-
+	
 	drawWells();
+	});
 }
 
 // Create chart SVGs
@@ -302,8 +303,33 @@ function drawWells(){
 								d3.select(this).attr("r", 3)
 								d3.select('#tooltip').remove();
 							});
+
+
+
 		createCharts(data);
 		sliderActivate(wells, data);
+
+		d3.select(".playPause button").on("click", function(){
+			if(sliderStatus === "finished"){
+				step = 1980;
+				d3.select(".playPause span").classed("glyphicon", false)
+								  			.attr("class", "glyphicon glyphicon-pause");
+				sliderStatus = "playing";
+				animate(wells, data);
+			}else if (sliderStatus === "paused"){
+				d3.select(".playPause span").classed("glyphicon", false)
+								  			.attr("class", "glyphicon glyphicon-pause");
+				sliderStatus = "playing";
+				animate(wells, data);
+			} else{
+				clearInterval(interval);
+				d3.select(".playPause span").classed("glyphicon", false)
+								 			 .attr("class", "glyphicon glyphicon-play");
+				sliderStatus = "paused";
+				
+			}		
+		});
+		
 	});
 
 }	
@@ -330,7 +356,8 @@ function updateLegend(attr){
 	wellLegend.append("circle")
 			.attr("r", 7)
 			.style("fill", attr)
-			.style("stroke", attr);
+			.style("stroke", "black")
+			.style("stroke-width", 0.4);
 
 		wellLegend.append("text")
 			.attr("x", 25)
@@ -352,7 +379,7 @@ function updateLegend(attr){
 			})
 			.style("font-size", "12px");
 
-		height = document.getElementById("legendBox").getBBox().height;	
+	height = document.getElementById("legendBox").getBBox().height;	
 	width = document.getElementById("legendBox").getBBox().width;
 	d3.select("#legendSVG").attr("height", height + 15).attr("width", width + 13);
 	}
@@ -491,22 +518,23 @@ function createCharts(data){
    		})
    		.style("opacity", 0.7)
    		.on("mouseover", function(d){
-				d3.select(this)
-				.style("opacity", 1);
+				if(sliderStatus != "playing"){
+					d3.select(this)
+					.style("opacity", 1);
 
-				svg_map.selectAll(".well")
-				.attr("r", function(j){
-	   				if (j.year <= sliderYear){
-	   					if(d.key === j.type){
-	   						return 3.5;
-	   					}else{
-	   						return 0;
-	   					}
-	   				}else{
-	   					return 0;
-	   				}
-	   			});
-	   			
+					svg_map.selectAll(".well")
+					.attr("r", function(j){
+		   				if (j.year <= slider.value()){
+		   					if(d.key === j.type){
+		   						return 3.5;
+		   					}else{
+		   						return 0;
+		   					}
+		   				}else{
+		   					return 0;
+		   				}
+		   			});
+		   		}
 		})
 		.on("mouseout", function(d){
 				d3.select(this)
@@ -514,7 +542,7 @@ function createCharts(data){
 
 				svg_map.selectAll(".well")
 				.attr("r", function(j){
-	   				if(j.year <= sliderYear){
+	   				if(j.year <= slider.value()){
 	   					return 3;
 	   				}else{
 	   					return 0;
@@ -590,21 +618,23 @@ function createCharts(data){
    		})
    		.style("opacity", 0.7)
    		.on("mouseover", function(d){
-				d3.select(this)
-				.style("opacity", 1);
+				if(sliderStatus != "playing"){
+					d3.select(this)
+					.style("opacity", 1);
 
-				svg_map.selectAll(".well")
-				.attr("r", function(j){
-	   				if (j.year <= sliderYear){
-	   					if(d.key === j.depth_bin){
-	   						return 3.5;
-	   					}else{
-	   						return 0;
-	   					}
-	   				}else{
-	   					return 0;
-	   				}
-	   			});
+					svg_map.selectAll(".well")
+					.attr("r", function(j){
+		   				if (j.year <= slider.value()){
+		   					if(d.key === j.depth_bin){
+		   						return 3.5;
+		   					}else{
+		   						return 0;
+		   					}
+		   				}else{
+		   					return 0;
+		   				}
+		   			});
+		   		}
 		})
 		.on("mouseout", function(d){
 				d3.select(this)
@@ -612,7 +642,7 @@ function createCharts(data){
 
 				svg_map.selectAll(".well")
 				.attr("r", function(j){
-	   				if(j.year <= sliderYear){
+	   				if(j.year <= slider.value()){
 	   					return 3;
 	   				}else{
 	   					return 0;
@@ -690,22 +720,23 @@ function createCharts(data){
    		})
    		.style("opacity", 0.7)
    		.on("mouseover", function(d){
-				d3.select(this)
-				.style("opacity", 1);
+				if(sliderStatus != "playing"){
+					d3.select(this)
+					.style("opacity", 1);
 
-				svg_map.selectAll(".well")
-				.attr("r", function(j){
-	   				if (j.year <= sliderYear){
-	   					if(d.key === j.status){
-	   						return 3.5;
-	   					}else{
-	   						return 0;
-	   					}
-	   				}else{
-	   					return 0;
-	   				}
-	   			});
-	   			
+					svg_map.selectAll(".well")
+					.attr("r", function(j){
+		   				if (j.year <= slider.value()){
+		   					if(d.key === j.status){
+		   						return 3.5;
+		   					}else{
+		   						return 0;
+		   					}
+		   				}else{
+		   					return 0;
+		   				}
+		   			});
+		   		}
 		})
 		.on("mouseout", function(d){
 				d3.select(this)
@@ -713,7 +744,7 @@ function createCharts(data){
 
 				svg_map.selectAll(".well")
 				.attr("r", function(j){
-	   				if(j.year <= sliderYear){
+	   				if(j.year <= slider.value()){
 	   					return 3;
 	   				}else{
 	   					return 0;
@@ -723,63 +754,35 @@ function createCharts(data){
 }			
 
 
-function sliderActivate(wells, data){		// slider event 
-    
+function sliderActivate(wells, data){		 
     slider.on("slide", function(evt, value){
-			
-		sliderYear = value;
-		
-		d3.select('#slidertext').text(value);
-		
-		// update wells on map
-		wells.attr("r", function(d){
-				if(d.year <= value){
-					return 3;
-				} else{
-					return 0;
+	    	if (sliderStatus === "playing"){
+	    		clearInterval(interval);
+			}else if(sliderStatus === "finished"){
+				if(value != 2013){
+					//clearInterval(interval);
+					sliderStatus = "paused";
+					d3.select(".playPause span").classed("glyphicon", false)
+								 			 .attr("class", "glyphicon glyphicon-play");
 				}
-			  })
+			}
 
-		// Update type chart
-		wellTypes = countWells(data, "type", value);
-		var bars1 = svg_type.selectAll("rect")
-				            .data(wellTypes);
-		bars1.transition()
-			 .duration(100)
-			 .attr("y", function(d) {
-					return yType(d.values);
-			 })
-			 .attr("height", function(d) {
-					return h2 - yType(d.values);
-			 })
+			d3.select(".d3-slider-handle")
+	      		.attr("left", (100*(value-1980))/33 + "%" );
+			d3.select('#slidertext').text(value);
+			updateWells(wells, data, value);
+			step = value;
 
-			//Update depth chart	
-		wellDepths = countWells(data, "depth_bin", value);
-		var bars2 = svg_depth.selectAll("rect")
-				             .data(wellDepths);
-		bars2.transition()
-			 .duration(100)
-			 .attr("y", function(d) {
-				return yDepth(d.values);
-			 })
-			 .attr("height", function(d) {
-				return h2 - yDepth(d.values);
-			 })
-
-			//Update Status chart	
-		wellStatus = countWells(data, "status", value);
-		var bars3 = svg_status.selectAll("rect")
-				              .data(wellStatus);
-		bars3.transition()
-			 .duration(100)
-			 .attr("y", function(d) {
-				return yStatus(d.values);
-			 })
-			 .attr("height", function(d) {
-				return h2 - yStatus(d.values);
-			 })
-
-	});
+		})
+		.on("slideend", function(evt, value){
+			if(value === 2013){
+				sliderStatus = "finished";
+				d3.select(".playPause span").classed("glyphicon", false)
+								 			 .attr("class", "glyphicon glyphicon-repeat");
+			}else if(sliderStatus === "playing"){
+				animate(wells, data);
+			};
+		});		
 }		
 			
 
@@ -827,6 +830,95 @@ function wrap(text, width) {
   	});
 }
 
+function animate(wells, data){
+	interval = setInterval(function(){ 
+		step++;
+
+		slider.value(step);
+
+		if (step === 2013){
+			clearInterval(interval);
+			updateWells(wells, data, step);
+			sliderStatus = "finished";
+			d3.select(".playPause span").classed("glyphicon", false)
+								 			 .attr("class", "glyphicon glyphicon-repeat");
+		}; 
+
+		if(step < 2013){
+		   d3.select(".d3-slider-handle")
+	      		.attr("left", (100*(step-1980))/33 + "%" );
+	       console.log(step);
+	       updateWells(wells, data, step);
+	       
+		}
+	}, 500); 
+}
+
+function updateWells(wells, data, year){
+
+	if(year < 2013) d3.select('#slidertext').text(year);
+
+	wells.transition()
+		.duration(function(){
+			if(sliderStatus === "playing"){
+				return 500;
+			} else{
+				return 0;
+			}
+		})
+		.attr("r", function(d){
+				if(d.year === "1980" ){
+					return 3;
+				} else if (d.year == year & sliderStatus === "playing"){
+					return 4.5;
+				}else if(d.year < year){
+					return 3;
+				} 
+				else{
+					return 0;
+				}
+			  })
+
+		// Update type chart
+	wellTypes = countWells(data, "type", year);
+	svg_type.selectAll("rect")
+			    .data(wellTypes)
+				.transition()
+				.duration(500)
+				.attr("y", function(d) {
+					return yType(d.values);
+			    })
+				.attr("height", function(d) {
+					return h2 - yType(d.values);
+			    });
+
+		//Update depth chart	
+	wellDepths = countWells(data, "depth_bin", year);
+	svg_depth.selectAll("rect")
+			    .data(wellDepths)
+				.transition()
+				 .duration(500)
+				 .attr("y", function(d) {
+					return yDepth(d.values);
+				 })
+				 .attr("height", function(d) {
+					return h2 - yDepth(d.values);
+				 });
+
+		//Update Status chart	
+	wellStatus = countWells(data, "status", year);
+	svg_status.selectAll("rect")
+			  .data(wellStatus)
+		      .transition()
+			  .duration(500)
+			  .attr("y", function(d) {
+			 	return yStatus(d.values);
+			  })
+			  .attr("height", function(d) {
+			 	return h2 - yStatus(d.values);
+			  });
+}
+
 function createWellVis(){
 	drawFeatures();
 	var wellLegend = legend.append("g").attr("id", "legendGroup");
@@ -835,3 +927,4 @@ function createWellVis(){
 }
 
 createWellVis();
+

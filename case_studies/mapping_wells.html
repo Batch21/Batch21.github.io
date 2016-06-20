@@ -16,10 +16,8 @@
 			}
 
 			.well{
-				transition: all 0.3s;
-				-moz-transition: all 0.3s;
-				-o-transition: all 0.3s;
-				-webkit-transition: all 0.3s;
+				stroke: black;
+				stroke-width: 0.4;
 			}
 			
 			.buttons{
@@ -66,27 +64,49 @@
 				background-color: rgba(220, 220, 217, 0.9);
 				border-style: solid;
 				border-width: 1px;
+				border-radius: 5px;
 			}
 			
-			circle:hover {
-				fill: blue;
-			}
-            
             #col{
             	width:100%;
             }
 
+			
 			#slider-con{
-				
-				margin-bottom: 30px;
-				margin-top: 10px;
-				margin-left: 20px;
-				width: 550px;
+				margin-left: 10px;
+				margin-top:15px;
+				margin-bottom: 20px;
+				width: 485px;
+				display: inline-block;
+				vertical-align: middle;
+
 			}
+
+			.playPause {
+				margin-bottom: 5px;
+				margin-right: 10px;
+				margin-top: 8px;
+				margin-left: 10px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+
+			.glyphicon {
+    			font-size: 25px;
+			}
+
+			.btn{
+				padding: 10px;
+			}
+
 
 			#well-viz-map,
 			#well-viz-charts{
 				display: inline-block;
+			}
+
+			#well-viz-map{
+				width: 580px;
 			}
 
 			.mapBorder{
@@ -115,12 +135,8 @@
 				font-family: sans-serif;
 				font-size: 10px;
 			}
-			
-			.well{
-				stroke: black;
-				stroke-width: 0.4;
-			}
-			
+
+
 	
 	
 		</style>
@@ -137,16 +153,19 @@
     	 <div id="well-viz">
     	    <div class="well-viz-com">
     	     <div id="well-viz-map">
-    	      <div id="slider-con">
-    	     	<div id="slider"></div>
-    	      </div>
+    	        <div class="playPause"> 
+    	           <button type="button" class="btn btn-default btn-lg">
+  			        <span class="glyphicon glyphicon-play" aria-hidden="false"></span>
+		        </div>
+    	       <div id="slider-con">
+    	     	 <div id="slider"></div>
+    	       </div>
     	     	<div class="buttons">
     	     	  <div class="button" id="wellDepthButton">Well Depth</div>
     	     	  <div class="button">Well Type</div>
     	     	  <div class="button">Well Status (2012)</div> 
     	     	  <div id="yearCount">Year: <span id="slidertext">1980</span></div> 
     	      </div>
-    	      
     	      <div id="legend"></div>
     	     </div>
     	 	 <div id="well-viz-charts" >
@@ -158,6 +177,9 @@
     	 	</div>
     	 </div>
     	 <p> The above map shows....</p>
+    	 <button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-play" aria-hidden="false"></span> Star
+		 </button>
     	 <p> The above map shows....</p>
     	 <p> The above map shows....</p>
     	 <p> The above map shows....</p>
