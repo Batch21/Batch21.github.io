@@ -215,6 +215,7 @@ return function module() {
           moveHandle(scale.invert ? 
                       stepValue(scale.invert(pos / sliderLength))
                     : nearestTick(pos / sliderLength));
+          dispatch.slideend(d3.event, value)
         }
       }
 
@@ -224,6 +225,7 @@ return function module() {
           moveHandle(scale.invert ? 
                       stepValue(scale.invert(pos / sliderLength))
                     : nearestTick(pos / sliderLength));
+          dispatch.slideend(d3.event, value)
         }
       }
 

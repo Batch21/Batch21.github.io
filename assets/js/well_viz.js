@@ -1,22 +1,28 @@
 var startYear = 1980,
 	step = startYear,
 	sliderStatus = "paused",
-	interval;
+	scrollTrig = true,
+	yearDuration = 800,
+	interval, 
+	wellData,
+	wellCircles,
+	lineData;
+
 // define slider
 var slider = d3.slider().axis(true).min(startYear).max(2013).value(startYear).step(1);
 d3.select('#slider').call(slider);
 
 // Define Widths and heights and margins
 var margin_map = {top: 5, right: 10, bottom: 5, left: 10},
-	margin_bar = {top: 20, right: 0, bottom: 50, left: 55};
+	margin_bar = {top: 10, right: 0, bottom: 45, left: 55};
 var w = 580 - margin_map.left - margin_map.right,
 	w2 = 300 - margin_bar.left - margin_bar.right,
     h = 740 - margin_map.top - margin_map.bottom,
-    h2 = 262 - margin_bar.top - margin_bar.bottom;
+    h2 = 196 - margin_bar.top - margin_bar.bottom;
 
 // Define map projection
 var projection = d3.geo.transverseMercator()
-      				   .rotate([-77.82519, -15.394, 0])
+      				   .rotate([-77.81858, -15.392, 0])
       				   .translate([w/2, h/2])
       				   .scale(420000);
 
@@ -33,7 +39,7 @@ var pathWells = d3.geo.path()
 // Define scales for well map
 var colorDepth = d3.scale.threshold()
 					.domain([10, 50, 100, 300])
-					.range(["#deebf7", "#6baed6","#2171b5", "#08306b"]);
+					.range(["#c4d4e1", "#6baed6","#2171b5", "#08306b"]);
 
 var colorType = d3.scale.ordinal()
 						.domain(["Open Well", "Agricultural Borewell", "Domestic Borewell"])
@@ -46,7 +52,7 @@ var colorStatus = d3.scale.ordinal()
 
 
 var dem_colors = ["#227516", "#648744", "#9bc133", "#cdcb32", "#fed976", "#ffeda0", "#ffffcc", "#d7cebf", "#b6b098", "#986b41", "#561f10"]
-var dem_breaks = ["0%", "5%", "9%", "17%", "24%", "33%", "43%", "52%", "64%", "76%", "100%"]
+var dem_breaks = ["0%", "5%", "9%", "15%", "24%", "33%", "43%", "52%", "64%", "76%", "100%"]
 var dem_scale = d3.scale.linear().domain([390, 620]).range([0, 170]);
 
 var svg_map = d3.select("#well-viz-map").append("svg")
@@ -174,12 +180,12 @@ dhoneLegend.append("text")
 		  	 .style("font-size", "12px");
 
 dhoneLegend.append("line")
-	.attr("x1", 0)
+	.attr("x1", 2)
 	.attr("y1", 0)
-	.attr("x2", 15)
+	.attr("x2", 12)
 	.attr("y2", 10)
 	.style("stroke", "#7e864f")
-	.style("stroke-width", 1.5)
+	.style("stroke-width", 0.2)
 	.style("shape-rendering", "auto");
 
 function drawFeatures() {
@@ -194,7 +200,34 @@ function drawFeatures() {
 	   		.attr("class", "village-boundaries")
 	   		.style("fill", "#DF837D")
 	   		.style("opacity", 0.5)
-	   		.style("stroke", "red");
+	   		.style("stroke", "red")
+	   		.style("stroke-width", 1.1)
+	   		.on("mouseover", function(d){
+				d3.select(this)
+				  .transition()
+				  .duration(300)
+				  .style("opacity", 1)
+				  .style("stroke-width", 2)
+
+				svg_map.append("text")	
+				   .attr("id", "village_name")
+				   .attr("x", parseFloat(projection([d.properties.lon_centre, d.properties.lat_centre])[0]) + 12)
+				   .attr("y", parseFloat(projection([d.properties.lon_centre, d.properties.lat_centre])[1]) - 12)
+				   .attr("text-anchor", "left")
+				   .attr("font-family", "sans-serif")
+				   .attr("font-size", "14px")
+				   .attr("font-weight", "bold")
+				   .attr("fill", "black")
+				   .text(d.properties.name);	
+		    })
+		    .on("mouseout", function(d){
+				d3.select(this)
+				  .transition()
+				  .duration(100)
+				  .style("opacity", 0.5)
+				  .style("stroke-width", 1.1);
+				d3.select("#village_name").remove();
+		    });
 
 	var villageLegend = legend.append("g")
 						   .attr("id", "boundaryLegend")
@@ -237,28 +270,42 @@ var svg_status = d3.select("#well-viz-chart3").append("svg")
 				.append("g")
 			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
 
+var svg_line = d3.select("#well-viz-chart4").append("svg")
+			.attr("width", w2 + margin_bar.left + margin_bar.right)
+			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
+				.append("g")
+			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
+
 // Create chart scales
-xType = d3.scale.ordinal()
-	.rangeRoundBands([0, w2], 0.05);
-	yType = d3.scale.linear()
-		.range([h2, 0]);
+var xType = d3.scale.ordinal()
+				.rangeRoundBands([0, w2], 0.05);
+var yType = d3.scale.linear()
+				.range([h2, 0]);
 
-	xDepth = d3.scale.ordinal()
-	.rangeRoundBands([0, w2], 0.05);
-	yDepth = d3.scale.linear()
-		.range([h2, 0]);
+var xDepth = d3.scale.ordinal()
+				.rangeRoundBands([0, w2], 0.05);
+var yDepth = d3.scale.linear()
+			     .range([h2, 0]);
 
-	xStatus = d3.scale.ordinal()
-	.rangeRoundBands([0, w2], 0.05);
-	yStatus = d3.scale.linear()
-		.range([h2, 0])
+var xStatus = d3.scale.ordinal()
+				  .rangeRoundBands([0, w2], 0.05);
+var yStatus = d3.scale.linear()
+				  .range([h2, 0])
+
+var xline = d3.scale.linear()
+				  .range([0, w2])
+				  .domain([1970, 2013]);
+var yline = d3.scale.linear()
+				  .range([h2, 0])
+				  .domain([0, 600]);
 
 	
 function drawWells(){	   
 
 	d3.csv("/assets/data/dhone_wells.csv", function(data) {
-	
-		var wells = svg_map.selectAll("circle")
+		
+		wellData = data;
+		wellCircles = svg_map.selectAll("circle")
 	   					    .data(data)
 	   					    .enter()
 	   					    .append("circle")
@@ -306,30 +353,40 @@ function drawWells(){
 
 
 
-		createCharts(data);
-		sliderActivate(wells, data);
+		createCharts();
+		sliderActivate();
 
 		d3.select(".playPause button").on("click", function(){
 			if(sliderStatus === "finished"){
-				step = 1980;
+				step = startYear;
 				d3.select(".playPause span").classed("glyphicon", false)
 								  			.attr("class", "glyphicon glyphicon-pause");
 				sliderStatus = "playing";
-				animate(wells, data);
+				animate(wellCircles, data);
 			}else if (sliderStatus === "paused"){
 				d3.select(".playPause span").classed("glyphicon", false)
 								  			.attr("class", "glyphicon glyphicon-pause");
 				sliderStatus = "playing";
-				animate(wells, data);
+				animate(wellCircles, data);
 			} else{
 				clearInterval(interval);
 				d3.select(".playPause span").classed("glyphicon", false)
 								 			 .attr("class", "glyphicon glyphicon-play");
 				sliderStatus = "paused";
+				svg_map.selectAll(".well")
+						.transition()
+						.duration(yearDuration)
+						.attr("r", function(d){
+	   							if(d.year <= step){
+	   								return 3;
+	   							} else{
+	   								return 0;
+	   							}
+	   						})
 				
 			}		
 		});
-		
+		window.onscroll = function(){scrollAnimate(wellCircles, wellData)};
 	});
 
 }	
@@ -448,32 +505,32 @@ d3.selectAll(".button")
 	})
 }
 
-function createCharts(data){		
+function createCharts(){		
 
 	// Group data and define scale domains for type bar chart using complete dataset
-	var wellTypes = countWells(data, "type", 2012);
+	var wellTypes = countWells("type", 2012);
 	xType.domain(d3.range(wellTypes.length))
 	yType.domain([0, 280])
 	
 	// Add axes for type bar chart
 	svg_type.append("g")
-	.attr("class", "y axis")
+		.attr("class", "y axis")
 		.call(d3.svg.axis()
 		.scale(yType)
 		.orient("left"));
 
-		svg_type.append("g")
-	.attr("class", "x axis")
-	.attr("transform", "translate(0, " + h2 + ")")
+	svg_type.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0, " + h2 + ")")
 		.call(d3.svg.axis()
 		.scale(xType)
 		.orient("bottom")
 		.tickFormat(function(d){return wellTypes[d].key;}))
 		.selectAll(".tick text")
-			.call(wrap, xType.rangeBand());
+		.call(wrap, xType.rangeBand());
 
 		// Add axes titles for type chart 
-		svg_type.append("text")
+	svg_type.append("text")
 		.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 5) + ")")
 		.style("text-anchor", "middle")
 		.style("font-size", "14px")
@@ -490,7 +547,7 @@ function createCharts(data){
 		.text("Number of Wells");
 
 	// Regroup data	for start year
-    wellTypes = countWells(data, "type", startYear);
+    wellTypes = countWells("type", startYear);
 
     // Add bars for type chart
 	var typeChart = svg_type.selectAll("rect")
@@ -551,27 +608,27 @@ function createCharts(data){
 		});
 
    	// Group data and define scale domains for depth bar chart using complete dataset
-   	var wellDepths = countWells(data, "depth_bin", 2012);
+   	var wellDepths = countWells("depth_bin", 2012);
 	xDepth.domain(d3.range(wellDepths.length))
 	yDepth.domain([0, 280])
 	
 	// Add axes for depth bar chart
 	svg_depth.append("g")
-	.attr("class", "y axis")
+		.attr("class", "y axis")
 		.call(d3.svg.axis()
 		.scale(yDepth)
 		.orient("left"));
 
-		svg_depth.append("g")
-	.attr("class", "x axis")
-	.attr("transform", "translate(0, " + h2 + ")")
+	svg_depth.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0, " + h2 + ")")
 		.call(d3.svg.axis()
 		.scale(xDepth)
 		.orient("bottom")
 		.tickFormat(function(d){return wellDepths[d].key;}));
 
-		// Add axes titles for depth chart 
-		svg_depth.append("text")
+	// Add axes titles for depth chart 
+	svg_depth.append("text")
 		.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 15) + ")")
 		.style("text-anchor", "middle")
 		.style("font-size", "14px")
@@ -588,7 +645,7 @@ function createCharts(data){
 		.text("Number of Wells");
 
 	// Regroup data	for start year	
-	wellDepths = countWells(data, "depth_bin", startYear);
+	wellDepths = countWells("depth_bin", startYear);
 	
 	// Add bars for depth chart
 	var chart2 = svg_depth.selectAll("rect")
@@ -607,7 +664,7 @@ function createCharts(data){
    		})
    		.style("fill", function(d){
    			if(d.key === "0 - 10"){
-   				return "#deebf7";
+   				return "#c4d4e1";
    			} else if (d.key === "10 - 50"){
    				return "#6baed6";
    			} else if (d.key === "50 - 100"){
@@ -651,30 +708,30 @@ function createCharts(data){
 		});
 
 	// Group data and define scale domains for status bar chart using complete dataset
-	var wellStatus = countWells(data, "status", 2012);
+	var wellStatus = countWells("status", 2012);
 	xStatus.domain(d3.range(wellStatus.length))
 	yStatus.domain([0, 280])
 	
 	// Add axes for status bar chart
 	svg_status.append("g")
-	.attr("class", "y axis")
+	 .attr("class", "y axis")
 		.call(d3.svg.axis()
 		.scale(yStatus)
 		.orient("left"));
 
-		svg_status.append("g")
-	.attr("class", "x axis")
-	.attr("transform", "translate(0, " + h2 + ")")
+	svg_status.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0, " + h2 + ")")
 		.call(d3.svg.axis()
 		.scale(xStatus)
 		.orient("bottom")
 		.tickFormat(function(d){return wellStatus[d].key;}))
 		.selectAll(".tick text")
-			.call(wrap, xStatus.rangeBand());
+		.call(wrap, xStatus.rangeBand());
 
 		// Add axes titles for type chart 
 		svg_status.append("text")
-		.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 5) + ")")
+		.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom) + ")")
 		.style("text-anchor", "middle")
 		.style("font-size", "14px")
 		.style("font-weight", "bold")
@@ -690,7 +747,7 @@ function createCharts(data){
 		.text("Number of Wells");
 
 	// Regroup data	for start year
-    wellStatus = countWells(data, "status", startYear);
+    wellStatus = countWells("status", startYear);
 
     // Add bars for status chart
 	var statusChart = svg_status.selectAll("rect")
@@ -751,10 +808,32 @@ function createCharts(data){
 	   				}
 	   			});
 		});
+
+	addLineChart();
+
 }			
 
+function countWells(attr, year){
+					
+	var nested = d3.nest()
+    	.key(function(d) {
+        	return d[attr];
+        	})
+    	.rollup(function(wellData) {
 
-function sliderActivate(wells, data){		 
+        	var count = d3.sum(wellData, function(d) {
+        		if(d['year'] <= year){;
+            		return d['count'];
+            	}		
+        });
+        return count;
+    })
+    .entries(wellData);
+    return nested;
+}
+
+function sliderActivate(){		 
+    
     slider.on("slide", function(evt, value){
 	    	if (sliderStatus === "playing"){
 	    		clearInterval(interval);
@@ -768,9 +847,10 @@ function sliderActivate(wells, data){
 			}
 
 			d3.select(".d3-slider-handle")
-	      		.attr("left", (100*(value-1980))/33 + "%" );
+	      		.attr("left", (100*(value-startYear))/33 + "%" );
 			d3.select('#slidertext').text(value);
-			updateWells(wells, data, value);
+			updateWells(value);
+			updateLineChart(value);
 			step = value;
 
 		})
@@ -780,30 +860,11 @@ function sliderActivate(wells, data){
 				d3.select(".playPause span").classed("glyphicon", false)
 								 			 .attr("class", "glyphicon glyphicon-repeat");
 			}else if(sliderStatus === "playing"){
-				animate(wells, data);
+				animate();
 			};
-		});		
-}		
-			
+		})	
+	
 
-
-function countWells(data, attr, year){
-					
-	var nested = d3.nest()
-    	.key(function(d) {
-        	return d[attr];
-        	})
-    	.rollup(function(wells) {
-
-        	var count = d3.sum(wells, function(d) {
-        		if(d['year'] <= year){;
-            		return d['count'];
-            	}		
-        });
-        return count;
-    })
-    .entries(data);
-    return nested;
 }
 
 function wrap(text, width) {
@@ -830,7 +891,7 @@ function wrap(text, width) {
   	});
 }
 
-function animate(wells, data){
+function animate(){
 	interval = setInterval(function(){ 
 		step++;
 
@@ -838,7 +899,8 @@ function animate(wells, data){
 
 		if (step === 2013){
 			clearInterval(interval);
-			updateWells(wells, data, step);
+			updateWells(step);
+			updateLineChart(step);
 			sliderStatus = "finished";
 			d3.select(".playPause span").classed("glyphicon", false)
 								 			 .attr("class", "glyphicon glyphicon-repeat");
@@ -846,31 +908,32 @@ function animate(wells, data){
 
 		if(step < 2013){
 		   d3.select(".d3-slider-handle")
-	      		.attr("left", (100*(step-1980))/33 + "%" );
+	      		.attr("left", (100*(step-startYear))/33 + "%" );
 	       console.log(step);
-	       updateWells(wells, data, step);
+	       updateWells(step);
+	       updateLineChart(step);
 	       
 		}
-	}, 500); 
+	}, yearDuration); 
 }
 
-function updateWells(wells, data, year){
+function updateWells(year){
 
 	if(year < 2013) d3.select('#slidertext').text(year);
 
-	wells.transition()
+	wellCircles.transition()
 		.duration(function(){
 			if(sliderStatus === "playing"){
-				return 500;
-			} else{
-				return 0;
+				return yearDuration;
+			} else {
+				return 100;
 			}
 		})
 		.attr("r", function(d){
-				if(d.year === "1980" ){
+				if(d.year === startYear ){
 					return 3;
 				} else if (d.year == year & sliderStatus === "playing"){
-					return 4.5;
+					return 10;
 				}else if(d.year < year){
 					return 3;
 				} 
@@ -880,11 +943,11 @@ function updateWells(wells, data, year){
 			  })
 
 		// Update type chart
-	wellTypes = countWells(data, "type", year);
+	wellTypes = countWells("type", year);
 	svg_type.selectAll("rect")
 			    .data(wellTypes)
 				.transition()
-				.duration(500)
+				.duration(yearDuration)
 				.attr("y", function(d) {
 					return yType(d.values);
 			    })
@@ -893,11 +956,11 @@ function updateWells(wells, data, year){
 			    });
 
 		//Update depth chart	
-	wellDepths = countWells(data, "depth_bin", year);
+	wellDepths = countWells("depth_bin", year);
 	svg_depth.selectAll("rect")
 			    .data(wellDepths)
 				.transition()
-				 .duration(500)
+				 .duration(yearDuration)
 				 .attr("y", function(d) {
 					return yDepth(d.values);
 				 })
@@ -906,11 +969,11 @@ function updateWells(wells, data, year){
 				 });
 
 		//Update Status chart	
-	wellStatus = countWells(data, "status", year);
+	wellStatus = countWells("status", year);
 	svg_status.selectAll("rect")
 			  .data(wellStatus)
 		      .transition()
-			  .duration(500)
+			  .duration(yearDuration)
 			  .attr("y", function(d) {
 			 	return yStatus(d.values);
 			  })
@@ -919,7 +982,23 @@ function updateWells(wells, data, year){
 			  });
 }
 
+
+
+function scrollAnimate(){
+	if(document.body.scrollTop > 800 || document.documentElement.scrollTop > 800){
+		if(scrollTrig === true){
+			d3.select(".playPause span").classed("glyphicon", false)
+									  			.attr("class", "glyphicon glyphicon-pause");
+			sliderStatus = "playing";
+			animate();
+			scrollTrig = false;
+		}
+	}
+}
+
+
 function createWellVis(){
+
 	drawFeatures();
 	var wellLegend = legend.append("g").attr("id", "legendGroup");
 	updateLegend(colorDepth);
@@ -928,3 +1007,98 @@ function createWellVis(){
 
 createWellVis();
 
+function addLineChart(){
+
+	d3.csv("/assets/data/year_totals.csv", function(data) {
+
+		lineData = data;
+
+		var line = d3.svg.line()
+	    			 .x(function(d) { return xline(d.year); })
+	                 .y(function(d) { return yline(d.cumTotal); });
+
+		
+		svg_line.append("path")
+      			.datum(data)
+      			.attr("class", "chartline")
+      			.attr("d", line)
+      			.style("fill", "none")
+      			.style("stroke", "black")
+      			.style("stroke-width", 1.5);
+
+      	svg_line.append("g")
+			 	.attr("class", "y axis")
+				.call(d3.svg.axis()
+					.scale(yline)
+					.orient("left"));
+
+		svg_line.append("g")
+				.attr("class", "x axis")
+				.attr("transform", "translate(0, " + h2 + ")")
+				.call(d3.svg.axis()
+					.scale(xline)
+					.orient("bottom")
+					.tickFormat(d3.format("d"))
+					.tickValues([1970, 1980, 1990, 2000, 2010]));
+
+		// Add axes titles for type chart 
+		svg_line.append("text")
+				.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 10) + ")")
+				.style("text-anchor", "middle")
+				.style("font-size", "14px")
+				.style("font-weight", "bold")
+				.text("Year");
+
+		svg_line.append("text")
+				.attr("transform", "rotate(-90)")
+				.attr("y", 0 - margin_bar.left + 20)
+				.attr("x",0 - (h2 / 2))
+				.style("text-anchor", "middle")
+				.style("font-size", "14px")
+				.style("font-weight", "bold")
+				.text("Number of Wells");
+
+		svg_line.append("circle")
+				.attr("cx", function(){
+					return xline(1980);
+				})
+				.attr("cy", function(d){
+					return yline(86)
+				})
+				.attr("r", 5)
+				.attr("id", "well-total")
+				.style("fill", "blue");
+
+		for (var i = 0; i < lineData.length; i++) {
+			console.log(lineData[i].year);
+		}
+
+	});
+}
+
+function updateLineChart(year){
+	if(year < 2013){
+		d3.select("#well-total")
+			.transition()
+			.duration(function(){
+				if(sliderStatus === "playing"){
+					return yearDuration;
+				} else {
+					return 100;
+				}
+			})
+			.attr("cx", function(){
+				return xline(year);
+			})
+			.attr("cy", function(){
+				for (var i = 0; i < lineData.length; i++) {
+					if(lineData[i].year == year){
+						//debugger;
+						return yline(lineData[i].cumTotal);
+					}
+				}
+			});
+	}
+}
+
+					
