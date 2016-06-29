@@ -15,7 +15,7 @@
 				background-color: #f2f2f2;
 			}
 			#well-viz-charts{
-				margin-top: 10px;
+				margin-top: 5px;
 			}
 
 			.well{
@@ -103,7 +103,10 @@
 			}
 
 			.btn{
-				padding: 10px;
+				padding-top: 10px;
+				padding-right: 10px;
+				padding-left: 10px;
+				padding-bottom: 8px;
 			}
 
 
@@ -150,6 +153,13 @@
 				margin-bottom: 5px;
 				color: black;
 			}
+
+			.chartline{
+				fill: none;
+				stroke: #6A7368;
+				stroke-width: 1.5;
+				shape-rendering: auto;
+			}
 	
 		</style>
 		<link rel="stylesheet" type="text/css" href="/styles.css">
@@ -168,7 +178,6 @@
       	<header>
         </header>
     	 <div id="well-viz">
-    	    <div class="well-viz-com">
     	     <div id="well-viz-map">
     	        <div class="playPause"> 
     	           <button type="button" class="btn btn-default btn-lg">
@@ -190,14 +199,11 @@
     	 		 <div id="well-viz-chart2" class="charts"></div>
     	 		 <div id="well-viz-chart3" class="charts"></div>
     	 		 <div id="well-viz-chart4" class="charts"></div>
+    	 		 <div id="well-viz-chart5" class="charts"></div>
     	 	 </div>
     	 	 <p class="vis-instructions">Select well information using buttons to the top left of the map. View subsets of wells by hovering over the bar charts.</p>
-    	 	</div>
     	 </div>
     	 <p> The above map shows....</p>
-    	 <button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-play" aria-hidden="false"></span> Star
-		 </button>
     	 <p> The above map shows....</p>
     	 <p> The above map shows....</p>
     	 <p> The above map shows....</p>
