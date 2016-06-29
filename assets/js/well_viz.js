@@ -14,11 +14,13 @@ d3.select('#slider').call(slider);
 
 // Define Widths and heights and margins
 var margin_map = {top: 5, right: 10, bottom: 5, left: 10},
-	margin_bar = {top: 15, right: 0, bottom: 45, left: 55};
+	margin_bar = {top: 10, right: 0, bottom: 45, left: 40};
+	margin_chart = {top: 15, right: 0, bottom: 18, left: 40};
 var w = 580 - margin_map.left - margin_map.right,
 	w2 = 300 - margin_bar.left - margin_bar.right,
     h = 740 - margin_map.top - margin_map.bottom,
     h2 = 157 - margin_bar.top - margin_bar.bottom;
+    h3 = 150 - margin_chart.top - margin_chart.bottom;
 
 // Define map projection
 var projection = d3.geo.transverseMercator()
@@ -271,16 +273,16 @@ var svg_status = d3.select("#well-viz-chart3").append("svg")
 			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
 
 var svg_line = d3.select("#well-viz-chart4").append("svg")
-			.attr("width", w2 + margin_bar.left + margin_bar.right)
-			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
+			.attr("width", w2 + margin_chart.left + margin_chart.right)
+			.attr("height", h3 + margin_chart.top + margin_chart.bottom)
 				.append("g")
-			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
+			.attr("transform", "translate(" + margin_chart.left + "," + margin_chart.top + ")");
 
 var svg_avDep = d3.select("#well-viz-chart5").append("svg")
-			.attr("width", w2 + margin_bar.left + margin_bar.right)
-			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
+			.attr("width", w2 + margin_chart.left + margin_bar.right)
+			.attr("height", h3 + margin_chart.top + margin_chart.bottom)
 				.append("g")
-			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
+			.attr("transform", "translate(" + margin_chart.left + "," + margin_chart.top + ")");
 
 // Create chart scales
 var xType = d3.scale.ordinal()
@@ -302,14 +304,14 @@ var xline = d3.scale.linear()
 				  .range([0, w2])
 				  .domain([1970, 2013]);
 var yline = d3.scale.linear()
-				  .range([h2, 0])
+				  .range([h3, 0])
 				  .domain([0, 600]);
 
 var xAvDep = d3.scale.linear()
 				  .range([0, w2])
 				  .domain([1970, 2013]);
 var yAvDep= d3.scale.linear()
-				  .range([h2, 0])
+				  .range([h3, 0])
 				  .domain([0, 50]);
 	
 function drawWells(){	   
@@ -553,7 +555,7 @@ function createCharts(){
 
 	svg_type.append("text")
 		.attr("transform", "rotate(-90)")
-		.attr("y", 0 - margin_bar.left + 20)
+		.attr("y", 0 - margin_bar.left + 10)
 		.attr("x",0 - (h2 / 2))
 		.style("text-anchor", "middle")
 		.style("font-size", "11px")
@@ -590,6 +592,7 @@ function createCharts(){
    		})
    		.style("opacity", 0.7)
    		.on("mouseover", function(d){
+
 				if(sliderStatus != "playing"){
 					d3.select(this)
 					.style("opacity", 1);
@@ -606,6 +609,17 @@ function createCharts(){
 		   					return 0;
 		   				}
 		   			});
+
+		   			svg_type.append("text")	
+						   .attr("id", "typetip")
+						   .attr("x", parseInt(this.getAttribute("x")) + 38)
+						   .attr("y", parseInt(this.getAttribute("y")) - 2)
+						   .attr("text-anchor", "middle")
+						   .attr("font-family", "sans-serif")
+						   .attr("font-size", "14px")
+						   .attr("font-weight", "bold")
+						   .attr("fill", "black")
+						   .text(Math.round(yType.invert(this.getAttribute("y"))));
 		   		}
 		})
 		.on("mouseout", function(d){
@@ -620,6 +634,8 @@ function createCharts(){
 	   					return 0;
 	   				}
 	   			});
+
+	   			d3.select("#typetip").remove();
 		});
 
    	// Group data and define scale domains for depth bar chart using complete dataset
@@ -654,7 +670,7 @@ function createCharts(){
 
 	svg_depth.append("text")
 		.attr("transform", "rotate(-90)")
-		.attr("y", 0 - margin_bar.left + 20)
+		.attr("y", 0 - margin_bar.left + 10)
 		.attr("x",0 - (h2 / 2))
 		.style("text-anchor", "middle")
 		.style("font-size", "11px")
@@ -709,6 +725,17 @@ function createCharts(){
 		   					return 0;
 		   				}
 		   			});
+
+		   			svg_depth.append("text")	
+						   .attr("id", "depthtip")
+						   .attr("x", parseInt(this.getAttribute("x")) + 27.5)
+						   .attr("y", parseInt(this.getAttribute("y")) - 2)
+						   .attr("text-anchor", "middle")
+						   .attr("font-family", "sans-serif")
+						   .attr("font-size", "14px")
+						   .attr("font-weight", "bold")
+						   .attr("fill", "black")
+						   .text(Math.round(yType.invert(this.getAttribute("y"))));
 		   		}
 		})
 		.on("mouseout", function(d){
@@ -723,6 +750,7 @@ function createCharts(){
 	   					return 0;
 	   				}
 	   			});
+	   			d3.select("#depthtip").remove()
 		});
 
 	// Group data and define scale domains for status bar chart using complete dataset
@@ -759,7 +787,7 @@ function createCharts(){
 
 	svg_status.append("text")
 		.attr("transform", "rotate(-90)")
-		.attr("y", 0 - margin_bar.left + 20)
+		.attr("y", 0 - margin_bar.left + 10)
 		.attr("x",0 - (h2 / 2))
 		.style("text-anchor", "middle")
 		.style("font-size", "11px")
@@ -814,6 +842,17 @@ function createCharts(){
 		   					return 0;
 		   				}
 		   			});
+
+		   			svg_status.append("text")	
+						   .attr("id", "statustip")
+						   .attr("x", parseInt(this.getAttribute("x")) + 27.5)
+						   .attr("y", parseInt(this.getAttribute("y")) - 2)
+						   .attr("text-anchor", "middle")
+						   .attr("font-family", "sans-serif")
+						   .attr("font-size", "14px")
+						   .attr("font-weight", "bold")
+						   .attr("fill", "black")
+						   .text(Math.round(yType.invert(this.getAttribute("y"))));
 		   		}
 		})
 		.on("mouseout", function(d){
@@ -828,6 +867,7 @@ function createCharts(){
 	   					return 0;
 	   				}
 	   			});
+	   			d3.select("#statustip").remove();
 		});
 
 	addLineChart();
@@ -859,7 +899,7 @@ function addLineChart(){
 
 		svg_line.append("g")
 				.attr("class", "x axis")
-				.attr("transform", "translate(0, " + h2 + ")")
+				.attr("transform", "translate(0, " + h3 + ")")
 				.call(d3.svg.axis()
 					.scale(xline)
 					.orient("bottom")
@@ -867,17 +907,9 @@ function addLineChart(){
 					.tickValues([1970, 1980, 1990, 2000, 2010]));
 
 		svg_line.append("text")
-				.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 10) + ")")
-				.style("text-anchor", "middle")
-				.style("font-size", "12px")
-				.style("font-weight", "bold")
-				.style("letter-spacing", 1.2)
-				.text("Year");
-
-		svg_line.append("text")
 				.attr("transform", "rotate(-90)")
-				.attr("y", 0 - margin_bar.left + 20)
-				.attr("x",0 - (h2 / 2))
+				.attr("y", 0 - margin_chart.left + 10)
+				.attr("x",0 - (h3 / 2))
 				.style("text-anchor", "middle")
 				.style("font-size", "11px")
 				.style("font-weight", "bold")
@@ -897,12 +929,25 @@ function addLineChart(){
 				.attr("stroke", "black")
 				.attr("stroke-width", 0)
 				.on("mouseover", function(){
+					var point = this;
 					d3.select(this)
 					  .attr("stroke-width", 1.1)	
 					svg_line.append("text")	
 						   .attr("id", "linetip")
-						   .attr("x", (this.getAttribute("cx") - 70))
-						   .attr("y", (this.getAttribute("cy") - 3))
+						   .attr("x", function(){
+						   		if (slider.value() < 1985){
+						   			return (parseInt(point.getAttribute("cx"))) - 50;
+						   		} else{
+						   			return (parseInt(point.getAttribute("cx"))) - 70;
+						   		}
+						   })
+						   .attr("y", function(){
+						   		if(slider.value() < 1985){
+						   			return parseInt(point.getAttribute("cy")) - 8;
+						   		} else{
+						   			return parseInt(point.getAttribute("cy")) - 2;
+						   		}
+							})
 						   .attr("text-anchor", "left")
 						   .attr("font-family", "sans-serif")
 						   .attr("font-size", "14px")
@@ -945,7 +990,7 @@ function addLineChart(){
 
 		svg_avDep.append("g")
 				.attr("class", "x axis")
-				.attr("transform", "translate(0, " + h2 + ")")
+				.attr("transform", "translate(0, " + h3 + ")")
 				.call(d3.svg.axis()
 					.scale(xAvDep)
 					.orient("bottom")
@@ -953,17 +998,9 @@ function addLineChart(){
 					.tickValues([1970, 1980, 1990, 2000, 2010]));
 
 		svg_avDep.append("text")
-				.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 10) + ")")
-				.style("text-anchor", "middle")
-				.style("font-size", "12px")
-				.style("font-weight", "bold")
-				.style("letter-spacing", 1.2)
-				.text("Year");
-
-		svg_avDep.append("text")
 				.attr("transform", "rotate(-90)")
-				.attr("y", 0 - margin_bar.left + 20)
-				.attr("x",0 - (h2 / 2))
+				.attr("y", 0 - margin_chart.left + 10)
+				.attr("x",0 - (h3 / 2))
 				.style("text-anchor", "middle")
 				.style("font-size", "11px")
 				.style("font-weight", "bold")
@@ -983,19 +1020,32 @@ function addLineChart(){
 				.attr("stroke", "black")
 				.attr("stroke-width", 0)
 				.on("mouseover", function(){
+					var point = this;
 					d3.select(this)
 					  .attr("stroke-width", 1.1)	
 					svg_avDep.append("text")	
 						   .attr("id", "avlinetip")
-						   .attr("x", (this.getAttribute("cx") - 70))
-						   .attr("y", (this.getAttribute("cy") - 3))
+						   .attr("x", function(){
+						   		if (slider.value() < 1985){
+						   			return (parseInt(point.getAttribute("cx"))) - 50;
+						   		} else{
+						   			return (parseInt(point.getAttribute("cx"))) - 70;
+						   		}
+						   })
+						   .attr("y", function(){
+						   		if(slider.value() < 1985){
+						   			return parseInt(point.getAttribute("cy")) - 8;
+						   		} else{
+						   			return parseInt(point.getAttribute("cy")) - 2;
+						   		}
+							})
 						   .attr("text-anchor", "left")
 						   .attr("font-family", "sans-serif")
 						   .attr("font-size", "14px")
 						   .attr("font-weight", "bold")
 						   .attr("fill", "#6A7368")
 						   .text(Math.round(yAvDep.invert(this.getAttribute("cy"))) + " metres");
-
+					//debugger;		   
 					svg_avDep.append("line")
 							.attr("id", "guideline")
 							.attr("stroke", "#BDBBC4")
