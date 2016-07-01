@@ -14,7 +14,7 @@ d3.select('#slider').call(slider);
 
 // Define Widths and heights and margins
 var margin_map = {top: 5, right: 10, bottom: 5, left: 10},
-	margin_bar = {top: 10, right: 0, bottom: 45, left: 40};
+	margin_bar = {top: 8, right: 0, bottom: 28, left: 40};
 	margin_chart = {top: 15, right: 0, bottom: 18, left: 40};
 var w = 580 - margin_map.left - margin_map.right,
 	w2 = 300 - margin_bar.left - margin_bar.right,
@@ -372,7 +372,7 @@ function drawWells(){
 
 		d3.select(".playPause button").on("click", function(){
 			if(sliderStatus === "finished"){
-				step = startYear;
+				step = startYear - 1;
 				d3.select(".playPause span").classed("glyphicon", false)
 								  			.attr("class", "glyphicon glyphicon-pause");
 				sliderStatus = "playing";
@@ -544,15 +544,6 @@ function createCharts(){
 		.selectAll(".tick text")
 		.call(wrap, xType.rangeBand());
 
-		// Add axes titles for type chart 
-	svg_type.append("text")
-		.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 5) + ")")
-		.style("text-anchor", "middle")
-		.style("font-size", "12px")
-		.style("font-weight", "bold")
-		.style("letter-spacing", 1.2)
-		.text("Well Type")
-
 	svg_type.append("text")
 		.attr("transform", "rotate(-90)")
 		.attr("y", 0 - margin_bar.left + 10)
@@ -659,15 +650,6 @@ function createCharts(){
 		.orient("bottom")
 		.tickFormat(function(d){return wellDepths[d].key;}));
 
-	// Add axes titles for depth chart 
-	svg_depth.append("text")
-		.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom - 15) + ")")
-		.style("text-anchor", "middle")
-		.style("font-size", "12px")
-		.style("font-weight", "bold")
-		.style("letter-spacing", 1.2)
-		.text("Well Depth (m)")
-
 	svg_depth.append("text")
 		.attr("transform", "rotate(-90)")
 		.attr("y", 0 - margin_bar.left + 10)
@@ -697,13 +679,13 @@ function createCharts(){
    			return h2 - yDepth(d.values);
    		})
    		.style("fill", function(d){
-   			if(d.key === "0 - 10"){
+   			if(d.key === "0 - 10 m"){
    				return "#c4d4e1";
-   			} else if (d.key === "10 - 50"){
+   			} else if (d.key === "10 - 50 m"){
    				return "#6baed6";
-   			} else if (d.key === "50 - 100"){
+   			} else if (d.key === "50 - 100 m"){
    				return "#2171b5";
-   			} else if(d.key === "100 +"){
+   			} else if(d.key === "100 + m"){
    				return "#08306b";
    			}
    		})
@@ -775,15 +757,6 @@ function createCharts(){
 		.tickFormat(function(d){return wellStatus[d].key;}))
 		.selectAll(".tick text")
 		.call(wrap, xStatus.rangeBand());
-
-		// Add axes titles for type chart 
-		svg_status.append("text")
-		.attr("transform", "translate(" + (w2 / 2) + " ," + (h2 + margin_bar.bottom) + ")")
-		.style("text-anchor", "middle")
-		.style("font-size", "12px")
-		.style("font-weight", "bold")
-		.style("letter-spacing", 1.2)
-		.text("Well Status (2012)")
 
 	svg_status.append("text")
 		.attr("transform", "rotate(-90)")
@@ -1155,7 +1128,7 @@ function sliderActivate(){
 			}
 
 			d3.select(".d3-slider-handle")
-	      		.attr("left", (100*(value-startYear))/33 + "%" );
+	      		.attr("left", (100*(value-startYear))/33 + "%");
 			d3.select('#slidertext').text(value);
 			updateWells(value);
 			updateLineChart(value);
@@ -1293,8 +1266,8 @@ function updateWells(year){
 
 
 function scrollAnimate(){
-	if(document.body.scrollTop > 800 || document.documentElement.scrollTop > 800){
-		if(scrollTrig === true){
+	if(document.body.scrollTop > 2000 || document.documentElement.scrollTop > 2000){
+		if(scrollTrig === true & slider.value() < 2013){
 			d3.select(".playPause span").classed("glyphicon", false)
 									  			.attr("class", "glyphicon glyphicon-pause");
 			sliderStatus = "playing";

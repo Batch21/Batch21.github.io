@@ -1,0 +1,183 @@
+#well-viz{
+	border-style: solid;
+	border-width: 1px;
+	background-color: #f2f2f2;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#well-viz-charts{
+	margin-top: 5px;
+}
+
+.well{
+	stroke: black;
+	stroke-width: 0.4;
+	-moz-transition: fill 0.3s;
+	-o-transition: fill 0.3s;
+	-webkit-transition: fill 0.3s;
+	transition: fill 0.5s;
+}
+
+.buttons{
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 15px;
+}
+
+.button{
+	display: inline;
+	font-size: 15px;
+	color: black;
+	padding: 6px;
+	margin: 1px;
+	background-color: #DDDDDD;
+	opacity: 0.8;
+	border-style: solid;
+	border-width: 1px;
+	-webkit-box-shadow: 2px 2px 2px;
+		-moz-box-shadow: 2px 2px 2px;
+		box-shadow: 2px 2px 2px;
+		border-radius: 5px;
+}
+
+#yearCount{
+	float: right;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin-left: 100px;
+	margin-right: 4px;
+	font-size: 24px;
+	font-weight: bold;
+	color: black;
+	background-color: #DDDDDD;
+	opacity: 0.8;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#legend{
+	position: absolute;
+	margin-top: 52px;
+	margin-left: 16px;
+	background-color: rgba(220, 220, 217, 0.9);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+#col{
+	width:100%;
+}
+
+
+#slider-con{
+	margin-left: 10px;
+	margin-top:15px;
+	margin-bottom: 20px;
+	width: 485px;
+	display: inline-block;
+	vertical-align: middle;
+
+}
+
+.playPause {
+	margin-bottom: 5px;
+	margin-right: 10px;
+	margin-top: 8px;
+	margin-left: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.glyphicon {
+	font-size: 25px;
+}
+
+.btn{
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 8px;
+}
+
+
+#well-viz-map,
+#well-viz-charts{
+	display: inline-block;
+}
+
+#well-viz-map{
+	width: 580px;
+}
+
+.mapBorder{
+	stroke: black;
+	fill: none;
+	stroke-width: 1.2;
+}
+
+.charts{
+	display: float;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: black;
+	stroke-width: 1.1;
+	shape-rendering: auto;
+}
+
+.demAxis path{
+	stroke-width: 0;
+}
+
+.axis text {
+	font-family: sans-serif;
+	font-size: 10px;
+}
+
+.vis-instructions{
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 10px;
+	margin-bottom: 5px;
+	color: black;
+}
+
+.chartline{
+	fill: none;
+	stroke: #6A7368;
+	stroke-width: 1.5;
+	shape-rendering: auto;
+}
+
+#title-con{
+	min-height: 640px;
+}
+
+#title{
+	min-width: 100%;
+	min-height: 100%;
+	margin-bottom: 20px;
+}
+
+#title-img{
+	position: absolute;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+    align-content: center;
+}
+
+#title-text{
+	position: absolute;
+	top: 0px;
+	left: -9999px;
+    right: -9999px;
+	margin: auto;
+	line-height: 1;
+	font-weight: bold;
+	font-size: 2.2rem;
+	text-align: center;
+}
