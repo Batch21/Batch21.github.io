@@ -1,4 +1,4 @@
-#well-viz{
+#well-viz, #rwh-viz{
 	border-style: solid;
 	border-width: 1px;
 	background-color: #f2f2f2;
@@ -22,40 +22,42 @@
 	position: absolute;
 	margin-top: 10px;
 	margin-left: 15px;
+	width:580px;
 }
 
-.button{
+.buttonWells, .buttonRWH{
 	display: inline;
 	font-size: 15px;
 	color: black;
+	font-weight: bold;
 	padding: 6px;
 	margin: 1px;
 	background-color: #DDDDDD;
-	opacity: 0.8;
+	opacity: 0.95;
 	border-style: solid;
 	border-width: 1px;
 	-webkit-box-shadow: 2px 2px 2px;
-		-moz-box-shadow: 2px 2px 2px;
-		box-shadow: 2px 2px 2px;
-		border-radius: 5px;
+	-moz-box-shadow: 2px 2px 2px;
+	box-shadow: 2px 2px 2px;
+	border-radius: 5px;
 }
 
-#yearCount{
-	float: right;
-	padding-left: 8px;
-	padding-right: 8px;
-	margin-left: 100px;
-	margin-right: 4px;
-	font-size: 24px;
+button:focus {outline:0;}
+
+#yearCount, #yearCountRWH{
+	display: inline;
+	position: absolute;
+	right:30px;
 	font-weight: bold;
 	color: black;
 	background-color: #DDDDDD;
-	opacity: 0.8;
 	border-style: solid;
 	border-width: 1px;
+	padding: 4px;
+	margin: 0px;
 }
 
-#legend{
+#legend, #legendRWH{
 	position: absolute;
 	margin-top: 52px;
 	margin-left: 16px;
@@ -70,7 +72,7 @@
 }
 
 
-#slider-con{
+#slider-con-wells {
 	margin-left: 10px;
 	margin-top:15px;
 	margin-bottom: 20px;
@@ -180,4 +182,15 @@
 	font-weight: bold;
 	font-size: 2.2rem;
 	text-align: center;
+}
+
+#slider-con-rwh{
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 30px;
+	margin-top: 20px;
+	width: 550px;
+	display: inline-block;
+	vertical-align: middle;
+
 }

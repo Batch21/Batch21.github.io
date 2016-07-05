@@ -33,10 +33,6 @@ var projection = d3.geo.transverseMercator()
 var path = d3.geo.path()
 				 .projection(projection);
 
-var pathWells = d3.geo.path()
-				 .projection(projection);
-
-
 
 // Define scales for well map
 var colorDepth = d3.scale.threshold()
@@ -337,6 +333,7 @@ function drawWells(){
 	   							}
 	   						})
 						    .attr("class", "well")
+						    .attr("display", "yes")
 							.style("fill", function(d){
 								if (d.depth){
 			   						return colorDepth(d.depth);
@@ -461,21 +458,21 @@ function createButtons(){
 d3.select("#wellDepthButton").style("background-color", "#FAE9BD")
 						   	 .style("border-width", "1px");
 
-d3.selectAll(".button")
+d3.selectAll(".buttonWells")
 	.on("mouseover", function(){
 		d3.select(this).style("opacity", 1)
 					   .style("border-width", "2px")
 					   .style("margin", "0px");
 	})
 	.on("mouseout", function(){
-		d3.select(this).style("opacity", 0.8)
+		d3.select(this).style("opacity", 0.95)
 					   .style("border-width", "1px")
 					   .style("margin", "1px");
 	})
 	.on("click", function(){
 		var buttonText = this.textContent;
 
-		d3.selectAll(".button").style("background-color", "#DDDDDD")
+		d3.selectAll(".buttonWells").style("background-color", "#DDDDDD")
 					           .style("border-width", "1px");						   
 		d3.select(this).style("background-color", "#FAE9BD")
 					   .style("border-width", "2px");
@@ -559,9 +556,11 @@ function createCharts(){
 
     // Add bars for type chart
 	var typeChart = svg_type.selectAll("rect")
-   		.data(wellTypes.sort(function(a, b){return b-a}))		
+   		.data(wellTypes)		
    		.enter()
    		.append("rect")
+   		.attr("selected", "no")
+   		.attr("class", "bar")
    		.attr("x", function(d, i) {
    			return xType(i);
    		})
@@ -573,14 +572,16 @@ function createCharts(){
    			return h2 - yType(d.values);
    		})
    		.style("fill", function(d){
-   			if(d.key === "Agricultural Borewell"){
-   				return "#59A80F"
-   			} else if(d.key === "Domestic Borewell"){
-   				return "#ba831f"
-   			}else if(d.key === "Open Well"){
+   			if(d.key == "Open Well"){
    				return "#C4ED68"
+   			}else if(d.key == "Agricultural Borewell"){
+   				return "#59A80F"
+   			}else if(d.key == "Domestic Borewell"){
+   				return "#ba831f"
    			}
    		})
+   		.style("stroke", "red")
+   		.style("stroke-width", 0)
    		.style("opacity", 0.7)
    		.on("mouseover", function(d){
 
@@ -590,7 +591,7 @@ function createCharts(){
 
 					svg_map.selectAll(".well")
 					.attr("r", function(j){
-		   				if (j.year <= slider.value()){
+		   				if (j.year <= slider.value() & this.getAttribute("display") == "yes"){
 		   					if(d.key === j.type){
 		   						return 3.5;
 		   					}else{
@@ -613,18 +614,69 @@ function createCharts(){
 						   .text(Math.round(yType.invert(this.getAttribute("y"))));
 		   		}
 		})
+		.on("click", function(d){
+			if(sliderStatus != "playing"){
+				if(this.getAttribute("selected") == "no"){
+
+					d3.selectAll(".bar").attr("selected", "no")
+							.style("stroke-width", 0)
+
+					d3.select(this).attr("selected", "yes")
+						.style("stroke-width", 2.5)
+
+					svg_map.selectAll(".well")
+						.attr("r", function(j){
+			   				if (j.year <= slider.value()){
+			   					if(d.key === j.type){
+			   						return 3.5;
+			   					}else{
+			   						return 0;
+			   					}
+			   				}else{
+			   					return 0;
+			   				}
+			   			})
+			   			.attr("display", function(j){
+			   				if(d.key === j.type){
+			   					return "yes";
+			   				}else{
+			   					return "no";
+			   				}
+			   			});
+		   		} else{
+					if(sliderStatus != "playing"){
+						d3.selectAll(".bar").attr("selected", "no")
+							.style("stroke-width", 0)
+
+						svg_map.selectAll(".well")
+							.attr("display", "yes")
+							.attr("r", function(j){
+								if(this.getAttribute("display") === "yes" & j.year <= slider.value()){
+					   					return 3;
+   					   			}else{
+					   				return 0
+					   			}
+		   					});
+					}
+				}			
+			}
+		})
 		.on("mouseout", function(d){
 				d3.select(this)
 				.style("opacity", 0.7);
 
 				svg_map.selectAll(".well")
-				.attr("r", function(j){
-	   				if(j.year <= slider.value()){
-	   					return 3;
-	   				}else{
-	   					return 0;
-	   				}
-	   			});
+					.attr("r", function(j){
+						if(this.getAttribute("display") === "yes"){
+			   				if(j.year <= slider.value()){
+			   					return 3;
+			   				}else{
+			   					return 0;
+			   				}
+			   			}else{
+			   				return 0
+			   			}
+		   			});
 
 	   			d3.select("#typetip").remove();
 		});
@@ -668,6 +720,8 @@ function createCharts(){
    		.data(wellDepths)		
    		.enter()
    		.append("rect")
+   		.attr("class", "bar")
+   		.attr("selected", "no")
    		.attr("x", function(d, i) {
    			return xDepth(i);
    		})
@@ -685,10 +739,12 @@ function createCharts(){
    				return "#6baed6";
    			} else if (d.key === "50 - 100 m"){
    				return "#2171b5";
-   			} else if(d.key === "100 + m"){
+   			} else if(d.key === "100 m +"){
    				return "#08306b";
    			}
    		})
+   		.style("stroke", "red")
+   		.style("stroke-width", 0)
    		.style("opacity", 0.7)
    		.on("mouseover", function(d){
 				if(sliderStatus != "playing"){
@@ -697,7 +753,7 @@ function createCharts(){
 
 					svg_map.selectAll(".well")
 					.attr("r", function(j){
-		   				if (j.year <= slider.value()){
+		   				if (j.year <= slider.value() & this.getAttribute("display") === "yes"){
 		   					if(d.key === j.depth_bin){
 		   						return 3.5;
 		   					}else{
@@ -708,30 +764,85 @@ function createCharts(){
 		   				}
 		   			});
 
-		   			svg_depth.append("text")	
-						   .attr("id", "depthtip")
-						   .attr("x", parseInt(this.getAttribute("x")) + 27.5)
-						   .attr("y", parseInt(this.getAttribute("y")) - 2)
-						   .attr("text-anchor", "middle")
-						   .attr("font-family", "sans-serif")
-						   .attr("font-size", "14px")
-						   .attr("font-weight", "bold")
-						   .attr("fill", "black")
-						   .text(Math.round(yType.invert(this.getAttribute("y"))));
+	   			svg_depth.append("text")	
+					   .attr("id", "depthtip")
+					   .attr("x", parseInt(this.getAttribute("x")) + 27.5)
+					   .attr("y", parseInt(this.getAttribute("y")) - 2)
+					   .attr("text-anchor", "middle")
+					   .attr("font-family", "sans-serif")
+					   .attr("font-size", "14px")
+					   .attr("font-weight", "bold")
+					   .attr("fill", "black")
+					   .text(Math.round(yType.invert(this.getAttribute("y"))));
 		   		}
+		})
+		.on("click", function(d){
+			if(sliderStatus != "playing"){
+				if(this.getAttribute("selected") === "no"){
+
+					d3.selectAll(".bar").attr("selected", "no")
+							.style("stroke-width", 0)
+
+					d3.select(this).attr("selected", "yes")
+						.style("stroke-width", 2.5)
+
+					svg_map.selectAll(".well")
+						.attr("r", function(j){
+			   				if (j.year <= slider.value()){
+			   					if(d.key === j.depth_bin){
+			   						return 3.5;
+			   					}else{
+			   						return 0;
+			   					}
+			   				}else{
+			   					return 0;
+			   				}
+			   			})
+			   			.attr("display", function(j){
+			   				if(d.key === j.depth_bin){
+			   					return "yes";
+			   				}else{
+			   					return "no";
+			   				}
+			   			});
+		   		}else{
+					d3.selectAll(".bar").attr("selected", "no")
+						.style("stroke-width", 0)
+
+					svg_map.selectAll(".well")
+						.attr("display", "yes")
+						.attr("r", function(j){
+							if(this.getAttribute("display") === "yes"){
+				   				if(j.year <= slider.value()){
+				   					return 3;
+				   				}else{
+				   					return 0;
+				   				}
+				   			}else{
+				   				return 0
+				   			}
+	   					});
+				}
+		
+		}
 		})
 		.on("mouseout", function(d){
 				d3.select(this)
 				.style("opacity", 0.7);
 
-				svg_map.selectAll(".well")
-				.attr("r", function(j){
-	   				if(j.year <= slider.value()){
-	   					return 3;
-	   				}else{
-	   					return 0;
-	   				}
-	   			});
+	   			svg_map.selectAll(".well")
+					.attr("r", function(j){
+						if(this.getAttribute("display") === "yes"){
+			   				if(j.year <= slider.value()){
+			   					return 3;
+			   				}else{
+			   					return 0;
+			   				}
+			   			}else{
+			   				return 0
+			   			}
+		   			});
+
 	   			d3.select("#depthtip").remove()
 		});
 
@@ -776,6 +887,8 @@ function createCharts(){
    		.data(wellStatus)		
    		.enter()
    		.append("rect")
+   		.attr("class", "bar")
+   		.attr("selected", "no")
    		.attr("x", function(d, i) {
    			return xStatus(i);
    		})
@@ -797,6 +910,8 @@ function createCharts(){
    				return "#FFF4C2"
    			}
    		})
+   		.style("stroke", "red")
+   		.style("stroke-width", 0)
    		.style("opacity", 0.7)
    		.on("mouseover", function(d){
 				if(sliderStatus != "playing"){
@@ -805,7 +920,7 @@ function createCharts(){
 
 					svg_map.selectAll(".well")
 					.attr("r", function(j){
-		   				if (j.year <= slider.value()){
+		   				if (j.year <= slider.value() & this.getAttribute("display") === "yes"){
 		   					if(d.key === j.status){
 		   						return 3.5;
 		   					}else{
@@ -828,18 +943,73 @@ function createCharts(){
 						   .text(Math.round(yType.invert(this.getAttribute("y"))));
 		   		}
 		})
+		.on("click", function(d){
+			if(sliderStatus != "playing"){
+				if(this.getAttribute("selected") === "no"){
+
+					d3.selectAll(".bar").attr("selected", "no")
+							.style("stroke-width", 0)
+
+					d3.select(this).attr("selected", "yes")
+						.style("stroke-width", 2.5)
+
+					svg_map.selectAll(".well")
+						.attr("r", function(j){
+			   				if (j.year <= slider.value()){
+			   					if(d.key === j.status){
+			   						return 3.5;
+			   					}else{
+			   						return 0;
+			   					}
+			   				}else{
+			   					return 0;
+			   				}
+			   			})
+			   			.attr("display", function(j){
+			   				if(d.key === j.status){
+			   					return "yes";
+			   				}else{
+			   					return "no";
+			   				}
+			   			});
+		   		}else{
+					d3.selectAll(".bar").attr("selected", "no")
+						.style("stroke-width", 0)
+
+					svg_map.selectAll(".well")
+						.attr("display", "yes")
+						.attr("r", function(j){
+							if(this.getAttribute("display") === "yes"){
+				   				if(j.year <= slider.value()){
+				   					return 3;
+				   				}else{
+				   					return 0;
+				   				}
+				   			}else{
+				   				return 0
+				   			}
+	   					});
+				}
+		
+		}
+		})
 		.on("mouseout", function(d){
 				d3.select(this)
 				.style("opacity", 0.7);
 
 				svg_map.selectAll(".well")
-				.attr("r", function(j){
-	   				if(j.year <= slider.value()){
-	   					return 3;
-	   				}else{
-	   					return 0;
-	   				}
-	   			});
+					.attr("r", function(j){
+						if(this.getAttribute("display") === "yes"){
+			   				if(j.year <= slider.value()){
+			   					return 3;
+			   				}else{
+			   					return 0;
+			   				}
+			   			}else{
+			   				return 0
+			   			}
+		   			});
+
 	   			d3.select("#statustip").remove();
 		});
 
@@ -1127,7 +1297,7 @@ function sliderActivate(){
 				}
 			}
 
-			d3.select(".d3-slider-handle")
+			d3.select("#slider-con-wells .d3-slider #handle-one")
 	      		.attr("left", (100*(value-startYear))/33 + "%");
 			d3.select('#slidertext').text(value);
 			updateWells(value);
@@ -1188,9 +1358,8 @@ function animate(){
 		}; 
 
 		if(step < 2013){
-		   d3.select(".d3-slider-handle")
+		   d3.select("#slider-con-wells .d3-slider #handle-one")
 	      		.attr("left", (100*(step-startYear))/33 + "%" );
-	       console.log(step);
 	       updateWells(step);
 	       updateLineChart(step);
 	       
@@ -1211,15 +1380,17 @@ function updateWells(year){
 			}
 		})
 		.attr("r", function(d){
-				if(d.year === startYear ){
-					return 3;
-				} else if (d.year == year & sliderStatus === "playing"){
-					return 10;
-				}else if(d.year < year){
-					return 3;
-				} 
-				else{
-					return 0;
+				if(this.getAttribute("display") === "yes"){
+					if(d.year === startYear ){
+						return 3;
+					} else if (d.year == year & sliderStatus === "playing"){
+						return 10;
+					}else if(d.year < year){
+						return 3;
+					} 
+					else{
+						return 0;
+					}
 				}
 			  })
 

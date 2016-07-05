@@ -34,13 +34,13 @@
     	           <button type="button" class="btn btn-default btn-lg">
   			        <span class="glyphicon glyphicon-play" aria-hidden="false"></span>
 		        </div>
-    	       <div id="slider-con">
+    	       <div id="slider-con-wells">
     	     	 <div id="slider"></div>
     	       </div>
     	     	<div class="buttons">
-    	     	  <div class="button" id="wellDepthButton">Well Depth</div>
-    	     	  <div class="button">Well Type</div>
-    	     	  <div class="button">Well Status (2012)</div> 
+    	     	  <button type="button" class="buttonWells" id="wellDepthButton">Well Depth</button>
+    	     	  <button type="button" class="buttonWells">Well Type</button>
+    	     	  <button type="button" class="buttonWells">Well Status (2012)</button> 
     	     	  <div id="yearCount">Year: <span id="slidertext">1980</span></div> 
     	      </div>
     	      <div id="legend"></div>
@@ -63,15 +63,15 @@
 		  <div id="rwh-viz">
     	     <div id="rwh-viz-map">
     	       <div id="slider-con-rwh">
-    	     	 <div id="slider"-rwh></div>
+    	     	 <div id="slider-rwh"></div>
     	       </div>
     	     	<div class="buttons">
-    	     	  <div class="button" id="wellDepthButton">Well Depth</div>
-    	     	  <div class="button">Well Type</div>
-    	     	  <div class="button">Well Status (2012)</div> 
-    	     	  <div id="yearCount">Year: <span id="slidertext">1980</span></div> 
+    	     	  <button type="button" class="buttonRWH" id="rwhTypeButton">RWH Type</button>
+    	     	  <button type="button" class="buttonRWH">RWH Status</button>
+    	     	  <button type="button" class="buttonRWH">RWH Capacity</button> 
+    	     	  <div id="yearCountRWH">Year: <span id="slidertextRWH">2012</span></div> 
     	      </div>
-    	      <div id="legend"></div>
+    	      <div id="legendRWH"></div>
     	     </div>
     	 	 <div id="well-viz-charts" >
     	 		 <div id="well-viz-chart1" class="charts"></div>
@@ -84,7 +84,8 @@
     	 </div>
        </div>
 	</div>
-	<script type="text/javascript" src="/assets/js/well_viz.js"></script>
+	<script type="text/javascript" src="/assets/js/well_vis.js"></script>
+	<script type="text/javascript" src="/assets/js/rwh_vis.js"></script>
 	</body>
 </html>
 

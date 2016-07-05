@@ -36,6 +36,7 @@ return function module() {
       value,
       active = 1,
       snap = false,
+      second,
       scale;
 
   // Private variables
@@ -84,6 +85,13 @@ return function module() {
           .attr("xlink:href", "#")
           .on("click", stopPropagation)
           .call(drag);
+      }else if(handle1){
+        handle2nd = div.append("a")
+          .classed("d3-slider-handle", true)
+          .attr("xlink:href", "#")
+          .attr('id', "handle-2nd")
+          .on("click", stopPropagation)
+          .call(drag);
       } else {
         handle1 = div.append("a")
           .classed("d3-slider-handle", true)
@@ -110,7 +118,10 @@ return function module() {
           divRange.style("right", width+"%");
           drag.on("drag", onDragHorizontal);
 
-        } else {
+        } else if(second == true){
+          handle2nd.style("left", formatPercent(scale(value)));
+          drag.on("drag", onDragHorizontal);
+        }else {
           handle1.style("left", formatPercent(scale(value)));
           drag.on("drag", onDragHorizontal);
         }
@@ -133,7 +144,10 @@ return function module() {
           divRange.style("top", top+"%");
           drag.on("drag", onDragVertical);
 
-        } else {
+        }else if(second === true){
+          handle2nd.style("bottom", formatPercent(scale(value)));
+          drag.on("drag", onDragVertical);
+        }else {
           handle1.style("bottom", formatPercent(scale(value)));
           drag.on("drag", onDragVertical);
         }
