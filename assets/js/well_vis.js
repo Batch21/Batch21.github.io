@@ -188,10 +188,10 @@ dhoneLegend.append("line")
 
 function drawFeatures() {
 
-	d3.json("/assets/data/village_areas.json", function(json2) {
+	d3.json("/assets/data/village_areas.json", function(villages) {
 
 		svg_map.selectAll("path.features")
-	   		.data(json2.features)
+	   		.data(villages.features)
 	   		.enter()
 	   		.append("path")
 	   		.attr("d", path)
@@ -348,8 +348,8 @@ function drawWells(){
 								
 								svg_map.append("text")	
 									   .attr("id", "tooltip")
-		   							   .attr("x", parseFloat(projection([d.lon, d.lat])[0]) + 7)
-		   							   .attr("y", parseFloat(projection([d.lon, d.lat])[1]) - 7)
+		   							   .attr("x", parseFloat(projection([d.lon, d.lat])[0]) - 60)
+		   							   .attr("y", parseFloat(projection([d.lon, d.lat])[1]) - 10)
 		   							   .attr("text-anchor", "left")
 		  							   .attr("font-family", "sans-serif")
 		  							   .attr("font-size", "14px")
@@ -402,7 +402,7 @@ function drawWells(){
 
 }	
 	
-function updateLegend(attr){
+function updateLegend(buttonScale){
 		
 	legend.select("#legendGroup").remove();			
 	
@@ -410,7 +410,7 @@ function updateLegend(attr){
 		.attr("id", "legendGroup")
 			.attr("transform", "translate(" + 22 + "," + 167 + ")")
 			.selectAll("g")
-			.data(attr.domain())
+			.data(buttonScale.domain())
 			.enter()
 			.append("g")
 		.attr("class", "legend")
@@ -423,7 +423,7 @@ function updateLegend(attr){
 
 	wellLegend.append("circle")
 			.attr("r", 7)
-			.style("fill", attr)
+			.style("fill", buttonScale)
 			.style("stroke", "black")
 			.style("stroke-width", 0.4);
 
@@ -431,7 +431,7 @@ function updateLegend(attr){
 			.attr("x", 25)
 			.attr("y", 6)
 			.text(function(d) { 
-				if(attr === colorDepth){
+				if(buttonScale === colorDepth){
 					if(d === 10){
 						return "0 - 10 metres";
 					} else if (d === 50){
