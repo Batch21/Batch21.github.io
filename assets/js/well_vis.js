@@ -522,7 +522,7 @@ function createCharts(){
 	var wellTypes = countWells("type", 2012);
 	xType.domain(d3.range(wellTypes.length))
 	yType.domain([0, 280])
-
+	
 	// Add axes for type bar chart
 	svg_type.append("g")
 		.attr("class", "y axis")
@@ -1458,4 +1458,4 @@ function createWellVis(){
 }
 
 createWellVis();
-					
+	

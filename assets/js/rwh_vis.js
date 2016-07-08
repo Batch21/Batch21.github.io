@@ -6,7 +6,6 @@ var startYearRWH = 2012,
 var sliderRWH = d3.slider().axis(true).min(1998).max(startYearRWH).value(startYearRWH).step(1);
 d3.select('#slider-rwh').call(sliderRWH);
 
-
 var svg_map_rwh = d3.select("#rwh-viz-map").append("svg")
 	.attr("width", w + margin_map.left + margin_map.right)
 	.attr("height", h + margin_map.top + margin_map.bottom)
@@ -179,8 +178,8 @@ var rwhStatusScale = d3.scale.ordinal()
 						.range(["#D7191C", "#FDAE61", "#2C7BB6"])
 
 var rwhSizeScale = d3.scale.linear()
-						.domain([50, 500, 1000, 10000, 40000])
-						.range([50, 106.28, 167.49, 1268.53, 5000])
+						.domain([100, 1000, 10000, 40000])
+						.range([56.23, 167.49, 1268.53, 5000])
 
 
 
@@ -227,7 +226,7 @@ function drawRWH(){
 									  .attr("d", d3.svg.symbol()
 									  	.size(function(d){
 									  		if(buttonText != "RWH Capacity"){
-									  			return 150;
+									  			return 250;
 									  		}else{
 									  			return rwhSizeScale(d.Capacity);
 									  		}
@@ -262,13 +261,13 @@ function drawRWH(){
 									d3.select(this).attr("d", d3.svg.symbol()
 									  	.size(function(d){
 									  		if(buttonText != "RWH Capacity"){
-									  			return 150;
+									  			return 50;
 									  		}else{
 									  			return rwhSizeScale(d.Capacity);
 									  		}
 									  	})
 									  	.type(function(d){
-									  		if(buttonText != "RWH Capacity"){	
+									  		if(buttonText == "RWH Type"){	
 										   		if(d.type === "Check Dam"){
 										   			return "square";
 										   		} else if (d.type === "Infiltration Tankk"){
@@ -329,8 +328,9 @@ function updateLegendRWH(buttonScale){
 	  			var vert = i * height;
 	  			return "translate(" + horz + "," + vert + ")";
 	  		} else{
-	  			totalCircleRadii += Math.sqrt(rwhSizeScale(d)/Math.PI);
-	  			var height = 25;
+	  			//debugger;
+	  			totalCircleRadii += Math.sqrt(rwhSizeScale(d)/Math.PI) * 1.5;
+	  			var height = 9;
 	  			var horz = 0;
 	  			var vert = i * height + totalCircleRadii;
 	  			return "translate(" + horz + "," + vert + ")";
@@ -379,7 +379,7 @@ function updateLegendRWH(buttonScale){
 			if(buttonText != "RWH Capacity"){
 				return d;
 			} else{
-				return d + cubedMetres;
+				return numberWithCommas(d) + cubedMetres;
 			}
 		})
 		.style("font-size", "12px");
@@ -473,8 +473,41 @@ function createButtonsRWH(){
 		})
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+sliderRWH.on("slide", function(evt, value){
+	svg_map_rwh.selectAll(".rwh")
+			.attr("d", d3.svg.symbol()
+			  	.size(function(d){
+			  		if(d.year <= value){
+				  		if(buttonText != "RWH Capacity"){
+				  			return 50;
+				  		} else{
+				  			return rwhSizeScale(parseInt(d.Capacity));
+				  		}
+				  	}else{
+				  		return 0;
+				  	}
+				 })
+			)
+	countRWH('status', value)
+	countRWH('type', value)
+});
+
+
+function countRWH(column, year){
+	var counts = {};
+	for (var i = 0; i < rwhData.length; i++) {
+		if(rwhData[i].year <= year){
+    		counts[rwhData[i][column]] = 1 + (counts[rwhData[i][column]] || 0);
+    	}
+ 	}
+    return counts
+}
 
 drawFeaturesRWH();
 drawRWH();
 updateLegendRWH(rwhTypeScale);
-createButtonsRWH()
+createButtonsRWH();
