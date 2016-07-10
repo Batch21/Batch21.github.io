@@ -14,13 +14,17 @@ d3.select('#slider').call(slider);
 
 // Define Widths and heights and margins
 var margin_map = {top: 5, right: 10, bottom: 5, left: 10},
-	margin_bar = {top: 8, right: 0, bottom: 28, left: 40};
-	margin_chart = {top: 15, right: 0, bottom: 18, left: 40};
+	margin_bar = {top: 8, right: 0, bottom: 28, left: 40},
+	margin_chart = {top: 15, right: 0, bottom: 18, left: 40},
+	margin_line = {top: 15, right: 0, bottom: 18, left: 65};
 var w = 580 - margin_map.left - margin_map.right,
 	w2 = 300 - margin_bar.left - margin_bar.right,
+	w3 = 300 - margin_line.left - margin_line.right,
     h = 740 - margin_map.top - margin_map.bottom,
-    h2 = 157 - margin_bar.top - margin_bar.bottom;
-    h3 = 150 - margin_chart.top - margin_chart.bottom;
+    h2 = 157 - margin_bar.top - margin_bar.bottom,
+    h3 = 150 - margin_chart.top - margin_chart.bottom,
+    h4 = 250 - margin_chart.top - margin_chart.bottom;
+
 
 // Define map projection
 var projection = d3.geo.transverseMercator()
@@ -248,67 +252,6 @@ function drawFeatures() {
 	drawWells();
 	});
 }
-
-// Create chart SVGs
-var svg_type = d3.select("#well-viz-chart2").append("svg")
-			.attr("width", w2 + margin_bar.left + margin_bar.right)
-			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
-				.append("g")
-			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
-
-var svg_depth = d3.select("#well-viz-chart1").append("svg")
-			.attr("width", w2 + margin_bar.left + margin_bar.right)
-			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
-				.append("g")
-			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
-
-var svg_status = d3.select("#well-viz-chart3").append("svg")
-			.attr("width", w2 + margin_bar.left + margin_bar.right)
-			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
-				.append("g")
-			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
-
-var svg_line = d3.select("#well-viz-chart4").append("svg")
-			.attr("width", w2 + margin_chart.left + margin_chart.right)
-			.attr("height", h3 + margin_chart.top + margin_chart.bottom)
-				.append("g")
-			.attr("transform", "translate(" + margin_chart.left + "," + margin_chart.top + ")");
-
-var svg_avDep = d3.select("#well-viz-chart5").append("svg")
-			.attr("width", w2 + margin_chart.left + margin_bar.right)
-			.attr("height", h3 + margin_chart.top + margin_chart.bottom)
-				.append("g")
-			.attr("transform", "translate(" + margin_chart.left + "," + margin_chart.top + ")");
-
-// Create chart scales
-var xType = d3.scale.ordinal()
-				.rangeRoundBands([0, w2], 0.05);
-var yType = d3.scale.linear()
-				.range([h2, 0]);
-
-var xDepth = d3.scale.ordinal()
-				.rangeRoundBands([0, w2], 0.05);
-var yDepth = d3.scale.linear()
-			     .range([h2, 0]);
-
-var xStatus = d3.scale.ordinal()
-				  .rangeRoundBands([0, w2], 0.05);
-var yStatus = d3.scale.linear()
-				  .range([h2, 0])
-
-var xline = d3.scale.linear()
-				  .range([0, w2])
-				  .domain([1970, 2013]);
-var yline = d3.scale.linear()
-				  .range([h3, 0])
-				  .domain([0, 600]);
-
-var xAvDep = d3.scale.linear()
-				  .range([0, w2])
-				  .domain([1970, 2013]);
-var yAvDep= d3.scale.linear()
-				  .range([h3, 0])
-				  .domain([0, 50]);
 	
 function drawWells(){	   
 
@@ -516,13 +459,74 @@ d3.selectAll(".buttonWells")
 	})
 }
 
+// Create chart SVGs
+var svg_type = d3.select("#well-viz-chart2").append("svg")
+			.attr("width", w2 + margin_bar.left + margin_bar.right)
+			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
+				.append("g")
+			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
+
+var svg_depth = d3.select("#well-viz-chart1").append("svg")
+			.attr("width", w2 + margin_bar.left + margin_bar.right)
+			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
+				.append("g")
+			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
+
+var svg_status = d3.select("#well-viz-chart3").append("svg")
+			.attr("width", w2 + margin_bar.left + margin_bar.right)
+			.attr("height", h2 + margin_bar.top + margin_bar.bottom)
+				.append("g")
+			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
+
+var svg_line = d3.select("#well-viz-chart4").append("svg")
+			.attr("width", w2 + margin_chart.left + margin_chart.right)
+			.attr("height", h3 + margin_chart.top + margin_chart.bottom)
+				.append("g")
+			.attr("transform", "translate(" + margin_chart.left + "," + margin_chart.top + ")");
+
+var svg_avDep = d3.select("#well-viz-chart5").append("svg")
+			.attr("width", w2 + margin_chart.left + margin_bar.right)
+			.attr("height", h3 + margin_chart.top + margin_chart.bottom)
+				.append("g")
+			.attr("transform", "translate(" + margin_chart.left + "," + margin_chart.top + ")");
+
+// Create chart scales
+var xType = d3.scale.ordinal()
+				.rangeRoundBands([0, w2], 0.05);
+var yType = d3.scale.linear()
+				.range([h2, 0]);
+
+var xDepth = d3.scale.ordinal()
+				.rangeRoundBands([0, w2], 0.05);
+var yDepth = d3.scale.linear()
+			     .range([h2, 0]);
+
+var xStatus = d3.scale.ordinal()
+				  .rangeRoundBands([0, w2], 0.05);
+var yStatus = d3.scale.linear()
+				  .range([h2, 0])
+
+var xline = d3.scale.linear()
+				  .range([0, w2])
+				  .domain([1970, 2013]);
+var yline = d3.scale.linear()
+				  .range([h3, 0])
+				  .domain([0, 600]);
+
+var xAvDep = d3.scale.linear()
+				  .range([0, w2])
+				  .domain([1970, 2013]);
+var yAvDep= d3.scale.linear()
+				  .range([h3, 0])
+				  .domain([0, 50]);
+
 function createCharts(){		
 
 	// Group data and define scale domains for type bar chart using complete dataset
 	var wellTypes = countWells("type", 2012);
 	xType.domain(d3.range(wellTypes.length))
 	yType.domain([0, 280])
-	
+
 	// Add axes for type bar chart
 	svg_type.append("g")
 		.attr("class", "y axis")
@@ -618,7 +622,7 @@ function createCharts(){
 			if(sliderStatus != "playing"){
 				if(this.getAttribute("selected") == "no"){
 
-					d3.selectAll(".bar").attr("selected", "no")
+					d3.selectAll("#well-viz-charts .bar").attr("selected", "no")
 							.style("stroke-width", 0)
 
 					d3.select(this).attr("selected", "yes")
@@ -645,7 +649,7 @@ function createCharts(){
 			   			});
 		   		} else{
 					if(sliderStatus != "playing"){
-						d3.selectAll(".bar").attr("selected", "no")
+						d3.selectAll("#well-viz-charts .bar").attr("selected", "no")
 							.style("stroke-width", 0)
 
 						svg_map.selectAll(".well")
@@ -780,7 +784,7 @@ function createCharts(){
 			if(sliderStatus != "playing"){
 				if(this.getAttribute("selected") === "no"){
 
-					d3.selectAll(".bar").attr("selected", "no")
+					d3.selectAll("#well-viz-charts .bar").attr("selected", "no")
 							.style("stroke-width", 0)
 
 					d3.select(this).attr("selected", "yes")
@@ -806,7 +810,7 @@ function createCharts(){
 			   				}
 			   			});
 		   		}else{
-					d3.selectAll(".bar").attr("selected", "no")
+					d3.selectAll("#well-viz-charts .bar").attr("selected", "no")
 						.style("stroke-width", 0)
 
 					svg_map.selectAll(".well")
@@ -947,7 +951,7 @@ function createCharts(){
 			if(sliderStatus != "playing"){
 				if(this.getAttribute("selected") === "no"){
 
-					d3.selectAll(".bar").attr("selected", "no")
+					d3.selectAll("#well-viz-charts .bar").attr("selected", "no")
 							.style("stroke-width", 0)
 
 					d3.select(this).attr("selected", "yes")
@@ -973,7 +977,7 @@ function createCharts(){
 			   				}
 			   			});
 		   		}else{
-					d3.selectAll(".bar").attr("selected", "no")
+					d3.selectAll("#well-viz-charts .bar").attr("selected", "no")
 						.style("stroke-width", 0)
 
 					svg_map.selectAll(".well")
