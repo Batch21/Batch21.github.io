@@ -67,6 +67,31 @@ button:focus {outline:0;}
 	border-radius: 5px;
 }
 
+.legendLanduse{
+	position: absolute;
+	margin-left: 16px;
+	background-color: rgba(220, 220, 217, 0.9);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+	font-size: 12px;
+	text-align: ;
+}
+
+#landuse1{
+ 	margin-top: 322px;
+}
+
+#landuse2{
+ 	margin-top: 297px;
+}
+
+#landuseCheckBox{
+	position: absolute;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
 #col{
 	width:100%;
 }

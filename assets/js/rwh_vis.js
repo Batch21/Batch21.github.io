@@ -1,7 +1,7 @@
 var startYearRWH = 2012,
 	rwhData,
 	capacityData,
-	buttonText = "RWH Type",
+	buttonTextRWH = "RWH Type",
 	cubedMetres = "m³";
 
 var sliderRWH = d3.slider().axis(true).min(1998).max(startYearRWH).value(startYearRWH).step(1);
@@ -227,14 +227,14 @@ function drawRWH(){
 									d3.select(this)
 									  .attr("d", d3.svg.symbol()
 									  	.size(function(d){
-									  		if(buttonText != "RWH Capacity"){
+									  		if(buttonTextRWH != "RWH Capacity"){
 									  			return 250;
 									  		}else{
 									  			return rwhSizeScale(d.Capacity);
 									  		}
 									  	})
 									  	.type(function(d){
-										  	if(buttonText == "RWH Type"){	
+										  	if(buttonTextRWH == "RWH Type"){	
 										   		if(d.type === "Check Dam"){
 										   			return "square";
 										   		} else if (d.type === "Infiltration Tankk"){
@@ -262,14 +262,14 @@ function drawRWH(){
 								.on("mouseout", function(){
 									d3.select(this).attr("d", d3.svg.symbol()
 									  	.size(function(d){
-									  		if(buttonText != "RWH Capacity"){
+									  		if(buttonTextRWH != "RWH Capacity"){
 									  			return 50;
 									  		}else{
 									  			return rwhSizeScale(d.Capacity);
 									  		}
 									  	})
 									  	.type(function(d){
-									  		if(buttonText == "RWH Type"){	
+									  		if(buttonTextRWH == "RWH Type"){	
 										   		if(d.type === "Check Dam"){
 										   			return "square";
 										   		} else if (d.type === "Infiltration Tankk"){
@@ -299,14 +299,14 @@ function updateLegendRWH(buttonScale){
 	
 	legendRWH.append("text")
 			 .attr("x", function(){
-				if(buttonText != "RWH Capacity"){
+				if(buttonTextRWH != "RWH Capacity"){
 					return 48;
 				}else{
 					return 60;
 				}
 			 })
 			 .attr("y", 150)
-			 .text(buttonText)
+			 .text(buttonTextRWH)
 			 .attr("id", "rwhTitle")
 			 .style("font-size", "12px")
 			 .style("font-weight", "bold")
@@ -315,7 +315,7 @@ function updateLegendRWH(buttonScale){
 	strucLegend = legendRWH.append("g")
 		.attr("id", "legendGroupRWH")
 			.attr("transform", function(){
-				if(buttonText != "RWH Capacity"){
+				if(buttonTextRWH != "RWH Capacity"){
 					return "translate(" + 22 + "," + 162 + ")"
 				}else{
 					return "translate(" + 42 + "," + 162 + ")"
@@ -327,7 +327,7 @@ function updateLegendRWH(buttonScale){
 			.append("g")
 		.attr("class", "legendItem")
 		.attr("transform", function(d, i) {
-			if(buttonText != "RWH Capacity"){
+			if(buttonTextRWH != "RWH Capacity"){
 	  			var height = 22;
 	  			var horz = 0;
 	  			var vert = i * height;
@@ -345,7 +345,7 @@ function updateLegendRWH(buttonScale){
 	strucLegend.append("path")
 			   .attr("d", d3.svg.symbol()
 				   	.size(function(d){
-				   		if(buttonText != "RWH Capacity"){
+				   		if(buttonTextRWH != "RWH Capacity"){
 				   			return 110;
 				   		} else{
 				   			return rwhSizeScale(d)
@@ -361,7 +361,7 @@ function updateLegendRWH(buttonScale){
 				   		}
 						}))
 			   		.attr("fill", function(d){
-			   			if(buttonText != "RWH Capacity"){
+			   			if(buttonTextRWH != "RWH Capacity"){
 			   				return buttonScale(d);
 			   			}else{
 			   				return "#96E1EB"
@@ -373,7 +373,7 @@ function updateLegendRWH(buttonScale){
 
 	strucLegend.append("text")
 		.attr("x", function(){
-				if(buttonText != "RWH Capacity"){
+				if(buttonTextRWH != "RWH Capacity"){
 					return 25;
 				}else{
 					return 60;
@@ -381,7 +381,7 @@ function updateLegendRWH(buttonScale){
 			 })
 		.attr("y", 6)
 		.text(function(d) { 
-			if(buttonText != "RWH Capacity"){
+			if(buttonTextRWH != "RWH Capacity"){
 				return d;
 			} else{
 				return numberWithCommas(d) + " " + cubedMetres;
@@ -411,7 +411,7 @@ function activateButtonsRWH(){
 						   .style("margin", "1px");
 		})
 		.on("click", function(){
-			buttonText = this.textContent;
+			buttonTextRWH = this.textContent;
 
 			d3.selectAll(".buttonRWH").style("background-color", "#DDDDDD")
 						           .style("border-width", "1px");						   
@@ -422,14 +422,14 @@ function activateButtonsRWH(){
 			svg_map_rwh.selectAll(".rwh")
 				.attr("d", d3.svg.symbol()
 				  	.size(function(d){
-				  		if(buttonText != "RWH Capacity"){
+				  		if(buttonTextRWH != "RWH Capacity"){
 				  			return 50;
 				  		} else{
 				  			return rwhSizeScale(d.Capacity)
 				  		}
 				  	})
 				  	.type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -442,21 +442,21 @@ function activateButtonsRWH(){
 					   	}
 	   			}))
 				.style("fill", function(d){
-					if (buttonText === "RWH Type"){
+					if (buttonTextRWH === "RWH Type"){
 						if (d.type){
 				   			return rwhTypeScale(d.type);
 						}
 						else{
 							return "#ccc";
 						}
-					}else if(buttonText === "RWH Status"){
+					}else if(buttonTextRWH === "RWH Status"){
 						if (d.status){
 				   			return rwhStatusScale(d.status);
 						}
 						else{
 							return "#ccc";
 						}
-					}else if(buttonText === "RWH Capacity"){
+					}else if(buttonTextRWH === "RWH Capacity"){
 						if(d.Capacity){
 							return "#96E1EB";
 						}else{
@@ -468,11 +468,11 @@ function activateButtonsRWH(){
 					})
 
 				// Update legend
-			if(buttonText === "RWH Type"){
+			if(buttonTextRWH === "RWH Type"){
 				updateLegendRWH(rwhTypeScale);
-			}else if(buttonText === "RWH Status"){
+			}else if(buttonTextRWH === "RWH Status"){
 				updateLegendRWH(rwhStatusScale);
-			}else if(buttonText === "RWH Capacity"){
+			}else if(buttonTextRWH === "RWH Capacity"){
 				updateLegendRWH(rwhSizeScale);
 			}
 		})
@@ -584,7 +584,7 @@ function addBarChartsRWH(){
 				  	.size(function(j){
 	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
 	   						if(d.key === j.type){
-	   							if(buttonText == "RWH Capacity"){
+	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
 		   							return 50;
@@ -597,7 +597,7 @@ function addBarChartsRWH(){
 		   				}
    			        })
    			        .type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -637,7 +637,7 @@ function addBarChartsRWH(){
 				  	.size(function(j){
 	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
 	   						if(d.key === j.type){
-	   							if(buttonText == "RWH Capacity"){
+	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
 		   							return 50;
@@ -650,7 +650,7 @@ function addBarChartsRWH(){
 		   				}
    			        })
    			        .type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -680,7 +680,7 @@ function addBarChartsRWH(){
 				  	.size(function(j){
 	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
 	   						if(d.key === j.type){
-	   							if(buttonText == "RWH Capacity"){
+	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
 		   							return 50;
@@ -693,7 +693,7 @@ function addBarChartsRWH(){
 		   				}
    			        })
    			        .type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -716,7 +716,7 @@ function addBarChartsRWH(){
 					.attr("d", d3.svg.symbol()
 				  	.size(function(j){
 	   					if(j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
-	   							if(buttonText == "RWH Capacity"){
+	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
 		   							return 50;
@@ -727,7 +727,7 @@ function addBarChartsRWH(){
 
    			        })
    			        .type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -812,7 +812,7 @@ function addBarChartsRWH(){
 				  	.size(function(j){
 	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
 	   						if(d.key === j.status){
-	   							if(buttonText == "RWH Capacity"){
+	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
 		   							return 50;
@@ -825,7 +825,7 @@ function addBarChartsRWH(){
 		   				}
    			        })
    			        .type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -865,7 +865,7 @@ function addBarChartsRWH(){
 				  	.size(function(j){
 	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
 	   						if(d.key === j.status){
-	   							if(buttonText == "RWH Capacity"){
+	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
 		   							return 50;
@@ -878,7 +878,7 @@ function addBarChartsRWH(){
 		   				}
    			        })
    			        .type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -908,7 +908,7 @@ function addBarChartsRWH(){
 				  	.size(function(j){
 	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
 	   						if(d.key === j.status){
-	   							if(buttonText == "RWH Capacity"){
+	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
 		   							return 50;
@@ -921,7 +921,7 @@ function addBarChartsRWH(){
 		   				}
    			        })
    			        .type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -944,7 +944,7 @@ function addBarChartsRWH(){
 					.attr("d", d3.svg.symbol()
 				  	.size(function(j){
 	   					if(j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
-	   							if(buttonText == "RWH Capacity"){
+	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
 		   							return 50;
@@ -955,7 +955,7 @@ function addBarChartsRWH(){
 
    			        })
    			        .type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -1084,7 +1084,7 @@ function SliderUpdateRWH(){
 				.attr("d", d3.svg.symbol()
 				  	.size(function(d){
 				  		if(d.year <= value){
-					  		if(buttonText != "RWH Capacity"){
+					  		if(buttonTextRWH != "RWH Capacity"){
 					  			return 50;
 					  		} else{
 					  			return rwhSizeScale(parseInt(d.Capacity));
@@ -1094,7 +1094,7 @@ function SliderUpdateRWH(){
 					  	}
 					 })
 					.type(function(d){
-				  		if(buttonText == "RWH Type"){ 
+				  		if(buttonTextRWH == "RWH Type"){ 
 					   		if(d.type === "Check Dam"){
 					   			return "square";
 					   		} else if (d.type === "Infiltration Pond"){
@@ -1132,8 +1132,6 @@ function SliderUpdateRWH(){
 		   		});
 
 		d3.select("#total-capacity")
-			.transition()
-			.duration(300)
 			.attr("cx", function(){
 				return xlineRWH(value);
 			})

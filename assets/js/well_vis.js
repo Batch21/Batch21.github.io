@@ -3,6 +3,7 @@ var startYear = 1980,
 	sliderStatus = "paused",
 	scrollTrig = true,
 	yearDuration = 1000,
+	buttonText = "Well Depth",
 	interval, 
 	wellData,
 	wellCircles,
@@ -45,13 +46,15 @@ var colorDepth = d3.scale.threshold()
 
 var colorType = d3.scale.ordinal()
 						.domain(["Open Well", "Agricultural Borewell", "Domestic Borewell"])
-						.range(["#C4ED68", "#59A80F", "#ba831f"])
+						.range(["#C4ED68", "#59A80F", "#ba831f"]);
 
 var colorStatus = d3.scale.ordinal()
 						  .domain(["Defunct", "Fails every summer", "Fails during droughts", "Has never failed"])
-						  .range(["#784860", "#C07860", "#F8CA8C", "#FFF4C2"])
+						  .range(["#784860", "#C07860", "#F8CA8C", "#FFF4C2"]);
 
-
+var landuseScale = d3.scale.ordinal()
+							.domain(["Single Crop", "Double Crop", "Plantation", "Fallow", "Scrub",  "Rocky Ground", "Settlements"])
+							.range(["#abdf8f", "#5fb933", "#b68f30", "#ffff8c", "#f8d496", "#828482", "#bb312f"])
 
 var dem_colors = ["#227516", "#648744", "#9bc133", "#cdcb32", "#fed976", "#ffeda0", "#ffffcc", "#d7cebf", "#b6b098", "#986b41", "#561f10"]
 var dem_breaks = ["0%", "5%", "9%", "15%", "24%", "33%", "43%", "52%", "64%", "76%", "100%"]
@@ -80,7 +83,7 @@ svg_map.append("svg:image")
 // Create legend and add static features
 var legend = d3.select("#legend").append("svg")
 	   .attr("id", "legendSVG")
-	   .attr("width", 195)
+	   .attr("width", 198)
 	   .attr("height", 200)
        .append("g")
        .attr("id", "legendBox")
@@ -161,34 +164,65 @@ drainageLegend.append("text")
 	.attr("x", 32)
 	.attr("y", 5)
 	.text("Drainage")
-	.style("font-size", "12px")
+	.style("font-size", "12px");
 
-var dhoneLegend = legend.append("g")
-						   .attr("id", "dhoneLegend")
-						   .attr("transform", "translate(" + 15 + "," + 139 + ")")
+var legendLanduse = d3.select(".legendLanduse").attr("id", "landuse1")
+		.append("svg")
+	   .attr("class", "legendLanduseSVG")
+	   .attr("width", 198)
+	   .attr("height", 25)
+       
+legendLanduse.append("text")
+       .text("Show Landuse")
+       .attr("x", 35)
+       .attr("y", 18)
+       .style("font-weight", "bold")
+       .style("text-decoration", "underline");
 
-dhoneLegend.append("rect")
-			  	 .attr("width", 15)
-			  	 .attr("height", 10)
-			  	 .style("stroke", "#7e864f")
-			  	 .style("fill", "#acb08c")
-			  	 .style("opacity", 0.6)
-			  	 .style("shape-rendering", "auto");
+function legendLanduseUpdate(){
 
-dhoneLegend.append("text")
-		  	 .attr("x", 32)
-		  	 .attr("y", 10)
-		  	 .text("Dhone Town")
-		  	 .style("font-size", "12px");
+	d3.select("#landuseCheckBox")
+	  .on("click", function(){
+	  	if(document.getElementById("landuseCheck").checked){
+			
+			legendLanduse.attr("height", 200)
+			d3.selectAll(".landuse").style("opacity", 1)
 
-dhoneLegend.append("line")
-	.attr("x1", 2)
-	.attr("y1", 0)
-	.attr("x2", 12)
-	.attr("y2", 10)
-	.style("stroke", "#7e864f")
-	.style("stroke-width", 0.2)
-	.style("shape-rendering", "auto");
+			var landuses = legendLanduse.append("g")
+						.attr("class", "landuseBox")
+						.attr("transform",  "translate(" + 15 + "," + 35 + ")")
+						.selectAll("g")
+						.data(landuseScale.domain())
+						.enter()
+						.append("g")
+						.attr("transform", function(d, i) {
+				  			var height = 25;
+				  			var horz = 0;
+				  			var vert = i * height;
+				  			return "translate(" + horz + "," + vert + ")";
+						});
+
+			landuses.append("rect")
+					.attr("width", 15)
+					.attr("height", 10)
+					.style("fill", landuseScale)
+					.style("stroke", "black")
+					.style("stroke-width", 0.4);
+
+			landuses.append("text")
+					.attr("x", 30)
+					.attr("y", 10)
+					.text(function(d){
+						return d;
+					});
+		}else if(document.getElementById("landuseCheck").checked == false){
+			d3.select(".landuseBox").remove();
+			d3.selectAll(".landuse").style("opacity", 0)
+			legendLanduse.attr("height", 25)
+		} 				
+	});
+}
+
 
 function drawFeatures() {
 
@@ -231,11 +265,11 @@ function drawFeatures() {
 				d3.select("#village_name").remove();
 		    });
 
-	var villageLegend = legend.append("g")
+			var villageLegend = legend.append("g")
 						   .attr("id", "boundaryLegend")
 						   .attr("transform", "translate(" + 15 + "," + 116 + ")")
 
-	villageLegend.append("rect")
+			villageLegend.append("rect")
 			  	 .attr("width", 15)
 			  	 .attr("height", 10)
 			  	 .style("stroke", "red")
@@ -243,13 +277,30 @@ function drawFeatures() {
 			  	 .style("opacity", 0.5)
 			  	 .style("shape-rendering", "auto");
 
-	villageLegend.append("text")
+			villageLegend.append("text")
 			  	 .attr("x", 32)
 			  	 .attr("y", 10)
 			  	 .text("Village areas")
 			  	 .style("font-size", "12px");
-	
-	drawWells();
+
+		d3.json("/assets/data/dhone_landuse.json", function(landuse) {
+			
+			svg_map.selectAll("path.features")
+		   		.data(landuse.features)
+		   		.enter()
+		   		.append("path")
+		   		.attr("d", path)
+		   		.attr("class", "landuse")
+		   		.style("fill", function(d){
+		   			return landuseScale(d.properties.descript)
+		   		})
+		   		.style("opacity", 0)
+		   		.style("stroke", "red")
+		   		.style("stroke-width", 0)		
+
+			legendLanduseUpdate();
+			drawWells();
+		});
 	});
 }
 	
@@ -347,7 +398,17 @@ function drawWells(){
 	
 function updateLegend(buttonScale){
 		
-	legend.select("#legendGroup").remove();			
+	legend.select("#legendGroup").remove();
+	legend.select("#wellTitle").remove();
+
+	legend.append("text")
+		 .attr("x", 48)
+		 .attr("y", 152)
+		 .text(buttonText)
+		 .attr("id", "wellTitle")
+		 .style("font-size", "12px")
+		 .style("font-weight", "bold")
+		 .style("text-decoration", "underline");			
 	
 	wellLegend = legend.append("g")
 		.attr("id", "legendGroup")
@@ -391,8 +452,7 @@ function updateLegend(buttonScale){
 			.style("font-size", "12px");
 
 	height = document.getElementById("legendBox").getBBox().height;	
-	width = document.getElementById("legendBox").getBBox().width;
-	d3.select("#legendSVG").attr("height", height + 15).attr("width", width + 13);
+	d3.select("#legendSVG").attr("height", height + 15);
 	}
 
 
@@ -413,7 +473,7 @@ d3.selectAll(".buttonWells")
 					   .style("margin", "1px");
 	})
 	.on("click", function(){
-		var buttonText = this.textContent;
+		buttonText = this.textContent;
 
 		d3.selectAll(".buttonWells").style("background-color", "#DDDDDD")
 					           .style("border-width", "1px");						   
@@ -451,10 +511,13 @@ d3.selectAll(".buttonWells")
 			// Update legend
 		if(buttonText === "Well Depth"){
 			updateLegend(colorDepth);
+			d3.select(".legendLanduse").attr("id", "landuse1");
 		}else if(buttonText === "Well Type"){
 			updateLegend(colorType);
+			d3.select(".legendLanduse").attr("id", "landuse2");
 		}else if(buttonText === "Well Status (2012)"){
 			updateLegend(colorStatus);
+			d3.select(".legendLanduse").attr("id", "landuse1");
 		}
 	})
 }
@@ -1454,9 +1517,7 @@ function scrollAnimate(){
 
 
 function createWellVis(){
-
 	drawFeatures();
-	var wellLegend = legend.append("g").attr("id", "legendGroup");
 	updateLegend(colorDepth);
 	createButtons();
 }
