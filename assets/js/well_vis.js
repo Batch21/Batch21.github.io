@@ -29,7 +29,7 @@ var w = 580 - margin_map.left - margin_map.right,
 
 // Define map projection
 var projection = d3.geo.transverseMercator()
-      				   .rotate([-77.81858, -15.392, 0])
+      				   .rotate([-77.81258, -15.393, 0])
       				   .translate([w/2, h/2])
       				   .scale(420000);
 
@@ -54,7 +54,7 @@ var colorStatus = d3.scale.ordinal()
 
 var landuseScale = d3.scale.ordinal()
 							.domain(["Single Crop", "Double Crop", "Plantation", "Fallow", "Scrub",  "Rocky Ground", "Settlements"])
-							.range(["#abdf8f", "#5fb933", "#b68f30", "#ffff8c", "#f8d496", "#828482", "#bb312f"])
+							.range(["#9bca6c", "#5fb933", "#b68f30", "#ffff8c", "#f8d496", "#828482", "#bb312f"])
 
 var dem_colors = ["#227516", "#648744", "#9bc133", "#cdcb32", "#fed976", "#ffeda0", "#ffffcc", "#d7cebf", "#b6b098", "#986b41", "#561f10"]
 var dem_breaks = ["0%", "5%", "9%", "15%", "24%", "33%", "43%", "52%", "64%", "76%", "100%"]
@@ -367,11 +367,13 @@ function drawWells(){
 				d3.select(".playPause span").classed("glyphicon", false)
 								  			.attr("class", "glyphicon glyphicon-pause");
 				sliderStatus = "playing";
+				scrollTrig = false;
 				animate(wellCircles, data);
 			}else if (sliderStatus === "paused"){
 				d3.select(".playPause span").classed("glyphicon", false)
 								  			.attr("class", "glyphicon glyphicon-pause");
 				sliderStatus = "playing";
+				scrollTrig = false;
 				animate(wellCircles, data);
 			} else{
 				clearInterval(interval);
@@ -1366,7 +1368,13 @@ function sliderActivate(){
 
 			d3.select("#slider-con-wells .d3-slider #handle-one")
 	      		.attr("left", (100*(value-startYear))/33 + "%");
-			d3.select('#slidertext').text(value);
+			d3.select('#slidertext').text(function(){
+				if(value < 2013){
+					return value;
+				} else if(value == 2013){
+					return 2012;
+				}
+			});
 			updateWells(value);
 			updateLineChart(value);
 			step = value;
@@ -1426,7 +1434,13 @@ function animate(){
 
 		if(step < 2013){
 		   d3.select("#slider-con-wells .d3-slider #handle-one")
-	      		.attr("left", (100*(step-startYear))/33 + "%" );
+	      		.attr("left", function(){
+					var move = (100*(step-startYear))/33; 
+					if(move < 100){
+						return move + "%";
+					}
+	      		});
+	      			 
 	       updateWells(step);
 	       updateLineChart(step);
 	       

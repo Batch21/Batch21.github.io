@@ -29,7 +29,7 @@ svg_map_rwh.append("svg:image")
 
 var legendRWH = d3.select("#legendRWH").append("svg")
 	   .attr("id", "legendSVG_RWH")
-	   .attr("width", 195)
+	   .attr("width", 198)
 	   .attr("height", 200)
        .append("g")
        .attr("id", "legendBoxRWH")
@@ -257,7 +257,7 @@ function drawRWH(){
 			  							   .attr("font-size", "14px")
 			   							   .attr("font-weight", "bold")
 			  							   .attr("fill", "black")
-			   							   .text("Capcity: " + d.Capacity + cubedMetres);	
+			   							   .text("Capacity: " + d.Capacity + cubedMetres);	
 								})
 								.on("mouseout", function(){
 									d3.select(this).attr("d", d3.svg.symbol()
@@ -391,7 +391,7 @@ function updateLegendRWH(buttonScale){
 
 	height = document.getElementById("legendBoxRWH").getBBox().height;	
 	width = document.getElementById("legendBoxRWH").getBBox().width;
-	d3.select("#legendSVG_RWH").attr("height", height + 15).attr("width", width + 5);
+	d3.select("#legendSVG_RWH").attr("height", height + 15).attr("width", width + 10);
 	}
 
 function activateButtonsRWH(){
