@@ -422,11 +422,15 @@ function activateButtonsRWH(){
 			svg_map_rwh.selectAll(".rwh")
 				.attr("d", d3.svg.symbol()
 				  	.size(function(d){
-				  		if(buttonTextRWH != "RWH Capacity"){
-				  			return 50;
-				  		} else{
-				  			return rwhSizeScale(d.Capacity)
-				  		}
+				  		if(this.getAttribute("display") == "yes"){
+					  		if(buttonTextRWH != "RWH Capacity"){
+					  			return 50;
+					  		} else{
+					  			return rwhSizeScale(d.Capacity)
+					  		}
+					  	}else{
+					  		return 0;
+					  	}
 				  	})
 				  	.type(function(d){
 				  		if(buttonTextRWH == "RWH Type"){ 
@@ -541,9 +545,9 @@ function addBarChartsRWH(){
 		.attr("y", 0 - margin_bar.left + 10)
 		.attr("x",0 - (h4 / 2))
 		.style("text-anchor", "middle")
-		.style("font-size", "11px")
+		.style("font-size", "14px")
 		.style("font-weight", "bold")
-		.style("letter-spacing", 1.1)
+		.style("letter-spacing", "1.6px")
 		.text("Number of structures");
 
 	rwh_type.selectAll("rect")
@@ -769,9 +773,9 @@ function addBarChartsRWH(){
 		.attr("y", 0 - margin_bar.left + 10)
 		.attr("x",0 - (h4 / 2))
 		.style("text-anchor", "middle")
-		.style("font-size", "11px")
+		.style("font-size", "14px")
 		.style("font-weight", "bold")
-		.style("letter-spacing", 1.1)
+		.style("letter-spacing", "1.6px")
 		.text("Number of structures");
 
 	rwh_status.selectAll("rect")
@@ -1008,9 +1012,9 @@ function addLineChartRWH(){
 				.attr("y", 0 - margin_line.left + 10)
 				.attr("x",0 - (h4 / 2))
 				.style("text-anchor", "middle")
-				.style("font-size", "11px")
+				.style("font-size", "14px")
 				.style("font-weight", "bold")
-				.style("letter-spacing", 1.1)
+				.style("letter-spacing", "1.6px")
 				.text("Total RWH Capacity " + "(" + cubedMetres + ")");
 
 		rwh_capacity.append("circle")
@@ -1083,7 +1087,7 @@ function SliderUpdateRWH(){
 		svg_map_rwh.selectAll(".rwh")
 				.attr("d", d3.svg.symbol()
 				  	.size(function(d){
-				  		if(d.year <= value){
+				  		if(d.year <= value & this.getAttribute("display") == "yes"){
 					  		if(buttonTextRWH != "RWH Capacity"){
 					  			return 50;
 					  		} else{

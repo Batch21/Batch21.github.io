@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="/assets/css/d3.slider.css">
 		<link rel="stylesheet" type="text/css" href=/assets/css/dhone.css>
 		<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 	</head>
 	<body>
       <div class="container">
@@ -26,7 +27,18 @@
       	<h3> -- Introduce study area and WASHCost project</h3>
       	<h3> -- Location Map</h3>
       	<p>The revenue village is located in Kurnool district within the state of Andhra Pradesh, a few miles west of the town of Dhone. The revenue village has an area of 25.4 km2 and consist of 4 individual villages that, in 2012, had a total of 1087 households. The region is semi-arid with an average annual rainfall of 587mm. Soil in the revenue village is predominantly inceptisols with small areas of entisols and alfsols.  The underlying geology is crystalline basement. The average elevation of the revenue village is 430 metres, with a maximum of 533 metres and a minimum of 385 metres. However, the hills that rise a short distance beyond the revenue village boundary rise to a maximum elevation of 620 metres. Single crop agriculture accounts for 60% and double-crop agriculture 8% of the total area of the revenue village, although these figures vary significantly depending on annual rainfall. Other important land uses included plantations, primarily mango, which account for 11% of the area, and scrub forest, which accounts for 11% of the area.</p>
-      	<h3> -- Rainfall Vis</h3>
+      	<div id="rainfall-vis">
+          <ul id="rainfall-choices">
+            <li class="rainfall-selection" id="rainfall-selection-left">Annual Rainfall</li>
+            <li class="rainfall-selection">Monthly Rainfall</li>
+            <li class="rainfall-selection" id="rainfall-selection-right">Monthly Rainfall - Boxplot</li>
+          </ul>
+          <div id="rainfall-charts">
+            <div id="rainfall-ann"></div>
+            <div id="rainfall-mon"></div>
+            <div id="rainfall-mon-box"></div>
+          </div>
+        </div>
       	<p>Decision-making in semi-arid rural India is complicate by the fact that different stakeholders have a range of different agricultural, social, economic and environmental goals (Kaur et al, 2003). A further complication is that for many catchments the quantity and location of water infrastructure, including wells and RWH structures, is unknown, which make the effective planning of future interventions difficult. One solution is to use GPS technology and GIS software to map and analyse the location of infrastructure. Mapping can be done using standalone GPS devices, however increasingly smartphone apps, such as Akvo Flow and mWater, are used. These apps have been used by a wide range of projects to map hundreds of thousands of water points worldwide (link: https://www.waterpointdata.org/), however for this project traditional handheld GPS devices were used, with 4 local students primarily responsible for collecting the data. For each well and RWH structure mapped a range of information was collected including type, cost, year of construction, and current status. Additionally, every household in all 4 of the villages was survey to collect a range of socio-economic and WASH information. The visualisation below presents the wells located in revenue village and demonstrates how their number and characteristics change over time.</p>
     	 <div id="well-viz">
     	     <div id="well-viz-map">
@@ -85,6 +97,8 @@
     	 </div>
        </div>
 	</div>
+	<script type="text/javascript" src="/assets/js/box.js"></script>
+	<script type="text/javascript" src="/assets/js/rainfall_vis.js"></script>
 	<script type="text/javascript" src="/assets/js/well_vis.js"></script>
 	<script type="text/javascript" src="/assets/js/rwh_vis.js"></script>
 	</body>

@@ -185,8 +185,9 @@ function legendLanduseUpdate(){
 	  .on("click", function(){
 	  	if(document.getElementById("landuseCheck").checked){
 			
-			legendLanduse.attr("height", 200)
-			d3.selectAll(".landuse").style("opacity", 1)
+			legendLanduse.attr("height", 200);
+			d3.selectAll(".landuse").style("opacity", 1);
+			d3.selectAll(".village-boundaries").style("opacity", 0);
 
 			var landuses = legendLanduse.append("g")
 						.attr("class", "landuseBox")
@@ -218,6 +219,7 @@ function legendLanduseUpdate(){
 		}else if(document.getElementById("landuseCheck").checked == false){
 			d3.select(".landuseBox").remove();
 			d3.selectAll(".landuse").style("opacity", 0)
+			d3.selectAll(".village-boundaries").style("opacity", 0.5);
 			legendLanduse.attr("height", 25)
 		} 				
 	});
@@ -226,44 +228,59 @@ function legendLanduseUpdate(){
 
 function drawFeatures() {
 
-	d3.json("/assets/data/village_areas.json", function(villages) {
-
+	d3.json("/assets/data/dhone_landuse.json", function(landuse) {
+		
 		svg_map.selectAll("path.features")
-	   		.data(villages.features)
+	   		.data(landuse.features)
 	   		.enter()
 	   		.append("path")
 	   		.attr("d", path)
-	   		.attr("class", "village-boundaries")
-	   		.style("fill", "#DF837D")
-	   		.style("opacity", 0.5)
+	   		.attr("class", "landuse")
+	   		.style("fill", function(d){
+	   			return landuseScale(d.properties.descript)
+	   		})
+	   		.style("opacity", 0)
 	   		.style("stroke", "red")
-	   		.style("stroke-width", 1.1)
-	   		.on("mouseover", function(d){
-				d3.select(this)
-				  .transition()
-				  .duration(300)
-				  .style("opacity", 1)
-				  .style("stroke-width", 2)
+	   		.style("stroke-width", 0)
 
-				svg_map.append("text")	
-				   .attr("id", "village_name")
-				   .attr("x", parseFloat(projection([d.properties.lon_centre, d.properties.lat_centre])[0]) + 12)
-				   .attr("y", parseFloat(projection([d.properties.lon_centre, d.properties.lat_centre])[1]) - 12)
-				   .attr("text-anchor", "left")
-				   .attr("font-family", "sans-serif")
-				   .attr("font-size", "14px")
-				   .attr("font-weight", "bold")
-				   .attr("fill", "black")
-				   .text(d.properties.name);	
-		    })
-		    .on("mouseout", function(d){
-				d3.select(this)
-				  .transition()
-				  .duration(100)
-				  .style("opacity", 0.5)
-				  .style("stroke-width", 1.1);
-				d3.select("#village_name").remove();
-		    });
+	   	d3.json("/assets/data/village_areas.json", function(villages) {
+
+			svg_map.selectAll("path.features")
+		   		.data(villages.features)
+		   		.enter()
+		   		.append("path")
+		   		.attr("d", path)
+		   		.attr("class", "village-boundaries")
+		   		.style("fill", "#DF837D")
+		   		.style("opacity", 0.5)
+		   		.style("stroke", "red")
+		   		.style("stroke-width", 1.1)
+		   		.on("mouseover", function(d){
+					d3.select(this)
+					  .transition()
+					  .duration(300)
+					  .style("opacity", 1)
+					  .style("stroke-width", 2)
+
+					svg_map.append("text")	
+					   .attr("id", "village_name")
+					   .attr("x", parseFloat(projection([d.properties.lon_centre, d.properties.lat_centre])[0]) + 12)
+					   .attr("y", parseFloat(projection([d.properties.lon_centre, d.properties.lat_centre])[1]) - 12)
+					   .attr("text-anchor", "left")
+					   .attr("font-family", "sans-serif")
+					   .attr("font-size", "14px")
+					   .attr("font-weight", "bold")
+					   .attr("fill", "black")
+					   .text(d.properties.name);	
+			    })
+			    .on("mouseout", function(d){
+					d3.select(this)
+					  .transition()
+					  .duration(100)
+					  .style("opacity", 0.5)
+					  .style("stroke-width", 1.1);
+					d3.select("#village_name").remove();
+			    });
 
 			var villageLegend = legend.append("g")
 						   .attr("id", "boundaryLegend")
@@ -281,26 +298,12 @@ function drawFeatures() {
 			  	 .attr("x", 32)
 			  	 .attr("y", 10)
 			  	 .text("Village areas")
-			  	 .style("font-size", "12px");
+			  	 .style("font-size", "12px");		
 
-		d3.json("/assets/data/dhone_landuse.json", function(landuse) {
-			
-			svg_map.selectAll("path.features")
-		   		.data(landuse.features)
-		   		.enter()
-		   		.append("path")
-		   		.attr("d", path)
-		   		.attr("class", "landuse")
-		   		.style("fill", function(d){
-		   			return landuseScale(d.properties.descript)
-		   		})
-		   		.style("opacity", 0)
-		   		.style("stroke", "red")
-		   		.style("stroke-width", 0)		
-
-			legendLanduseUpdate();
+		
 			drawWells();
 		});
+		legendLanduseUpdate();
 	});
 }
 	
@@ -361,18 +364,21 @@ function drawWells(){
 		createCharts();
 		sliderActivate();
 
+		d3.select(".glyphicon").attr("title", "Play Animation");
 		d3.select(".playPause button").on("click", function(){
 			if(sliderStatus === "finished"){
 				step = startYear - 1;
 				d3.select(".playPause span").classed("glyphicon", false)
 								  			.attr("class", "glyphicon glyphicon-pause");
 				sliderStatus = "playing";
+				d3.select(".glyphicon").attr("title", "Pause Animation");
 				scrollTrig = false;
 				animate(wellCircles, data);
 			}else if (sliderStatus === "paused"){
 				d3.select(".playPause span").classed("glyphicon", false)
 								  			.attr("class", "glyphicon glyphicon-pause");
 				sliderStatus = "playing";
+				d3.select(".glyphicon").attr("title", "Pause Animation");
 				scrollTrig = false;
 				animate(wellCircles, data);
 			} else{
@@ -380,6 +386,7 @@ function drawWells(){
 				d3.select(".playPause span").classed("glyphicon", false)
 								 			 .attr("class", "glyphicon glyphicon-play");
 				sliderStatus = "paused";
+				d3.select(".glyphicon").attr("title", "Play Animation");
 				svg_map.selectAll(".well")
 						.transition()
 						.duration(yearDuration)
@@ -615,9 +622,9 @@ function createCharts(){
 		.attr("y", 0 - margin_bar.left + 10)
 		.attr("x",0 - (h2 / 2))
 		.style("text-anchor", "middle")
-		.style("font-size", "11px")
+		.style("font-size", "12px")
 		.style("font-weight", "bold")
-		.style("letter-spacing", 1.1)
+		.style("letter-spacing", "1.8px")
 		.text("Number of Wells");
 
 	// Regroup data	for start year
@@ -776,9 +783,9 @@ function createCharts(){
 		.attr("y", 0 - margin_bar.left + 10)
 		.attr("x",0 - (h2 / 2))
 		.style("text-anchor", "middle")
-		.style("font-size", "11px")
+		.style("font-size", "12px")
 		.style("font-weight", "bold")
-		.style("letter-spacing", 1.1)
+		.style("letter-spacing", "1.8px")
 		.text("Number of Wells");
 
 	// Regroup data	for start year	
@@ -943,9 +950,9 @@ function createCharts(){
 		.attr("y", 0 - margin_bar.left + 10)
 		.attr("x",0 - (h2 / 2))
 		.style("text-anchor", "middle")
-		.style("font-size", "11px")
+		.style("font-size", "12px")
 		.style("font-weight", "bold")
-		.style("letter-spacing", 1.1)
+		.style("letter-spacing", "1.8px")
 		.text("Number of Wells");
 
 	// Regroup data	for start year
@@ -1123,9 +1130,9 @@ function addLineChart(){
 				.attr("y", 0 - margin_chart.left + 10)
 				.attr("x",0 - (h3 / 2))
 				.style("text-anchor", "middle")
-				.style("font-size", "11px")
+				.style("font-size", "12px")
 				.style("font-weight", "bold")
-				.style("letter-spacing", 1.1)
+				.style("letter-spacing", "1.8px")
 				.text("Number of Wells");
 
 		svg_line.append("circle")
@@ -1214,9 +1221,9 @@ function addLineChart(){
 				.attr("y", 0 - margin_chart.left + 10)
 				.attr("x",0 - (h3 / 2))
 				.style("text-anchor", "middle")
-				.style("font-size", "11px")
+				.style("font-size", "12px")
 				.style("font-weight", "bold")
-				.style("letter-spacing", 1.1)
+				.style("letter-spacing", "1.8px")
 				.text("Average depth (m)");
 
 		svg_avDep.append("circle")
@@ -1385,6 +1392,7 @@ function sliderActivate(){
 				sliderStatus = "finished";
 				d3.select(".playPause span").classed("glyphicon", false)
 								 			 .attr("class", "glyphicon glyphicon-repeat");
+				d3.select(".glyphicon").attr("title", "Replay Animation");
 			}else if(sliderStatus === "playing"){
 				animate();
 			};
@@ -1430,13 +1438,14 @@ function animate(){
 			sliderStatus = "finished";
 			d3.select(".playPause span").classed("glyphicon", false)
 								 			 .attr("class", "glyphicon glyphicon-repeat");
+			d3.select(".glyphicon").attr("title", "Replay Animation");
 		}; 
 
 		if(step < 2013){
 		   d3.select("#slider-con-wells .d3-slider #handle-one")
 	      		.attr("left", function(){
 					var move = (100*(step-startYear))/33; 
-					if(move < 100){
+					if(move <= 100){
 						return move + "%";
 					}
 	      		});
@@ -1523,6 +1532,7 @@ function scrollAnimate(){
 			d3.select(".playPause span").classed("glyphicon", false)
 									  			.attr("class", "glyphicon glyphicon-pause");
 			sliderStatus = "playing";
+			d3.select(".glyphicon").attr("title", "Pause Animation");
 			animate();
 			scrollTrig = false;
 		}
