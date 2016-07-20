@@ -980,7 +980,7 @@ function addBarChartsRWH(){
 
 function addLineChartRWH(){
 
-	d3.csv("/assets/data/rwh_cumulative_capacity.csv", function(data) {
+	d3.csv("/assets/data/dhone_rwh_cumulative_capacity.csv", function(data) {
 
 		capacityData = data;
 		//debugger;

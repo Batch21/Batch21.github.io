@@ -255,6 +255,10 @@ button:focus {outline:0;}
 	height: 410px;
 }
 
+.rainfall-chart{
+	position:absolute;
+}
+
 .box {
   font-family: 'lato', sans-serif;
   font-size: 10px;
@@ -263,7 +267,7 @@ button:focus {outline:0;}
 .box line,
 .box rect,
 .box circle {
-  fill: #8CCDD3;
+  fill: #4DBAD9;
   stroke: #000;
   stroke-width: 1px;
 }
@@ -294,6 +298,7 @@ button:focus {outline:0;}
 	width: 100%;
 	border-bottom: 1px solid #a8a8a8;
 	padding: 0px;
+	margin-bottom: 10px;
 }
 
 .rainfall-selection{
@@ -318,8 +323,45 @@ button:focus {outline:0;}
 	font-size: 13px;
 }
 
-#rainfall-mon-box .y .tick line{
+#rainfall-mon-box .y .tick line,
+#rainfall-ann .y .tick line{
 	stroke: #c3c3c3;
 	stroke-width: 1.1;
 	stroke-dasharray: 5, 5;
+}
+
+#rainfall-daily .y .tick line{
+	stroke: #d5d5d5;
+	stroke-width: 1.1;
+}
+
+#rainfall-daily .y path{
+	stroke: none;
+	stroke-width: 0;
+}
+
+#rainfall-daily .months text{
+	font-size: 14px;
+	cursor: pointer;
+}
+
+#rainfall-daily .days text{
+	font-size: 12px;
+}
+
+#rainfall-daily .y text{
+	font-size: 12px;
+
+}
+
+rect.svgTooltip {
+	fill: rgba(220, 220, 217, 0.8);
+}
+
+text.svgTooltip{
+	font-size: 14px;
+}
+
+#rainfall-daily .instructions {
+	fill: #f0f0f0;
 }

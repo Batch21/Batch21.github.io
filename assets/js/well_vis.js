@@ -1095,7 +1095,7 @@ function createCharts(){
 
 function addLineChart(){
 
-	d3.csv("/assets/data/year_totals.csv", function(data) {
+	d3.csv("/assets/data/dhone_wells_year_totals.csv", function(data) {
 
 		lineData = data;
 
