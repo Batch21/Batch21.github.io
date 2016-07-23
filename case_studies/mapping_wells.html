@@ -6,11 +6,13 @@
 		<script type="text/javascript" src="/assets/js/d3.js"></script>
 		<script type="text/javascript" src="/assets/js/d3.slider.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery-3.0.0.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
 		<link rel="stylesheet" type="text/css" href="/styles.css">
-		<link rel="stylesheet" type="text/css" href="/assets/css/d3.slider.css">
-		<link rel="stylesheet" type="text/css" href=/assets/css/dhone.css>
+		<link rel="stylesheet" type="text/css" href="/assets/css/d3.slider.css">		
 		<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" type="text/css" href=/assets/css/dhone.css>
 	</head>
 	<body>
       <div class="container">
@@ -23,9 +25,17 @@
       	<p>The impacts of the <a href="https://www.theguardian.com/world/2016/apr/20/india-drought-affecting-330-million-people-weak-monsoons">recent drought</a> that effected large parts of western and southern India were so severe that <a href="http://timesofindia.indiatimes.com/india/First-train-carrying-five-lakh-litres-of-water-reaches-drought-hit-Latur/articleshow/51787639.cms">trains were used to transport water to the worst hit regions</a>. Although this year’s monsoon has produced above average rainfall <a href="http://www.indiaspend.com/cover-story/in-june-7-drought-hit-states-short-of-water-67340?utm_content=buffer27917&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer"> for some areas</a>, climate change is expected to increase the severity of droughts in the future, heightening the already extreme pressure that rural water supplies are under in many parts of rural India . </p>
       	<p>Aquifers have become the predominant source of water for both agricultural and domestic use across much of southern India, both due to increasing demand and the limited and seasonal nature of surface water resources. The increase in groundwater use has been driven by improvements in borewell technology, decreases in borewell construction costs, and government subsidies that reduce running costs. It has led to a large expansion of the area of land under irrigation and the area which are double-cropped. Groundwater, along with increased fertiliser and pesticide use and the adoption of new crop varieties, has therefore greatly increased agricultural productivity, boosted rural prosperity and has helped to significantly reduce poverty levels across rural India. </p>
       	<p>However, subsidised and unregulated use of groundwater has also led to precipitous declines in groundwater levels in many regions (World Bank, 2010). To maintain access to water in these areas, farmers have had to dig increasing numbers of ever deeper borewells. Poor farmers, often from lower social groups, have been less able to do this than richer farmers and have therefore seen their access to water curtailed. Well failure and a subsequent inability to repay loans taken out for well construction has been stated as a primary cause of the<a href="https://www.theguardian.com/world/2016/jan/14/india-thousands-of-farmer-suicides-prompt-1bn-crop-insurance-scheme"> high suicide rates of farmers in rural India</a>.</p>
-      	<p>Falling groundwater levels have also increased pressure of domestic water supplies as many traditional drinking water sources have fallen dry. The impact has been exacerbated by an increasing demand for water due to population growth and rising incomes. Many households still do not receive the 40 of clean water litres per capita per day recommended by the World Health Organisation (WHO, 1998), resulting in significant social, economic and health related problems, which are felt disproportionally by the poor (Hunter, P., et al., 2010).</p>
-      	<h3> -- Introduce study area and WASHCost project</h3>
-      	<h3> -- Location Map</h3>
+      	<div id="location-map">
+          <div id="map"></div>
+          <button type="button"  id="villageZoom">Zoom to revenue village</button>
+            <div id='location-menu'>
+              <input id='ciqw43rbk000bcbmbwohidax7' type='radio' name='rtoggle' value='basic' checked='checked'>
+              <label for='satellite'>Satellite</label>
+              <input id='ciquvlpvk000oc7nnz3an6s06' type='radio' name='rtoggle' value='streets'>
+              <label for='Terrain'>Terrain</label>
+            </div>
+        </div>
+        <p>Falling groundwater levels have also increased pressure of domestic water supplies as many traditional drinking water sources have fallen dry. The impact has been exacerbated by an increasing demand for water due to population growth and rising incomes. Many households still do not receive the 40 of clean water litres per capita per day recommended by the World Health Organisation (WHO, 1998), resulting in significant social, economic and health related problems, which are felt disproportionally by the poor (Hunter, P., et al., 2010).</p>
       	<p>The revenue village is located in Kurnool district within the state of Andhra Pradesh, a few miles west of the town of Dhone. The revenue village has an area of 25.4 km2 and consist of 4 individual villages that, in 2012, had a total of 1087 households. The region is semi-arid with an average annual rainfall of 587mm. Soil in the revenue village is predominantly inceptisols with small areas of entisols and alfsols.  The underlying geology is crystalline basement. The average elevation of the revenue village is 430 metres, with a maximum of 533 metres and a minimum of 385 metres. However, the hills that rise a short distance beyond the revenue village boundary rise to a maximum elevation of 620 metres. Single crop agriculture accounts for 60% and double-crop agriculture 8% of the total area of the revenue village, although these figures vary significantly depending on annual rainfall. Other important land uses included plantations, primarily mango, which account for 11% of the area, and scrub forest, which accounts for 11% of the area.</p>
       	<div id="rainfall-vis">
           <ul id="rainfall-choices">
@@ -97,7 +107,8 @@
     	 </div>
        </div>
 	</div>
-	<script type="text/javascript" src="/assets/js/box.js"></script>
+  <script type="text/javascript" src="/assets/js/dhone_location_map.js"></script>
+  <script type="text/javascript" src="/assets/js/box.js"></script>
 	<script type="text/javascript" src="/assets/js/rainfall_vis.js"></script>
 	<script type="text/javascript" src="/assets/js/well_vis.js"></script>
 	<script type="text/javascript" src="/assets/js/rwh_vis.js"></script>

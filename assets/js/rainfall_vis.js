@@ -421,7 +421,7 @@ var svgRainDaily = d3.select("#rainfall-daily").append("svg")
 d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 
 	var months = ["June", "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May"]
-	var legendAmounts = [10, 50, 100, 250];
+	var legendAmounts = [10, 25, 100, 250];
 	
 	var xDayScale = d3.scale.linear()
 						.domain([1, 366])
@@ -476,7 +476,6 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 	   .attr("x", 0)
 	   .attr("y", heightRain2 + 33)
        .append("g")
-       .attr("id", "legendBoxRWH")
 
     legendDaily.append("rect")
     		   .attr("width", 298)

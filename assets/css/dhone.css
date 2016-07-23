@@ -365,3 +365,86 @@ text.svgTooltip{
 #rainfall-daily .instructions {
 	fill: #f0f0f0;
 }
+
+#location-map{
+	position: relative;
+	float: right;
+	height: 500px;
+	width: 450px;
+}	
+
+#map{ 
+	height: 500px;
+	width: 450px;	
+	border: 1px solid #DDDDDD;
+	position: absolute;	  
+}
+
+#map .mapboxgl-popup-content {
+	background: rgba(220, 220, 217, 0.95);
+	padding: 5px 5px 5px;
+	border: 1px solid #333333;
+}
+
+#map .mapboxgl-popup-tip{
+	border-left-color: black;
+}
+
+#map p{
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0px;
+	font-family: 'Lato', sans-serif;
+}
+.mapboxgl-ctrl-attrib{
+	font-size: 9px;
+}
+
+#villageZoom{
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
+	cursor: pointer;
+	color: black;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	padding: 6px;
+	background-color: white;
+	opacity: 0.95;
+	border-style: solid;
+	border-width: 1px;
+	-webkit-box-shadow: 1px 1px 1px;
+	-moz-box-shadow: 1px 1px 1px;
+	box-shadow: 1px 1px 1px;
+	border-radius: 4px
+}
+
+#location-menu{
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	max-width: 100px;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	padding: 6px;
+	background-color: white;
+	opacity: 0.95;
+	border-style: solid;
+	border-width: 1px;
+	-webkit-box-shadow: 1px 1px 1px;
+	-moz-box-shadow: 1px 1px 1px;
+	box-shadow: 1px 1px 1px;
+	border-radius: 4px
+}
+
+#villageZoom:hover, #location-menu:hover{
+	background-color:  #f2f2f2;
+	opacity: 1;
+	-webkit-box-shadow: 2px 2px 2px;
+	-moz-box-shadow: 2px 2px 2px;
+	box-shadow: 2px 2px 2px;
+
+}
