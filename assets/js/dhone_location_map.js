@@ -1,64 +1,19 @@
-//var map = L.map('mapid').setView([15.39, 77.82], 10);
 
-/**L.tileLayer('https://api.mapbox.com/styles/v1/batch21/ciquvlpvk000oc7nnz3an6s06/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'batch21.ciquvlpvk000oc7nnz3an6s06',
-    accessToken: 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug'
-}).addTo(map);**/
-
-/**L.tileLayer('https://api.mapbox.com/styles/v1/batch21/ciqw43rbk000bcbmbwohidax7/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'batch21.ciqw43rbk000bcbmbwohidax7',
-    accessToken: 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug'
-}).addTo(map);**/
-
-/**L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-         }).addTo(map);
-
-function onRevenueVillage(feature, layer){
-	layer.on({click: zoomToFeature})
-}
-
-function zoomToFeature(e) {
-			map.fitBounds(e.target.getBounds(), {animiate: true, pan: {duration: 5}});
-}
-
-var villageBoundary = new L.GeoJSON.AJAX("/assets/data/dhone_area.json", {color: "black", weight: 2, fillOpacity: 0, onEachFeature: onRevenueVillage}); 
-villageBoundary.addTo(map);
-
-function onEachFeature(feature, layer) {
-    if (feature.properties && feature.properties.name) {
-        layer.bindPopup(feature.properties.name);
-        layer.on('mouseover', function() { layer.openPopup(); });
-        layer.on('mouseout', function() { layer.closePopup(); });
-    }
-}
-
-
-var villageAreas = new L.GeoJSON.AJAX("/assets/data/village_areas.json", {color: "red", weight: 1, fillColor: "#DF837D", fillOpacity: 0.5,
-    onEachFeature: onEachFeature
-});       
-villageAreas.addTo(map);**/
-
-
-/**mapboxgl.accessToken = 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug';
-var map = new mapboxgl.Map({
+mapboxgl.accessToken = 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug';
+/**var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
     center: [78.6757, 18.9209], // starting position
-    zoom: 3.5 // starting zoom
+    zoom: 3.8 // starting zoom
 });**/
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug';
+/**mapboxgl.accessToken = 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug';
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/batch21/ciqw43rbk000bcbmbwohidax7', //stylesheet location
     center: [78.6757, 18.9209], // starting position
     zoom: 3.5 // starting zoom
-});
+});**/
 
 
 map.addControl(new mapboxgl.Navigation());
@@ -93,7 +48,7 @@ map.on('style.load', function() {
 	    'id': 'village-boundary',
 	    'type': 'line',
 	    "minzoom": 5.5,
-	    "maxzoom": 12.5,
+	    "maxzoom": 13.5,
 	    'source': 'villageAreas',
 	    'layout': {},
 	    'paint': {
@@ -107,7 +62,7 @@ map.on('style.load', function() {
 	    'id': 'village-areas',
 	    'type': 'fill',
 	    "minzoom": 5.5,
-	    "maxzoom": 12.5,
+	    "maxzoom": 13.5,
 	    'source': 'villageAreas',
 	    'layout': {},
 	    'paint': {
@@ -121,7 +76,7 @@ map.on('style.load', function() {
 	    'id': 'village-areas-hover',
 	    'type': 'fill',
 	    "minzoom": 5.5,
-	    "maxzoom": 12.5,
+	    "maxzoom": 13.5,
 	    'source': 'villageAreas',
 	    'layout': {},
 	    'paint': {

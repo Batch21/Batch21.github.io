@@ -1,9 +1,9 @@
 var marginRain = {top: 10, right: 10, bottom: 40, left: 60},
 	marginRain2 = {top: 45, right: 40, bottom: 75, left: 70},
-    widthRain = 930 - marginRain.left - marginRain.right,
+    widthRain = 1100 - marginRain.left - marginRain.right,
     heightRain = 400 - marginRain.top - marginRain.bottom;
     heightRain2 = 400 - marginRain2.top - marginRain2.bottom,
-    widthRain2 = 930 - marginRain2.left - marginRain2.right;
+    widthRain2 = 1100 - marginRain2.left - marginRain2.right;
 
 var minRain = 0,
     maxRain = 650,

@@ -1014,7 +1014,7 @@ function addLineChartRWH(){
 				.style("text-anchor", "middle")
 				.style("font-size", "14px")
 				.style("font-weight", "bold")
-				.style("letter-spacing", "1.6px")
+				.style("letter-spacing", "1.2px")
 				.text("Total RWH Capacity " + "(" + cubedMetres + ")");
 
 		rwh_capacity.append("circle")

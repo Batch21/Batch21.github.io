@@ -1,3 +1,166 @@
+html, body {
+	margin:0;
+	padding:0;
+}
+
+.navbar{
+	background-color: rgba(0, 26, 77, 0.8);
+	border-width: 0px;
+	margin: 0px;
+	height: auto;
+	min-width: 1100px;
+}
+
+#nav-img{
+	height: 45px;
+	width: 41px;
+	display: inline;
+	margin-left: 4%;
+	margin-top: 3px;
+}
+
+#title-text{
+	font-family: 'Lato', sans-serif;
+	font-size: 26px;
+	font-weight: bold;
+	margin: 0px;
+	display: inline;
+	padding-left: 10px;
+	vertical-align: middle;
+	line-height: 1.6;
+	color: white;
+	letter-spacing: 1.4px;
+}
+
+#chapter-list{
+	float: right;
+	padding: 0;
+	padding-top: 12.5px;
+	margin: 0px;
+	height: 22px;
+	margin-right: 5%;
+}
+
+#chapter-list li{
+	display: inline;
+	color: ;
+	font-size: 18px;
+	vertical-align: middle;
+	margin: 0px;
+	padding: 14px 8px 14px 8px;
+	cursor: pointer;
+}
+
+#chapter-list a{
+	color: #bfbfbf;
+}
+
+#chapter-list a:hover{
+	color: white;
+}
+
+
+#chapter-list .selected a{
+	color: white;
+}
+
+#chapter-list span{
+	display: none;
+}
+
+
+#chapter-list .selected span{
+	display: inline;
+}
+
+#chapter-list .selected{
+	border-left: 1px solid;
+	border-right: 1px solid;
+	color: white;
+}
+
+#chapter-list li:hover{
+	color: white;
+}
+
+@media screen and (max-width: 1100px){
+	#title-text{
+		font-size: 18px
+	}
+	#chapter-list li{
+		font-size: 14px
+	}
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1100px){
+	#title-text{
+		font-size: 22px
+	}
+	#chapter-list li{
+		font-size: 16px
+	}
+}
+
+@media screen and (min-width: 1400px){
+	#title-text{
+		font-size: 32px
+	}
+	#chapter-list li{
+		font-size: 20px
+	}
+
+}
+
+#header-img{
+	padding: 0;
+	margin: 0;
+	display: block;
+	width: 100%;
+	min-width: 1100px;
+}
+
+.container{
+	min-width: 1100px;
+}
+
+img{
+	width: 100%;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -250px;
+    visibility: hidden;
+}
+
+p{
+	margin-top: 0;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-size: 20px;
+    font-family: "Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+    line-height: 1.5;
+    color: #515151;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h3{
+	max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+}
+
+
+
 #well-viz, #rwh-viz{
 	border-style: solid;
 	border-width: 1px;
@@ -5,6 +168,9 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 	font-family: 'Lato', sans-serif;
+	max-width: 900px;
+	margin-right: auto;
+	margin-left: auto;
 }
 #well-viz-charts{
 	margin-top: 5px;
@@ -202,36 +368,6 @@ button:focus {outline:0;}
 	shape-rendering: auto;
 }
 
-#title-con{
-	min-height: 640px;
-}
-
-#title{
-	min-width: 100%;
-	min-height: 100%;
-	margin-bottom: 20px;
-}
-
-#title-img{
-	position: absolute;
-    left: -9999px;
-    right: -9999px;
-    margin: auto;
-    align-content: center;
-}
-
-#title-text{
-	position: absolute;
-	top: 0px;
-	left: -9999px;
-    right: -9999px;
-	margin: auto;
-	line-height: 1;
-	font-weight: bold;
-	font-size: 2.2rem;
-	text-align: center;
-}
-
 #slider-con-rwh{
 	margin-left: 20px;
 	margin-right: 20px;
@@ -247,7 +383,10 @@ button:focus {outline:0;}
 	border-width: 1px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	font-family: 'Lato', sans-serif; 
+	margin-right: auto;
+	margin-left: auto;
+	font-family: 'Lato', sans-serif;
+	width: 1100px;
 }
 
 #rainfall-charts{
@@ -293,20 +432,23 @@ button:focus {outline:0;}
 }
 
 #rainfall-choices{
-	background-color: #e8e8e8;
-	display: inline-block;
-	width: 100%;
 	border-bottom: 1px solid #a8a8a8;
+	margin: 0px;
 	padding: 0px;
-	margin-bottom: 10px;
+	display: inline-block; 
+	width: 100%;
+	background-color: #e8e8e8;
 }
 
 .rainfall-selection{
+	font-size: 18px;
 	position: relative;
 	float: left;
 	width: 30%;
 	padding-right: 10px;
 	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	list-style-type: none;
 	background-color: transparent;
 	border-right: 1px solid #a8a8a8;
@@ -369,13 +511,13 @@ text.svgTooltip{
 #location-map{
 	position: relative;
 	float: right;
-	height: 500px;
-	width: 450px;
+	height: 550px;
+	width: 500px;
 }	
 
 #map{ 
-	height: 500px;
-	width: 450px;	
+	height: 550px;
+	width: 500px;	
 	border: 1px solid #DDDDDD;
 	position: absolute;	  
 }
@@ -401,10 +543,15 @@ text.svgTooltip{
 	font-size: 9px;
 }
 
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl{
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
 #villageZoom{
 	position: absolute;
-	margin-top: 10px;
-	margin-left: 10px;
+	margin-top: 5px;
+	margin-left: 5px;
 	cursor: pointer;
 	color: black;
 	font-weight: bold;
@@ -423,9 +570,8 @@ text.svgTooltip{
 
 #location-menu{
 	position: absolute;
-	bottom: 10px;
-	left: 10px;
-	max-width: 100px;
+	bottom: 5px;
+	left: 5px;
 	font-weight: bold;
 	font-family: 'Lato', sans-serif;
 	font-size: 16px;
