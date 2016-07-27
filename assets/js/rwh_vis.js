@@ -4,7 +4,7 @@ var startYearRWH = 2012,
 	buttonTextRWH = "RWH Type",
 	cubedMetres = "m³";
 
-var sliderRWH = d3.slider().axis(true).min(1998).max(startYearRWH).value(startYearRWH).step(1);
+var sliderRWH = d3.slider().axis(d3.svg.axis().ticks(17).tickSize(6).tickFormat(d3.format(".0d"))).min(1998).max(startYearRWH).value(startYearRWH).step(1);
 d3.select('#slider-rwh').call(sliderRWH);
 
 var svg_map_rwh = d3.select("#rwh-viz-map").append("svg")
@@ -24,8 +24,8 @@ svg_map_rwh.append("svg:image")
 		.attr("xlink:href", "/assets/data/background.jpg")
 		.attr("x", 0)
 		.attr("y", 0)
-		.attr("width", 560)
-		.attr("height", 730);
+		.attr("width", 500)
+		.attr("height", 540);
 
 var legendRWH = d3.select("#legendRWH").append("svg")
 	   .attr("id", "legendSVG_RWH")
@@ -483,13 +483,13 @@ function activateButtonsRWH(){
 }
 
 var rwh_type = d3.select("#rwh-viz-chart1").append("svg")
-			.attr("width", w2 + margin_bar.left + margin_bar.right)
+			.attr("width", w5 + margin_bar.left + margin_bar.right)
 			.attr("height", h4 + margin_bar.top + margin_bar.bottom)
 				.append("g")
 			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
 
 var rwh_status = d3.select("#rwh-viz-chart2").append("svg")
-			.attr("width", w2 + margin_bar.left + margin_bar.right)
+			.attr("width", w5 + margin_bar.left + margin_bar.right)
 			.attr("height", h4 + margin_bar.top + margin_bar.bottom)
 				.append("g")
 			.attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
@@ -501,18 +501,18 @@ var rwh_capacity = d3.select("#rwh-viz-chart3").append("svg")
 			.attr("transform", "translate(" + margin_line.left + "," + margin_bar.top + ")");
 
 var xTypeRWH = d3.scale.ordinal()
-				.rangeRoundBands([0, w2], 0.05);
+				.rangeRoundBands([0, w5], 0.05);
 var yTypeRWH = d3.scale.linear()
 				.range([h4, 0]);
 
 var xStatusRWH = d3.scale.ordinal()
-				  .rangeRoundBands([0, w2], 0.05);
+				  .rangeRoundBands([0, w5], 0.05);
 var yStatusRWH = d3.scale.linear()
 				  .range([h4, 0])
 
 var xlineRWH = d3.scale.linear()
 				  .range([0, w3])
-				  .domain([1998, 2013]);
+				  .domain([1998, 2012]);
 var ylineRWH = d3.scale.linear()
 				  .range([h4, 0])
 				  .domain([0, 120000]);
@@ -528,6 +528,8 @@ function addBarChartsRWH(){
 		.attr("class", "y axis")
 		.call(d3.svg.axis()
 		.scale(yTypeRWH)
+		.innerTickSize(-w5)
+		.outerTickSize(0)
 		.orient("left"));
 
 	rwh_type.append("g")
@@ -536,13 +538,15 @@ function addBarChartsRWH(){
 		.call(d3.svg.axis()
 		.scale(xTypeRWH)
 		.orient("bottom")
+		.innerTickSize(0)
+		.outerTickSize(0)
 		.tickFormat(function(d){return rwhTypes[d].key;}))
 		.selectAll(".tick text")
 		.call(wrap, xTypeRWH.rangeBand());
 
 	rwh_type.append("text")
 		.attr("transform", "rotate(-90)")
-		.attr("y", 0 - margin_bar.left + 10)
+		.attr("y", 0 - margin_bar.left + 15)
 		.attr("x",0 - (h4 / 2))
 		.style("text-anchor", "middle")
 		.style("font-size", "14px")
@@ -577,11 +581,18 @@ function addBarChartsRWH(){
    		})
    		.style("stroke", "black")
    		.style("stroke-width", 0)
-   		.style("opacity", 0.7)
    		.on("mouseover", function(d){
 			
 			d3.select(this)
-			.style("opacity", 1);
+			.style("fill", function(d){
+	   			if(d.key == "Check Dam"){
+	   				return "#a2a0ac";
+	   			}else if(d.key == "Infiltration Pond"){
+	   				return "#518b94";
+	   			}else if(d.key == "Bund"){
+	   				return "#513b15";
+	   			}
+	   		});
 
 			svg_map_rwh.selectAll(".rwh")
 				.attr("d", d3.svg.symbol()
@@ -714,7 +725,15 @@ function addBarChartsRWH(){
 		})
 		.on("mouseout", function(d){
 				d3.select(this)
-				.style("opacity", 0.7);
+				.style("fill", function(d){
+		   			if(d.key == "Check Dam"){
+		   				return "#BDBBC4";
+		   			}else if(d.key == "Infiltration Pond"){
+		   				return "#5D9CA5";
+		   			}else if(d.key == "Bund"){
+		   				return "#7a591f";
+		   			}
+		   		});
 
 				svg_map_rwh.selectAll(".rwh")
 					.attr("d", d3.svg.symbol()
@@ -756,6 +775,8 @@ function addBarChartsRWH(){
 		.attr("class", "y axis")
 		.call(d3.svg.axis()
 		.scale(yStatusRWH)
+		.innerTickSize(-w5)
+		.outerTickSize(0)
 		.orient("left"));
 
 	rwh_status.append("g")
@@ -764,13 +785,15 @@ function addBarChartsRWH(){
 		.call(d3.svg.axis()
 		.scale(xStatusRWH)
 		.orient("bottom")
+		.innerTickSize(0)
+		.outerTickSize(0)
 		.tickFormat(function(d){return rwhStatus[d].key;}))
 		.selectAll(".tick text")
 		.call(wrap, xStatusRWH.rangeBand());
 
 	rwh_status.append("text")
 		.attr("transform", "rotate(-90)")
-		.attr("y", 0 - margin_bar.left + 10)
+		.attr("y", 0 - margin_bar.left + 18)
 		.attr("x",0 - (h4 / 2))
 		.style("text-anchor", "middle")
 		.style("font-size", "14px")
@@ -805,11 +828,18 @@ function addBarChartsRWH(){
    		})
    		.style("stroke", "black")
    		.style("stroke-width", 0)
-   		.style("opacity", 0.7)
    		.on("mouseover", function(d){
 			
 			d3.select(this)
-			.style("opacity", 1);
+			.style("fill", function(d){
+	   			if(d.key == "Good"){
+	   				return "#236190";
+	   			}else if(d.key == "Damaged"){
+	   				return "#fd9935";
+	   			}else if(d.key == "Destroyed"){
+	   				return "#b71518";
+	   			}
+	   		});
 
 			svg_map_rwh.selectAll(".rwh")
 				.attr("d", d3.svg.symbol()
@@ -942,7 +972,15 @@ function addBarChartsRWH(){
 		})
 		.on("mouseout", function(d){
 				d3.select(this)
-				.style("opacity", 0.7);
+				.style("fill", function(d){
+		   			if(d.key == "Good"){
+		   				return "#2C7BB6";
+		   			}else if(d.key == "Damaged"){
+		   				return "#FDAE61";
+		   			}else if(d.key == "Destroyed"){
+		   				return "#D7191C";
+		   			}
+		   		});
 
 				svg_map_rwh.selectAll(".rwh")
 					.attr("d", d3.svg.symbol()
@@ -984,20 +1022,15 @@ function addLineChartRWH(){
 
 		capacityData = data;
 		//debugger;
-		var lineCapacity = d3.svg.line()
-		    			 .x(function(d) { return xlineRWH(d.year); })
-		                 .y(function(d) { return ylineRWH(d.capacity); });
-
-		rwh_capacity.append("path")
-	      			.datum(data)
-	      			.attr("class", "chartline")
-	      			.attr("d", lineCapacity);
-
+	
 	  	rwh_capacity.append("g")
 			 	.attr("class", "y axis")
 				.call(d3.svg.axis()
 					.scale(ylineRWH)
-					.orient("left"));
+					.innerTickSize(-w3)
+					.outerTickSize(0)
+					.orient("left")
+					.tickValues([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000]));
 
 		rwh_capacity.append("g")
 				.attr("class", "x axis")
@@ -1005,17 +1038,29 @@ function addLineChartRWH(){
 				.call(d3.svg.axis()
 					.scale(xlineRWH)
 					.orient("bottom")
+					.outerTickSize(0)
+					.ticks([15])
 					.tickFormat(d3.format("d")));
 
 		rwh_capacity.append("text")
 				.attr("transform", "rotate(-90)")
-				.attr("y", 0 - margin_line.left + 10)
+				.attr("y", 0 - margin_line.left + 15)
 				.attr("x",0 - (h4 / 2))
 				.style("text-anchor", "middle")
 				.style("font-size", "14px")
 				.style("font-weight", "bold")
 				.style("letter-spacing", "1.2px")
 				.text("Total RWH Capacity " + "(" + cubedMetres + ")");
+
+		var lineCapacity = d3.svg.line()
+	    			 .x(function(d) { return xlineRWH(d.year); })
+	                 .y(function(d) { return ylineRWH(d.capacity); });
+
+		rwh_capacity.append("path")
+	      			.datum(data)
+	      			.attr("class", "chartline")
+	      			.attr("d", lineCapacity);
+
 
 		rwh_capacity.append("circle")
 				.attr("cx", function(){

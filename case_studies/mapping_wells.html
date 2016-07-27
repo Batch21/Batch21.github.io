@@ -21,10 +21,10 @@
       <img id="nav-img" src="/assets/images/logo-small.png">
        <h2 id="title-text">Visualising Water Scarcity in Rural India</h2>
        <ul id="chapter-list">
-         <li class="chap-1 selected"><a href="#chapter-1">1<span class="chapter-title">.&nbsp&nbspIntroduction</span></a></li>
+         <li class="chap-1 current"><a href="#chapter-1">1<span class="chapter-title">.&nbsp&nbspIntroduction</span></a></li>
          <li class="chap-2"><a href="#chapter-2">2<span class="chapter-title">.&nbsp&nbspStudy Area</span></a></li>
          <li class="chap-3"><a href="#chapter-3">3<span class="chapter-title">.&nbsp&nbspIncreased Groundwater Use</span></a></li>
-         <li class="chap-4"><a href="#chapter-4">4<span class="chapter-title">.&nbsp&nbspImpact of water scarcity on WASH service</span></a></li>
+         <li class="chap-4"><a href="#chapter-4">4<span class="chapter-title">.&nbsp&nbspThe Impact of water scarcity on WASH service</span></a></li>
          <li class="chap-5"><a href="#chapter-5">5<span class="chapter-title">.&nbsp&nbspIs Rain Water Harvesting the solution?</span></a></li>
          <li class="chap-6"><a href="#chapter-6">6<span class="chapter-title">.&nbsp&nbspConclusion</span></a></li>
        </ul>
@@ -65,14 +65,16 @@
         <a class="anchor" id="chapter-2"></a>
       	<p>Decision-making in semi-arid rural India is complicate by the fact that different stakeholders have a range of different agricultural, social, economic and environmental goals (Kaur et al, 2003). A further complication is that for many catchments the quantity and location of water infrastructure, including wells and RWH structures, is unknown, which make the effective planning of future interventions difficult. One solution is to use GPS technology and GIS software to map and analyse the location of infrastructure. Mapping can be done using standalone GPS devices, however increasingly smartphone apps, such as Akvo Flow and mWater, are used. These apps have been used by a wide range of projects to map hundreds of thousands of water points worldwide (link: https://www.waterpointdata.org/), however for this project traditional handheld GPS devices were used, with 4 local students primarily responsible for collecting the data. For each well and RWH structure mapped a range of information was collected including type, cost, year of construction, and current status. Additionally, every household in all 4 of the villages was survey to collect a range of socio-economic and WASH information. The visualisation below presents the wells located in revenue village and demonstrates how their number and characteristics change over time.</p>
     	 <div id="well-viz">
-    	     <div id="well-viz-map">
-    	        <div class="playPause"> 
+    	      <div>
+             <div class="playPause"> 
     	           <button type="button" class="btn btn-default btn-lg">
   			        <span class="glyphicon glyphicon-play" aria-hidden="false"></span>
 		        </div>
     	       <div id="slider-con-wells">
     	     	 <div id="slider"></div>
     	       </div>
+            </div>
+            <div id="well-viz-map">
     	     	<div class="buttons">
     	     	  <button type="button" class="buttonWells" id="wellDepthButton">Well Depth</button>
     	     	  <button type="button" class="buttonWells">Well Type</button>
@@ -84,10 +86,12 @@
     	      	<div id="landuseCheckBox"><input type="checkbox" id="landuseCheck"></div>
     	      </div>
     	     </div>
-    	 	 <div id="well-viz-charts" >
+    	 	 <div class="well-viz-charts" >
     	 		 <div id="well-viz-chart1" class="charts"></div>
     	 		 <div id="well-viz-chart2" class="charts"></div>
     	 		 <div id="well-viz-chart3" class="charts"></div>
+         </div>
+         <div class="well-viz-charts" > 
     	 		 <div id="well-viz-chart4" class="charts"></div>
     	 		 <div id="well-viz-chart5" class="charts"></div>
     	 	 </div>
@@ -111,12 +115,17 @@
     	      </div>
     	      <div id="legendRWH"></div>
     	     </div>
-    	 	 <div id="rwh-viz-charts" >
-    	 		 <div id="rwh-viz-chart1" class="charts"></div>
-    	 		 <div id="rwh-viz-chart2" class="charts"></div>
-    	 		 <div id="rwh-viz-chart3" class="charts"></div>
-    	 	 </div>>
+          <div id="rwh-viz-charts"> 
+      	 	 <div>
+      	 		 <div id="rwh-viz-chart1" class="charts-rwh"></div>
+      	 		 <div id="rwh-viz-chart2" class="charts-rwh"></div>
+        	 </div>
+           <div>
+              <div id="rwh-viz-chart3" class="charts"></div>
+           </div>
+          </div>
     	 </div>
+      <p>The survey showed that 55 check dams, 42 infiltration tank, and 6 bunds have been constructed in the revenue village by various agencies at a total cost of around $55,000. The majority have been built during the last two decades and mostly in years when government projects focused on the area. The total capacity of all the RWH structures that have not been destroyed is approximately 114,000 m3, which is equivalent to approximately 4mm of rainfall spread evenly across the catchment.</p>
     </div>   
   <script type="text/javascript" src="/assets/js/dhone_location_map.js"></script>
   <script type="text/javascript" src="/assets/js/box.js"></script>

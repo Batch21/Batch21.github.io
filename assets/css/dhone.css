@@ -43,10 +43,9 @@ html, body {
 
 #chapter-list li{
 	display: inline;
-	color: ;
 	font-size: 18px;
 	vertical-align: middle;
-	margin: 0px;
+	margin: 0px 0px 0px -3px;
 	padding: 14px 8px 14px 8px;
 	cursor: pointer;
 }
@@ -60,7 +59,7 @@ html, body {
 }
 
 
-#chapter-list .selected a{
+#chapter-list .current a{
 	color: white;
 }
 
@@ -69,15 +68,16 @@ html, body {
 }
 
 
-#chapter-list .selected span{
+#chapter-list .current span{
 	display: inline;
 }
 
-#chapter-list .selected{
+#chapter-list .current{
 	border-left: 1px solid;
 	border-right: 1px solid;
 	color: white;
 }
+
 
 #chapter-list li:hover{
 	color: white;
@@ -168,12 +168,9 @@ h3{
 	margin-top: 10px;
 	margin-bottom: 10px;
 	font-family: 'Lato', sans-serif;
-	max-width: 900px;
+	max-width: 1300px;
 	margin-right: auto;
 	margin-left: auto;
-}
-#well-viz-charts{
-	margin-top: 5px;
 }
 
 .well{
@@ -187,9 +184,9 @@ h3{
 
 .buttons{
 	position: absolute;
-	margin-top: 10px;
-	margin-left: 15px;
-	width:580px;
+	margin-top: 8px;
+	margin-left: 12px;
+	width:520px;
 }
 
 .bar{
@@ -198,12 +195,12 @@ h3{
 
 .buttonWells, .buttonRWH{
 	display: inline;
-	font-size: 15px;
+	font-size: 14px;
 	color: black;
 	font-weight: bold;
 	font-family: 'Lato', sans-serif;
-	padding: 6px;
-	margin: 1px;
+	padding: 4px;
+	margin: 1px 5px 1px 1px;
 	background-color: #DDDDDD;
 	opacity: 0.95;
 	border-style: solid;
@@ -218,22 +215,24 @@ h3{
 button:focus {outline:0;}
 
 #yearCount, #yearCountRWH{
-	display: inline;
+	display: inline-block;
 	position: absolute;
-	right:30px;
+	right: 21.5px;
 	font-weight: bold;
 	color: black;
 	background-color: #DDDDDD;
 	border-style: solid;
 	border-width: 1px;
 	padding: 4px;
-	margin: 0px;
+	margin: -4px 0px 0px 0px;
+	font-size: 16px;
+	display: none;
 }
 
 #legend, #legendRWH{
 	position: absolute;
-	margin-top: 52px;
-	margin-left: 16px;
+	margin-top: 46px;
+	margin-left: 14px;
 	background-color: rgba(220, 220, 217, 0.9);
 	border-style: solid;
 	border-width: 1px;
@@ -242,21 +241,20 @@ button:focus {outline:0;}
 
 .legendLanduse{
 	position: absolute;
-	margin-left: 16px;
+	margin-left: 14px;
 	background-color: rgba(220, 220, 217, 0.9);
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 5px;
 	font-size: 12px;
-	text-align: ;
 }
 
 #landuse1{
- 	margin-top: 322px;
+ 	margin-top: 313px;
 }
 
 #landuse2{
- 	margin-top: 297px;
+ 	margin-top: 288px;
 }
 
 #landuseCheckBox{
@@ -269,48 +267,53 @@ button:focus {outline:0;}
 	cursor: pointer;
 }
 
-#col{
-	width:100%;
-}
-
 
 #slider-con-wells {
-	margin-left: 10px;
-	margin-top:15px;
-	margin-bottom: 20px;
-	width: 485px;
+	margin-right: 10px;
+	margin-top:18px;
+	margin-bottom: 18px;
+	width: 1065px;
 	display: inline-block;
 	vertical-align: middle;
+	float: right;
+}
+
+.d3-slider-horizontal{
+	height: 2px;
+	top: 0px;
 }
 
 .d3-slider-handle{
 	cursor: pointer;
 }
 
+.d3-slider-axis{
+	top: 1px;
+	pointer-events: none;
+	height: 20px;
+}
+
 .playPause {
-	margin-bottom: 5px;
-	margin-right: 10px;
-	margin-top: 8px;
-	margin-left: 10px;
+
+	margin-top: 5px;
+	margin-left: 8px;
 	display: inline-block;
 	vertical-align: middle;
 }
 
 .glyphicon {
-	font-size: 25px;
+	font-size: 20px;
 	cursor: pointer;
 }
 
 .btn{
-	padding-top: 10px;
-	padding-right: 10px;
-	padding-left: 10px;
-	padding-bottom: 8px;
+	padding: 5px 6px 4px 7px;
+
 }
 
 
 #well-viz-map,
-#well-viz-charts,
+.well-viz-charts,
 #rwh-viz-charts,
 #rwh-viz-map{
 	display: inline-block;
@@ -318,7 +321,7 @@ button:focus {outline:0;}
 
 #well-viz-map,
 #rwh-viz-map{
-	width: 580px;
+	width: 520px;
 }
 
 #rwh-viz .axis text {
@@ -334,6 +337,10 @@ button:focus {outline:0;}
 
 .charts{
 	display: float;
+}
+
+.charts-rwh{
+	display: inline-block;
 }
 
 .axis path,
@@ -373,9 +380,15 @@ button:focus {outline:0;}
 	margin-right: 20px;
 	margin-bottom: 30px;
 	margin-top: 20px;
-	width: 540px;
+	width: 1100px;
 	display: inline-block;
 	vertical-align: middle;
+}
+
+#well-viz .y .tick line, #rwh-viz .y .tick line{	
+	stroke: #cccccc;
+	stroke-width: 1.1;
+	stroke-dasharray: 5, 5;
 }
 
 #rainfall-vis{
@@ -594,3 +607,7 @@ text.svgTooltip{
 	box-shadow: 2px 2px 2px;
 
 }
+
+#location-menu label, #location-menu input{
+	margin: 0px;
+} 

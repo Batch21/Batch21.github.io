@@ -108,7 +108,8 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
     
 	var xAxisRain = d3.svg.axis()
 		.scale(xRainBox)
-		.orient("bottom");
+		.orient("bottom")
+		.outerTickSize(0);
 
     var yAxisRain = d3.svg.axis()
 						.innerTickSize(-widthRain)
@@ -333,6 +334,7 @@ d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, csv) {
 	var xAxisAnn = d3.svg.axis()
 		.scale(xRainAnn)
 		.orient("bottom")
+		.outerTickSize(0)
 		.tickFormat(function(d){
 	    	return annualRainfall[d].water_year;
 		});
@@ -453,6 +455,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 	var xAxisMonth = d3.svg.axis()
 							.scale(xMonthScale)
 							.orient("top")
+							.outerTickSize(0)
 							.innerTickSize(5);
 
 	var zoomScale = d3.scale.ordinal()
@@ -467,6 +470,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 	var xAxisDayMonth = d3.svg.axis()
 							.scale(xScaleDayMonth)
 							.orient("bottom")
+							.outerTickSize(0)
 							.tickValues([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]);					
 
 	var legendDaily = svgRainDaily.append("svg")
