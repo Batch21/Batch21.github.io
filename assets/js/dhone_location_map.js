@@ -102,7 +102,7 @@ map.on('style.load', function() {
 map.on('style.load', function() {
   map.addSource("villageCentres", {
     "type": "geojson",
-    "data": "/assets/data/Dhone_village_centres.json"
+    "data": "/assets/data/dhone_village_centres.json"
     });
 
     map.addLayer({
