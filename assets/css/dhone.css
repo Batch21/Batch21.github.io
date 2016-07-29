@@ -1,0 +1,695 @@
+html, body {
+	margin:0;
+	padding:0;
+}
+
+.navbar{
+	background-color: rgba(0, 26, 77, 0.8);
+	border-width: 0px;
+	margin: 0px;
+	height: auto;
+	min-width: 1150px;
+}
+
+#nav-img{
+	height: 38px;
+	width: 31px;
+	display: inline;
+	margin-left: 3%;
+	margin: 5px 5px 7px 3%;
+}
+
+#title-text{
+	font-family: 'Lato', sans-serif;
+	font-size: 26px;
+	font-weight: bold;
+	margin: 0px;
+	display: inline;
+	padding-left: 10px;
+	vertical-align: middle;
+	line-height: 1.6;
+	color: white;
+	letter-spacing: 1.4px;
+}
+
+#chapter-list{
+	float: right;
+	padding: 0;
+	padding-top: 12.5px;
+	margin: 0px;
+	height: 22px;
+	margin-right: 5%;
+}
+
+#chapter-list li{
+	display: inline;
+	font-size: 18px;
+	vertical-align: middle;
+	margin: 0px 0px 0px -3px;
+	padding: 14px 8px 14px 8px;
+	cursor: pointer;
+}
+
+#chapter-list a{
+	color: #bfbfbf;
+}
+
+#chapter-list a:hover{
+	color: white;
+}
+
+
+#chapter-list .current a{
+	color: white;
+}
+
+#chapter-list span{
+	display: none;
+}
+
+
+#chapter-list .current span{
+	display: inline;
+}
+
+#chapter-list .current{
+	border-left: 1px solid;
+	border-right: 1px solid;
+	color: white;
+}
+
+
+#chapter-list li:hover{
+	color: white;
+}
+
+@media screen and (max-width: 1200px){
+	#title-text{
+		font-size: 18px
+	}
+	#chapter-list li{
+		font-size: 14px
+	}
+}
+
+@media screen and (max-width: 1400px) and (min-width: 1200px){
+	#title-text{
+		font-size: 22px
+	}
+	#chapter-list li{
+		font-size: 16px
+	}
+}
+
+@media screen and (min-width: 1600px){
+	#title-text{
+		font-size: 32px
+	}
+	#chapter-list li{
+		font-size: 20px
+	}
+
+}
+
+#header-img{
+	padding: 0;
+	margin: 0;
+	display: block;
+	width: 100%;
+	min-width: 1100px;
+}
+
+.container{
+	min-width: 1150px;
+}
+
+img{
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.img-left{
+	max-width: 450px;
+	max-height: 600px;
+	margin: 20px 20px 0px 0px;
+	float: left;
+}
+
+.img-right{
+	max-width: 500px;
+	max-height: 600px
+	margin: 20px 0px 0px 20px;
+	float: right;
+
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -250px;
+    visibility: hidden;
+}
+
+p{
+	margin-top: 0;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-size: 20px;
+    font-family: "Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+    line-height: 1.5;
+    color: #515151;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+sup{
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#references{
+	max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-left: 15px;
+}
+
+
+
+h3{
+	max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+}
+
+
+
+#well-viz, #rwh-viz{
+	border-style: solid;
+	border-width: 1px;
+	background-color: #f2f2f2;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-family: 'Lato', sans-serif;
+	max-width: 1300px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.well{
+	stroke: black;
+	stroke-width: 0.4;
+	-moz-transition: fill 0.3s;
+	-o-transition: fill 0.3s;
+	-webkit-transition: fill 0.3s;
+	transition: fill 0.5s;
+}
+
+.buttons{
+	position: absolute;
+	margin-top: 8px;
+	margin-left: 12px;
+	width:520px;
+}
+
+.bar{
+	cursor: pointer;
+}
+
+.buttonWells, .buttonRWH{
+	display: inline;
+	font-size: 14px;
+	color: black;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	padding: 4px;
+	margin: 1px 5px 1px 1px;
+	background-color: #DDDDDD;
+	opacity: 0.95;
+	border-style: solid;
+	border-width: 1px;
+	-webkit-box-shadow: 2px 2px 2px;
+	-moz-box-shadow: 2px 2px 2px;
+	box-shadow: 2px 2px 2px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:focus {outline:0;}
+
+#yearCount, #yearCountRWH{
+	display: inline-block;
+	position: absolute;
+	right: 21.5px;
+	font-weight: bold;
+	color: black;
+	background-color: #DDDDDD;
+	border-style: solid;
+	border-width: 1px;
+	padding: 4px;
+	margin: -4px 0px 0px 0px;
+	font-size: 16px;
+	display: none;
+}
+
+#legend, #legendRWH{
+	position: absolute;
+	margin-top: 46px;
+	margin-left: 14px;
+	background-color: rgba(220, 220, 217, 0.9);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+.wellInfoBox, .rwhInfoBox{
+	fill: rgba(220, 220, 217, 0.8);
+	stroke: #404040;
+	stroke-width: 1.1px;
+}
+
+.legendLanduse{
+	position: absolute;
+	margin-left: 14px;
+	background-color: rgba(220, 220, 217, 0.9);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+	font-size: 12px;
+}
+
+#landuse1{
+ 	margin-top: 313px;
+}
+
+#landuse2{
+ 	margin-top: 288px;
+}
+
+#landuseCheckBox{
+	position: absolute;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+#landuseCheck{
+	cursor: pointer;
+}
+
+
+#slider-con-wells, #slider-con-rwh{
+	margin-right: 15px;
+	margin-top:15px;
+	margin-bottom: 18px;
+	width: 1060px;
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
+}
+
+.d3-slider-horizontal{
+	height: 2px;
+	top: 0px;
+	cursor: pointer;
+}
+
+.d3-slider-handle{
+	cursor: pointer;
+}
+
+.d3-slider-axis{
+	top: 1px;
+	pointer-events: none;
+	height: 20px;
+	left: -2px;
+}
+
+.playPause, .playPauseRWH {
+
+	margin-top: 5px;
+	margin-left: 8px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.glyphicon {
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.btn{
+	padding: 5px 6px 4px 7px;
+
+}
+
+#line-menu {
+	position: absolute;
+	top: 10px;
+	left: 75px;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	font-size: 12px;
+	padding: 1px 4px 0px 3px;
+	background-color: rgba(230, 230, 230, 0.9);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0.5px 0.5px 0.5px;
+	-moz-box-shadow: 0.5px 0.5px 0.5px;
+	box-shadow: 0.5px 0.5px 0.5px;
+}
+
+#line-menu p, #line-menu label{
+	font-size: 12px;
+	display:inline;
+	vertical-align: 15%;
+}
+
+#line-menu input{
+	margin-left: 5px;
+}
+
+
+#well-viz-map,
+.well-viz-charts,
+#rwh-viz-charts,
+#rwh-viz-map{
+	display: inline-block;
+	position: relative;
+}
+
+#well-viz-map,
+#rwh-viz-map{
+	width: 520px;
+}
+
+#rwh-viz .axis text {
+	font-family: 'Lato', sans-serif;
+	font-size: 11px;
+}
+
+.trigger a{
+    visibility: hidden;
+}
+
+.mapBorder{
+	stroke: black;
+	fill: none;
+	stroke-width: 1.2;
+}
+
+.charts{
+	display: float;
+	position: relative;
+}
+
+.charts-rwh{
+	display: inline-block;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: black;
+	stroke-width: 1.1;
+	shape-rendering: auto;
+}
+
+.demAxis path{
+	stroke-width: 0;
+}
+
+.axis text {
+	font-family: 'Lato', sans-serif;
+	font-size: 10px;
+}
+
+.vis-instructions{
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 10px;
+	margin-bottom: 5px;
+	color: black;
+}
+
+.chartline, .secondaryLine{
+	fill: none;
+	stroke: #262626;
+	stroke-width: 2;
+	shape-rendering: auto;
+}
+
+#well-viz .y .tick line, #rwh-viz .y .tick line{	
+	stroke: #cccccc;
+	stroke-width: 1.1;
+	stroke-dasharray: 5, 5;
+}
+
+#rainfall-vis{
+	border-style: solid;
+	border-width: 1px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	font-family: 'Lato', sans-serif;
+	width: 1100px;
+}
+
+.rainfall-chart{
+	position:absolute;
+}
+
+.box {
+  font-family: 'lato', sans-serif;
+  font-size: 10px;
+}
+
+.box line,
+.box rect,
+.box circle {
+  fill: #4DBAD9;
+  stroke: #000;
+  stroke-width: 1px;
+}
+
+.box .center {
+  stroke-dasharray: 3,3;
+}
+
+.box .outlier {
+  fill: none;
+  stroke: #000;
+}
+
+.box .zoom{
+	fill: #DDDDDD;
+	cursor: pointer;
+}
+
+.zoomButton{
+	position: absolute;
+	margin-top: 20px;
+	margin-left: 40px;
+
+}
+
+.box .avLine{
+	stroke: #165769;
+	stroke-width: 3px;
+	stroke-dasharray: 16, 8;
+	opacity: 0.8;
+}
+
+#avRainfall{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#rainfall-choices{
+	border-bottom: 1px solid #a8a8a8;
+	margin: 0px;
+	padding: 0px;
+	display: inline-block; 
+	width: 100%;
+	background-color: #e8e8e8;
+}
+
+.rainfall-selection{
+	font-size: 18px;
+	position: relative;
+	float: left;
+	width: 30%;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	list-style-type: none;
+	background-color: transparent;
+	border-right: 1px solid #a8a8a8;
+	text-align: center;
+	cursor: pointer;
+}
+
+#rainfall-selection-right{
+	border-right: 0px;
+}
+
+#rainfall-mon-box .axis text {
+	font-family: 'Lato', sans-serif;
+	font-size: 13px;
+}
+
+#rainfall-mon-box .y .tick line,
+#rainfall-ann .y .tick line{
+	stroke: #c3c3c3;
+	stroke-width: 1.1px;
+	stroke-dasharray: 5, 5;
+}
+
+#rainfall-daily .y .tick line{
+	stroke: #d5d5d5;
+	stroke-width: 1.1;
+}
+
+#rainfall-daily .y path{
+	stroke: none;
+	stroke-width: 0;
+}
+
+#rainfall-daily .months text{
+	font-size: 14px;
+	cursor: pointer;
+}
+
+#rainfall-daily .days text{
+	font-size: 12px;
+}
+
+#rainfall-daily .y text{
+	font-size: 12px;
+
+}
+
+rect.svgTooltip {
+	fill: rgba(220, 220, 217, 0.8);
+}
+
+text.svgTooltip{
+	font-size: 14px;
+}
+
+#rainfall-daily .instructions {
+	fill: #f0f0f0;
+}
+
+#location-map{
+	position: relative;
+	float: right;
+	height: 550px;
+	width: 500px;
+}	
+
+#map{ 
+	height: 550px;
+	width: 500px;	
+	border: 1px solid #DDDDDD;
+	position: absolute;	  
+}
+
+#map .mapboxgl-popup-content {
+	background: rgba(220, 220, 217, 0.95);
+	padding: 5px 5px 5px;
+	border: 1px solid #333333;
+}
+
+#map .mapboxgl-popup-tip{
+	border-left-color: black;
+}
+
+#map p{
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0px;
+	font-family: 'Lato', sans-serif;
+}
+.mapboxgl-ctrl-attrib{
+	font-size: 9px;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl{
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+#villageZoom{
+	position: absolute;
+	margin-top: 5px;
+	margin-left: 5px;
+	cursor: pointer;
+	color: black;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	padding: 6px;
+	background-color: white;
+	opacity: 0.95;
+	border-style: solid;
+	border-width: 1px;
+	-webkit-box-shadow: 1px 1px 1px;
+	-moz-box-shadow: 1px 1px 1px;
+	box-shadow: 1px 1px 1px;
+	border-radius: 4px
+}
+
+#location-menu{
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	padding: 6px;
+	background-color: white;
+	opacity: 0.95;
+	border-style: solid;
+	border-width: 1px;
+	-webkit-box-shadow: 1px 1px 1px;
+	-moz-box-shadow: 1px 1px 1px;
+	box-shadow: 1px 1px 1px;
+	border-radius: 4px
+}
+
+#villageZoom:hover, #location-menu:hover{
+	background-color:  #f2f2f2;
+	opacity: 1;
+	-webkit-box-shadow: 2px 2px 2px;
+	-moz-box-shadow: 2px 2px 2px;
+	box-shadow: 2px 2px 2px;
+
+}
+
+#location-menu label, #location-menu input{
+	margin: 0px;
+} 
+
+#hh-vis{
+	border-style: solid;
+	border-width: 1px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	font-family: 'Lato', sans-serif;
+	width: 1100px;
+}

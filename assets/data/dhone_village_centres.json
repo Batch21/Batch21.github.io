@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "id": 6, "village": 1, "name": "Ungaranigundla" }, "geometry": { "type": "Point", "coordinates": [ 77.825703683821587, 15.368488986035265 ] } },
+{ "type": "Feature", "properties": { "id": 2, "village": 3, "name": "Seesamguntla" }, "geometry": { "type": "Point", "coordinates": [ 77.820779114873474, 15.384758539626974 ] } },
+{ "type": "Feature", "properties": { "id": 1, "village": 2, "name": "U. Kothapalli" }, "geometry": { "type": "Point", "coordinates": [ 77.84836289405113, 15.380010074985846 ] } },
+{ "type": "Feature", "properties": { "id": 5, "village": 4, "name": "Lashmipalli" }, "geometry": { "type": "Point", "coordinates": [ 77.836408257183805, 15.415268276139148 ] } }
+]
+}

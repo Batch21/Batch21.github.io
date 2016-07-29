@@ -3,4 +3,4 @@ layout: page
 title: Case Studies
 ---
 
-<h3> Coming soon!<h3>
+<p>Coming Soon!</p>
