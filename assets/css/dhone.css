@@ -8,15 +8,15 @@ html, body {
 	border-width: 0px;
 	margin: 0px;
 	height: auto;
-	min-width: 1100px;
+	min-width: 1150px;
 }
 
 #nav-img{
-	height: 45px;
-	width: 41px;
+	height: 38px;
+	width: 31px;
 	display: inline;
-	margin-left: 4%;
-	margin-top: 3px;
+	margin-left: 3%;
+	margin: 5px 5px 7px 3%;
 }
 
 #title-text{
@@ -83,7 +83,7 @@ html, body {
 	color: white;
 }
 
-@media screen and (max-width: 1100px){
+@media screen and (max-width: 1200px){
 	#title-text{
 		font-size: 18px
 	}
@@ -92,7 +92,7 @@ html, body {
 	}
 }
 
-@media screen and (max-width: 1200px) and (min-width: 1100px){
+@media screen and (max-width: 1400px) and (min-width: 1200px){
 	#title-text{
 		font-size: 22px
 	}
@@ -101,7 +101,7 @@ html, body {
 	}
 }
 
-@media screen and (min-width: 1400px){
+@media screen and (min-width: 1600px){
 	#title-text{
 		font-size: 32px
 	}
@@ -120,11 +120,28 @@ html, body {
 }
 
 .container{
-	min-width: 1100px;
+	min-width: 1150px;
 }
 
 img{
-	width: 100%;
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.img-left{
+	max-width: 450px;
+	max-height: 600px;
+	margin: 20px 20px 0px 0px;
+	float: left;
+}
+
+.img-right{
+	max-width: 500px;
+	max-height: 600px
+	margin: 20px 0px 0px 20px;
+	float: right;
+
 }
 
 a.anchor {
@@ -151,6 +168,21 @@ p{
     margin-left: auto;
     margin-right: auto;
 }
+
+sup{
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#references{
+	max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-left: 15px;
+}
+
+
 
 h3{
 	max-width: 750px;
@@ -239,6 +271,12 @@ button:focus {outline:0;}
 	border-radius: 5px;
 }
 
+.wellInfoBox, .rwhInfoBox{
+	fill: rgba(220, 220, 217, 0.8);
+	stroke: #404040;
+	stroke-width: 1.1px;
+}
+
 .legendLanduse{
 	position: absolute;
 	margin-left: 14px;
@@ -268,11 +306,11 @@ button:focus {outline:0;}
 }
 
 
-#slider-con-wells {
-	margin-right: 10px;
-	margin-top:18px;
+#slider-con-wells, #slider-con-rwh{
+	margin-right: 15px;
+	margin-top:15px;
 	margin-bottom: 18px;
-	width: 1065px;
+	width: 1060px;
 	display: inline-block;
 	vertical-align: middle;
 	float: right;
@@ -281,6 +319,7 @@ button:focus {outline:0;}
 .d3-slider-horizontal{
 	height: 2px;
 	top: 0px;
+	cursor: pointer;
 }
 
 .d3-slider-handle{
@@ -291,9 +330,10 @@ button:focus {outline:0;}
 	top: 1px;
 	pointer-events: none;
 	height: 20px;
+	left: -2px;
 }
 
-.playPause {
+.playPause, .playPauseRWH {
 
 	margin-top: 5px;
 	margin-left: 8px;
@@ -311,12 +351,40 @@ button:focus {outline:0;}
 
 }
 
+#line-menu {
+	position: absolute;
+	top: 10px;
+	left: 75px;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	font-size: 12px;
+	padding: 1px 4px 0px 3px;
+	background-color: rgba(230, 230, 230, 0.9);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0.5px 0.5px 0.5px;
+	-moz-box-shadow: 0.5px 0.5px 0.5px;
+	box-shadow: 0.5px 0.5px 0.5px;
+}
+
+#line-menu p, #line-menu label{
+	font-size: 12px;
+	display:inline;
+	vertical-align: 15%;
+}
+
+#line-menu input{
+	margin-left: 5px;
+}
+
 
 #well-viz-map,
 .well-viz-charts,
 #rwh-viz-charts,
 #rwh-viz-map{
 	display: inline-block;
+	position: relative;
 }
 
 #well-viz-map,
@@ -329,6 +397,10 @@ button:focus {outline:0;}
 	font-size: 11px;
 }
 
+.trigger a{
+    visibility: hidden;
+}
+
 .mapBorder{
 	stroke: black;
 	fill: none;
@@ -337,6 +409,7 @@ button:focus {outline:0;}
 
 .charts{
 	display: float;
+	position: relative;
 }
 
 .charts-rwh{
@@ -368,21 +441,11 @@ button:focus {outline:0;}
 	color: black;
 }
 
-.chartline{
+.chartline, .secondaryLine{
 	fill: none;
-	stroke: #6A7368;
-	stroke-width: 1.5;
+	stroke: #262626;
+	stroke-width: 2;
 	shape-rendering: auto;
-}
-
-#slider-con-rwh{
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-bottom: 30px;
-	margin-top: 20px;
-	width: 1100px;
-	display: inline-block;
-	vertical-align: middle;
 }
 
 #well-viz .y .tick line, #rwh-viz .y .tick line{	
@@ -400,11 +463,6 @@ button:focus {outline:0;}
 	margin-left: auto;
 	font-family: 'Lato', sans-serif;
 	width: 1100px;
-}
-
-#rainfall-charts{
-	width: 930px;
-	height: 410px;
 }
 
 .rainfall-chart{
@@ -442,6 +500,19 @@ button:focus {outline:0;}
 	position: absolute;
 	margin-top: 20px;
 	margin-left: 40px;
+
+}
+
+.box .avLine{
+	stroke: #165769;
+	stroke-width: 3px;
+	stroke-dasharray: 16, 8;
+	opacity: 0.8;
+}
+
+#avRainfall{
+	font-size: 18px;
+	font-weight: bold;
 }
 
 #rainfall-choices{
@@ -481,7 +552,7 @@ button:focus {outline:0;}
 #rainfall-mon-box .y .tick line,
 #rainfall-ann .y .tick line{
 	stroke: #c3c3c3;
-	stroke-width: 1.1;
+	stroke-width: 1.1px;
 	stroke-dasharray: 5, 5;
 }
 
@@ -611,3 +682,14 @@ text.svgTooltip{
 #location-menu label, #location-menu input{
 	margin: 0px;
 } 
+
+#hh-vis{
+	border-style: solid;
+	border-width: 1px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	font-family: 'Lato', sans-serif;
+	width: 1100px;
+}

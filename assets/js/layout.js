@@ -12,7 +12,8 @@ var waypoints = $('.chapter').waypoint({
 	  		$(chapterList[i-1]).addClass('current');
   		}
   	}
-  	console.log(direction)
   },
   offset: '75%' 
 })
+
+

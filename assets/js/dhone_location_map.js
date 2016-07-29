@@ -1,22 +1,23 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug';
-/**var map = new mapboxgl.Map({
+var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
     center: [78.6757, 18.9209], // starting position
     zoom: 3.8 // starting zoom
-});**/
+});
 
-/**mapboxgl.accessToken = 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYmF0Y2gyMSIsImEiOiJQUDEzTDBzIn0.49sCQ1PnCzCwXO1L8w51Ug';
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/batch21/ciqw43rbk000bcbmbwohidax7', //stylesheet location
     center: [78.6757, 18.9209], // starting position
     zoom: 3.5 // starting zoom
-});**/
+});
 
 
 map.addControl(new mapboxgl.Navigation());
+map.scrollZoom.disable();
 
 map.on('style.load', function() {
   map.addSource("villageBoundary", {

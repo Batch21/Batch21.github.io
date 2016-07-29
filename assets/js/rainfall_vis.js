@@ -6,11 +6,10 @@ var marginRain = {top: 10, right: 10, bottom: 40, left: 60},
     widthRain2 = 1100 - marginRain2.left - marginRain2.right;
 
 var minRain = 0,
-    maxRain = 650,
+    maxRain = 550,
     zoomed = false,
-    annualRainfall;
-
-var labels = false; 
+    annualRainfall,
+    labels = false; 
 
 var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 	.attr("width", widthRain + marginRain.left + marginRain.right)
@@ -20,7 +19,6 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 	.attr("transform", "translate(" + marginRain.left + "," + marginRain.top + ")");
 
  d3.csv("/assets/data/dhone_rainfall_monthly.csv", function(error, csv) {
-
  	var data = [];
 	data[0] = [];
 	data[1] = [];
@@ -100,7 +98,7 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 
 	var xRainBox = d3.scale.ordinal()	   
 		.domain( data.map(function(d) {return d[0] } ) )	    
-		.rangeRoundBands([0 , widthRain], 0.6, 0.3); 		
+		.rangeRoundBands([0 , widthRain], 0.6, 0.3);
 
 	var yRainBox = d3.scale.linear()
 		.domain([minRain, maxRain])
@@ -153,20 +151,20 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 
 
     d3.selectAll(".b").on("mouseover", function(d){
-    	//debugger;	
+
     	d3.select(this).selectAll(".box").style("fill", "#55d0f1");
     	d3.select(this).selectAll(".outlier").style("fill", "#55d0f1");
 
     	if(Math.round(d[1].quartiles[1]) > 0){
 	    	d3.select(this).append("text")
 			    			.attr("class", "stats")
-			    			.attr("x", 30)
+			    			.attr("x", 37)
 			    			.attr("y", yRainBox(d[1].quartiles[1]))
 			    			.text(function(){
 			    				return Math.round(d[1].quartiles[1]) + " mm"
 			    			});
 			}
-		//debugger;	
+;	
     	if(Math.round(yRainBox.invert(d3.select(this).selectAll(".whisker")[0][0].getAttribute("y2"))) > 0){
 	    	d3.select(this).append("text")
 	    			.attr("class", "stats")
@@ -180,24 +178,30 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
     			.attr("x", d3.select(this).selectAll(".whisker")[0][1].getAttribute("x2"))
     			.attr("y", d3.select(this).selectAll(".whisker")[0][1].getAttribute("y2"))
     			.text(Math.round(yRainBox.invert(d3.select(this).selectAll(".whisker")[0][1].getAttribute("y2"))) + " mm");
-    	//debugger;		
-    	var outliers = d3.selectAll(d3.select(this).selectAll(".outlier"))
-    	//debugger;
 		
-		for (var i = 0; i < outliers[0][0].length; i++) {
+    	var outliers = d3.selectAll(d3.select(this).selectAll(".outlier"));
+    	var outliers = outliers[0][0].reverse();
 
+    	if(outliers.length > 0){
+    		var position = parseInt(outliers[0].getAttribute("cy")) - 50; 
+    	}
+
+		for (var i = 0; i < outliers.length; i++) {
+			console.log("position: " + position)
+            //debugger;
+			if((position - parseInt(outliers[i].getAttribute("cy"))) < -10 | outliers.length == 1){
+					console.log("diff: " + (position - parseInt(outliers[i].getAttribute("cy"))));
 					d3.select(this).append("text")
 									.attr("class", "stats")
-									.attr("x", Math.round(outliers[0][0][i].getAttribute("cx")) + 5)
-									.attr("y", function(d){
-										if((Math.max.apply(Math, d[1]) - Math.min.apply(Math, [100,13,3,6])) > 100){
-											return Math.round(outliers[0][0][i].getAttribute("cy"))
-										} else{
-											return Math.round(outliers[0][0][i].getAttribute("cy")) +(i * -5)
-										}
-									})
-									.text(Math.round(yRainBox.invert(outliers[0][0][i].getAttribute("cy"))) + " mm")
-				}		
+									.attr("x", Math.round(outliers[i].getAttribute("cx")) + 10)
+									.attr("y", Math.round(outliers[i].getAttribute("cy")))
+									.text(Math.round(yRainBox.invert(outliers[i].getAttribute("cy"))) + " mm")
+
+			}
+			position = parseInt(outliers[i].getAttribute("cy"))
+			console.log("position: " + position)
+			console.log(" ")
+		}		
 
     })
     .on("mouseout", function(d){
@@ -211,16 +215,18 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 
     var zoomButton = svgRainBox.append("rect")
 			.attr("class", "zoom")
-			.attr("width", 90)
+			.attr("width", 80)
 			.attr("height", 30)
 			.attr("x", 10)
 			.attr("y", 0)
+			.attr("rx", "5px")
+			.attr("ry", "5px")
 			.style("stroke", "black")
 			.style("stroke-width", 1.1)
 			.style("filter", "url(#drop-shadow)");
 
 	var zoomText = svgRainBox.append("text")
-							.attr("x", 55)
+							.attr("x", 50)
 							.attr("y", 22)
 							.attr("text-anchor", "middle")
 							.attr("pointer-events", "none")
@@ -392,14 +398,14 @@ d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, csv) {
    			var barData = d;
 
    			svgRainAnn.append("text")
-   					  .attr("x", parseInt(this.getAttribute("x")) + 28)
+   					  .attr("x", parseInt(this.getAttribute("x")) + 15)
    					  .attr("y", parseInt(this.getAttribute("y")) + 15)
    					  .attr("class", "tooltip")
    					  .text(function(){
    					  	return Math.round(barData.total_rainfall);
    					  })
    					  .style("text-anchor", "middle")
-   					  .style("font-size", "14px")
+   					  .style("font-size", "12px")
    					  .style("font-weight", "bold");
 
    			d3.select(this).style("fill", "#55d0f1")
@@ -407,7 +413,30 @@ d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, csv) {
    		.on("mouseout", function(d){
    			svgRainAnn.selectAll(".tooltip").remove();
    			d3.select(this).style("fill", "#4DBAD9")
-   		});	
+   		});
+
+   	svgRainAnn.append("line")
+   			  .attr("class", "avLine")
+   			  .attr("x1", 0)
+   			  .attr("x2", widthRain)
+   			  .attr("y1", yRainAnn(613))
+   			  .attr("y2", yRainAnn(613));
+
+   	d3.selectAll(".avLine").on("mouseover", function(){
+   		d3.select(this).style("stroke-width", 5)
+   					   .style("opacity", 1);
+   		svgRainAnn.append("text")
+   				  .attr("id", "avRainfall")
+   				  .attr("x", widthRain/10)
+   				  .attr("y", this.getAttribute("y1") - 5)
+   				  .text("Average: 613 mm");
+
+   	})
+   	.on("mouseout", function(){
+   		d3.select(this).style("stroke-width", 3)
+   						.style("opacity", 0.8);
+   		d3.select("#avRainfall").remove();
+   	})		
 
 
 
@@ -435,7 +464,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 							.tickValues([1, 50, 100, 150, 200, 250, 300, 350]);
 
 	var yDailyScale = d3.scale.ordinal()
-						.domain(["96/97", "97/98", "98/99", "99/00", "00/01", "01/02", "02/03", "03/04", "04/05", "05/06", "06/07", "07/08"])
+						.domain(["97/98", "98/99", "99/00", "00/01", "01/02", "02/03", "03/04", "04/05", "05/06", "06/07", "07/08"])
 						.rangeRoundBands([heightRain2, 0], 0, 0.2);
 
 	var yAxisDaily = d3.svg.axis()
@@ -497,7 +526,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
     		   		return 5 + (i * 50) + (radiusScale(Math.sqrt(d)) * 5); 
     		   })
     		   .attr("r", function(d){
-    		   		//debugger;
+  ;
     		   		return radiusScale(Math.sqrt(d));
     		   })
     		   .style("opacity", 0.5)
@@ -542,7 +571,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 					return xDayScale(d.year_day);
 				})
 				.attr("cy", function(d){
-					return yDailyScale(d.water_year) + 11;
+					return yDailyScale(d.water_year) + 12;
 				}).
 				attr("r", function(d){
 					return radiusScale(Math.sqrt(d.Rainfall));
@@ -736,18 +765,10 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 
 		})
 
-
-	svgRainDaily.append("rect")
-				.attr("class", "instructions")
-				.attr("height", 40)
-				.attr("width", 250)
-				.attr("x", widthRain2/2 + 160)
-				.attr("y", heightRain2 + 33);
-				
 	svgRainDaily.append("text")
-				.attr("x", widthRain2/2 + 190)
-				.attr("y", heightRain2 + 60)
-				.style("font-size", "16px")
+				.attr("x", widthRain2/2 + 257)
+				.attr("y", heightRain2 + 68)
+				.style("font-size", "20px")
 				.style("font-weight", "bold")
 				.text("Click on months to zoom in")
 
