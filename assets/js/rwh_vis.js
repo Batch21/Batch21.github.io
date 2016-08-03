@@ -35,13 +35,13 @@ svg_map_rwh.append("svg:image")
 
 var legendRWH = d3.select("#legendRWH").append("svg")
 	   .attr("id", "legendSVG_RWH")
-	   .attr("width", 198)
+	   .attr("width", 150)
 	   .attr("height", 200)
        .append("g")
        .attr("id", "legendBoxRWH")
 
 dem_legendRWH = legendRWH.append("g")
-	   				.attr("width", 150)
+	   				.attr("width", 120)
 	   				.attr("height", 15)
 	   				.attr("transform", "translate(" + 15 + "," + 45 + ")");       
 
@@ -63,7 +63,7 @@ for (var i = 0; i < dem_colors.length; i++) {
 
 var gradientBarRWH = dem_legendRWH.append("rect")
 				        .attr("y", 0)
-				        .attr("width", 170)
+				        .attr("width", 120)
 				        .attr("height", 15)
 				        .attr("fill","url(#gradient)")
 				        .style("stroke", "black")
@@ -92,7 +92,7 @@ boundaryLegendRWH.append("line")
 boundaryLegendRWH.append("text")
 	.attr("x", 32)
 	.attr("y", 5)
-	.text("Revenue village boundary")
+	.text("Study Area")
 	.style("font-size", "12px");
 
 var drainageLegendRWH = legendRWH.append("g")
@@ -181,7 +181,7 @@ var rwhTypeScale = d3.scale.ordinal()
 						.range(["#BDBBC4", "#5D9CA5", "#7a591f"])
 
 var rwhStatusScale = d3.scale.ordinal()
-						.domain(["Destroyed", "Damaged", "Good"])
+						.domain(["Destroyed", "Damaged", "Good Condition"])
 						.range(["#D7191C", "#FDAE61", "#2C7BB6"])
 
 var rwhSizeScale = d3.scale.linear()
@@ -348,8 +348,7 @@ function drawRWH(){
 								});	
 		addBarChartsRWH();
 		addLineChartRWH();
-		SliderUpdateRWH();
-		rwhTrig();			
+		SliderUpdateRWH();		
 		});
 	
 	d3.select("#rwh-viz .glyphicon").attr("title", "Play Animation");
@@ -380,7 +379,7 @@ function drawRWH(){
 						.duration(yearDuration)
 						.attr("d", d3.svg.symbol()
 								   	.size(function(d){
-								  		if(d.year <= sliderRWH.value() & this.getAttribute("display") == "yes"){
+								  		if(d.year <= sliderRWH.value() && this.getAttribute("display") == "yes"){
 									  		if(buttonTextRWH != "RWH Capacity"){
 									  			return 50;
 									  		} else{
@@ -521,12 +520,14 @@ function activateButtonsRWH(){
 		.on("mouseover", function(){
 			d3.select(this).style("opacity", 1)
 						   .style("border-width", "2px")
-						   .style("margin", "0px");
+						   .style("margin", "0px")
+						   .style("margin", " 0px 4px 0px 0px");
 		})
 		.on("mouseout", function(){
 			d3.select(this).style("opacity", 0.95)
 						   .style("border-width", "1px")
-						   .style("margin", "1px");
+						   .style("margin", "1px")
+						   .style("margin", "1px 5px 1px 1px");;
 		})
 		.on("click", function(){
 			buttonTextRWH = this.textContent;
@@ -539,7 +540,7 @@ function activateButtonsRWH(){
 			svg_map_rwh.selectAll(".rwh")
 				.attr("d", d3.svg.symbol()
 				  	.size(function(d){
-				  		if(this.getAttribute("display") == "yes" & d.year <= sliderRWH.value()){
+				  		if(this.getAttribute("display") == "yes" && d.year <= sliderRWH.value()){
 					  		if(buttonTextRWH != "RWH Capacity"){
 					  			return 50;
 					  		} else{
@@ -714,7 +715,7 @@ function addBarChartsRWH(){
 			svg_map_rwh.selectAll(".rwh")
 				.attr("d", d3.svg.symbol()
 				  	.size(function(j){
-	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
+	   					if (j.year <= sliderRWH.value() && this.getAttribute("display") === "yes"){
 	   						if(d.key === j.type){
 	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
@@ -767,7 +768,7 @@ function addBarChartsRWH(){
 				svg_map_rwh.selectAll(".rwh")
 					.attr("d", d3.svg.symbol()
 				  	.size(function(j){
-	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
+	   					if (j.year <= sliderRWH.value() && this.getAttribute("display") === "yes"){
 	   						if(d.key === j.type){
 	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
@@ -810,7 +811,7 @@ function addBarChartsRWH(){
 					.attr("display", "yes")
 					.attr("d", d3.svg.symbol()
 				  	.size(function(j){
-	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
+	   					if (j.year <= sliderRWH.value() && this.getAttribute("display") === "yes"){
 	   						if(d.key === j.type){
 	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
@@ -855,7 +856,7 @@ function addBarChartsRWH(){
 				svg_map_rwh.selectAll(".rwh")
 					.attr("d", d3.svg.symbol()
 				  	.size(function(j){
-	   					if(j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
+	   					if(j.year <= sliderRWH.value() && this.getAttribute("display") === "yes"){
 	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
@@ -935,7 +936,7 @@ function addBarChartsRWH(){
    			return h4 - yStatusRWH(d.count);
    		})
    		.style("fill", function(d){
-   			if(d.key == "Good"){
+   			if(d.key == "Good Condition"){
    				return "#2C7BB6";
    			}else if(d.key == "Damaged"){
    				return "#FDAE61";
@@ -949,7 +950,7 @@ function addBarChartsRWH(){
 			
 			d3.select(this)
 			.style("fill", function(d){
-	   			if(d.key == "Good"){
+	   			if(d.key == "Good Condition"){
 	   				return "#236190";
 	   			}else if(d.key == "Damaged"){
 	   				return "#fd9935";
@@ -961,7 +962,7 @@ function addBarChartsRWH(){
 			svg_map_rwh.selectAll(".rwh")
 				.attr("d", d3.svg.symbol()
 				  	.size(function(j){
-	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
+	   					if (j.year <= sliderRWH.value() && this.getAttribute("display") === "yes"){
 	   						if(d.key === j.status){
 	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
@@ -1014,7 +1015,7 @@ function addBarChartsRWH(){
 				svg_map_rwh.selectAll(".rwh")
 					.attr("d", d3.svg.symbol()
 				  	.size(function(j){
-	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
+	   					if (j.year <= sliderRWH.value() && this.getAttribute("display") === "yes"){
 	   						if(d.key === j.status){
 	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
@@ -1057,7 +1058,7 @@ function addBarChartsRWH(){
 					.attr("display", "yes")
 					.attr("d", d3.svg.symbol()
 				  	.size(function(j){
-	   					if (j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
+	   					if (j.year <= sliderRWH.value() && this.getAttribute("display") === "yes"){
 	   						if(d.key === j.status){
 	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
@@ -1090,7 +1091,7 @@ function addBarChartsRWH(){
 		.on("mouseout", function(d){
 				d3.select(this)
 				.style("fill", function(d){
-		   			if(d.key == "Good"){
+		   			if(d.key == "Good Condition"){
 		   				return "#2C7BB6";
 		   			}else if(d.key == "Damaged"){
 		   				return "#FDAE61";
@@ -1102,7 +1103,7 @@ function addBarChartsRWH(){
 				svg_map_rwh.selectAll(".rwh")
 					.attr("d", d3.svg.symbol()
 				  	.size(function(j){
-	   					if(j.year <= sliderRWH.value() & this.getAttribute("display") === "yes"){
+	   					if(j.year <= sliderRWH.value() && this.getAttribute("display") === "yes"){
 	   							if(buttonTextRWH == "RWH Capacity"){
 	   								return rwhSizeScale(j.Capacity);
 	   							}else{
@@ -1346,11 +1347,11 @@ function updateRWH(year){
 			})
 			.attr("d", d3.svg.symbol()
 			  	.size(function(d){
-			  		if(d.year <= year & this.getAttribute("display") == "yes"){
+			  		if(d.year <= year && this.getAttribute("display") == "yes"){
 				  		if(buttonTextRWH != "RWH Capacity"){
 				  			if(d.year == startYearRWH){
 				  				return 50;
-				  			}else if(d.year == year & sliderStatusRWH === "playing"){
+				  			}else if(d.year == year && sliderStatusRWH === "playing"){
 				  				return 500;
 				  			}else if(d.year < year){
 								return 50;
@@ -1455,25 +1456,18 @@ function countRWH(column, year){
     return objects;
 }
 
-function rwhTrig(){
-	$(window).on('load', function(){
-		$('#rwh-viz-trig').waypoint({
-		  handler: function(direction) {
-		  	if(scrollTrigRWH == true & sliderRWH.value() == startYearRWH){
-					d3.select(".playPauseRWH span").classed("glyphicon", false)
-											  			.attr("class", "glyphicon glyphicon-pause");
-					sliderStatusRWH = "playing";
-					d3.select("#rwh-viz .glyphicon").attr("title", "Pause Animation");
-					animateRWH();
-					scrollTrigRWH = false;
-		  	}
-		  },
-		  offset: '40%' 
-		});
+$(window).on("load", function(){
+	$(window).on("scroll", function(){
+		if( ($("#rwh-viz").offset().top - ($(window).scrollTop() + $(window).height())) < -($(window).height()/2) && scrollTrigRWH && sliderRWH.value() < 2012){
+			d3.select(".playPauseRWH span").classed("glyphicon", false)
+									  			.attr("class", "glyphicon glyphicon-pause");
+			sliderStatusRWH = "playing";
+			d3.select("#rwh-viz .glyphicon").attr("title", "Pause Animation");
+			animateRWH();
+			scrollTrigRWH = false;
+		} 
 	});
-}
-
-
+});
 
 drawFeaturesRWH();
 drawRWH();

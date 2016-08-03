@@ -9,7 +9,8 @@ var minRain = 0,
     maxRain = 550,
     zoomed = false,
     annualRainfall,
-    labels = false; 
+    labels = false,
+    dailyRainfall; 
 
 var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 	.attr("width", widthRain + marginRain.left + marginRain.right)
@@ -187,10 +188,7 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
     	}
 
 		for (var i = 0; i < outliers.length; i++) {
-			console.log("position: " + position)
-            //debugger;
-			if((position - parseInt(outliers[i].getAttribute("cy"))) < -10 | outliers.length == 1){
-					console.log("diff: " + (position - parseInt(outliers[i].getAttribute("cy"))));
+			if((position - parseInt(outliers[i].getAttribute("cy"))) < - 5 || outliers.length == 1){
 					d3.select(this).append("text")
 									.attr("class", "stats")
 									.attr("x", Math.round(outliers[i].getAttribute("cx")) + 10)
@@ -199,8 +197,6 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 
 			}
 			position = parseInt(outliers[i].getAttribute("cy"))
-			console.log("position: " + position)
-			console.log(" ")
 		}		
 
     })
@@ -334,7 +330,7 @@ d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, csv) {
 		.rangeRoundBands([0 , widthRain], 0.2, 0.2); 		
 
 	var yRainAnn = d3.scale.linear()
-		.domain([0, 1500])
+		.domain([0, 1400])
 		.range([heightRain, 0]);
     
 	var xAxisAnn = d3.svg.axis()
@@ -442,21 +438,49 @@ d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, csv) {
 
 });
 
-var svgRainDaily = d3.select("#rainfall-daily").append("svg")
+var svgRD = d3.select("#rainfall-daily").append("svg")
 	.attr("width", widthRain2 + marginRain2.left + marginRain2.right)
 	.attr("height", heightRain2 + marginRain2.top + marginRain2.bottom)
 	.attr("class", "box rainfallSVG")    
-	.append("g")
-	.attr("transform", "translate(" + marginRain2.left + "," + marginRain2.top + ")");
+	
+var svgRainDaily = 	svgRD.append("g")
+						 .attr("transform", "translate(" + marginRain2.left + "," + marginRain2.top + ")");
 
 d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
+
+    var rainTotals = d3.nest()
+				    	.key(function(d) {
+				        	return d.water_year;
+				        })
+				        .key(function(d){
+				        	return d.Month;
+				        })
+				    	.rollup(function(csv) {
+
+				        	var count = d3.sum(csv, function(d) {
+				            	return Math.round(d.Rainfall);
+				        	});
+				        	return count;
+				   		 })
+				    	.entries(csv);
+
+    for (var i = 0; i < rainTotals.length; i++) {
+    	var month = rainTotals[i].values;
+    	var total = 0;
+    	for (var j = 0; j < month.length; j++) {
+    		total += month[j].values;
+    	}
+    	rainTotals[i]["annualTotal"] = Math.round(total);
+    }
+
+    rainTotals = rainTotals.reverse();
 
 	var months = ["June", "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May"]
 	var legendAmounts = [10, 25, 100, 250];
 	
 	var xDayScale = d3.scale.linear()
 						.domain([1, 366])
-						.range([5, widthRain2]);
+						.range([5, 950]);
 
 	var xAxisDaily = d3.svg.axis()
 							.scale(xDayScale)
@@ -468,7 +492,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 						.rangeRoundBands([heightRain2, 0], 0, 0.2);
 
 	var yAxisDaily = d3.svg.axis()
-						.innerTickSize(-widthRain2)
+						.innerTickSize(-950)
 						.outerTickSize(0)
 					    .scale(yDailyScale)
 					    .orient("left");
@@ -479,7 +503,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 
 	var xMonthScale = d3.scale.ordinal()
 							  .domain(months)
-							  .rangeRoundBands([5, widthRain2]);	
+							  .rangeRoundBands([5, 950]);	
 
 	var xAxisMonth = d3.svg.axis()
 							.scale(xMonthScale)
@@ -493,7 +517,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 
 	var xScaleDayMonth = d3.scale.linear()
 						.domain([0, 32])
-						.range([0, widthRain2]);
+						.range([0, 950]);
 
 
 	var xAxisDayMonth = d3.svg.axis()
@@ -501,6 +525,31 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 							.orient("bottom")
 							.outerTickSize(0)
 							.tickValues([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]);					
+
+	var totals = svgRD.append("g")
+							 .attr("transform", "translate(" + 1030 + "," + 35 + ")")
+
+	totals.append("text")
+		  .attr("x", "5px")
+		  .attr("y", "12px")
+		  .style("font-weight", "bold")
+		  .style("font-size", "16px")
+		  .style("text-decoration", "underline")
+		  .text("Total")
+
+	var rTotals = totals.selectAll("g")
+					  .data(rainTotals)
+					  .enter()
+					  .append("g")
+					  .append("text")
+					  .attr("y", function(d, i){
+					  		return 34 + (i * 24) + "px";
+					  })
+					  .attr("x", "5px")
+					  .text(function(d){
+					  	return d.annualTotal + " mm";
+					  })
+					  .style("font-size", "12px");					
 
 	var legendDaily = svgRainDaily.append("svg")
 	   .attr("id", "legendDaily")
@@ -526,7 +575,6 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
     		   		return 5 + (i * 50) + (radiusScale(Math.sqrt(d)) * 5); 
     		   })
     		   .attr("r", function(d){
-  ;
     		   		return radiusScale(Math.sqrt(d));
     		   })
     		   .style("opacity", 0.5)
@@ -554,7 +602,7 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 		        .attr("transform", "translate(0," + (heightRain2 + 7)  + ")")
 		        .call(xAxisDaily)
 		        .append("text")          
-		        .attr("x", (widthRain2 / 2) )
+		        .attr("x", (1000 / 2) )
 		        .attr("y",  35)
 		        .style("text-anchor", "middle")
 		        .style("font-size", "16px")
@@ -625,6 +673,14 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 				.style("stroke", "none")
 				.style("fill", "white");
 
+	svgRainDaily.append("rect")
+				.attr("width", 78)
+				.attr("height", 280)
+				.attr("x", 950)
+				.attr("y", -5)
+				.style("stroke", "none")
+				.style("fill", "white");
+
 	svgRainDaily.append("g")
 		  .attr("class", "y axis")
 		  .call(yAxisDaily)
@@ -688,6 +744,12 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 				svgRainDaily.select(".x.axis.days").transition()
 												   .duration(1500)
 												   .call(xAxisDaily);
+
+				rTotals.transition()
+					   .duration(1000)
+					   .text(function(d){
+					  		return d.annualTotal + " mm";
+					  	})
 
 			}else{ 
 
@@ -759,6 +821,16 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 													.duration(1500)
 													.call(xAxisDayMonth);
 
+				rTotals.transition()
+					   .duration(1000)
+				       .text(function(d){
+							for (var i = 0; i < d.values.length; i++) {
+								if(d.values[i].key == month){
+									return d.values[i].values + " mm";
+								}
+							}
+						});
+
 			}		
 
 		
@@ -766,16 +838,14 @@ d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 		})
 
 	svgRainDaily.append("text")
-				.attr("x", widthRain2/2 + 257)
-				.attr("y", heightRain2 + 68)
+				.attr("x", widthRain2/2 + 220)
+				.attr("y", heightRain2 + 60)
 				.style("font-size", "20px")
 				.style("font-weight", "bold")
-				.text("Click on months to zoom in")
-
-
+				.style("fill", "#737373")
+				.text("Click on months to zoom in/out");
 
 });
-
 
 
 

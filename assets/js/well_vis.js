@@ -7,7 +7,8 @@ var startYear = 1980,
 	interval, 
 	wellData,
 	wellCircles,
-	lineData;
+	lineData,
+	wellTrig;
 
 // define slider
 var slider = d3.slider().axis(d3.svg.axis().ticks(33).tickSize(6).tickFormat(d3.format(".0d"))).min(startYear).max(2012).value(startYear).step(1);
@@ -31,7 +32,7 @@ var w = 520 - margin_map.left - margin_map.right,
 
 // Define map projection
 var projection = d3.geo.transverseMercator()
-      				   .rotate([-77.8078, -15.391, 0])
+      				   .rotate([-77.8095, -15.391, 0])
       				   .translate([w/2, h/2])
       				   .scale(330000);
 
@@ -60,13 +61,16 @@ var landuseScale = d3.scale.ordinal()
 
 var dem_colors = ["#227516", "#648744", "#9bc133", "#cdcb32", "#fed976", "#ffeda0", "#ffffcc", "#d7cebf", "#b6b098", "#986b41", "#561f10"]
 var dem_breaks = ["0%", "5%", "9%", "15%", "24%", "33%", "43%", "52%", "64%", "76%", "100%"]
-var dem_scale = d3.scale.linear().domain([390, 620]).range([0, 170]);
+var dem_scale = d3.scale.linear().domain([390, 620]).range([0, 120]);
 
 var svg_map = d3.select("#well-viz-map").append("svg")
 	.attr("width", w + margin_map.left + margin_map.right)
 	.attr("height", h + margin_map.top + margin_map.bottom)
 		.append("g")
 	.attr("transform", "translate(" + margin_map.left + "," + margin_map.top + ")");
+
+
+
 
 svg_map.append("rect")
 	.attr("class", "mapBorder")
@@ -84,14 +88,14 @@ svg_map.append("svg:image")
 
 var legend = d3.select("#legend").append("svg")
 	   .attr("id", "legendSVG")
-	   .attr("width", 198)
+	   .attr("width", 150)
 	   .attr("height", 200)
        .append("g")
        .attr("id", "legendBox")
 
 
 dem_legend = legend.append("g")
-	   				.attr("width", 170)
+	   				.attr("width", 120)
 	   				.attr("height", 15)
 	   				.attr("transform", "translate(" + 15 + "," + 45 + ")");       
 
@@ -113,7 +117,7 @@ for (var i = 0; i < dem_colors.length; i++) {
 
 var gradientBar = dem_legend.append("rect")
 				        .attr("y", 0)
-				        .attr("width", 170)
+				        .attr("width", 120)
 				        .attr("height", 15)
 				        .attr("fill","url(#gradient)")
 				        .style("stroke", "black")
@@ -145,7 +149,7 @@ boundaryLegend.append("line")
 boundaryLegend.append("text")
 	.attr("x", 32)
 	.attr("y", 5)
-	.text("Revenue village boundary")
+	.text("Study Area")
 	.style("font-size", "12px");
 
 var drainageLegend = legend.append("g")
@@ -170,7 +174,7 @@ drainageLegend.append("text")
 var legendLanduse = d3.select(".legendLanduse").attr("id", "landuse1")
 		.append("svg")
 	   .attr("class", "legendLanduseSVG")
-	   .attr("width", 198)
+	   .attr("width", 150)
 	   .attr("height", 25)
        
 legendLanduse.append("text")
@@ -454,20 +458,6 @@ function drawWells(){
 			}		
 		});
 
-	$('#well-viz-trig').waypoint({
-	  handler: function(direction) {
-	  	if(scrollTrig === true & slider.value() < 2012){
-				d3.select(".playPause span").classed("glyphicon", false)
-										  			.attr("class", "glyphicon glyphicon-pause");
-				sliderStatus = "playing";
-				d3.select("#well-viz .glyphicon").attr("title", "Pause Animation");
-				animate();
-				scrollTrig = false;
-	  	}
-	  },
-	  offset: '40%' 
-	})
-
 	});
 
 }	
@@ -745,7 +735,7 @@ function createCharts(){
 
 					svg_map.selectAll(".well")
 					.attr("r", function(j){
-		   				if (j.year <= slider.value() & this.getAttribute("display") == "yes"){
+		   				if (j.year <= slider.value() && this.getAttribute("display") == "yes"){
 		   					if(d.key === j.type){
 		   						return 3.5;
 		   					}else{
@@ -805,7 +795,7 @@ function createCharts(){
 						svg_map.selectAll(".well")
 							.attr("display", "yes")
 							.attr("r", function(j){
-								if(this.getAttribute("display") === "yes" & j.year <= slider.value()){
+								if(this.getAttribute("display") === "yes" && j.year <= slider.value()){
 					   					return 3;
    					   			}else{
 					   				return 0
@@ -928,7 +918,7 @@ function createCharts(){
 
 					svg_map.selectAll(".well")
 					.attr("r", function(j){
-		   				if (j.year <= slider.value() & this.getAttribute("display") === "yes"){
+		   				if (j.year <= slider.value() && this.getAttribute("display") === "yes"){
 		   					if(d.key === j.depth_bin){
 		   						return 3.5;
 		   					}else{
@@ -1118,7 +1108,7 @@ function createCharts(){
 
 					svg_map.selectAll(".well")
 					.attr("r", function(j){
-		   				if (j.year <= slider.value() & this.getAttribute("display") === "yes"){
+		   				if (j.year <= slider.value() && this.getAttribute("display") === "yes"){
 		   					if(d.key === j.status){
 		   						return 3.5;
 		   					}else{
@@ -1482,17 +1472,18 @@ function countWells(attr, year){
 	var nested = d3.nest()
     	.key(function(d) {
         	return d[attr];
-        	})
+        })
     	.rollup(function(wellData) {
 
         	var count = d3.sum(wellData, function(d) {
         		if(d['year'] <= year){;
             		return d['count'];
             	}		
-        });
-        return count;
-    })
-    .entries(wellData);
+        	});
+        	return count;
+   		 })
+    	.entries(wellData);
+    	
     return nested
 }
 
@@ -1592,8 +1583,8 @@ function updateWells(year){
 				if(this.getAttribute("display") === "yes"){
 					if(d.year === startYear ){
 						return 3;
-					} else if (d.year == year & sliderStatus === "playing"){
-						return 10;
+					} else if (d.year == year && sliderStatus === "playing"){
+						return 8;
 					}else if(d.year < year){
 						return 3;
 					} 
@@ -1643,6 +1634,23 @@ function updateWells(year){
 			  });
 }
 
+
+$(window).on("load", function(){
+	$(window).on("scroll", function(){
+		if( ($("#well-viz").offset().top - ($(window).scrollTop() + $(window).height())) < -($(window).height()/2) && scrollTrig && slider.value() < 2012){
+			d3.select(".playPause span").classed("glyphicon", false)
+												  			.attr("class", "glyphicon glyphicon-pause");
+			sliderStatus = "playing";
+			d3.select("#well-viz .glyphicon").attr("title", "Pause Animation");
+			animate();
+			scrollTrig = false;
+		} 
+	});	
+});
+
+
+
+
 function createWellVis(){
 	drawFeatures();
 	updateLegend(colorDepth);
@@ -1650,4 +1658,3 @@ function createWellVis(){
 }
 
 createWellVis();
-	

@@ -1,574 +1,574 @@
 lat,lon,type_detailed,type,year,depth,depth_bin,status_code,status,count
-15.415202,77.827336,2,Open Well,1992,2,0 - 10 m,1,Defunct,1
-15.388614,77.817135,3,Open Well,2000,2,0 - 10 m,1,Defunct,1
+15.414789,77.834946,3,Open Well,1800,8.1,0 - 10 m,1,Defunct,1
+15.370325,77.825351,3,Open Well,1840,9.7,0 - 10 m,3,Fails during droughts,1
+15.35882,77.813928,2,Open Well,1870,6,0 - 10 m,3,Fails during droughts,1
+15.418045,77.830338,4,Open Well,1902,7.3,0 - 10 m,4,Has never failed,1
+15.386182,77.831043,2,Open Well,1917,6,0 - 10 m,1,Defunct,1
+15.362804,77.825484,2,Open Well,1920,10,10 - 50 m,4,Has never failed,1
+15.361605,77.826625,2,Open Well,1940,7.2,0 - 10 m,1,Defunct,1
+15.367345,77.821889,2,Open Well,1940,6.3,0 - 10 m,2,Fails every summer,1
+15.416305,77.83324,2,Open Well,1940,6,0 - 10 m,4,Has never failed,1
+15.381959,77.824399,2,Open Well,1945,11,10 - 50 m,2,Fails every summer,1
+15.382272,77.822917,3,Open Well,1950,5,0 - 10 m,1,Defunct,1
+15.384556,77.824472,2,Open Well,1950,6,0 - 10 m,1,Defunct,1
+15.414623,77.822781,4,Open Well,1950,4.5,0 - 10 m,3,Fails during droughts,1
+15.369184,77.82643,9,Open Well,1950,10.4,10 - 50 m,1,Defunct,1
+15.41435,77.838143,2,Open Well,1955,6,0 - 10 m,2,Fails every summer,1
+15.364108,77.819008,1,Open Well,1958,6.4,0 - 10 m,2,Fails every summer,1
 15.366985,77.820832,2,Open Well,1960,2.4,0 - 10 m,1,Defunct,1
+15.362471,77.832365,2,Open Well,1960,8,0 - 10 m,1,Defunct,1
+15.41325,77.839716,2,Open Well,1960,4.3,0 - 10 m,2,Fails every summer,1
+15.382396,77.822347,2,Open Well,1960,5,0 - 10 m,2,Fails every summer,1
+15.416554,77.837921,4,Open Well,1960,6.4,0 - 10 m,2,Fails every summer,1
+15.36473,77.823785,2,Open Well,1960,7.3,0 - 10 m,2,Fails every summer,1
+15.386299,77.81894,4,Open Well,1960,9.8,0 - 10 m,2,Fails every summer,1
+15.421488,77.845637,3,Open Well,1960,7.5,0 - 10 m,4,Has never failed,1
+15.384432,77.821778,9,Open Well,1960,10,10 - 50 m,1,Defunct,1
+15.415255,77.83214,2,Open Well,1965,5,0 - 10 m,2,Fails every summer,1
+15.417233,77.831488,4,Open Well,1966,5.3,0 - 10 m,2,Fails every summer,1
+15.369491,77.831942,2,Open Well,1967,7.5,0 - 10 m,1,Defunct,1
+15.365205,77.820685,2,Open Well,1967,7.4,0 - 10 m,2,Fails every summer,1
+15.365156,77.819338,3,Open Well,1968,8,0 - 10 m,2,Fails every summer,1
 15.387536,77.818119,2,Open Well,1970,3,0 - 10 m,1,Defunct,1
 15.36602,77.816403,2,Open Well,1970,3,0 - 10 m,1,Defunct,1
 15.415965,77.842586,2,Open Well,1970,3,0 - 10 m,1,Defunct,1
-15.38376,77.828257,2,Open Well,1998,3,0 - 10 m,1,Defunct,1
-15.409768,77.830462,1,Open Well,2001,3,0 - 10 m,1,Defunct,1
-15.410756,77.827833,1,Open Well,2001,3,0 - 10 m,1,Defunct,1
-15.410842,77.825925,2,Open Well,2001,3,0 - 10 m,1,Defunct,1
-15.415563,77.833814,2,Open Well,2002,3,0 - 10 m,1,Defunct,1
-15.412027,77.838107,2,Open Well,2000,3.5,0 - 10 m,1,Defunct,1
-15.373968,77.843655,3,Open Well,2009,3.5,0 - 10 m,1,Defunct,1
 15.3575,77.821858,2,Open Well,1970,4,0 - 10 m,1,Defunct,1
 15.373045,77.837411,3,Open Well,1970,4,0 - 10 m,1,Defunct,1
-15.38605,77.831525,2,Open Well,1980,4,0 - 10 m,1,Defunct,1
-15.366923,77.817139,2,Open Well,1980,4,0 - 10 m,1,Defunct,1
-15.370016,77.828128,2,Open Well,1995,4,0 - 10 m,1,Defunct,1
-15.381953,77.828088,3,Open Well,2007,4,0 - 10 m,1,Defunct,1
 15.363823,77.823439,4,Open Well,1970,4.1,0 - 10 m,1,Defunct,1
-15.399387,77.815672,2,Open Well,2003,4.3,0 - 10 m,1,Defunct,1
-15.371977,77.829041,2,Open Well,1990,4.5,0 - 10 m,1,Defunct,1
-15.418142,77.84097,2,Open Well,1994,4.5,0 - 10 m,1,Defunct,1
-15.364462,77.827359,3,Open Well,2000,4.5,0 - 10 m,1,Defunct,1
-15.385219,77.830623,4,Open Well,2002,4.5,0 - 10 m,1,Defunct,1
-15.367678,77.817112,2,Open Well,1990,4.6,0 - 10 m,1,Defunct,1
-15.366642,77.810917,2,Open Well,1990,4.8,0 - 10 m,1,Defunct,1
-15.382272,77.822917,3,Open Well,1950,5,0 - 10 m,1,Defunct,1
-15.361541,77.825467,3,Open Well,1990,5,0 - 10 m,1,Defunct,1
-15.355645,77.824991,2,Open Well,2002,5,0 - 10 m,1,Defunct,1
-15.367813,77.839506,2,Open Well,2006,5,0 - 10 m,1,Defunct,1
-15.380558,77.819894,2,Open Well,2008,5,0 - 10 m,1,Defunct,1
-15.421033,77.835375,2,Open Well,2009,5,0 - 10 m,1,Defunct,1
-15.384516,77.830524,2,Open Well,1980,5.3,0 - 10 m,1,Defunct,1
-15.400877,77.82232,3,Open Well,2002,5.5,0 - 10 m,1,Defunct,1
-15.386182,77.831043,2,Open Well,1917,6,0 - 10 m,1,Defunct,1
-15.384556,77.824472,2,Open Well,1950,6,0 - 10 m,1,Defunct,1
 15.381604,77.823823,1,Open Well,1970,6,0 - 10 m,1,Defunct,1
-15.391411,77.811343,1,Open Well,1980,6,0 - 10 m,1,Defunct,1
-15.370296,77.809401,2,Open Well,1980,6,0 - 10 m,1,Defunct,1
-15.3746,77.839249,3,Open Well,1990,6,0 - 10 m,1,Defunct,1
-15.36441,77.824548,2,Open Well,1992,6,0 - 10 m,1,Defunct,1
-15.390859,77.83137,2,Open Well,1998,6,0 - 10 m,1,Defunct,1
-15.376534,77.828799,2,Open Well,2000,6,0 - 10 m,1,Defunct,1
-15.361823,77.823845,2,Open Well,2005,6,0 - 10 m,1,Defunct,1
-15.397757,77.814811,2,Open Well,2007,6,0 - 10 m,1,Defunct,1
 15.366482,77.823661,2,Open Well,1970,6.5,0 - 10 m,1,Defunct,1
 15.385577,77.831181,3,Open Well,1970,6.5,0 - 10 m,1,Defunct,1
-15.355528,77.819524,3,Open Well,2009,6.5,0 - 10 m,1,Defunct,1
-15.389021,77.815421,3,Open Well,1980,7,0 - 10 m,1,Defunct,1
-15.370379,77.822955,3,Open Well,1980,7,0 - 10 m,1,Defunct,1
-15.377866,77.829986,2,Open Well,1990,7,0 - 10 m,1,Defunct,1
-15.361605,77.826625,2,Open Well,1940,7.2,0 - 10 m,1,Defunct,1
-15.39074,77.810531,1,Open Well,1980,7.3,0 - 10 m,1,Defunct,1
-15.369491,77.831942,2,Open Well,1967,7.5,0 - 10 m,1,Defunct,1
 15.380967,77.829468,2,Open Well,1970,7.5,0 - 10 m,1,Defunct,1
-15.400097,77.816949,1,Open Well,1990,7.9,0 - 10 m,1,Defunct,1
-15.362471,77.832365,2,Open Well,1960,8,0 - 10 m,1,Defunct,1
-15.364267,77.832176,2,Open Well,1990,8,0 - 10 m,1,Defunct,1
-15.367514,77.810757,1,Open Well,1995,8,0 - 10 m,1,Defunct,1
-15.35969,77.828239,1,Open Well,1998,8,0 - 10 m,1,Defunct,1
-15.386556,77.820502,3,Open Well,1998,8,0 - 10 m,1,Defunct,1
-15.414789,77.834946,3,Open Well,1800,8.1,0 - 10 m,1,Defunct,1
-15.401481,77.820164,1,Open Well,1990,9,0 - 10 m,1,Defunct,1
-15.357462,77.827,2,Open Well,1990,9,0 - 10 m,1,Defunct,1
-15.380839,77.82612,2,Open Well,2004,9,0 - 10 m,1,Defunct,1
 15.356455,77.820914,2,Open Well,1970,9.5,0 - 10 m,1,Defunct,1
-15.372725,77.844485,3,Open Well,1990,9.5,0 - 10 m,1,Defunct,1
-15.410524,77.830352,1,Open Well,2001,2,0 - 10 m,2,Fails every summer,1
-15.409991,77.831213,2,Open Well,2008,2,0 - 10 m,2,Fails every summer,1
-15.410883,77.832999,2,Open Well,2001,3,0 - 10 m,2,Fails every summer,1
-15.370626,77.813215,2,Open Well,2011,3.4,0 - 10 m,2,Fails every summer,1
-15.364864,77.816534,4,Open Well,2003,4,0 - 10 m,2,Fails every summer,1
-15.41325,77.839716,2,Open Well,1960,4.3,0 - 10 m,2,Fails every summer,1
-15.411699,77.83652,3,Open Well,1980,4.5,0 - 10 m,2,Fails every summer,1
-15.41967,77.8393,3,Open Well,1998,4.5,0 - 10 m,2,Fails every summer,1
-15.382396,77.822347,2,Open Well,1960,5,0 - 10 m,2,Fails every summer,1
-15.415255,77.83214,2,Open Well,1965,5,0 - 10 m,2,Fails every summer,1
-15.414042,77.837967,4,Open Well,1975,5,0 - 10 m,2,Fails every summer,1
-15.383893,77.823069,3,Open Well,2002,5,0 - 10 m,2,Fails every summer,1
-15.370815,77.814292,2,Open Well,2007,5.2,0 - 10 m,2,Fails every summer,1
-15.417233,77.831488,4,Open Well,1966,5.3,0 - 10 m,2,Fails every summer,1
-15.388243,77.816526,2,Open Well,2005,5.3,0 - 10 m,2,Fails every summer,1
-15.372993,77.816925,3,Open Well,2009,5.3,0 - 10 m,2,Fails every summer,1
 15.365906,77.82141,2,Open Well,1970,5.5,0 - 10 m,2,Fails every summer,1
-15.378002,77.823364,2,Open Well,2010,5.5,0 - 10 m,2,Fails every summer,1
-15.37088,77.810299,2,Open Well,1980,5.6,0 - 10 m,2,Fails every summer,1
-15.41435,77.838143,2,Open Well,1955,6,0 - 10 m,2,Fails every summer,1
 15.365903,77.823774,3,Open Well,1970,6,0 - 10 m,2,Fails every summer,1
-15.364561,77.825042,2,Open Well,1980,6,0 - 10 m,2,Fails every summer,1
-15.397181,77.815872,1,Open Well,1990,6,0 - 10 m,2,Fails every summer,1
-15.372895,77.815787,2,Open Well,1990,6,0 - 10 m,2,Fails every summer,1
-15.391652,77.831253,3,Open Well,2000,6,0 - 10 m,2,Fails every summer,1
-15.370114,77.81359,3,Open Well,2002,6,0 - 10 m,2,Fails every summer,1
-15.383747,77.823813,2,Open Well,2007,6,0 - 10 m,2,Fails every summer,1
-15.394199,77.824261,2,Open Well,2000,6.1,0 - 10 m,2,Fails every summer,1
-15.361407,77.824614,2,Open Well,1996,6.2,0 - 10 m,2,Fails every summer,1
-15.418168,77.82259,2,Open Well,2002,6.2,0 - 10 m,2,Fails every summer,1
-15.382853,77.827767,2,Open Well,2006,6.2,0 - 10 m,2,Fails every summer,1
-15.367345,77.821889,2,Open Well,1940,6.3,0 - 10 m,2,Fails every summer,1
-15.364108,77.819008,1,Open Well,1958,6.4,0 - 10 m,2,Fails every summer,1
-15.416554,77.837921,4,Open Well,1960,6.4,0 - 10 m,2,Fails every summer,1
-15.384359,77.823223,3,Open Well,1995,6.4,0 - 10 m,2,Fails every summer,1
-15.362856,77.824021,2,Open Well,2005,6.5,0 - 10 m,2,Fails every summer,1
-15.398086,77.812252,2,Open Well,2008,6.5,0 - 10 m,2,Fails every summer,1
 15.37939,77.829623,2,Open Well,1970,7,0 - 10 m,2,Fails every summer,1
 15.370986,77.822697,3,Open Well,1970,7.1,0 - 10 m,2,Fails every summer,1
-15.391341,77.815781,1,Open Well,1990,7.2,0 - 10 m,2,Fails every summer,1
-15.359414,77.823643,2,Open Well,2011,7.2,0 - 10 m,2,Fails every summer,1
-15.36473,77.823785,2,Open Well,1960,7.3,0 - 10 m,2,Fails every summer,1
-15.383373,77.812146,2,Open Well,1980,7.3,0 - 10 m,2,Fails every summer,1
-15.365205,77.820685,2,Open Well,1967,7.4,0 - 10 m,2,Fails every summer,1
-15.384231,77.821678,9,Open Well,1988,7.5,0 - 10 m,2,Fails every summer,1
-15.39631,77.811999,1,Open Well,1990,7.5,0 - 10 m,2,Fails every summer,1
-15.419503,77.838426,2,Open Well,1992,7.5,0 - 10 m,2,Fails every summer,1
-15.39098,77.831938,3,Open Well,2002,7.5,0 - 10 m,2,Fails every summer,1
-15.386135,77.81476,2,Open Well,1990,7.6,0 - 10 m,2,Fails every summer,1
-15.367629,77.829041,3,Open Well,2000,7.6,0 - 10 m,2,Fails every summer,1
-15.379842,77.818872,2,Open Well,2008,7.6,0 - 10 m,2,Fails every summer,1
-15.365156,77.819338,3,Open Well,1968,8,0 - 10 m,2,Fails every summer,1
 15.390103,77.816024,4,Open Well,1970,8,0 - 10 m,2,Fails every summer,1
+15.418491,77.830666,3,Open Well,1970,7.1,0 - 10 m,3,Fails during droughts,1
+15.362714,77.819037,2,Open Well,1970,8.3,0 - 10 m,3,Fails during droughts,1
+15.37531,77.818682,1,Open Well,1970,7.5,0 - 10 m,4,Has never failed,1
+15.389567,77.821318,2,Open Well,1970,8.2,0 - 10 m,4,Has never failed,1
+15.384745,77.812538,1,Open Well,1970,8.7,0 - 10 m,4,Has never failed,1
+15.388838,77.813891,2,Open Well,1970,9,0 - 10 m,4,Has never failed,1
+15.369888,77.807675,2,Open Well,1970,10,10 - 50 m,2,Fails every summer,1
+15.385557,77.821595,6,Domestic Borewell,1985,60,50 - 100 m,1,Defunct,1
+15.375889,77.837476,6,Domestic Borewell,1970,120,100 m +,3,Fails during droughts,1
+15.362939,77.816194,2,Open Well,1973,6,0 - 10 m,3,Fails during droughts,1
+15.414042,77.837967,4,Open Well,1975,5,0 - 10 m,2,Fails every summer,1
 15.38686,77.818321,2,Open Well,1975,8,0 - 10 m,2,Fails every summer,1
+15.371142,77.809094,2,Open Well,1975,8.7,0 - 10 m,2,Fails every summer,1
+15.414922,77.836607,1,Open Well,1975,9,0 - 10 m,2,Fails every summer,1
+15.364555,77.820016,3,Open Well,1975,11.2,10 - 50 m,1,Defunct,1
 15.388258,77.8127,2,Open Well,1978,8,0 - 10 m,2,Fails every summer,1
+15.361328,77.814426,4,Open Well,1978,4.5,0 - 10 m,3,Fails during droughts,1
+15.38605,77.831525,2,Open Well,1980,4,0 - 10 m,1,Defunct,1
+15.366923,77.817139,2,Open Well,1980,4,0 - 10 m,1,Defunct,1
+15.384516,77.830524,2,Open Well,1980,5.3,0 - 10 m,1,Defunct,1
+15.391411,77.811343,1,Open Well,1980,6,0 - 10 m,1,Defunct,1
+15.370296,77.809401,2,Open Well,1980,6,0 - 10 m,1,Defunct,1
+15.389021,77.815421,3,Open Well,1980,7,0 - 10 m,1,Defunct,1
+15.370379,77.822955,3,Open Well,1980,7,0 - 10 m,1,Defunct,1
+15.39074,77.810531,1,Open Well,1980,7.3,0 - 10 m,1,Defunct,1
+15.411699,77.83652,3,Open Well,1980,4.5,0 - 10 m,2,Fails every summer,1
+15.37088,77.810299,2,Open Well,1980,5.6,0 - 10 m,2,Fails every summer,1
+15.364561,77.825042,2,Open Well,1980,6,0 - 10 m,2,Fails every summer,1
+15.383373,77.812146,2,Open Well,1980,7.3,0 - 10 m,2,Fails every summer,1
 15.382779,77.818954,2,Open Well,1980,8,0 - 10 m,2,Fails every summer,1
 15.386716,77.816631,2,Open Well,1980,8,0 - 10 m,2,Fails every summer,1
 15.361928,77.819823,3,Open Well,1980,8,0 - 10 m,2,Fails every summer,1
-15.386265,77.814036,2,Open Well,1992,8.2,0 - 10 m,2,Fails every summer,1
-15.375046,77.817069,2,Open Well,2011,8.2,0 - 10 m,2,Fails every summer,1
-15.371142,77.809094,2,Open Well,1975,8.7,0 - 10 m,2,Fails every summer,1
-15.414922,77.836607,1,Open Well,1975,9,0 - 10 m,2,Fails every summer,1
-15.387742,77.813393,3,Open Well,2002,9,0 - 10 m,2,Fails every summer,1
-15.389939,77.814703,2,Open Well,1988,9.5,0 - 10 m,2,Fails every summer,1
-15.389749,77.818101,2,Open Well,2003,9.5,0 - 10 m,2,Fails every summer,1
-15.386299,77.81894,4,Open Well,1960,9.8,0 - 10 m,2,Fails every summer,1
-15.420477,77.838035,2,Open Well,1992,4,0 - 10 m,3,Fails during droughts,1
-15.361209,77.812357,2,Open Well,2003,4,0 - 10 m,3,Fails during droughts,1
-15.362532,77.815445,3,Open Well,1985,4.2,0 - 10 m,3,Fails during droughts,1
-15.360098,77.81948,2,Open Well,2005,4.2,0 - 10 m,3,Fails during droughts,1
-15.414623,77.822781,4,Open Well,1950,4.5,0 - 10 m,3,Fails during droughts,1
-15.361328,77.814426,4,Open Well,1978,4.5,0 - 10 m,3,Fails during droughts,1
-15.356854,77.818932,3,Open Well,2005,5,0 - 10 m,3,Fails during droughts,1
-15.360753,77.813778,2,Open Well,1995,5.5,0 - 10 m,3,Fails during droughts,1
-15.35882,77.813928,2,Open Well,1870,6,0 - 10 m,3,Fails during droughts,1
-15.362939,77.816194,2,Open Well,1973,6,0 - 10 m,3,Fails during droughts,1
-15.363092,77.816322,3,Open Well,1985,6,0 - 10 m,3,Fails during droughts,1
-15.362857,77.816368,3,Open Well,2003,6,0 - 10 m,3,Fails during droughts,1
-15.418713,77.829749,3,Open Well,2000,7,0 - 10 m,3,Fails during droughts,1
-15.374484,77.830137,3,Open Well,2005,7,0 - 10 m,3,Fails during droughts,1
-15.418491,77.830666,3,Open Well,1970,7.1,0 - 10 m,3,Fails during droughts,1
-15.381994,77.828922,2,Open Well,2007,7.3,0 - 10 m,3,Fails during droughts,1
 15.390065,77.825952,3,Open Well,1980,7.5,0 - 10 m,3,Fails during droughts,1
-15.361093,77.815443,2,Open Well,1998,8.2,0 - 10 m,3,Fails during droughts,1
-15.362714,77.819037,2,Open Well,1970,8.3,0 - 10 m,3,Fails during droughts,1
 15.371935,77.823377,3,Open Well,1980,8.3,0 - 10 m,3,Fails during droughts,1
-15.370325,77.825351,3,Open Well,1840,9.7,0 - 10 m,3,Fails during droughts,1
 15.372969,77.823178,2,Open Well,1980,0,0 - 10 m,4,Has never failed,1
-15.410594,77.826477,2,Open Well,1995,3,0 - 10 m,4,Has never failed,1
-15.393758,77.826689,2,Open Well,2011,3.5,0 - 10 m,4,Has never failed,1
-15.392265,77.826894,2,Open Well,2011,3.5,0 - 10 m,4,Has never failed,1
-15.402466,77.822081,1,Open Well,2002,4.5,0 - 10 m,4,Has never failed,1
-15.376929,77.821031,2,Open Well,2009,4.8,0 - 10 m,4,Has never failed,1
-15.401575,77.82459,4,Open Well,2007,5,0 - 10 m,4,Has never failed,1
-15.394869,77.826939,2,Open Well,2011,5,0 - 10 m,4,Has never failed,1
-15.394173,77.826974,2,Open Well,2011,5,0 - 10 m,4,Has never failed,1
-15.391415,77.829889,2,Open Well,1998,5.4,0 - 10 m,4,Has never failed,1
-15.416305,77.83324,2,Open Well,1940,6,0 - 10 m,4,Has never failed,1
 15.375545,77.818554,2,Open Well,1980,6.3,0 - 10 m,4,Has never failed,1
-15.391533,77.826632,2,Open Well,2011,6.3,0 - 10 m,4,Has never failed,1
-15.39922,77.814955,1,Open Well,1990,6.8,0 - 10 m,4,Has never failed,1
-15.389834,77.809939,1,Open Well,1995,6.8,0 - 10 m,4,Has never failed,1
-15.39674,77.823726,3,Open Well,2002,6.9,0 - 10 m,4,Has never failed,1
-15.392357,77.823437,2,Open Well,2002,7,0 - 10 m,4,Has never failed,1
-15.377929,77.82118,2,Open Well,2010,7,0 - 10 m,4,Has never failed,1
-15.390757,77.827033,3,Open Well,2011,7,0 - 10 m,4,Has never failed,1
-15.41709,77.821898,4,Open Well,1985,7.1,0 - 10 m,4,Has never failed,1
-15.39864,77.815927,2,Open Well,1990,7.2,0 - 10 m,4,Has never failed,1
-15.395421,77.824622,2,Open Well,2002,7.2,0 - 10 m,4,Has never failed,1
-15.418045,77.830338,4,Open Well,1902,7.3,0 - 10 m,4,Has never failed,1
-15.392259,77.825564,2,Open Well,2006,7.3,0 - 10 m,4,Has never failed,1
-15.421488,77.845637,3,Open Well,1960,7.5,0 - 10 m,4,Has never failed,1
-15.37531,77.818682,1,Open Well,1970,7.5,0 - 10 m,4,Has never failed,1
-15.37975,77.819888,3,Open Well,2007,7.5,0 - 10 m,4,Has never failed,1
 15.388191,77.826029,2,Open Well,1980,8,0 - 10 m,4,Has never failed,1
 15.387313,77.816227,3,Open Well,1980,8,0 - 10 m,4,Has never failed,1
-15.37377,77.817373,3,Open Well,1990,8,0 - 10 m,4,Has never failed,1
-15.393146,77.823547,2,Open Well,2002,8,0 - 10 m,4,Has never failed,1
-15.393161,77.826954,2,Open Well,2011,8,0 - 10 m,4,Has never failed,1
-15.389567,77.821318,2,Open Well,1970,8.2,0 - 10 m,4,Has never failed,1
-15.391274,77.826077,2,Open Well,1999,8.3,0 - 10 m,4,Has never failed,1
-15.384745,77.812538,1,Open Well,1970,8.7,0 - 10 m,4,Has never failed,1
-15.388838,77.813891,2,Open Well,1970,9,0 - 10 m,4,Has never failed,1
-15.390286,77.809388,1,Open Well,1995,9,0 - 10 m,4,Has never failed,1
-15.389546,77.818373,3,Open Well,2002,9,0 - 10 m,4,Has never failed,1
-15.38767,77.822096,2,Open Well,1998,9.4,0 - 10 m,4,Has never failed,1
-15.384432,77.821778,9,Open Well,1960,10,10 - 50 m,1,Defunct,1
-15.369184,77.82643,9,Open Well,1950,10.4,10 - 50 m,1,Defunct,1
 15.358701,77.82813,2,Open Well,1980,11,10 - 50 m,1,Defunct,1
-15.364555,77.820016,3,Open Well,1975,11.2,10 - 50 m,1,Defunct,1
-15.371955,77.828744,5,Agricultural Borewell,2007,30,10 - 50 m,1,Defunct,1
+15.380828,77.835719,5,Agricultural Borewell,1980,40,10 - 50 m,4,Has never failed,1
+15.376538,77.837434,6,Domestic Borewell,1980,120,100 m +,1,Defunct,1
+15.362532,77.815445,3,Open Well,1985,4.2,0 - 10 m,3,Fails during droughts,1
+15.363092,77.816322,3,Open Well,1985,6,0 - 10 m,3,Fails during droughts,1
+15.41709,77.821898,4,Open Well,1985,7.1,0 - 10 m,4,Has never failed,1
+15.380518,77.84183,8,Domestic Borewell,1985,40,10 - 50 m,3,Fails during droughts,1
+15.391027,77.822372,2,Open Well,1985,11,10 - 50 m,4,Has never failed,1
+15.385457,77.820523,6,Domestic Borewell,1985,120,100 m +,4,Has never failed,1
+15.364878,77.82162,5,Agricultural Borewell,1985,68,50 - 100 m,4,Has never failed,1
+15.385939,77.821136,6,Domestic Borewell,1985,90,50 - 100 m,4,Has never failed,1
+15.389231,77.82624,7,Domestic Borewell,1985,90,50 - 100 m,4,Has never failed,1
+15.368139,77.824025,6,Domestic Borewell,1987,60,50 - 100 m,4,Has never failed,1
+15.384231,77.821678,9,Open Well,1988,7.5,0 - 10 m,2,Fails every summer,1
+15.389939,77.814703,2,Open Well,1988,9.5,0 - 10 m,2,Fails every summer,1
 15.359957,77.831584,5,Agricultural Borewell,1988,40,10 - 50 m,1,Defunct,1
-15.365038,77.831811,5,Agricultural Borewell,1998,40,10 - 50 m,1,Defunct,1
-15.373158,77.843607,5,Agricultural Borewell,2007,40,10 - 50 m,1,Defunct,1
-15.385412,77.821874,6,Domestic Borewell,2004,45,10 - 50 m,1,Defunct,1
-15.365459,77.829738,8,Domestic Borewell,2008,45,10 - 50 m,1,Defunct,1
-15.365023,77.826831,5,Agricultural Borewell,2010,45,10 - 50 m,1,Defunct,1
-15.369888,77.807675,2,Open Well,1970,10,10 - 50 m,2,Fails every summer,1
-15.381959,77.824399,2,Open Well,1945,11,10 - 50 m,2,Fails every summer,1
-15.387606,77.814599,3,Open Well,2002,11,10 - 50 m,2,Fails every summer,1
-15.366269,77.810442,2,Open Well,2002,11.2,10 - 50 m,2,Fails every summer,1
-15.366235,77.830154,8,Domestic Borewell,2008,30,10 - 50 m,2,Fails every summer,1
-15.373927,77.840852,5,Agricultural Borewell,2000,40,10 - 50 m,2,Fails every summer,1
-15.370989,77.843644,5,Agricultural Borewell,2005,40,10 - 50 m,2,Fails every summer,1
-15.360921,77.8137,5,Agricultural Borewell,2006,40,10 - 50 m,2,Fails every summer,1
+15.371977,77.829041,2,Open Well,1990,4.5,0 - 10 m,1,Defunct,1
+15.367678,77.817112,2,Open Well,1990,4.6,0 - 10 m,1,Defunct,1
+15.366642,77.810917,2,Open Well,1990,4.8,0 - 10 m,1,Defunct,1
+15.361541,77.825467,3,Open Well,1990,5,0 - 10 m,1,Defunct,1
+15.3746,77.839249,3,Open Well,1990,6,0 - 10 m,1,Defunct,1
+15.377866,77.829986,2,Open Well,1990,7,0 - 10 m,1,Defunct,1
+15.400097,77.816949,1,Open Well,1990,7.9,0 - 10 m,1,Defunct,1
+15.364267,77.832176,2,Open Well,1990,8,0 - 10 m,1,Defunct,1
+15.401481,77.820164,1,Open Well,1990,9,0 - 10 m,1,Defunct,1
+15.357462,77.827,2,Open Well,1990,9,0 - 10 m,1,Defunct,1
+15.372725,77.844485,3,Open Well,1990,9.5,0 - 10 m,1,Defunct,1
+15.397181,77.815872,1,Open Well,1990,6,0 - 10 m,2,Fails every summer,1
+15.372895,77.815787,2,Open Well,1990,6,0 - 10 m,2,Fails every summer,1
+15.391341,77.815781,1,Open Well,1990,7.2,0 - 10 m,2,Fails every summer,1
+15.39631,77.811999,1,Open Well,1990,7.5,0 - 10 m,2,Fails every summer,1
+15.386135,77.81476,2,Open Well,1990,7.6,0 - 10 m,2,Fails every summer,1
+15.39922,77.814955,1,Open Well,1990,6.8,0 - 10 m,4,Has never failed,1
+15.39864,77.815927,2,Open Well,1990,7.2,0 - 10 m,4,Has never failed,1
+15.37377,77.817373,3,Open Well,1990,8,0 - 10 m,4,Has never failed,1
+15.376019,77.838259,7,Domestic Borewell,1990,120,100 m +,4,Has never failed,1
+15.373414,77.836233,5,Agricultural Borewell,1990,50,50 - 100 m,2,Fails every summer,1
+15.380339,77.830234,5,Agricultural Borewell,1990,60,50 - 100 m,3,Fails during droughts,1
+15.382458,77.838334,8,Domestic Borewell,1990,80,50 - 100 m,4,Has never failed,1
+15.418047,77.832911,5,Agricultural Borewell,1990,93,50 - 100 m,4,Has never failed,1
+15.371171,77.834757,5,Agricultural Borewell,1991,120,100 m +,2,Fails every summer,1
+15.415202,77.827336,2,Open Well,1992,2,0 - 10 m,1,Defunct,1
+15.36441,77.824548,2,Open Well,1992,6,0 - 10 m,1,Defunct,1
+15.419503,77.838426,2,Open Well,1992,7.5,0 - 10 m,2,Fails every summer,1
+15.386265,77.814036,2,Open Well,1992,8.2,0 - 10 m,2,Fails every summer,1
+15.420477,77.838035,2,Open Well,1992,4,0 - 10 m,3,Fails during droughts,1
+15.358672,77.833058,6,Domestic Borewell,1992,120,100 m +,1,Defunct,1
+15.373653,77.838901,7,Domestic Borewell,1992,120,100 m +,2,Fails every summer,1
+15.386047,77.819808,6,Domestic Borewell,1992,120,100 m +,4,Has never failed,1
+15.385854,77.821826,6,Domestic Borewell,1992,90,50 - 100 m,1,Defunct,1
+15.359663,77.832865,5,Agricultural Borewell,1992,50,50 - 100 m,4,Has never failed,1
+15.373257,77.831977,5,Agricultural Borewell,1993,60,50 - 100 m,1,Defunct,1
+15.418142,77.84097,2,Open Well,1994,4.5,0 - 10 m,1,Defunct,1
+15.370016,77.828128,2,Open Well,1995,4,0 - 10 m,1,Defunct,1
+15.367514,77.810757,1,Open Well,1995,8,0 - 10 m,1,Defunct,1
+15.384359,77.823223,3,Open Well,1995,6.4,0 - 10 m,2,Fails every summer,1
+15.360753,77.813778,2,Open Well,1995,5.5,0 - 10 m,3,Fails during droughts,1
+15.410594,77.826477,2,Open Well,1995,3,0 - 10 m,4,Has never failed,1
+15.389834,77.809939,1,Open Well,1995,6.8,0 - 10 m,4,Has never failed,1
+15.390286,77.809388,1,Open Well,1995,9,0 - 10 m,4,Has never failed,1
 15.356795,77.815775,6,Domestic Borewell,1995,45,10 - 50 m,2,Fails every summer,1
+15.373954,77.835442,7,Domestic Borewell,1995,120,100 m +,1,Defunct,1
+15.384514,77.840587,8,Domestic Borewell,1995,100,100 m +,4,Has never failed,1
+15.364531,77.821971,5,Agricultural Borewell,1995,54,50 - 100 m,1,Defunct,1
+15.36859,77.835844,5,Agricultural Borewell,1995,60,50 - 100 m,3,Fails during droughts,1
+15.36783,77.836041,5,Agricultural Borewell,1995,65,50 - 100 m,3,Fails during droughts,1
+15.358745,77.821258,5,Agricultural Borewell,1995,90,50 - 100 m,4,Has never failed,1
+15.361407,77.824614,2,Open Well,1996,6.2,0 - 10 m,2,Fails every summer,1
+15.386115,77.837222,5,Agricultural Borewell,1996,40,10 - 50 m,4,Has never failed,1
+15.359003,77.819698,6,Domestic Borewell,1996,40,10 - 50 m,4,Has never failed,1
+15.37026,77.825483,6,Domestic Borewell,1996,120,100 m +,1,Defunct,1
+15.366408,77.827738,6,Domestic Borewell,1996,120,100 m +,4,Has never failed,1
+15.375062,77.838893,7,Domestic Borewell,1996,120,100 m +,4,Has never failed,1
+15.36942,77.828823,5,Agricultural Borewell,1996,70,50 - 100 m,4,Has never failed,1
+15.414782,77.834994,6,Domestic Borewell,1996,90,50 - 100 m,4,Has never failed,1
+15.369034,77.826135,6,Domestic Borewell,1997,120,100 m +,1,Defunct,1
+15.36596,77.827985,6,Domestic Borewell,1997,150,100 m +,1,Defunct,1
+15.383921,77.820388,7,Domestic Borewell,1997,120,100 m +,4,Has never failed,1
+15.388295,77.843736,8,Domestic Borewell,1997,50,50 - 100 m,3,Fails during droughts,1
+15.38376,77.828257,2,Open Well,1998,3,0 - 10 m,1,Defunct,1
+15.390859,77.83137,2,Open Well,1998,6,0 - 10 m,1,Defunct,1
+15.35969,77.828239,1,Open Well,1998,8,0 - 10 m,1,Defunct,1
+15.386556,77.820502,3,Open Well,1998,8,0 - 10 m,1,Defunct,1
+15.41967,77.8393,3,Open Well,1998,4.5,0 - 10 m,2,Fails every summer,1
+15.361093,77.815443,2,Open Well,1998,8.2,0 - 10 m,3,Fails during droughts,1
+15.391415,77.829889,2,Open Well,1998,5.4,0 - 10 m,4,Has never failed,1
+15.38767,77.822096,2,Open Well,1998,9.4,0 - 10 m,4,Has never failed,1
+15.365038,77.831811,5,Agricultural Borewell,1998,40,10 - 50 m,1,Defunct,1
+15.375468,77.835929,7,Domestic Borewell,1998,120,100 m +,4,Has never failed,1
+15.370575,77.838254,5,Agricultural Borewell,1998,70,50 - 100 m,1,Defunct,1
+15.381103,77.829421,5,Agricultural Borewell,1998,60,50 - 100 m,4,Has never failed,1
+15.385139,77.840869,8,Domestic Borewell,1998,60,50 - 100 m,4,Has never failed,1
+15.391274,77.826077,2,Open Well,1999,8.3,0 - 10 m,4,Has never failed,1
+15.366602,77.829711,8,Domestic Borewell,1999,95,50 - 100 m,1,Defunct,1
+15.388614,77.817135,3,Open Well,2000,2,0 - 10 m,1,Defunct,1
+15.412027,77.838107,2,Open Well,2000,3.5,0 - 10 m,1,Defunct,1
+15.364462,77.827359,3,Open Well,2000,4.5,0 - 10 m,1,Defunct,1
+15.376534,77.828799,2,Open Well,2000,6,0 - 10 m,1,Defunct,1
+15.391652,77.831253,3,Open Well,2000,6,0 - 10 m,2,Fails every summer,1
+15.394199,77.824261,2,Open Well,2000,6.1,0 - 10 m,2,Fails every summer,1
+15.367629,77.829041,3,Open Well,2000,7.6,0 - 10 m,2,Fails every summer,1
+15.418713,77.829749,3,Open Well,2000,7,0 - 10 m,3,Fails during droughts,1
+15.373927,77.840852,5,Agricultural Borewell,2000,40,10 - 50 m,2,Fails every summer,1
 15.36683,77.80966,2,Open Well,2000,10,10 - 50 m,3,Fails during droughts,1
 15.366803,77.809281,2,Open Well,2000,12,10 - 50 m,3,Fails during droughts,1
 15.38669,77.835699,4,Open Well,2000,13,10 - 50 m,3,Fails during droughts,1
-15.362645,77.816101,5,Agricultural Borewell,2009,20,10 - 50 m,3,Fails during droughts,1
-15.355686,77.815903,5,Agricultural Borewell,2005,30,10 - 50 m,3,Fails during droughts,1
-15.380518,77.84183,8,Domestic Borewell,1985,40,10 - 50 m,3,Fails during droughts,1
-15.371804,77.830637,5,Agricultural Borewell,2006,40,10 - 50 m,3,Fails during droughts,1
-15.358971,77.812998,5,Agricultural Borewell,2009,40,10 - 50 m,3,Fails during droughts,1
-15.361378,77.814482,5,Agricultural Borewell,2011,40,10 - 50 m,3,Fails during droughts,1
-15.380477,77.836053,6,Domestic Borewell,2002,47,10 - 50 m,3,Fails during droughts,1
-15.365813,77.820923,5,Agricultural Borewell,2010,47,10 - 50 m,3,Fails during droughts,1
-15.362804,77.825484,2,Open Well,1920,10,10 - 50 m,4,Has never failed,1
-15.391027,77.822372,2,Open Well,1985,11,10 - 50 m,4,Has never failed,1
 15.387422,77.834818,5,Agricultural Borewell,2000,30,10 - 50 m,4,Has never failed,1
-15.38015,77.838108,8,Domestic Borewell,2004,35,10 - 50 m,4,Has never failed,1
-15.377962,77.829781,5,Agricultural Borewell,2006,36,10 - 50 m,4,Has never failed,1
-15.380828,77.835719,5,Agricultural Borewell,1980,40,10 - 50 m,4,Has never failed,1
-15.386115,77.837222,5,Agricultural Borewell,1996,40,10 - 50 m,4,Has never failed,1
-15.359003,77.819698,6,Domestic Borewell,1996,40,10 - 50 m,4,Has never failed,1
-15.380419,77.834496,5,Agricultural Borewell,2005,40,10 - 50 m,4,Has never failed,1
-15.381749,77.839441,8,Domestic Borewell,2008,40,10 - 50 m,4,Has never failed,1
-15.357241,77.815633,5,Agricultural Borewell,2011,40,10 - 50 m,4,Has never failed,1
-15.381767,77.83076,5,Agricultural Borewell,2010,42,10 - 50 m,4,Has never failed,1
-15.367473,77.837184,5,Agricultural Borewell,2011,43,10 - 50 m,4,Has never failed,1
-15.381166,77.829284,5,Agricultural Borewell,2001,45,10 - 50 m,4,Has never failed,1
-15.359638,77.814536,5,Agricultural Borewell,2002,45,10 - 50 m,4,Has never failed,1
-15.384468,77.819937,6,Domestic Borewell,2002,45,10 - 50 m,4,Has never failed,1
-15.366352,77.830264,8,Domestic Borewell,2003,45,10 - 50 m,4,Has never failed,1
-15.353838,77.817503,5,Agricultural Borewell,2011,45,10 - 50 m,4,Has never failed,1
-15.36231,77.819977,5,Agricultural Borewell,2012,46,10 - 50 m,4,Has never failed,1
-15.380122,77.835596,5,Agricultural Borewell,2003,47,10 - 50 m,4,Has never failed,1
-15.378552,77.829678,5,Agricultural Borewell,2008,47,10 - 50 m,4,Has never failed,1
-15.362502,77.819146,5,Agricultural Borewell,2010,47,10 - 50 m,4,Has never failed,1
-15.355382,77.816514,5,Agricultural Borewell,2012,47,10 - 50 m,4,Has never failed,1
-15.365176,77.826803,5,Agricultural Borewell,2010,49,10 - 50 m,4,Has never failed,1
+15.359787,77.83087,5,Agricultural Borewell,2000,100,100 m +,4,Has never failed,1
+15.352089,77.819137,7,Domestic Borewell,2000,100,100 m +,4,Has never failed,1
+15.385663,77.842166,8,Domestic Borewell,2000,100,100 m +,4,Has never failed,1
+15.370243,77.825493,5,Agricultural Borewell,2000,120,100 m +,4,Has never failed,1
+15.37458,77.836437,7,Domestic Borewell,2000,140,100 m +,4,Has never failed,1
 15.384985,77.831272,5,Agricultural Borewell,2000,50,50 - 100 m,1,Defunct,1
-15.365364,77.816837,5,Agricultural Borewell,2009,50,50 - 100 m,1,Defunct,1
-15.364531,77.821971,5,Agricultural Borewell,1995,54,50 - 100 m,1,Defunct,1
-15.372997,77.842952,5,Agricultural Borewell,2006,54,50 - 100 m,1,Defunct,1
-15.385557,77.821595,6,Domestic Borewell,1985,60,50 - 100 m,1,Defunct,1
-15.373257,77.831977,5,Agricultural Borewell,1993,60,50 - 100 m,1,Defunct,1
-15.380737,77.841967,5,Agricultural Borewell,2002,60,50 - 100 m,1,Defunct,1
-15.371846,77.833035,5,Agricultural Borewell,2006,60,50 - 100 m,1,Defunct,1
-15.364995,77.834658,5,Agricultural Borewell,2006,60,50 - 100 m,1,Defunct,1
-15.380156,77.832254,5,Agricultural Borewell,2008,60,50 - 100 m,1,Defunct,1
-15.36358,77.827172,5,Agricultural Borewell,2009,60,50 - 100 m,1,Defunct,1
-15.358276,77.829196,5,Agricultural Borewell,2009,60,50 - 100 m,1,Defunct,1
-15.354418,77.81871,5,Agricultural Borewell,2010,60,50 - 100 m,1,Defunct,1
-15.354927,77.824611,5,Agricultural Borewell,2011,60,50 - 100 m,1,Defunct,1
-15.372903,77.844734,5,Agricultural Borewell,2002,63,50 - 100 m,1,Defunct,1
 15.364979,77.828836,5,Agricultural Borewell,2000,65,50 - 100 m,1,Defunct,1
-15.365532,77.832695,5,Agricultural Borewell,2009,65,50 - 100 m,1,Defunct,1
-15.37859,77.842963,5,Agricultural Borewell,2005,69,50 - 100 m,1,Defunct,1
-15.379698,77.841144,5,Agricultural Borewell,2008,69,50 - 100 m,1,Defunct,1
-15.370575,77.838254,5,Agricultural Borewell,1998,70,50 - 100 m,1,Defunct,1
 15.380055,77.840305,8,Domestic Borewell,2000,70,50 - 100 m,1,Defunct,1
-15.387853,77.841565,5,Agricultural Borewell,2002,70,50 - 100 m,1,Defunct,1
-15.364973,77.834675,5,Agricultural Borewell,2008,70,50 - 100 m,1,Defunct,1
-15.415735,77.836186,6,Domestic Borewell,2011,72,50 - 100 m,1,Defunct,1
-15.370315,77.832386,5,Agricultural Borewell,2004,73,50 - 100 m,1,Defunct,1
-15.3813,77.828843,5,Agricultural Borewell,2001,75,50 - 100 m,1,Defunct,1
-15.376978,77.830905,5,Agricultural Borewell,2009,75,50 - 100 m,1,Defunct,1
-15.374879,77.832141,5,Agricultural Borewell,2010,75,50 - 100 m,1,Defunct,1
-15.385053,77.840249,8,Domestic Borewell,2008,77,50 - 100 m,1,Defunct,1
-15.355607,77.824608,5,Agricultural Borewell,2009,80,50 - 100 m,1,Defunct,1
-15.38485,77.840693,8,Domestic Borewell,2009,80,50 - 100 m,1,Defunct,1
-15.385195,77.839241,5,Agricultural Borewell,2011,80,50 - 100 m,1,Defunct,1
-15.359278,77.831079,5,Agricultural Borewell,2007,85,50 - 100 m,1,Defunct,1
-15.379431,77.837238,5,Agricultural Borewell,2004,86,50 - 100 m,1,Defunct,1
-15.385854,77.821826,6,Domestic Borewell,1992,90,50 - 100 m,1,Defunct,1
 15.37358,77.8404,5,Agricultural Borewell,2000,90,50 - 100 m,1,Defunct,1
 15.415373,77.837036,6,Domestic Borewell,2000,90,50 - 100 m,1,Defunct,1
-15.380322,77.839737,8,Domestic Borewell,2002,90,50 - 100 m,1,Defunct,1
-15.37052,77.842144,5,Agricultural Borewell,2004,90,50 - 100 m,1,Defunct,1
-15.415484,77.837395,6,Domestic Borewell,2008,90,50 - 100 m,1,Defunct,1
-15.419379,77.829461,5,Agricultural Borewell,2007,93,50 - 100 m,1,Defunct,1
-15.366602,77.829711,8,Domestic Borewell,1999,95,50 - 100 m,1,Defunct,1
-15.38205,77.832187,5,Agricultural Borewell,2004,95,50 - 100 m,1,Defunct,1
-15.373414,77.836233,5,Agricultural Borewell,1990,50,50 - 100 m,2,Fails every summer,1
-15.371929,77.843398,5,Agricultural Borewell,2007,50,50 - 100 m,2,Fails every summer,1
-15.356069,77.815228,5,Agricultural Borewell,2007,50,50 - 100 m,2,Fails every summer,1
 15.382546,77.827705,5,Agricultural Borewell,2000,60,50 - 100 m,2,Fails every summer,1
 15.368838,77.828885,5,Agricultural Borewell,2000,60,50 - 100 m,2,Fails every summer,1
-15.3734,77.836036,5,Agricultural Borewell,2002,60,50 - 100 m,2,Fails every summer,1
-15.356404,77.833048,6,Domestic Borewell,2005,60,50 - 100 m,2,Fails every summer,1
-15.369054,77.841495,5,Agricultural Borewell,2008,60,50 - 100 m,2,Fails every summer,1
-15.37583,77.834499,8,Domestic Borewell,2009,60,50 - 100 m,2,Fails every summer,1
-15.412878,77.830121,5,Agricultural Borewell,2002,63,50 - 100 m,2,Fails every summer,1
-15.372904,77.844766,5,Agricultural Borewell,2006,63,50 - 100 m,2,Fails every summer,1
-15.377181,77.830471,5,Agricultural Borewell,2006,63,50 - 100 m,2,Fails every summer,1
-15.413191,77.829882,5,Agricultural Borewell,2006,65,50 - 100 m,2,Fails every summer,1
-15.363121,77.816046,5,Agricultural Borewell,2010,65,50 - 100 m,2,Fails every summer,1
-15.357482,77.832045,5,Agricultural Borewell,2002,70,50 - 100 m,2,Fails every summer,1
-15.418241,77.82255,5,Agricultural Borewell,2009,70,50 - 100 m,2,Fails every summer,1
-15.364088,77.836771,5,Agricultural Borewell,2011,70,50 - 100 m,2,Fails every summer,1
-15.415986,77.834325,5,Agricultural Borewell,2008,72,50 - 100 m,2,Fails every summer,1
-15.381016,77.836232,5,Agricultural Borewell,2009,74,50 - 100 m,2,Fails every summer,1
-15.379329,77.829831,5,Agricultural Borewell,2004,75,50 - 100 m,2,Fails every summer,1
-15.373117,77.843927,5,Agricultural Borewell,2008,76,50 - 100 m,2,Fails every summer,1
-15.414523,77.837868,6,Domestic Borewell,2002,80,50 - 100 m,2,Fails every summer,1
-15.364157,77.834442,5,Agricultural Borewell,2008,80,50 - 100 m,2,Fails every summer,1
-15.414864,77.837395,6,Domestic Borewell,2010,80,50 - 100 m,2,Fails every summer,1
-15.370847,77.837817,5,Agricultural Borewell,2008,83,50 - 100 m,2,Fails every summer,1
-15.416317,77.83685,6,Domestic Borewell,2002,90,50 - 100 m,2,Fails every summer,1
-15.388295,77.843736,8,Domestic Borewell,1997,50,50 - 100 m,3,Fails during droughts,1
-15.355954,77.815361,5,Agricultural Borewell,2003,50,50 - 100 m,3,Fails during droughts,1
-15.368428,77.834728,6,Domestic Borewell,2004,50,50 - 100 m,3,Fails during droughts,1
-15.387745,77.843323,8,Domestic Borewell,2004,50,50 - 100 m,3,Fails during droughts,1
-15.383839,77.833828,5,Agricultural Borewell,2006,50,50 - 100 m,3,Fails during droughts,1
-15.360615,77.813672,5,Agricultural Borewell,2010,50,50 - 100 m,3,Fails during droughts,1
-15.372861,77.830624,5,Agricultural Borewell,2002,53,50 - 100 m,3,Fails during droughts,1
-15.382021,77.832058,5,Agricultural Borewell,2006,54,50 - 100 m,3,Fails during droughts,1
-15.361232,77.812403,5,Agricultural Borewell,2007,55,50 - 100 m,3,Fails during droughts,1
-15.355959,77.816851,5,Agricultural Borewell,2009,55,50 - 100 m,3,Fails during droughts,1
-15.380339,77.830234,5,Agricultural Borewell,1990,60,50 - 100 m,3,Fails during droughts,1
-15.36859,77.835844,5,Agricultural Borewell,1995,60,50 - 100 m,3,Fails during droughts,1
-15.387847,77.843696,5,Agricultural Borewell,2002,60,50 - 100 m,3,Fails during droughts,1
-15.371418,77.830812,5,Agricultural Borewell,2005,60,50 - 100 m,3,Fails during droughts,1
-15.361563,77.816457,5,Agricultural Borewell,2009,60,50 - 100 m,3,Fails during droughts,1
-15.380439,77.834552,5,Agricultural Borewell,2008,63,50 - 100 m,3,Fails during droughts,1
-15.380271,77.834554,5,Agricultural Borewell,2009,63,50 - 100 m,3,Fails during droughts,1
-15.36783,77.836041,5,Agricultural Borewell,1995,65,50 - 100 m,3,Fails during droughts,1
-15.377146,77.828327,5,Agricultural Borewell,2009,69,50 - 100 m,3,Fails during droughts,1
-15.368006,77.835369,5,Agricultural Borewell,2002,70,50 - 100 m,3,Fails during droughts,1
-15.361465,77.811519,5,Agricultural Borewell,2010,70,50 - 100 m,3,Fails during droughts,1
-15.381256,77.834874,5,Agricultural Borewell,2004,75,50 - 100 m,3,Fails during droughts,1
-15.379527,77.829625,5,Agricultural Borewell,2008,75,50 - 100 m,3,Fails during droughts,1
-15.364596,77.816486,5,Agricultural Borewell,2009,75,50 - 100 m,3,Fails during droughts,1
-15.384745,77.841507,7,Domestic Borewell,2005,80,50 - 100 m,3,Fails during droughts,1
-15.374542,77.829625,5,Agricultural Borewell,2007,80,50 - 100 m,3,Fails during droughts,1
-15.376612,77.831678,5,Agricultural Borewell,2012,85,50 - 100 m,3,Fails during droughts,1
-15.359663,77.832865,5,Agricultural Borewell,1992,50,50 - 100 m,4,Has never failed,1
 15.38334,77.839721,5,Agricultural Borewell,2000,50,50 - 100 m,4,Has never failed,1
-15.370315,77.841429,5,Agricultural Borewell,2002,50,50 - 100 m,4,Has never failed,1
-15.385414,77.83277,5,Agricultural Borewell,2002,50,50 - 100 m,4,Has never failed,1
-15.372845,77.842276,5,Agricultural Borewell,2003,50,50 - 100 m,4,Has never failed,1
-15.365398,77.8317,6,Domestic Borewell,2005,50,50 - 100 m,4,Has never failed,1
-15.380149,77.832459,5,Agricultural Borewell,2006,50,50 - 100 m,4,Has never failed,1
-15.353325,77.826812,5,Agricultural Borewell,2008,50,50 - 100 m,4,Has never failed,1
-15.384336,77.831016,5,Agricultural Borewell,2009,50,50 - 100 m,4,Has never failed,1
-15.361407,77.83398,5,Agricultural Borewell,2009,50,50 - 100 m,4,Has never failed,1
-15.355256,77.815968,5,Agricultural Borewell,2009,50,50 - 100 m,4,Has never failed,1
-15.362606,77.816117,5,Agricultural Borewell,2010,50,50 - 100 m,4,Has never failed,1
-15.360411,77.814435,5,Agricultural Borewell,2010,50,50 - 100 m,4,Has never failed,1
-15.369324,77.805936,5,Agricultural Borewell,2010,50,50 - 100 m,4,Has never failed,1
-15.375153,77.841051,5,Agricultural Borewell,2011,50,50 - 100 m,4,Has never failed,1
-15.354647,77.81779,5,Agricultural Borewell,2011,50,50 - 100 m,4,Has never failed,1
-15.373843,77.834727,7,Domestic Borewell,2011,50,50 - 100 m,4,Has never failed,1
-15.356517,77.813023,5,Agricultural Borewell,2012,50,50 - 100 m,4,Has never failed,1
-15.357205,77.815393,5,Agricultural Borewell,2012,50,50 - 100 m,4,Has never failed,1
-15.364521,77.814772,5,Agricultural Borewell,2001,52,50 - 100 m,4,Has never failed,1
-15.3627,77.814596,5,Agricultural Borewell,2009,54,50 - 100 m,4,Has never failed,1
-15.373438,77.833784,5,Agricultural Borewell,2010,54,50 - 100 m,4,Has never failed,1
-15.353766,77.825361,5,Agricultural Borewell,2002,55,50 - 100 m,4,Has never failed,1
-15.359703,77.814402,5,Agricultural Borewell,2007,55,50 - 100 m,4,Has never failed,1
-15.360622,77.831477,5,Agricultural Borewell,2008,55,50 - 100 m,4,Has never failed,1
-15.365555,77.822281,5,Agricultural Borewell,2009,55,50 - 100 m,4,Has never failed,1
-15.377444,77.82809,5,Agricultural Borewell,2012,55,50 - 100 m,4,Has never failed,1
-15.363767,77.820093,5,Agricultural Borewell,2010,56,50 - 100 m,4,Has never failed,1
-15.363887,77.824539,5,Agricultural Borewell,2009,57,50 - 100 m,4,Has never failed,1
-15.368139,77.824025,6,Domestic Borewell,1987,60,50 - 100 m,4,Has never failed,1
-15.381103,77.829421,5,Agricultural Borewell,1998,60,50 - 100 m,4,Has never failed,1
-15.385139,77.840869,8,Domestic Borewell,1998,60,50 - 100 m,4,Has never failed,1
 15.359471,77.82562,5,Agricultural Borewell,2000,60,50 - 100 m,4,Has never failed,1
+15.369024,77.835698,5,Agricultural Borewell,2000,63,50 - 100 m,4,Has never failed,1
+15.3668,77.829377,8,Domestic Borewell,2000,75,50 - 100 m,4,Has never failed,1
+15.358567,77.814686,5,Agricultural Borewell,2000,80,50 - 100 m,4,Has never failed,1
+15.383084,77.841141,8,Domestic Borewell,2000,80,50 - 100 m,4,Has never failed,1
+15.409768,77.830462,1,Open Well,2001,3,0 - 10 m,1,Defunct,1
+15.410756,77.827833,1,Open Well,2001,3,0 - 10 m,1,Defunct,1
+15.410842,77.825925,2,Open Well,2001,3,0 - 10 m,1,Defunct,1
+15.410524,77.830352,1,Open Well,2001,2,0 - 10 m,2,Fails every summer,1
+15.410883,77.832999,2,Open Well,2001,3,0 - 10 m,2,Fails every summer,1
+15.381166,77.829284,5,Agricultural Borewell,2001,45,10 - 50 m,4,Has never failed,1
+15.35612,77.822703,8,Domestic Borewell,2001,150,100 m +,4,Has never failed,1
+15.355613,77.823128,8,Domestic Borewell,2001,150,100 m +,4,Has never failed,1
+15.3813,77.828843,5,Agricultural Borewell,2001,75,50 - 100 m,1,Defunct,1
+15.364521,77.814772,5,Agricultural Borewell,2001,52,50 - 100 m,4,Has never failed,1
 15.383636,77.828096,5,Agricultural Borewell,2001,60,50 - 100 m,4,Has never failed,1
 15.357609,77.813967,5,Agricultural Borewell,2001,60,50 - 100 m,4,Has never failed,1
+15.416697,77.822683,5,Agricultural Borewell,2001,64,50 - 100 m,4,Has never failed,1
+15.415563,77.833814,2,Open Well,2002,3,0 - 10 m,1,Defunct,1
+15.385219,77.830623,4,Open Well,2002,4.5,0 - 10 m,1,Defunct,1
+15.355645,77.824991,2,Open Well,2002,5,0 - 10 m,1,Defunct,1
+15.400877,77.82232,3,Open Well,2002,5.5,0 - 10 m,1,Defunct,1
+15.383893,77.823069,3,Open Well,2002,5,0 - 10 m,2,Fails every summer,1
+15.370114,77.81359,3,Open Well,2002,6,0 - 10 m,2,Fails every summer,1
+15.418168,77.82259,2,Open Well,2002,6.2,0 - 10 m,2,Fails every summer,1
+15.39098,77.831938,3,Open Well,2002,7.5,0 - 10 m,2,Fails every summer,1
+15.387742,77.813393,3,Open Well,2002,9,0 - 10 m,2,Fails every summer,1
+15.402466,77.822081,1,Open Well,2002,4.5,0 - 10 m,4,Has never failed,1
+15.39674,77.823726,3,Open Well,2002,6.9,0 - 10 m,4,Has never failed,1
+15.392357,77.823437,2,Open Well,2002,7,0 - 10 m,4,Has never failed,1
+15.395421,77.824622,2,Open Well,2002,7.2,0 - 10 m,4,Has never failed,1
+15.393146,77.823547,2,Open Well,2002,8,0 - 10 m,4,Has never failed,1
+15.389546,77.818373,3,Open Well,2002,9,0 - 10 m,4,Has never failed,1
+15.387606,77.814599,3,Open Well,2002,11,10 - 50 m,2,Fails every summer,1
+15.366269,77.810442,2,Open Well,2002,11.2,10 - 50 m,2,Fails every summer,1
+15.380477,77.836053,6,Domestic Borewell,2002,47,10 - 50 m,3,Fails during droughts,1
+15.359638,77.814536,5,Agricultural Borewell,2002,45,10 - 50 m,4,Has never failed,1
+15.384468,77.819937,6,Domestic Borewell,2002,45,10 - 50 m,4,Has never failed,1
+15.389165,77.84249,5,Agricultural Borewell,2002,100,100 m +,1,Defunct,1
+15.378376,77.839353,8,Domestic Borewell,2002,100,100 m +,2,Fails every summer,1
+15.368072,77.823709,6,Domestic Borewell,2002,120,100 m +,2,Fails every summer,1
+15.365788,77.82817,6,Domestic Borewell,2002,120,100 m +,2,Fails every summer,1
+15.380737,77.841967,5,Agricultural Borewell,2002,60,50 - 100 m,1,Defunct,1
+15.372903,77.844734,5,Agricultural Borewell,2002,63,50 - 100 m,1,Defunct,1
+15.387853,77.841565,5,Agricultural Borewell,2002,70,50 - 100 m,1,Defunct,1
+15.380322,77.839737,8,Domestic Borewell,2002,90,50 - 100 m,1,Defunct,1
+15.3734,77.836036,5,Agricultural Borewell,2002,60,50 - 100 m,2,Fails every summer,1
+15.412878,77.830121,5,Agricultural Borewell,2002,63,50 - 100 m,2,Fails every summer,1
+15.357482,77.832045,5,Agricultural Borewell,2002,70,50 - 100 m,2,Fails every summer,1
+15.414523,77.837868,6,Domestic Borewell,2002,80,50 - 100 m,2,Fails every summer,1
+15.416317,77.83685,6,Domestic Borewell,2002,90,50 - 100 m,2,Fails every summer,1
+15.372861,77.830624,5,Agricultural Borewell,2002,53,50 - 100 m,3,Fails during droughts,1
+15.387847,77.843696,5,Agricultural Borewell,2002,60,50 - 100 m,3,Fails during droughts,1
+15.368006,77.835369,5,Agricultural Borewell,2002,70,50 - 100 m,3,Fails during droughts,1
+15.370315,77.841429,5,Agricultural Borewell,2002,50,50 - 100 m,4,Has never failed,1
+15.385414,77.83277,5,Agricultural Borewell,2002,50,50 - 100 m,4,Has never failed,1
+15.353766,77.825361,5,Agricultural Borewell,2002,55,50 - 100 m,4,Has never failed,1
 15.360667,77.829775,5,Agricultural Borewell,2002,60,50 - 100 m,4,Has never failed,1
 15.361171,77.812152,5,Agricultural Borewell,2002,60,50 - 100 m,4,Has never failed,1
 15.387634,77.843308,8,Domestic Borewell,2002,60,50 - 100 m,4,Has never failed,1
+15.38212,77.829343,5,Agricultural Borewell,2002,70,50 - 100 m,4,Has never failed,1
+15.379423,77.829502,5,Agricultural Borewell,2002,75,50 - 100 m,4,Has never failed,1
+15.361304,77.827707,5,Agricultural Borewell,2002,75,50 - 100 m,4,Has never failed,1
+15.377324,77.840828,8,Domestic Borewell,2002,80,50 - 100 m,4,Has never failed,1
+15.365414,77.83838,5,Agricultural Borewell,2002,83,50 - 100 m,4,Has never failed,1
+15.399387,77.815672,2,Open Well,2003,4.3,0 - 10 m,1,Defunct,1
+15.364864,77.816534,4,Open Well,2003,4,0 - 10 m,2,Fails every summer,1
+15.389749,77.818101,2,Open Well,2003,9.5,0 - 10 m,2,Fails every summer,1
+15.361209,77.812357,2,Open Well,2003,4,0 - 10 m,3,Fails during droughts,1
+15.362857,77.816368,3,Open Well,2003,6,0 - 10 m,3,Fails during droughts,1
+15.366352,77.830264,8,Domestic Borewell,2003,45,10 - 50 m,4,Has never failed,1
+15.380122,77.835596,5,Agricultural Borewell,2003,47,10 - 50 m,4,Has never failed,1
+15.381283,77.841517,5,Agricultural Borewell,2003,100,100 m +,4,Has never failed,1
+15.355954,77.815361,5,Agricultural Borewell,2003,50,50 - 100 m,3,Fails during droughts,1
+15.372845,77.842276,5,Agricultural Borewell,2003,50,50 - 100 m,4,Has never failed,1
 15.365103,77.834269,5,Agricultural Borewell,2003,60,50 - 100 m,4,Has never failed,1
+15.371549,77.828732,5,Agricultural Borewell,2003,70,50 - 100 m,4,Has never failed,1
+15.359766,77.830808,5,Agricultural Borewell,2003,70,50 - 100 m,4,Has never failed,1
+15.378807,77.819539,5,Agricultural Borewell,2003,75,50 - 100 m,4,Has never failed,1
+15.375057,77.832622,5,Agricultural Borewell,2003,75,50 - 100 m,4,Has never failed,1
+15.380839,77.82612,2,Open Well,2004,9,0 - 10 m,1,Defunct,1
+15.385412,77.821874,6,Domestic Borewell,2004,45,10 - 50 m,1,Defunct,1
+15.38015,77.838108,8,Domestic Borewell,2004,35,10 - 50 m,4,Has never failed,1
+15.370315,77.832386,5,Agricultural Borewell,2004,73,50 - 100 m,1,Defunct,1
+15.379431,77.837238,5,Agricultural Borewell,2004,86,50 - 100 m,1,Defunct,1
+15.37052,77.842144,5,Agricultural Borewell,2004,90,50 - 100 m,1,Defunct,1
+15.38205,77.832187,5,Agricultural Borewell,2004,95,50 - 100 m,1,Defunct,1
+15.379329,77.829831,5,Agricultural Borewell,2004,75,50 - 100 m,2,Fails every summer,1
+15.368428,77.834728,6,Domestic Borewell,2004,50,50 - 100 m,3,Fails during droughts,1
+15.387745,77.843323,8,Domestic Borewell,2004,50,50 - 100 m,3,Fails during droughts,1
+15.381256,77.834874,5,Agricultural Borewell,2004,75,50 - 100 m,3,Fails during droughts,1
+15.378549,77.838824,8,Domestic Borewell,2004,70,50 - 100 m,4,Has never failed,1
+15.414305,77.837898,6,Domestic Borewell,2004,90,50 - 100 m,4,Has never failed,1
+15.367886,77.827774,6,Domestic Borewell,2004,95,50 - 100 m,4,Has never failed,1
+15.361823,77.823845,2,Open Well,2005,6,0 - 10 m,1,Defunct,1
+15.388243,77.816526,2,Open Well,2005,5.3,0 - 10 m,2,Fails every summer,1
+15.362856,77.824021,2,Open Well,2005,6.5,0 - 10 m,2,Fails every summer,1
+15.360098,77.81948,2,Open Well,2005,4.2,0 - 10 m,3,Fails during droughts,1
+15.356854,77.818932,3,Open Well,2005,5,0 - 10 m,3,Fails during droughts,1
+15.374484,77.830137,3,Open Well,2005,7,0 - 10 m,3,Fails during droughts,1
+15.370989,77.843644,5,Agricultural Borewell,2005,40,10 - 50 m,2,Fails every summer,1
+15.355686,77.815903,5,Agricultural Borewell,2005,30,10 - 50 m,3,Fails during droughts,1
+15.380419,77.834496,5,Agricultural Borewell,2005,40,10 - 50 m,4,Has never failed,1
+15.380186,77.839781,8,Domestic Borewell,2005,100,100 m +,1,Defunct,1
+15.380046,77.839768,8,Domestic Borewell,2005,100,100 m +,1,Defunct,1
+15.37859,77.842963,5,Agricultural Borewell,2005,69,50 - 100 m,1,Defunct,1
+15.356404,77.833048,6,Domestic Borewell,2005,60,50 - 100 m,2,Fails every summer,1
+15.371418,77.830812,5,Agricultural Borewell,2005,60,50 - 100 m,3,Fails during droughts,1
+15.384745,77.841507,7,Domestic Borewell,2005,80,50 - 100 m,3,Fails during droughts,1
+15.365398,77.8317,6,Domestic Borewell,2005,50,50 - 100 m,4,Has never failed,1
 15.358542,77.815091,5,Agricultural Borewell,2005,60,50 - 100 m,4,Has never failed,1
+15.380199,77.833796,5,Agricultural Borewell,2005,63,50 - 100 m,4,Has never failed,1
+15.37923,77.836143,5,Agricultural Borewell,2005,65,50 - 100 m,4,Has never failed,1
+15.373252,77.845863,5,Agricultural Borewell,2005,66,50 - 100 m,4,Has never failed,1
+15.373932,77.844918,5,Agricultural Borewell,2005,66,50 - 100 m,4,Has never failed,1
+15.371851,77.808673,7,Domestic Borewell,2005,70,50 - 100 m,4,Has never failed,1
+15.36708,77.837173,5,Agricultural Borewell,2005,82,50 - 100 m,4,Has never failed,1
+15.367813,77.839506,2,Open Well,2006,5,0 - 10 m,1,Defunct,1
+15.382853,77.827767,2,Open Well,2006,6.2,0 - 10 m,2,Fails every summer,1
+15.392259,77.825564,2,Open Well,2006,7.3,0 - 10 m,4,Has never failed,1
+15.360921,77.8137,5,Agricultural Borewell,2006,40,10 - 50 m,2,Fails every summer,1
+15.371804,77.830637,5,Agricultural Borewell,2006,40,10 - 50 m,3,Fails during droughts,1
+15.377962,77.829781,5,Agricultural Borewell,2006,36,10 - 50 m,4,Has never failed,1
+15.372359,77.84559,5,Agricultural Borewell,2006,100,100 m +,1,Defunct,1
+15.380329,77.839638,8,Domestic Borewell,2006,120,100 m +,1,Defunct,1
+15.369194,77.826259,6,Domestic Borewell,2006,120,100 m +,4,Has never failed,1
+15.365265,77.828922,6,Domestic Borewell,2006,120,100 m +,4,Has never failed,1
+15.3733,77.835393,7,Domestic Borewell,2006,120,100 m +,4,Has never failed,1
+15.372997,77.842952,5,Agricultural Borewell,2006,54,50 - 100 m,1,Defunct,1
+15.371846,77.833035,5,Agricultural Borewell,2006,60,50 - 100 m,1,Defunct,1
+15.364995,77.834658,5,Agricultural Borewell,2006,60,50 - 100 m,1,Defunct,1
+15.372904,77.844766,5,Agricultural Borewell,2006,63,50 - 100 m,2,Fails every summer,1
+15.377181,77.830471,5,Agricultural Borewell,2006,63,50 - 100 m,2,Fails every summer,1
+15.413191,77.829882,5,Agricultural Borewell,2006,65,50 - 100 m,2,Fails every summer,1
+15.383839,77.833828,5,Agricultural Borewell,2006,50,50 - 100 m,3,Fails during droughts,1
+15.382021,77.832058,5,Agricultural Borewell,2006,54,50 - 100 m,3,Fails during droughts,1
+15.380149,77.832459,5,Agricultural Borewell,2006,50,50 - 100 m,4,Has never failed,1
+15.380416,77.834301,5,Agricultural Borewell,2006,63,50 - 100 m,4,Has never failed,1
+15.360202,77.828657,5,Agricultural Borewell,2006,67,50 - 100 m,4,Has never failed,1
+15.384489,77.830403,5,Agricultural Borewell,2006,75,50 - 100 m,4,Has never failed,1
+15.383938,77.819288,6,Domestic Borewell,2006,90,50 - 100 m,4,Has never failed,1
+15.381953,77.828088,3,Open Well,2007,4,0 - 10 m,1,Defunct,1
+15.397757,77.814811,2,Open Well,2007,6,0 - 10 m,1,Defunct,1
+15.370815,77.814292,2,Open Well,2007,5.2,0 - 10 m,2,Fails every summer,1
+15.383747,77.823813,2,Open Well,2007,6,0 - 10 m,2,Fails every summer,1
+15.381994,77.828922,2,Open Well,2007,7.3,0 - 10 m,3,Fails during droughts,1
+15.401575,77.82459,4,Open Well,2007,5,0 - 10 m,4,Has never failed,1
+15.37975,77.819888,3,Open Well,2007,7.5,0 - 10 m,4,Has never failed,1
+15.371955,77.828744,5,Agricultural Borewell,2007,30,10 - 50 m,1,Defunct,1
+15.373158,77.843607,5,Agricultural Borewell,2007,40,10 - 50 m,1,Defunct,1
+15.374094,77.834863,6,Domestic Borewell,2007,120,100 m +,2,Fails every summer,1
+15.372397,77.834626,6,Domestic Borewell,2007,120,100 m +,2,Fails every summer,1
+15.37986,77.81969,5,Agricultural Borewell,2007,120,100 m +,4,Has never failed,1
+15.359278,77.831079,5,Agricultural Borewell,2007,85,50 - 100 m,1,Defunct,1
+15.419379,77.829461,5,Agricultural Borewell,2007,93,50 - 100 m,1,Defunct,1
+15.371929,77.843398,5,Agricultural Borewell,2007,50,50 - 100 m,2,Fails every summer,1
+15.356069,77.815228,5,Agricultural Borewell,2007,50,50 - 100 m,2,Fails every summer,1
+15.361232,77.812403,5,Agricultural Borewell,2007,55,50 - 100 m,3,Fails during droughts,1
+15.374542,77.829625,5,Agricultural Borewell,2007,80,50 - 100 m,3,Fails during droughts,1
+15.359703,77.814402,5,Agricultural Borewell,2007,55,50 - 100 m,4,Has never failed,1
 15.39028,77.81805,5,Agricultural Borewell,2007,60,50 - 100 m,4,Has never failed,1
+15.380035,77.834708,5,Agricultural Borewell,2007,63,50 - 100 m,4,Has never failed,1
+15.378754,77.825186,5,Agricultural Borewell,2007,67,50 - 100 m,4,Has never failed,1
+15.358505,77.81491,5,Agricultural Borewell,2007,69,50 - 100 m,4,Has never failed,1
+15.390222,77.81925,5,Agricultural Borewell,2007,70,50 - 100 m,4,Has never failed,1
+15.380754,77.826534,5,Agricultural Borewell,2007,75,50 - 100 m,4,Has never failed,1
+15.363546,77.834368,5,Agricultural Borewell,2007,80,50 - 100 m,4,Has never failed,1
+15.382305,77.833531,5,Agricultural Borewell,2007,87,50 - 100 m,4,Has never failed,1
+15.380558,77.819894,2,Open Well,2008,5,0 - 10 m,1,Defunct,1
+15.409991,77.831213,2,Open Well,2008,2,0 - 10 m,2,Fails every summer,1
+15.398086,77.812252,2,Open Well,2008,6.5,0 - 10 m,2,Fails every summer,1
+15.379842,77.818872,2,Open Well,2008,7.6,0 - 10 m,2,Fails every summer,1
+15.365459,77.829738,8,Domestic Borewell,2008,45,10 - 50 m,1,Defunct,1
+15.366235,77.830154,8,Domestic Borewell,2008,30,10 - 50 m,2,Fails every summer,1
+15.381749,77.839441,8,Domestic Borewell,2008,40,10 - 50 m,4,Has never failed,1
+15.378552,77.829678,5,Agricultural Borewell,2008,47,10 - 50 m,4,Has never failed,1
+15.416242,77.836131,6,Domestic Borewell,2008,120,100 m +,1,Defunct,1
+15.414791,77.834946,6,Domestic Borewell,2008,135,100 m +,1,Defunct,1
+15.369344,77.82651,7,Domestic Borewell,2008,120,100 m +,2,Fails every summer,1
+15.379629,77.827882,6,Domestic Borewell,2008,100,100 m +,4,Has never failed,1
+15.379473,77.838408,8,Domestic Borewell,2008,100,100 m +,4,Has never failed,1
+15.380156,77.832254,5,Agricultural Borewell,2008,60,50 - 100 m,1,Defunct,1
+15.379698,77.841144,5,Agricultural Borewell,2008,69,50 - 100 m,1,Defunct,1
+15.364973,77.834675,5,Agricultural Borewell,2008,70,50 - 100 m,1,Defunct,1
+15.385053,77.840249,8,Domestic Borewell,2008,77,50 - 100 m,1,Defunct,1
+15.415484,77.837395,6,Domestic Borewell,2008,90,50 - 100 m,1,Defunct,1
+15.369054,77.841495,5,Agricultural Borewell,2008,60,50 - 100 m,2,Fails every summer,1
+15.415986,77.834325,5,Agricultural Borewell,2008,72,50 - 100 m,2,Fails every summer,1
+15.373117,77.843927,5,Agricultural Borewell,2008,76,50 - 100 m,2,Fails every summer,1
+15.364157,77.834442,5,Agricultural Borewell,2008,80,50 - 100 m,2,Fails every summer,1
+15.370847,77.837817,5,Agricultural Borewell,2008,83,50 - 100 m,2,Fails every summer,1
+15.380439,77.834552,5,Agricultural Borewell,2008,63,50 - 100 m,3,Fails during droughts,1
+15.379527,77.829625,5,Agricultural Borewell,2008,75,50 - 100 m,3,Fails during droughts,1
+15.353325,77.826812,5,Agricultural Borewell,2008,50,50 - 100 m,4,Has never failed,1
+15.360622,77.831477,5,Agricultural Borewell,2008,55,50 - 100 m,4,Has never failed,1
 15.380098,77.819549,5,Agricultural Borewell,2008,60,50 - 100 m,4,Has never failed,1
 15.358661,77.813969,5,Agricultural Borewell,2008,60,50 - 100 m,4,Has never failed,1
 15.42014,77.821667,5,Agricultural Borewell,2008,60,50 - 100 m,4,Has never failed,1
 15.416289,77.835891,6,Domestic Borewell,2008,60,50 - 100 m,4,Has never failed,1
-15.365022,77.833935,5,Agricultural Borewell,2009,60,50 - 100 m,4,Has never failed,1
-15.368954,77.812414,5,Agricultural Borewell,2009,60,50 - 100 m,4,Has never failed,1
-15.373063,77.832911,5,Agricultural Borewell,2010,60,50 - 100 m,4,Has never failed,1
-15.376598,77.831349,5,Agricultural Borewell,2010,60,50 - 100 m,4,Has never failed,1
-15.365953,77.821107,5,Agricultural Borewell,2011,60,50 - 100 m,4,Has never failed,1
-15.363542,77.818655,5,Agricultural Borewell,2011,60,50 - 100 m,4,Has never failed,1
-15.376885,77.838238,7,Domestic Borewell,2011,60,50 - 100 m,4,Has never failed,1
-15.415152,77.836433,7,Domestic Borewell,2011,60,50 - 100 m,4,Has never failed,1
-15.37267,77.83351,8,Domestic Borewell,2011,60,50 - 100 m,4,Has never failed,1
-15.38983,77.814684,5,Agricultural Borewell,2012,60,50 - 100 m,4,Has never failed,1
-15.376309,77.829975,5,Agricultural Borewell,2012,60,50 - 100 m,4,Has never failed,1
-15.360335,77.815058,5,Agricultural Borewell,2012,60,50 - 100 m,4,Has never failed,1
-15.3757,77.833685,8,Domestic Borewell,2012,60,50 - 100 m,4,Has never failed,1
-15.355633,77.816071,5,Agricultural Borewell,2009,62,50 - 100 m,4,Has never failed,1
-15.369024,77.835698,5,Agricultural Borewell,2000,63,50 - 100 m,4,Has never failed,1
-15.380199,77.833796,5,Agricultural Borewell,2005,63,50 - 100 m,4,Has never failed,1
-15.380416,77.834301,5,Agricultural Borewell,2006,63,50 - 100 m,4,Has never failed,1
-15.380035,77.834708,5,Agricultural Borewell,2007,63,50 - 100 m,4,Has never failed,1
-15.374919,77.842485,5,Agricultural Borewell,2011,63,50 - 100 m,4,Has never failed,1
-15.376868,77.829034,5,Agricultural Borewell,2011,63,50 - 100 m,4,Has never failed,1
-15.380079,77.835029,5,Agricultural Borewell,2011,63,50 - 100 m,4,Has never failed,1
-15.416697,77.822683,5,Agricultural Borewell,2001,64,50 - 100 m,4,Has never failed,1
-15.414992,77.82293,5,Agricultural Borewell,2009,64,50 - 100 m,4,Has never failed,1
-15.360602,77.828136,5,Agricultural Borewell,2010,64,50 - 100 m,4,Has never failed,1
-15.415505,77.822867,5,Agricultural Borewell,2010,64,50 - 100 m,4,Has never failed,1
-15.37923,77.836143,5,Agricultural Borewell,2005,65,50 - 100 m,4,Has never failed,1
 15.416328,77.833353,5,Agricultural Borewell,2008,65,50 - 100 m,4,Has never failed,1
-15.371145,77.82905,5,Agricultural Borewell,2009,65,50 - 100 m,4,Has never failed,1
-15.356933,77.826643,5,Agricultural Borewell,2009,65,50 - 100 m,4,Has never failed,1
-15.367671,77.835719,5,Agricultural Borewell,2009,65,50 - 100 m,4,Has never failed,1
-15.370861,77.828906,5,Agricultural Borewell,2010,65,50 - 100 m,4,Has never failed,1
-15.357663,77.821828,5,Agricultural Borewell,2010,65,50 - 100 m,4,Has never failed,1
-15.375061,77.827731,5,Agricultural Borewell,2011,65,50 - 100 m,4,Has never failed,1
-15.356613,77.815349,5,Agricultural Borewell,2012,65,50 - 100 m,4,Has never failed,1
-15.373252,77.845863,5,Agricultural Borewell,2005,66,50 - 100 m,4,Has never failed,1
-15.373932,77.844918,5,Agricultural Borewell,2005,66,50 - 100 m,4,Has never failed,1
-15.374486,77.844085,5,Agricultural Borewell,2009,66,50 - 100 m,4,Has never failed,1
-15.360202,77.828657,5,Agricultural Borewell,2006,67,50 - 100 m,4,Has never failed,1
-15.378754,77.825186,5,Agricultural Borewell,2007,67,50 - 100 m,4,Has never failed,1
-15.373793,77.832854,5,Agricultural Borewell,2011,67,50 - 100 m,4,Has never failed,1
-15.364878,77.82162,5,Agricultural Borewell,1985,68,50 - 100 m,4,Has never failed,1
-15.359596,77.823154,5,Agricultural Borewell,2012,68,50 - 100 m,4,Has never failed,1
-15.358505,77.81491,5,Agricultural Borewell,2007,69,50 - 100 m,4,Has never failed,1
-15.360183,77.82404,5,Agricultural Borewell,2010,69,50 - 100 m,4,Has never failed,1
-15.358938,77.815239,5,Agricultural Borewell,2012,69,50 - 100 m,4,Has never failed,1
-15.36942,77.828823,5,Agricultural Borewell,1996,70,50 - 100 m,4,Has never failed,1
-15.38212,77.829343,5,Agricultural Borewell,2002,70,50 - 100 m,4,Has never failed,1
-15.371549,77.828732,5,Agricultural Borewell,2003,70,50 - 100 m,4,Has never failed,1
-15.359766,77.830808,5,Agricultural Borewell,2003,70,50 - 100 m,4,Has never failed,1
-15.378549,77.838824,8,Domestic Borewell,2004,70,50 - 100 m,4,Has never failed,1
-15.371851,77.808673,7,Domestic Borewell,2005,70,50 - 100 m,4,Has never failed,1
-15.390222,77.81925,5,Agricultural Borewell,2007,70,50 - 100 m,4,Has never failed,1
 15.384823,77.836369,5,Agricultural Borewell,2008,70,50 - 100 m,4,Has never failed,1
 15.416412,77.836651,7,Domestic Borewell,2008,70,50 - 100 m,4,Has never failed,1
 15.37716,77.840491,8,Domestic Borewell,2008,70,50 - 100 m,4,Has never failed,1
-15.419654,77.821346,5,Agricultural Borewell,2009,70,50 - 100 m,4,Has never failed,1
-15.365892,77.832922,5,Agricultural Borewell,2010,70,50 - 100 m,4,Has never failed,1
-15.365075,77.81667,5,Agricultural Borewell,2010,70,50 - 100 m,4,Has never failed,1
-15.384982,77.84178,7,Domestic Borewell,2011,70,50 - 100 m,4,Has never failed,1
-15.381677,77.839355,8,Domestic Borewell,2011,70,50 - 100 m,4,Has never failed,1
-15.359521,77.823627,5,Agricultural Borewell,2012,70,50 - 100 m,4,Has never failed,1
 15.358441,77.833798,5,Agricultural Borewell,2008,72,50 - 100 m,4,Has never failed,1
 15.416616,77.836896,6,Domestic Borewell,2008,72,50 - 100 m,4,Has never failed,1
-15.416944,77.823307,5,Agricultural Borewell,2009,72,50 - 100 m,4,Has never failed,1
-15.35858,77.832996,5,Agricultural Borewell,2011,72,50 - 100 m,4,Has never failed,1
-15.3668,77.829377,8,Domestic Borewell,2000,75,50 - 100 m,4,Has never failed,1
-15.379423,77.829502,5,Agricultural Borewell,2002,75,50 - 100 m,4,Has never failed,1
-15.361304,77.827707,5,Agricultural Borewell,2002,75,50 - 100 m,4,Has never failed,1
-15.378807,77.819539,5,Agricultural Borewell,2003,75,50 - 100 m,4,Has never failed,1
-15.375057,77.832622,5,Agricultural Borewell,2003,75,50 - 100 m,4,Has never failed,1
-15.384489,77.830403,5,Agricultural Borewell,2006,75,50 - 100 m,4,Has never failed,1
-15.380754,77.826534,5,Agricultural Borewell,2007,75,50 - 100 m,4,Has never failed,1
 15.381506,77.819766,5,Agricultural Borewell,2008,75,50 - 100 m,4,Has never failed,1
-15.37053,77.838214,5,Agricultural Borewell,2009,75,50 - 100 m,4,Has never failed,1
-15.375869,77.836789,7,Domestic Borewell,2009,76,50 - 100 m,4,Has never failed,1
-15.382458,77.838334,8,Domestic Borewell,1990,80,50 - 100 m,4,Has never failed,1
-15.358567,77.814686,5,Agricultural Borewell,2000,80,50 - 100 m,4,Has never failed,1
-15.383084,77.841141,8,Domestic Borewell,2000,80,50 - 100 m,4,Has never failed,1
-15.377324,77.840828,8,Domestic Borewell,2002,80,50 - 100 m,4,Has never failed,1
-15.363546,77.834368,5,Agricultural Borewell,2007,80,50 - 100 m,4,Has never failed,1
 15.373914,77.842734,5,Agricultural Borewell,2008,80,50 - 100 m,4,Has never failed,1
 15.383566,77.834093,5,Agricultural Borewell,2008,80,50 - 100 m,4,Has never failed,1
+15.388153,77.834561,5,Agricultural Borewell,2008,85,50 - 100 m,4,Has never failed,1
+15.367475,77.827096,6,Domestic Borewell,2008,90,50 - 100 m,4,Has never failed,1
+15.373968,77.843655,3,Open Well,2009,3.5,0 - 10 m,1,Defunct,1
+15.421033,77.835375,2,Open Well,2009,5,0 - 10 m,1,Defunct,1
+15.355528,77.819524,3,Open Well,2009,6.5,0 - 10 m,1,Defunct,1
+15.372993,77.816925,3,Open Well,2009,5.3,0 - 10 m,2,Fails every summer,1
+15.376929,77.821031,2,Open Well,2009,4.8,0 - 10 m,4,Has never failed,1
+15.362645,77.816101,5,Agricultural Borewell,2009,20,10 - 50 m,3,Fails during droughts,1
+15.358971,77.812998,5,Agricultural Borewell,2009,40,10 - 50 m,3,Fails during droughts,1
+15.3813,77.840495,8,Domestic Borewell,2009,100,100 m +,3,Fails during droughts,1
+15.389516,77.818309,5,Agricultural Borewell,2009,100,100 m +,4,Has never failed,1
+15.355667,77.825046,5,Agricultural Borewell,2009,100,100 m +,4,Has never failed,1
+15.385232,77.813442,5,Agricultural Borewell,2009,120,100 m +,4,Has never failed,1
+15.379075,77.838981,8,Domestic Borewell,2009,200,100 m +,4,Has never failed,1
+15.365364,77.816837,5,Agricultural Borewell,2009,50,50 - 100 m,1,Defunct,1
+15.36358,77.827172,5,Agricultural Borewell,2009,60,50 - 100 m,1,Defunct,1
+15.358276,77.829196,5,Agricultural Borewell,2009,60,50 - 100 m,1,Defunct,1
+15.365532,77.832695,5,Agricultural Borewell,2009,65,50 - 100 m,1,Defunct,1
+15.376978,77.830905,5,Agricultural Borewell,2009,75,50 - 100 m,1,Defunct,1
+15.355607,77.824608,5,Agricultural Borewell,2009,80,50 - 100 m,1,Defunct,1
+15.38485,77.840693,8,Domestic Borewell,2009,80,50 - 100 m,1,Defunct,1
+15.37583,77.834499,8,Domestic Borewell,2009,60,50 - 100 m,2,Fails every summer,1
+15.418241,77.82255,5,Agricultural Borewell,2009,70,50 - 100 m,2,Fails every summer,1
+15.381016,77.836232,5,Agricultural Borewell,2009,74,50 - 100 m,2,Fails every summer,1
+15.355959,77.816851,5,Agricultural Borewell,2009,55,50 - 100 m,3,Fails during droughts,1
+15.361563,77.816457,5,Agricultural Borewell,2009,60,50 - 100 m,3,Fails during droughts,1
+15.380271,77.834554,5,Agricultural Borewell,2009,63,50 - 100 m,3,Fails during droughts,1
+15.377146,77.828327,5,Agricultural Borewell,2009,69,50 - 100 m,3,Fails during droughts,1
+15.364596,77.816486,5,Agricultural Borewell,2009,75,50 - 100 m,3,Fails during droughts,1
+15.384336,77.831016,5,Agricultural Borewell,2009,50,50 - 100 m,4,Has never failed,1
+15.361407,77.83398,5,Agricultural Borewell,2009,50,50 - 100 m,4,Has never failed,1
+15.355256,77.815968,5,Agricultural Borewell,2009,50,50 - 100 m,4,Has never failed,1
+15.3627,77.814596,5,Agricultural Borewell,2009,54,50 - 100 m,4,Has never failed,1
+15.365555,77.822281,5,Agricultural Borewell,2009,55,50 - 100 m,4,Has never failed,1
+15.363887,77.824539,5,Agricultural Borewell,2009,57,50 - 100 m,4,Has never failed,1
+15.365022,77.833935,5,Agricultural Borewell,2009,60,50 - 100 m,4,Has never failed,1
+15.368954,77.812414,5,Agricultural Borewell,2009,60,50 - 100 m,4,Has never failed,1
+15.355633,77.816071,5,Agricultural Borewell,2009,62,50 - 100 m,4,Has never failed,1
+15.414992,77.82293,5,Agricultural Borewell,2009,64,50 - 100 m,4,Has never failed,1
+15.371145,77.82905,5,Agricultural Borewell,2009,65,50 - 100 m,4,Has never failed,1
+15.356933,77.826643,5,Agricultural Borewell,2009,65,50 - 100 m,4,Has never failed,1
+15.367671,77.835719,5,Agricultural Borewell,2009,65,50 - 100 m,4,Has never failed,1
+15.374486,77.844085,5,Agricultural Borewell,2009,66,50 - 100 m,4,Has never failed,1
+15.419654,77.821346,5,Agricultural Borewell,2009,70,50 - 100 m,4,Has never failed,1
+15.416944,77.823307,5,Agricultural Borewell,2009,72,50 - 100 m,4,Has never failed,1
+15.37053,77.838214,5,Agricultural Borewell,2009,75,50 - 100 m,4,Has never failed,1
+15.375869,77.836789,7,Domestic Borewell,2009,76,50 - 100 m,4,Has never failed,1
 15.358813,77.831817,5,Agricultural Borewell,2009,80,50 - 100 m,4,Has never failed,1
 15.363452,77.834904,5,Agricultural Borewell,2009,80,50 - 100 m,4,Has never failed,1
 15.367627,77.835251,5,Agricultural Borewell,2009,80,50 - 100 m,4,Has never failed,1
-15.384755,77.84087,8,Domestic Borewell,2010,80,50 - 100 m,4,Has never failed,1
-15.372209,77.844361,5,Agricultural Borewell,2011,80,50 - 100 m,4,Has never failed,1
-15.371682,77.844613,5,Agricultural Borewell,2011,80,50 - 100 m,4,Has never failed,1
-15.380568,77.841815,5,Agricultural Borewell,2011,80,50 - 100 m,4,Has never failed,1
-15.360552,77.830269,5,Agricultural Borewell,2011,80,50 - 100 m,4,Has never failed,1
-15.359037,77.820082,5,Agricultural Borewell,2012,80,50 - 100 m,4,Has never failed,1
-15.36708,77.837173,5,Agricultural Borewell,2005,82,50 - 100 m,4,Has never failed,1
-15.365414,77.83838,5,Agricultural Borewell,2002,83,50 - 100 m,4,Has never failed,1
-15.370005,77.835928,5,Agricultural Borewell,2010,83,50 - 100 m,4,Has never failed,1
-15.363462,77.835126,5,Agricultural Borewell,2010,84,50 - 100 m,4,Has never failed,1
-15.388153,77.834561,5,Agricultural Borewell,2008,85,50 - 100 m,4,Has never failed,1
-15.389148,77.812704,5,Agricultural Borewell,2012,86,50 - 100 m,4,Has never failed,1
-15.382305,77.833531,5,Agricultural Borewell,2007,87,50 - 100 m,4,Has never failed,1
-15.385939,77.821136,6,Domestic Borewell,1985,90,50 - 100 m,4,Has never failed,1
-15.389231,77.82624,7,Domestic Borewell,1985,90,50 - 100 m,4,Has never failed,1
-15.358745,77.821258,5,Agricultural Borewell,1995,90,50 - 100 m,4,Has never failed,1
-15.414782,77.834994,6,Domestic Borewell,1996,90,50 - 100 m,4,Has never failed,1
-15.414305,77.837898,6,Domestic Borewell,2004,90,50 - 100 m,4,Has never failed,1
-15.383938,77.819288,6,Domestic Borewell,2006,90,50 - 100 m,4,Has never failed,1
-15.367475,77.827096,6,Domestic Borewell,2008,90,50 - 100 m,4,Has never failed,1
-15.39774,77.812074,5,Agricultural Borewell,2010,90,50 - 100 m,4,Has never failed,1
-15.416833,77.836714,6,Domestic Borewell,2010,90,50 - 100 m,4,Has never failed,1
-15.415529,77.836828,7,Domestic Borewell,2011,90,50 - 100 m,4,Has never failed,1
-15.388637,77.812459,5,Agricultural Borewell,2012,90,50 - 100 m,4,Has never failed,1
-15.418047,77.832911,5,Agricultural Borewell,1990,93,50 - 100 m,4,Has never failed,1
-15.417933,77.830252,5,Agricultural Borewell,2012,93,50 - 100 m,4,Has never failed,1
-15.417202,77.830806,5,Agricultural Borewell,2012,93,50 - 100 m,4,Has never failed,1
-15.360785,77.828087,5,Agricultural Borewell,2011,94,50 - 100 m,4,Has never failed,1
-15.367886,77.827774,6,Domestic Borewell,2004,95,50 - 100 m,4,Has never failed,1
-15.389165,77.84249,5,Agricultural Borewell,2002,100,100 m +,1,Defunct,1
-15.380186,77.839781,8,Domestic Borewell,2005,100,100 m +,1,Defunct,1
-15.380046,77.839768,8,Domestic Borewell,2005,100,100 m +,1,Defunct,1
-15.372359,77.84559,5,Agricultural Borewell,2006,100,100 m +,1,Defunct,1
-15.376538,77.837434,6,Domestic Borewell,1980,120,100 m +,1,Defunct,1
-15.358672,77.833058,6,Domestic Borewell,1992,120,100 m +,1,Defunct,1
-15.373954,77.835442,7,Domestic Borewell,1995,120,100 m +,1,Defunct,1
-15.37026,77.825483,6,Domestic Borewell,1996,120,100 m +,1,Defunct,1
-15.369034,77.826135,6,Domestic Borewell,1997,120,100 m +,1,Defunct,1
-15.380329,77.839638,8,Domestic Borewell,2006,120,100 m +,1,Defunct,1
-15.416242,77.836131,6,Domestic Borewell,2008,120,100 m +,1,Defunct,1
+15.378002,77.823364,2,Open Well,2010,5.5,0 - 10 m,2,Fails every summer,1
+15.377929,77.82118,2,Open Well,2010,7,0 - 10 m,4,Has never failed,1
+15.365023,77.826831,5,Agricultural Borewell,2010,45,10 - 50 m,1,Defunct,1
+15.365813,77.820923,5,Agricultural Borewell,2010,47,10 - 50 m,3,Fails during droughts,1
+15.381767,77.83076,5,Agricultural Borewell,2010,42,10 - 50 m,4,Has never failed,1
+15.362502,77.819146,5,Agricultural Borewell,2010,47,10 - 50 m,4,Has never failed,1
+15.365176,77.826803,5,Agricultural Borewell,2010,49,10 - 50 m,4,Has never failed,1
 15.379853,77.819572,5,Agricultural Borewell,2010,120,100 m +,1,Defunct,1
-15.414791,77.834946,6,Domestic Borewell,2008,135,100 m +,1,Defunct,1
-15.36596,77.827985,6,Domestic Borewell,1997,150,100 m +,1,Defunct,1
-15.378376,77.839353,8,Domestic Borewell,2002,100,100 m +,2,Fails every summer,1
 15.381715,77.836587,5,Agricultural Borewell,2010,100,100 m +,2,Fails every summer,1
-15.371171,77.834757,5,Agricultural Borewell,1991,120,100 m +,2,Fails every summer,1
-15.373653,77.838901,7,Domestic Borewell,1992,120,100 m +,2,Fails every summer,1
-15.368072,77.823709,6,Domestic Borewell,2002,120,100 m +,2,Fails every summer,1
-15.365788,77.82817,6,Domestic Borewell,2002,120,100 m +,2,Fails every summer,1
-15.374094,77.834863,6,Domestic Borewell,2007,120,100 m +,2,Fails every summer,1
-15.372397,77.834626,6,Domestic Borewell,2007,120,100 m +,2,Fails every summer,1
-15.369344,77.82651,7,Domestic Borewell,2008,120,100 m +,2,Fails every summer,1
 15.384647,77.812808,5,Agricultural Borewell,2010,120,100 m +,2,Fails every summer,1
-15.3813,77.840495,8,Domestic Borewell,2009,100,100 m +,3,Fails during droughts,1
-15.375889,77.837476,6,Domestic Borewell,1970,120,100 m +,3,Fails during droughts,1
-15.384514,77.840587,8,Domestic Borewell,1995,100,100 m +,4,Has never failed,1
-15.359787,77.83087,5,Agricultural Borewell,2000,100,100 m +,4,Has never failed,1
-15.352089,77.819137,7,Domestic Borewell,2000,100,100 m +,4,Has never failed,1
-15.385663,77.842166,8,Domestic Borewell,2000,100,100 m +,4,Has never failed,1
-15.381283,77.841517,5,Agricultural Borewell,2003,100,100 m +,4,Has never failed,1
-15.379629,77.827882,6,Domestic Borewell,2008,100,100 m +,4,Has never failed,1
-15.379473,77.838408,8,Domestic Borewell,2008,100,100 m +,4,Has never failed,1
-15.389516,77.818309,5,Agricultural Borewell,2009,100,100 m +,4,Has never failed,1
-15.355667,77.825046,5,Agricultural Borewell,2009,100,100 m +,4,Has never failed,1
 15.370891,77.830384,5,Agricultural Borewell,2010,100,100 m +,4,Has never failed,1
 15.384462,77.841578,7,Domestic Borewell,2010,100,100 m +,4,Has never failed,1
 15.375939,77.836853,7,Domestic Borewell,2010,100,100 m +,4,Has never failed,1
+15.352309,77.819117,7,Domestic Borewell,2010,125,100 m +,4,Has never failed,1
+15.354418,77.81871,5,Agricultural Borewell,2010,60,50 - 100 m,1,Defunct,1
+15.374879,77.832141,5,Agricultural Borewell,2010,75,50 - 100 m,1,Defunct,1
+15.363121,77.816046,5,Agricultural Borewell,2010,65,50 - 100 m,2,Fails every summer,1
+15.414864,77.837395,6,Domestic Borewell,2010,80,50 - 100 m,2,Fails every summer,1
+15.360615,77.813672,5,Agricultural Borewell,2010,50,50 - 100 m,3,Fails during droughts,1
+15.361465,77.811519,5,Agricultural Borewell,2010,70,50 - 100 m,3,Fails during droughts,1
+15.362606,77.816117,5,Agricultural Borewell,2010,50,50 - 100 m,4,Has never failed,1
+15.360411,77.814435,5,Agricultural Borewell,2010,50,50 - 100 m,4,Has never failed,1
+15.369324,77.805936,5,Agricultural Borewell,2010,50,50 - 100 m,4,Has never failed,1
+15.373438,77.833784,5,Agricultural Borewell,2010,54,50 - 100 m,4,Has never failed,1
+15.363767,77.820093,5,Agricultural Borewell,2010,56,50 - 100 m,4,Has never failed,1
+15.373063,77.832911,5,Agricultural Borewell,2010,60,50 - 100 m,4,Has never failed,1
+15.376598,77.831349,5,Agricultural Borewell,2010,60,50 - 100 m,4,Has never failed,1
+15.360602,77.828136,5,Agricultural Borewell,2010,64,50 - 100 m,4,Has never failed,1
+15.415505,77.822867,5,Agricultural Borewell,2010,64,50 - 100 m,4,Has never failed,1
+15.370861,77.828906,5,Agricultural Borewell,2010,65,50 - 100 m,4,Has never failed,1
+15.357663,77.821828,5,Agricultural Borewell,2010,65,50 - 100 m,4,Has never failed,1
+15.360183,77.82404,5,Agricultural Borewell,2010,69,50 - 100 m,4,Has never failed,1
+15.365892,77.832922,5,Agricultural Borewell,2010,70,50 - 100 m,4,Has never failed,1
+15.365075,77.81667,5,Agricultural Borewell,2010,70,50 - 100 m,4,Has never failed,1
+15.384755,77.84087,8,Domestic Borewell,2010,80,50 - 100 m,4,Has never failed,1
+15.370005,77.835928,5,Agricultural Borewell,2010,83,50 - 100 m,4,Has never failed,1
+15.363462,77.835126,5,Agricultural Borewell,2010,84,50 - 100 m,4,Has never failed,1
+15.39774,77.812074,5,Agricultural Borewell,2010,90,50 - 100 m,4,Has never failed,1
+15.416833,77.836714,6,Domestic Borewell,2010,90,50 - 100 m,4,Has never failed,1
+15.370626,77.813215,2,Open Well,2011,3.4,0 - 10 m,2,Fails every summer,1
+15.359414,77.823643,2,Open Well,2011,7.2,0 - 10 m,2,Fails every summer,1
+15.375046,77.817069,2,Open Well,2011,8.2,0 - 10 m,2,Fails every summer,1
+15.393758,77.826689,2,Open Well,2011,3.5,0 - 10 m,4,Has never failed,1
+15.392265,77.826894,2,Open Well,2011,3.5,0 - 10 m,4,Has never failed,1
+15.394869,77.826939,2,Open Well,2011,5,0 - 10 m,4,Has never failed,1
+15.394173,77.826974,2,Open Well,2011,5,0 - 10 m,4,Has never failed,1
+15.391533,77.826632,2,Open Well,2011,6.3,0 - 10 m,4,Has never failed,1
+15.390757,77.827033,3,Open Well,2011,7,0 - 10 m,4,Has never failed,1
+15.393161,77.826954,2,Open Well,2011,8,0 - 10 m,4,Has never failed,1
+15.361378,77.814482,5,Agricultural Borewell,2011,40,10 - 50 m,3,Fails during droughts,1
+15.357241,77.815633,5,Agricultural Borewell,2011,40,10 - 50 m,4,Has never failed,1
+15.367473,77.837184,5,Agricultural Borewell,2011,43,10 - 50 m,4,Has never failed,1
+15.353838,77.817503,5,Agricultural Borewell,2011,45,10 - 50 m,4,Has never failed,1
 15.356458,77.824016,5,Agricultural Borewell,2011,100,100 m +,4,Has never failed,1
 15.377271,77.840974,8,Domestic Borewell,2011,100,100 m +,4,Has never failed,1
 15.351098,77.820923,5,Agricultural Borewell,2011,105,100 m +,4,Has never failed,1
 15.381356,77.825361,5,Agricultural Borewell,2011,110,100 m +,4,Has never failed,1
 15.381378,77.825306,5,Agricultural Borewell,2011,110,100 m +,4,Has never failed,1
 15.371827,77.843877,5,Agricultural Borewell,2011,110,100 m +,4,Has never failed,1
-15.385457,77.820523,6,Domestic Borewell,1985,120,100 m +,4,Has never failed,1
-15.376019,77.838259,7,Domestic Borewell,1990,120,100 m +,4,Has never failed,1
-15.386047,77.819808,6,Domestic Borewell,1992,120,100 m +,4,Has never failed,1
-15.366408,77.827738,6,Domestic Borewell,1996,120,100 m +,4,Has never failed,1
-15.375062,77.838893,7,Domestic Borewell,1996,120,100 m +,4,Has never failed,1
-15.383921,77.820388,7,Domestic Borewell,1997,120,100 m +,4,Has never failed,1
-15.375468,77.835929,7,Domestic Borewell,1998,120,100 m +,4,Has never failed,1
-15.370243,77.825493,5,Agricultural Borewell,2000,120,100 m +,4,Has never failed,1
-15.369194,77.826259,6,Domestic Borewell,2006,120,100 m +,4,Has never failed,1
-15.365265,77.828922,6,Domestic Borewell,2006,120,100 m +,4,Has never failed,1
-15.3733,77.835393,7,Domestic Borewell,2006,120,100 m +,4,Has never failed,1
-15.37986,77.81969,5,Agricultural Borewell,2007,120,100 m +,4,Has never failed,1
-15.385232,77.813442,5,Agricultural Borewell,2009,120,100 m +,4,Has never failed,1
 15.383695,77.821979,6,Domestic Borewell,2011,120,100 m +,4,Has never failed,1
 15.379923,77.827061,7,Domestic Borewell,2011,120,100 m +,4,Has never failed,1
 15.351648,77.820159,7,Domestic Borewell,2011,120,100 m +,4,Has never failed,1
 15.381437,77.840605,8,Domestic Borewell,2011,120,100 m +,4,Has never failed,1
-15.352309,77.819117,7,Domestic Borewell,2010,125,100 m +,4,Has never failed,1
+15.354927,77.824611,5,Agricultural Borewell,2011,60,50 - 100 m,1,Defunct,1
+15.415735,77.836186,6,Domestic Borewell,2011,72,50 - 100 m,1,Defunct,1
+15.385195,77.839241,5,Agricultural Borewell,2011,80,50 - 100 m,1,Defunct,1
+15.364088,77.836771,5,Agricultural Borewell,2011,70,50 - 100 m,2,Fails every summer,1
+15.375153,77.841051,5,Agricultural Borewell,2011,50,50 - 100 m,4,Has never failed,1
+15.354647,77.81779,5,Agricultural Borewell,2011,50,50 - 100 m,4,Has never failed,1
+15.373843,77.834727,7,Domestic Borewell,2011,50,50 - 100 m,4,Has never failed,1
+15.365953,77.821107,5,Agricultural Borewell,2011,60,50 - 100 m,4,Has never failed,1
+15.363542,77.818655,5,Agricultural Borewell,2011,60,50 - 100 m,4,Has never failed,1
+15.376885,77.838238,7,Domestic Borewell,2011,60,50 - 100 m,4,Has never failed,1
+15.415152,77.836433,7,Domestic Borewell,2011,60,50 - 100 m,4,Has never failed,1
+15.37267,77.83351,8,Domestic Borewell,2011,60,50 - 100 m,4,Has never failed,1
+15.374919,77.842485,5,Agricultural Borewell,2011,63,50 - 100 m,4,Has never failed,1
+15.376868,77.829034,5,Agricultural Borewell,2011,63,50 - 100 m,4,Has never failed,1
+15.380079,77.835029,5,Agricultural Borewell,2011,63,50 - 100 m,4,Has never failed,1
+15.375061,77.827731,5,Agricultural Borewell,2011,65,50 - 100 m,4,Has never failed,1
+15.373793,77.832854,5,Agricultural Borewell,2011,67,50 - 100 m,4,Has never failed,1
+15.384982,77.84178,7,Domestic Borewell,2011,70,50 - 100 m,4,Has never failed,1
+15.381677,77.839355,8,Domestic Borewell,2011,70,50 - 100 m,4,Has never failed,1
+15.35858,77.832996,5,Agricultural Borewell,2011,72,50 - 100 m,4,Has never failed,1
+15.372209,77.844361,5,Agricultural Borewell,2011,80,50 - 100 m,4,Has never failed,1
+15.371682,77.844613,5,Agricultural Borewell,2011,80,50 - 100 m,4,Has never failed,1
+15.380568,77.841815,5,Agricultural Borewell,2011,80,50 - 100 m,4,Has never failed,1
+15.360552,77.830269,5,Agricultural Borewell,2011,80,50 - 100 m,4,Has never failed,1
+15.415529,77.836828,7,Domestic Borewell,2011,90,50 - 100 m,4,Has never failed,1
+15.360785,77.828087,5,Agricultural Borewell,2011,94,50 - 100 m,4,Has never failed,1
+15.36231,77.819977,5,Agricultural Borewell,2012,46,10 - 50 m,4,Has never failed,1
+15.355382,77.816514,5,Agricultural Borewell,2012,47,10 - 50 m,4,Has never failed,1
 15.385199,77.840039,5,Agricultural Borewell,2012,125,100 m +,4,Has never failed,1
 15.381753,77.840855,6,Domestic Borewell,2012,130,100 m +,4,Has never failed,1
-15.37458,77.836437,7,Domestic Borewell,2000,140,100 m +,4,Has never failed,1
 15.384802,77.83929,8,Domestic Borewell,2012,140,100 m +,4,Has never failed,1
-15.35612,77.822703,8,Domestic Borewell,2001,150,100 m +,4,Has never failed,1
-15.355613,77.823128,8,Domestic Borewell,2001,150,100 m +,4,Has never failed,1
-15.379075,77.838981,8,Domestic Borewell,2009,200,100 m +,4,Has never failed,1
+15.376612,77.831678,5,Agricultural Borewell,2012,85,50 - 100 m,3,Fails during droughts,1
+15.356517,77.813023,5,Agricultural Borewell,2012,50,50 - 100 m,4,Has never failed,1
+15.357205,77.815393,5,Agricultural Borewell,2012,50,50 - 100 m,4,Has never failed,1
+15.377444,77.82809,5,Agricultural Borewell,2012,55,50 - 100 m,4,Has never failed,1
+15.38983,77.814684,5,Agricultural Borewell,2012,60,50 - 100 m,4,Has never failed,1
+15.376309,77.829975,5,Agricultural Borewell,2012,60,50 - 100 m,4,Has never failed,1
+15.360335,77.815058,5,Agricultural Borewell,2012,60,50 - 100 m,4,Has never failed,1
+15.3757,77.833685,8,Domestic Borewell,2012,60,50 - 100 m,4,Has never failed,1
+15.356613,77.815349,5,Agricultural Borewell,2012,65,50 - 100 m,4,Has never failed,1
+15.359596,77.823154,5,Agricultural Borewell,2012,68,50 - 100 m,4,Has never failed,1
+15.358938,77.815239,5,Agricultural Borewell,2012,69,50 - 100 m,4,Has never failed,1
+15.359521,77.823627,5,Agricultural Borewell,2012,70,50 - 100 m,4,Has never failed,1
+15.359037,77.820082,5,Agricultural Borewell,2012,80,50 - 100 m,4,Has never failed,1
+15.389148,77.812704,5,Agricultural Borewell,2012,86,50 - 100 m,4,Has never failed,1
+15.388637,77.812459,5,Agricultural Borewell,2012,90,50 - 100 m,4,Has never failed,1
+15.417933,77.830252,5,Agricultural Borewell,2012,93,50 - 100 m,4,Has never failed,1
+15.417202,77.830806,5,Agricultural Borewell,2012,93,50 - 100 m,4,Has never failed,1

@@ -12,11 +12,11 @@ html, body {
 }
 
 #nav-img{
-	height: 38px;
-	width: 31px;
+	height: 42px;
+	width: 44px;
 	display: inline;
 	margin-left: 3%;
-	margin: 5px 5px 7px 3%;
+	margin: 4px 5px 4px 3%;
 }
 
 #title-text{
@@ -43,10 +43,10 @@ html, body {
 
 #chapter-list li{
 	display: inline;
-	font-size: 18px;
+	font-size: 20px;
 	vertical-align: middle;
 	margin: 0px 0px 0px -3px;
-	padding: 14px 8px 14px 8px;
+	padding: 14px 8px 12px 8px;
 	cursor: pointer;
 }
 
@@ -85,28 +85,31 @@ html, body {
 
 @media screen and (max-width: 1200px){
 	#title-text{
-		font-size: 18px
+		font-size: 18px;
 	}
 	#chapter-list li{
-		font-size: 14px
+		font-size: 14px;
+		padding: 30px 8px 16px 8px;
+
 	}
 }
 
 @media screen and (max-width: 1400px) and (min-width: 1200px){
 	#title-text{
-		font-size: 22px
+		font-size: 22px;
 	}
 	#chapter-list li{
-		font-size: 16px
+		font-size: 16px;
+		padding: 16px 8px 17px 8px;
 	}
 }
 
 @media screen and (min-width: 1600px){
 	#title-text{
-		font-size: 32px
+		font-size: 30px;
 	}
 	#chapter-list li{
-		font-size: 20px
+		font-size: 20px;
 	}
 
 }
@@ -127,19 +130,22 @@ img{
 	width: 90%;
 	margin-left: 5%;
 	margin-right: 5%;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .img-left{
 	max-width: 450px;
 	max-height: 600px;
-	margin: 20px 20px 0px 0px;
+	margin: 10px 20px 0px 0px;
 	float: left;
 }
 
+
 .img-right{
-	max-width: 500px;
-	max-height: 600px
-	margin: 20px 0px 0px 20px;
+	max-width: 450px;
+	max-height: 600px;
+	margin: 15px 0px 10px 10px;
 	float: right;
 
 }
@@ -152,14 +158,10 @@ a.anchor {
 }
 
 p{
-	margin-top: 0;
-    margin-bottom: 1rem;
+	margin-top: 10px;
+    margin-bottom: 10px;
     box-sizing: border-box;
     display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
     font-size: 20px;
     font-family: "Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
     line-height: 1.5;
@@ -169,38 +171,99 @@ p{
     margin-right: auto;
 }
 
-sup{
+.noselect{
+	-webkit-touch-callout: none; 
+    -webkit-user-select: none;   
+    -khtml-user-select: none;    
+    -moz-user-select: none;     
+    -ms-user-select: none;      
+    user-select: none;
+}
+
+
+sup > a{
 	font-size: 12px;
 	font-weight: bold;
+	border: 1px solid #a8a8a8;
+	margin-left: 2px;
+	padding: 1px 3px 1px 2px;
 }
+
+#ref-box{
+	position: absolute;
+	max-width: 700px;
+	border: 1px solid #a8a8a8;
+	border-radius: 3px;
+	background-color: rgba(220, 220, 217, 1);
+	padding: 4px;
+	pointer-events: none;
+}
+
+#ref-title{
+	text-align: center;
+	color: #737373;
+	margin-top: 20px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 5px 0px 5px 0px;
+	border: 1px solid #b3b3b3;
+	cursor: pointer;
+	width: 750px;
+	background-color: #e6e6e6;
+}
+
+#ref-title:hover{
+	font-weight: bold;
+	color: #4d4d4d;
+	border: 1px solid #999999;
+	background-color:  #d9d9d9;
+}
+
 
 #references{
 	max-width: 750px;
     margin-left: auto;
     margin-right: auto;
-    display: block;
+    display: none;
     padding-left: 15px;
 }
-
-
 
 h3{
 	max-width: 750px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
+#end-content{
+	margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    display: block;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #515151;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.twitter-share-button{
+	float: right;
+}
 
 
 #well-viz, #rwh-viz{
 	border-style: solid;
 	border-width: 1px;
 	background-color: #f2f2f2;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	font-family: 'Lato', sans-serif;
 	max-width: 1300px;
+	min-width: 1150px;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -330,7 +393,7 @@ button:focus {outline:0;}
 	top: 1px;
 	pointer-events: none;
 	height: 20px;
-	left: -2px;
+	left: -1px;
 }
 
 .playPause, .playPauseRWH {
@@ -457,8 +520,8 @@ button:focus {outline:0;}
 #rainfall-vis{
 	border-style: solid;
 	border-width: 1px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 	margin-right: auto;
 	margin-left: auto;
 	font-family: 'Lato', sans-serif;
@@ -597,6 +660,7 @@ text.svgTooltip{
 	float: right;
 	height: 550px;
 	width: 500px;
+	margin: 0px 0px 10px 20px;
 }	
 
 #map{ 
