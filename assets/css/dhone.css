@@ -145,7 +145,7 @@ img{
 .img-right{
 	max-width: 450px;
 	max-height: 600px;
-	margin: 15px 0px 10px 10px;
+	margin: 15px 0px 5px 10px;
 	float: right;
 
 }
@@ -660,7 +660,7 @@ text.svgTooltip{
 	float: right;
 	height: 550px;
 	width: 500px;
-	margin: 0px 0px 10px 20px;
+	margin: 0px 0px 5px 20px;
 }	
 
 #map{ 

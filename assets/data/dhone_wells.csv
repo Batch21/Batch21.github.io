@@ -1,5 +1,6 @@
 lat,lon,type_detailed,type,year,depth,depth_bin,status_code,status,count
 15.414789,77.834946,3,Open Well,1800,8.1,0 - 10 m,1,Defunct,1
+15.381959,77.824399,2,Open Well,1945,11,10 - 50 m,2,Fails every summer,1
 15.370325,77.825351,3,Open Well,1840,9.7,0 - 10 m,3,Fails during droughts,1
 15.35882,77.813928,2,Open Well,1870,6,0 - 10 m,3,Fails during droughts,1
 15.418045,77.830338,4,Open Well,1902,7.3,0 - 10 m,4,Has never failed,1
@@ -8,7 +9,6 @@ lat,lon,type_detailed,type,year,depth,depth_bin,status_code,status,count
 15.361605,77.826625,2,Open Well,1940,7.2,0 - 10 m,1,Defunct,1
 15.367345,77.821889,2,Open Well,1940,6.3,0 - 10 m,2,Fails every summer,1
 15.416305,77.83324,2,Open Well,1940,6,0 - 10 m,4,Has never failed,1
-15.381959,77.824399,2,Open Well,1945,11,10 - 50 m,2,Fails every summer,1
 15.382272,77.822917,3,Open Well,1950,5,0 - 10 m,1,Defunct,1
 15.384556,77.824472,2,Open Well,1950,6,0 - 10 m,1,Defunct,1
 15.414623,77.822781,4,Open Well,1950,4.5,0 - 10 m,3,Fails during droughts,1
