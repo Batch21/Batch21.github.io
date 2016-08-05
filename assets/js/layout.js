@@ -44,8 +44,8 @@ $('sup a').hover(function(){
 
 $("#ref-title").click(function(){
   $("#references").slideToggle();
-  $('html, body').animate({scrollTop: $('#ref-title').offset().top}, 'slow');
-   $(this).text(function(i, text){
+  //$('html, body').animate({scrollTop: $('#ref-title').offset().top}, 'slow');
+  $(this).text(function(i, text){
           return text === "Show References" ? "Hide References" : "Show References";
       })
 });

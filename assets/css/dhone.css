@@ -238,8 +238,8 @@ h3{
 }
 
 #end-content{
-	margin-top: 10px;
-    margin-bottom: 10px;
+	margin-top: 15px;
+    margin-bottom: 25px;
     box-sizing: border-box;
     display: block;
     font-size: 18px;
@@ -250,8 +250,18 @@ h3{
     margin-right: auto;
 }
 
+#disqus_thread{
+	max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .twitter-share-button{
 	float: right;
+}
+
+.return-link{
+	font-weight: bold;
 }
 
 
