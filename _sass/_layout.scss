@@ -2,7 +2,7 @@
 //
 // Styles for managing the structural hierarchy of the site.
 
-.container {
+.container,{
   max-width: 48rem;
   padding-left:  1.5rem;
   padding-right: 1.5rem;
@@ -12,4 +12,45 @@
 
 footer {
   margin-bottom: 2rem;
+}
+
+.container-large{
+	min-width: 100%;
+	padding: 0px;
+	padding: 0px;
+}
+
+.nav{
+	min-width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.case-study{
+	position: relative;
+	max-width: 50%;
+	margin-top: 1rem;
+
+	
+}
+
+
+.case-study h3{
+	position: absolute;
+	margin: 0.3rem 0.2rem 0rem 0.2rem;
+	text-align: center;
+
+	&:hover{
+		font-weight: bold;
+	}
+}
+
+.case-study img{
+	margin: 2rem 0rem 3rem 0rem
+
+	&:hover{
+		-moz-transform: scale(1.1);
+  		-webkit-transform: scale(1.1);
+  		transform: scale(1.1);
+	}
 }

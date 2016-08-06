@@ -1,6 +1,8 @@
 ---
-layout: page
+layout: default
 title: About
 ---
 
-<h3> Coming soon!<h3>
+<div class="container content">
+ <h3>Coming soon!</h3>
+</div>

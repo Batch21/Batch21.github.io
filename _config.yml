@@ -33,7 +33,6 @@ gems:
   - jekyll-gist
 
 pages_list:
-  Home: '/index'
   Case Studies: '/case_studies'
   Blog: '/blog/index'
   About: '/about'

@@ -1,23 +1,30 @@
 ---
-layout: default
+layout: homepage
 title: Home
 ---
 
-<img src="/assets/images/river.JPG" alt="River">
-
-<div class="posts">
-  {% for post in paginator.posts %}
-  <article class="post">
-    <h1 class="post-title">
-      <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
-
-    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
-
-    {{ post.content }}
-  
-  </article>
-  {% endfor %}
+<div id="img-con">
+  <img class="current" src="/assets/images/river.JPG" alt="River">
+  <img src="/assets/images/stream.JPG" alt="stream">
+  <img src="/assets/images/well.JPG" alt="Well">
+  <img src="/assets/images/river2.JPG" alt="River">
+  <img src="/assets/images/fields.JPG" alt="Fields">
 </div>
+
+<script>
+
+function cycleImages(){
+      var $current = $('#img-con .current');
+      var $next = ($current.next().length > 0) ? $current.next() : $('#img-con img:first');
+      $next.css('z-index',2);//move the next image up the pile
+      $current.fadeOut(1500,function(){//fade out the top image
+      $current.css('z-index',1).show().removeClass('current');//reset the z-index and unhide the image
+      $next.css('z-index',3).addClass('current');//make the next image the top one
+      });
+}
+
+$(document).ready(function(){
+setInterval('cycleImages()', 5000);
+});
+  
+</script>
