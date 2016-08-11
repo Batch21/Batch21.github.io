@@ -41,7 +41,7 @@ var legendRWH = d3.select("#legendRWH").append("svg")
        .attr("id", "legendBoxRWH")
 
 dem_legendRWH = legendRWH.append("g")
-	   				.attr("width", 120)
+	   				.attr("width", 135)
 	   				.attr("height", 15)
 	   				.attr("transform", "translate(" + 15 + "," + 45 + ")");       
 
@@ -63,7 +63,7 @@ for (var i = 0; i < dem_colors.length; i++) {
 
 var gradientBarRWH = dem_legendRWH.append("rect")
 				        .attr("y", 0)
-				        .attr("width", 120)
+				        .attr("width", 135)
 				        .attr("height", 15)
 				        .attr("fill","url(#gradient)")
 				        .style("stroke", "black")

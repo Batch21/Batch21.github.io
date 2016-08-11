@@ -61,16 +61,13 @@ var landuseScale = d3.scale.ordinal()
 
 var dem_colors = ["#227516", "#648744", "#9bc133", "#cdcb32", "#fed976", "#ffeda0", "#ffffcc", "#d7cebf", "#b6b098", "#986b41", "#561f10"]
 var dem_breaks = ["0%", "5%", "9%", "15%", "24%", "33%", "43%", "52%", "64%", "76%", "100%"]
-var dem_scale = d3.scale.linear().domain([390, 620]).range([0, 120]);
+var dem_scale = d3.scale.linear().domain([390, 620]).range([0, 135]);
 
 var svg_map = d3.select("#well-viz-map").append("svg")
 	.attr("width", w + margin_map.left + margin_map.right)
 	.attr("height", h + margin_map.top + margin_map.bottom)
 		.append("g")
 	.attr("transform", "translate(" + margin_map.left + "," + margin_map.top + ")");
-
-
-
 
 svg_map.append("rect")
 	.attr("class", "mapBorder")
@@ -88,14 +85,14 @@ svg_map.append("svg:image")
 
 var legend = d3.select("#legend").append("svg")
 	   .attr("id", "legendSVG")
-	   .attr("width", 150)
+	   .attr("width", 165)
 	   .attr("height", 200)
        .append("g")
        .attr("id", "legendBox")
 
 
 dem_legend = legend.append("g")
-	   				.attr("width", 120)
+	   				.attr("width", 135)
 	   				.attr("height", 15)
 	   				.attr("transform", "translate(" + 15 + "," + 45 + ")");       
 
@@ -117,7 +114,7 @@ for (var i = 0; i < dem_colors.length; i++) {
 
 var gradientBar = dem_legend.append("rect")
 				        .attr("y", 0)
-				        .attr("width", 120)
+				        .attr("width", 135)
 				        .attr("height", 15)
 				        .attr("fill","url(#gradient)")
 				        .style("stroke", "black")
@@ -174,7 +171,7 @@ drainageLegend.append("text")
 var legendLanduse = d3.select(".legendLanduse").attr("id", "landuse1")
 		.append("svg")
 	   .attr("class", "legendLanduseSVG")
-	   .attr("width", 150)
+	   .attr("width", 165)
 	   .attr("height", 25)
        
 legendLanduse.append("text")
