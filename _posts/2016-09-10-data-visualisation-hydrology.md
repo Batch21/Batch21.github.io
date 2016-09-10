@@ -68,6 +68,8 @@ Beyond traditional data portals and virtual observatories, there are some great 
  <li>Vitolo, C. Elkhatib, Y., Reusser, D., Macleod, C.J.A & Buytaert, W. 2015. Web technologies for environmental big data. <em>Environmental Modelling & Software.</em> 63. <a href="http://dx.doi.org/10.1016/j.envsoft.2014.10.007">http://dx.doi.org/10.1016/j.envsoft.2014.10.007</a> </li>
 </ol>
 
+<script type="text/javascript" src="/assets/js/libs/jquery-3.0.0.min.js"></script>
 {% include ref_display.html %}
+
 
 
