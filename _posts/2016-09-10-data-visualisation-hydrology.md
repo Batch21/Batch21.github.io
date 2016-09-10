@@ -19,7 +19,7 @@ The power of visualisations is that they leverage our cognitive abilities to rec
 One trend that is further heightening the importance of visualisation in hydrology is increasing data availability<sup>4</sup>. Remote sensing has become a vital source of data for hydrological studies, particularly for deriving land use and topographic information.  In recent years, the accessibility, accuracy and utility of remotely sensed datasets of a range of hydrological phenomena, such as precipitation, evapotranspiration, soil moisture, and groundwater, have increased rapidly<sup>5</sup>.
 
 <figure>
- <img src="../assets/images/grace.JPG">
+ <img src="../assets/images/grace.jpg">
  <figcaption>Groundwater measurements derived from data collected by the GRACE satellites - <a href="http://www.jpl.nasa.gov/news/news.php?release=2013-054">Image source</a>.</figcaption>
 </figure>
 
