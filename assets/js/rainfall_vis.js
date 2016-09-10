@@ -1,3 +1,4 @@
+// dimension of rainfall vis
 var marginRain = {top: 10, right: 10, bottom: 40, left: 60},
 	marginRain2 = {top: 45, right: 40, bottom: 75, left: 70},
     widthRain = 1100 - marginRain.left - marginRain.right,
@@ -10,8 +11,9 @@ var minRain = 0,
     zoomed = false,
     annualRainfall,
     labels = false,
-    dailyRainfall; 
+    dailyRainfall;
 
+//create monthly rainfall svg
 var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 	.attr("width", widthRain + marginRain.left + marginRain.right)
 	.attr("height", heightRain + marginRain.top + marginRain.bottom)
@@ -19,7 +21,11 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 	.append("g")
 	.attr("transform", "translate(" + marginRain.left + "," + marginRain.top + ")");
 
+
+// Monthley rainfall vis
  d3.csv("/assets/data/dhone_rainfall_monthly.csv", function(error, csv) {
+ 	
+ 	//setup data strucutre to use boxplot library
  	var data = [];
 	data[0] = [];
 	data[1] = [];
@@ -61,6 +67,7 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 	data[10][1] = [];
 	data[11][1] = [];
 
+    // push csv data into data structure
 	csv.forEach(function(x) {
 
 		var v1 = Math.floor(x[1]),
@@ -90,7 +97,8 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 		data[11][1].push(v12);
 
 	});
-	
+
+	//create scale and axis for boxplot
 	var chart = d3.box()
 		.whiskers(iqr(1.5))
 		.height(heightRain)	
@@ -150,7 +158,7 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
       .call(chart.width(xRainBox.rangeBand()));
 
 
-
+    //add hover interactivity
     d3.selectAll(".b").on("mouseover", function(d){
 
     	d3.select(this).selectAll(".box").style("fill", "#55d0f1");
@@ -209,6 +217,7 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 
     })
 
+    //create zoom button
     var zoomButton = svgRainBox.append("rect")
 			.attr("class", "zoom")
 			.attr("width", 80)
@@ -229,6 +238,7 @@ var svgRainBox = d3.select("#rainfall-mon-box").append("svg")
 							.style("font-size", "16px")
 							.text("Zoom In");
 
+	// add zoom functionality							
 	d3.select(".zoom").on("mouseover", function(){
 		zoomButton.style("stroke-width", 2)
 				  .style("fill", "#d3d3d3")
@@ -312,7 +322,7 @@ feMerge.append("feMergeNode")
 feMerge.append("feMergeNode")
     .attr("in", "SourceGraphic");
 
-		
+//create svg for annual rainfall chart		
 var svgRainAnn = d3.select("#rainfall-ann").append("svg")
 	.attr("width", widthRain + marginRain.left + marginRain.right)
 	.attr("height", heightRain + marginRain.top + marginRain.bottom)
@@ -320,7 +330,7 @@ var svgRainAnn = d3.select("#rainfall-ann").append("svg")
 	.append("g")
 	.attr("transform", "translate(" + marginRain.left + "," + marginRain.top + ")");
 
-
+// create annual rainfall chart
 d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, csv) {
 
 	annualRainfall = csv;
@@ -347,7 +357,6 @@ d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, csv) {
 					    .scale(yRainAnn)
 					    .orient("left")
 					    .ticks(15);
-
 
 	svgRainAnn.append("g")
 			  .attr("class", "y axis")
@@ -438,6 +447,7 @@ d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, csv) {
 
 });
 
+//create svg for daily rainfall chart
 var svgRD = d3.select("#rainfall-daily").append("svg")
 	.attr("width", widthRain2 + marginRain2.left + marginRain2.right)
 	.attr("height", heightRain2 + marginRain2.top + marginRain2.bottom)
@@ -446,6 +456,7 @@ var svgRD = d3.select("#rainfall-daily").append("svg")
 var svgRainDaily = 	svgRD.append("g")
 						 .attr("transform", "translate(" + marginRain2.left + "," + marginRain2.top + ")");
 
+//create daily rainfall chart
 d3.csv("/assets/data/dhone_rainfall_daily.csv", function(error, csv) {
 
     var rainTotals = d3.nest()

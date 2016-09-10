@@ -1,0 +1,8 @@
+<script type="text/javascript">
+	$(".ref-title").click(function(){
+      $(".references").slideToggle();
+      $(this).text(function(i, text){
+              return text === "Show References" ? "Hide References" : "Show References";
+          })
+    });
+</script>

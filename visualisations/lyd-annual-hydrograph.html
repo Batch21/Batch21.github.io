@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Annual Hydrograph for the River Lyd</title> 
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <style> 
+    
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; 
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        max-width: 1200px
+    }
+
+    .title{
+        font-family: arial;
+        text-anchor: middle;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .source{
+        font-family: arial;
+        text-anchor: end;
+        text-align: left;
+        font-size: 12px;
+        font-weight: bold;
+    } 
+
+    path { 
+        stroke: #cccccc;
+        opacity: 0.5;
+        stroke-width: 2;
+        fill: none;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+
+    .axis text{
+        font-size: 14px;
+    }
+
+    .selected{
+        stroke: steelblue;
+        opacity: 1;
+    }
+
+    .year {
+        font: 24px Arial;
+        font-weight: bold;
+        text-align: left;
+        text-anchor: end;
+    }
+
+    .axis-label{
+        text-anchor: middle;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+   </style>		
+  </head>
+  <body>
+   <div id="hydrograph"> </div>
+  </body>
+  <script type="text/javascript" src="/assets/js/libs/d3.js"></script>
+  <script type="text/javascript">
+
+      var margin = {top: 30, right: 10, bottom: 50, left: 45}, 
+      width = 850 - margin.right - margin.left,
+      height = 400 - margin.top - margin.bottom;
+
+      svg = d3.select("#hydrograph")
+                .append("div")
+                .classed("svg-container", true)
+                .append("svg")
+                .attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("viewBox", "0 0 850 400")    
+                .classed("svg-content-responsive", true); 
+
+      plt = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"); 
+
+      yScale = d3.scale.log()
+                  .range([height, 0]);
+
+      xScale =  d3.time.scale()
+                  .range([0, width]);
+
+      var xAxis = d3.svg.axis()
+                        .scale(xScale)
+                        .orient("bottom")
+                        .ticks(d3.time.months)
+                        .tickSize(16, 0)
+                        .tickFormat(d3.time.format("%b"));
+
+      var yAxis = d3.svg.axis()
+                        .scale(yScale)
+                        .orient("left")
+                        .tickFormat(function(d){
+                            return yScale.tickFormat(5,d3.format(",d"))(d)
+                        });
+
+      var line = d3.svg.line()
+                   .x(function(d) { return xScale(d.dayMonth); })
+                   .y(function(d) { return yScale(d.discharge); }); 
+
+      var format = d3.time.format("%m-%d-%Y");
+
+      yearText = plt.append("text")
+                      .text("2014")
+                      .attr("x", width)
+                      .attr("y", height - 5)
+                      .classed("year", true)
+
+      d3.csv("../assets/data/lyd.csv", function(data) {
+
+        data.forEach(function(d){
+            d.date = format.parse(d.date);
+            //new date allows all years to be plotted together
+            d.dayMonth = format.parse((d.date.getMonth() + 1) + "-" + d.date.getDate() + "-" + "2012")
+            d.discharge = +(d.discharge);
+        });
+
+        yScale.domain([0.1, d3.max(data, function(d) { return d.discharge; })]).nice();
+        xScale.domain(d3.extent(data, function(d) { return d.dayMonth; }));      
+
+        var nestedData = d3.nest()
+                         .key(function(d) {return d.date.getFullYear();})
+                         .entries(data);
+
+        nestedData.forEach(function(d){
+
+           plt.append("path")
+              .attr("class", "line")
+              .attr("d", line(d.values))
+              .attr("id", "t" + d.key); //add letter as all numeric id not allowed
+
+            d3.select("#t2014").classed("selected", true)
+
+        })
+
+        d3.selectAll(".line").on("mouseover", function(){
+            d3.select(".selected").classed("selected", false)
+            d3.select(this).classed("selected", true);
+            this.parentNode.appendChild(this); //move selected year to front
+            yearText.text(this.id.slice(1,5));
+        })
+
+        plt.append("g")
+           .attr("class", "x axis")
+           .attr("transform", "translate(0," + height + ")")
+           .call(xAxis)
+           .selectAll(".tick text")
+           .style("text-anchor", "start")
+           .attr("x", 6)
+           .attr("y", 6);
+
+        plt.append("g")
+           .attr("class", "y axis")
+           .call(yAxis);
+
+        plt.append("text")
+           .attr("transform", "rotate(-90)")
+           .attr("y", -30)
+           .attr("x",0 - (height / 2))
+           .attr("class", "axis-label")
+           .text("Discharge (metres³/second)")
+
+        plt.append("text")
+           .text("Annual hydrographs for the River Lyd, England (1989 - 2014)")
+           .attr("x", width/2)
+           .attr("y", -15)
+           .attr("class", "title")
+
+        plt.append("text")
+           .text("Data downloaded from: http://nrfa.ceh.ac.uk/")
+           .attr("x", width)
+           .attr("y", height + 35)
+           .attr("class", "source")  
+
+      });
+
+  </script>
+ </html>

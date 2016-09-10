@@ -12,6 +12,7 @@
 
 footer {
   margin-bottom: 2rem;
+  margin-left: 1rem;
 }
 
 .container-large{
@@ -21,6 +22,7 @@ footer {
 }
 
 .nav{
+  background-color: rgba(242, 242, 242, 0.80);
 	min-width: 100%;
 	margin: 0px;
 	padding: 0px;
@@ -30,21 +32,73 @@ footer {
 	position: relative;
 	max-width: 50%;
 	margin-top: 1rem;
+	text-align: center;
 
 	
 }
 
-
 .case-study h3{
 	position: absolute;
-	margin: 0.3rem 0.2rem 0rem 0.2rem;
-	text-align: center;
-
-	&:hover{
-		font-weight: bold;
-	}
+	margin: 2.5rem 0.5rem 0rem 0.5rem;
+	font-size: 26px;
+	text-shadow: 1px 1px 0.5px #ffffff;
 }
 
 .case-study img{
-	margin: 2rem 0rem 3rem 0rem
+	margin: 2rem 0rem 3rem 0rem;
+}
+
+.image{
+	width: 100%;
+	height: 100%;
+  overflow: hidden;
+}
+
+.image img {
+    -webkit-transition: all 1s ease; /* Safari and Chrome */
+    -moz-transition: all 1s ease; /* Firefox */
+    -ms-transition: all 1s ease; /* IE 9 */
+    -o-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+    position: relative;
+    z-index: -1;
+}
+
+.image:hover img {
+    -webkit-transform:scale(1.1); /* Safari and Chrome */
+    -moz-transform:scale(1.1); /* Firefox */
+    -ms-transform:scale(1.1); /* IE 9 */
+    -o-transform:scale(1.1); /* Opera */
+     transform:scale(1.1);
+}
+
+iframe{
+	width: 100%;
+	height: 420px;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+@media only screen and (max-width: 450px) {
+  iframe {
+    height: 170px;
+  }
+}
+
+@media only screen and (max-width: 650px) and (min-width: 450px ) {
+  iframe {
+    height: 260px;
+  }
+}
+
+@media only screen and (max-width: 780px) and (min-width: 650px) {
+  iframe {
+    height: 320px;
+  }
+}
+
+@media only screen and (max-width: 850px) and (min-width: 780px) {
+  iframe {
+    height: 350px;
+  }
 }

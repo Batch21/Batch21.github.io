@@ -5,7 +5,7 @@ permalink:           pretty
 title:               Aqua-Vis
 tagline:             Visualising Water
 url:                 http://aqua-vis.com
-paginate:            5
+paginate:            2
 paginate_path:       "blog/page:num"
 baseurl:             ""
 
@@ -33,7 +33,7 @@ gems:
   - jekyll-gist
 
 pages_list:
-  Case Studies: '/case_studies'
-  Blog: '/blog/index'
+  Case Studies: '/case-studies'
+  Blog: '/blog/index.html'
   About: '/about'
 

@@ -5,7 +5,10 @@
 
 .page,
 .post {
-  margin-bottom: 4em;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-right: 2%;
+  margin-left: 2%;
 
   li + li {
     margin-top: .25rem;
@@ -20,7 +23,7 @@
 }
 .page-title,
 .post-title {
-  margin-top: 0;
+  margin-top: 2rem;
 }
 
 // Meta data line below post title

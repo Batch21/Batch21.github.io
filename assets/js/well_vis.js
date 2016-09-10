@@ -63,6 +63,8 @@ var dem_colors = ["#227516", "#648744", "#9bc133", "#cdcb32", "#fed976", "#ffeda
 var dem_breaks = ["0%", "5%", "9%", "15%", "24%", "33%", "43%", "52%", "64%", "76%", "100%"]
 var dem_scale = d3.scale.linear().domain([390, 620]).range([0, 135]);
 
+
+//create well svg
 var svg_map = d3.select("#well-viz-map").append("svg")
 	.attr("width", w + margin_map.left + margin_map.right)
 	.attr("height", h + margin_map.top + margin_map.bottom)
@@ -83,6 +85,8 @@ svg_map.append("svg:image")
 		.attr("width", 500)
 		.attr("height", 540);
 
+
+//create legends
 var legend = d3.select("#legend").append("svg")
 	   .attr("id", "legendSVG")
 	   .attr("width", 165)
@@ -181,6 +185,7 @@ legendLanduse.append("text")
        .style("font-weight", "bold")
        .style("text-decoration", "underline");
 
+// create land use legend when box is checked
 function legendLanduseUpdate(){
 
 	d3.select("#landuseCheckBox")
@@ -227,7 +232,7 @@ function legendLanduseUpdate(){
 	});
 }
 
-
+//main function to draw geojson features
 function drawFeatures() {
 
 	d3.json("/assets/data/dhone_landuse.json", function(landuse) {
@@ -308,7 +313,8 @@ function drawFeatures() {
 		legendLanduseUpdate();
 	});
 }
-	
+
+// draws wells and activates animation buttons	
 function drawWells(){	   
 
 	d3.csv("/assets/data/dhone_wells.csv", function(data) {
@@ -457,8 +463,9 @@ function drawWells(){
 
 	});
 
-}	
-	
+}
+
+// updates well legend	
 function updateLegend(buttonScale){
 		
 	legend.select("#legendGroup").remove();
@@ -494,95 +501,96 @@ function updateLegend(buttonScale){
 			.style("stroke", "black")
 			.style("stroke-width", 0.4);
 
-		wellLegend.append("text")
-			.attr("x", 25)
-			.attr("y", 6)
-			.text(function(d) { 
-				if(buttonScale === colorDepth){
-					if(d === 10){
-						return "0 - 10 metres";
-					} else if (d === 50){
-						return "10 - 50 metres";
-					}else if (d === 100){
-						return "50 - 100 metres";
-					}else if (d === 300){
-						return "100 + metres";
-					}
-				} else{
-					return d
+	wellLegend.append("text")
+		.attr("x", 25)
+		.attr("y", 6)
+		.text(function(d) { 
+			if(buttonScale === colorDepth){
+				if(d === 10){
+					return "0 - 10 metres";
+				} else if (d === 50){
+					return "10 - 50 metres";
+				}else if (d === 100){
+					return "50 - 100 metres";
+				}else if (d === 300){
+					return "100 + metres";
 				}
-			})
-			.style("font-size", "12px");
+			} else{
+				return d
+			}
+		})
+		.style("font-size", "12px");
 
 	height = document.getElementById("legendBox").getBBox().height;	
 	d3.select("#legendSVG").attr("height", height + 15);
 	}
 
 
+//creates buttons for well characteristics
 function createButtons(){
 
-d3.select("#wellDepthButton").style("background-color", "#FAE9BD")
-						   	 .style("border-width", "1px");
+	d3.select("#wellDepthButton").style("background-color", "#FAE9BD")
+							   	 .style("border-width", "1px");
 
-d3.selectAll(".buttonWells")
-	.on("mouseover", function(){
-		d3.select(this).style("opacity", 1)
-					   .style("border-width", "2px")
-					   .style("margin", " 0px 4px 0px 0px");
-	})
-	.on("mouseout", function(){
-		d3.select(this).style("opacity", 0.95)
-					   .style("border-width", "1px")
-					   .style("margin", "1px 5px 1px 1px");
-	})
-	.on("click", function(){
-		buttonText = this.textContent;
+	d3.selectAll(".buttonWells")
+		.on("mouseover", function(){
+			d3.select(this).style("opacity", 1)
+						   .style("border-width", "2px")
+						   .style("margin", " 0px 4px 0px 0px");
+		})
+		.on("mouseout", function(){
+			d3.select(this).style("opacity", 0.95)
+						   .style("border-width", "1px")
+						   .style("margin", "1px 5px 1px 1px");
+		})
+		.on("click", function(){
+			buttonText = this.textContent;
 
-		d3.selectAll(".buttonWells").style("background-color", "#DDDDDD")
-					           .style("border-width", "1px");						   
-		d3.select(this).style("background-color", "#FAE9BD")
-					   .style("border-width", "2px");
+			d3.selectAll(".buttonWells").style("background-color", "#DDDDDD")
+						           .style("border-width", "1px");						   
+			d3.select(this).style("background-color", "#FAE9BD")
+						   .style("border-width", "2px");
 						   
 			// Update well color scheme
-		svg_map.selectAll(".well")
-			.style("fill", function(d){
-				if (buttonText === "Well Type"){
-					if (d.type){
-			   			return colorType(d.type);
-					}
-					else{
-						return "#ccc";
-					}
-				}else if(buttonText === "Well Depth"){
-					if (d.depth){
-			   			return colorDepth(d.depth);
-					}
-					else{
-						return "#ccc";
-					}
-				}else if(buttonText == "Well Status (2012)"){
-					if(d.status){
-						return colorStatus(d.status);
+			svg_map.selectAll(".well")
+				.style("fill", function(d){
+					if (buttonText === "Well Type"){
+						if (d.type){
+				   			return colorType(d.type);
+						}
+						else{
+							return "#ccc";
+						}
+					}else if(buttonText === "Well Depth"){
+						if (d.depth){
+				   			return colorDepth(d.depth);
+						}
+						else{
+							return "#ccc";
+						}
+					}else if(buttonText == "Well Status (2012)"){
+						if(d.status){
+							return colorStatus(d.status);
+						}else{
+							return "#ccc";
+						}
 					}else{
-						return "#ccc";
+						return "#ccc"
 					}
-				}else{
-					return "#ccc"
-				}
-				})
+					})
 
 			// Update legend
-		if(buttonText === "Well Depth"){
-			updateLegend(colorDepth);
-			d3.select(".legendLanduse").attr("id", "landuse1");
-		}else if(buttonText === "Well Type"){
-			updateLegend(colorType);
-			d3.select(".legendLanduse").attr("id", "landuse2");
-		}else if(buttonText === "Well Status (2012)"){
-			updateLegend(colorStatus);
-			d3.select(".legendLanduse").attr("id", "landuse1");
-		}
-	})
+			if(buttonText === "Well Depth"){
+				updateLegend(colorDepth);
+				d3.select(".legendLanduse").attr("id", "landuse1");
+			}else if(buttonText === "Well Type"){
+				updateLegend(colorType);
+				d3.select(".legendLanduse").attr("id", "landuse2");
+			}else if(buttonText === "Well Status (2012)"){
+				updateLegend(colorStatus);
+				d3.select(".legendLanduse").attr("id", "landuse1");
+			}
+		})
 }
 
 // Create chart SVGs
@@ -646,6 +654,7 @@ var yAvDep= d3.scale.linear()
 				  .range([h3, 0])
 				  .domain([0, 50]);
 
+//creates bar charts
 function createCharts(){		
 
 	// Group data and define scale domains for type bar chart using complete dataset
@@ -653,7 +662,6 @@ function createCharts(){
 	xType.domain(d3.range(wellTypes.length))
 	yType.domain([0, 280])
 
-	// Add axes for type bar chart
 	svg_type.append("g")
 		.attr("class", "y axis")
 		.call(d3.svg.axis()
@@ -835,7 +843,6 @@ function createCharts(){
 	xDepth.domain(d3.range(wellDepths.length))
 	yDepth.domain([0, 280])
 	
-	// Add axes for depth bar chart
 	svg_depth.append("g")
 		.attr("class", "y axis")
 		.call(d3.svg.axis()
@@ -1212,6 +1219,7 @@ function createCharts(){
 
 }			
 
+//creates line charts
 function addLineChart(){
 
 	d3.csv("/assets/data/dhone_wells_year_totals.csv", function(data) {
@@ -1408,6 +1416,7 @@ function addLineChart(){
 	});
 }
 
+//update line chart marker 
 function updateLineChart(year){
 
 	d3.select("#well-total")
@@ -1464,6 +1473,7 @@ function updateLineChart(year){
 }
 
 
+// select wells by year
 function countWells(attr, year){
 					
 	var nested = d3.nest()
@@ -1484,6 +1494,7 @@ function countWells(attr, year){
     return nested
 }
 
+// slider interactions
 function sliderActivate(){		 
     
     slider.on("slide", function(evt, value){
@@ -1516,6 +1527,7 @@ function sliderActivate(){
 
 }
 
+// wrap text for labels
 function wrap(text, width) {
 	text.each(function() {
 		var text = d3.select(this),
@@ -1540,6 +1552,7 @@ function wrap(text, width) {
   	});
 }
 
+//animate slider and update charts
 function animate(){
 	interval = setInterval(function(){ 
 
@@ -1564,6 +1577,7 @@ function animate(){
 	}, yearDuration); 
 }
 
+//update wells by year
 function updateWells(year){
 
 	if(year < 2013) d3.select('#slidertext').text(year);
@@ -1632,6 +1646,7 @@ function updateWells(year){
 }
 
 
+//animate vis on scroll
 $(window).on("load", function(){
 	$(window).on("scroll", function(){
 		if( ($("#well-viz").offset().top - ($(window).scrollTop() + $(window).height())) < -($(window).height()/2) && scrollTrig && slider.value() < 2012){
@@ -1647,7 +1662,7 @@ $(window).on("load", function(){
 
 
 
-
+//create well vis
 function createWellVis(){
 	drawFeatures();
 	updateLegend(colorDepth);

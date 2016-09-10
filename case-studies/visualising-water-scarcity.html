@@ -11,11 +11,6 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" type="text/css" href=/assets/css/dhone.css>
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />		
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
-    <script type="text/javascript" src="/assets/js/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery.waypoints.js"></script>
-    <script type="text/javascript" src="/assets/js/d3.js"></script>
-		<script type="text/javascript" src="/assets/js/d3.slider.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top"> 
@@ -181,7 +176,7 @@
             <li class="ref-9">Sinha, J., Sinha, M.K. and Adapa, U.R. 2013. Flow - River Rejuvenation in India: Impact of Tarun Bharat Sangh's work. Stockholm: Swedish International Development Cooperation Agency.</li>
           </ol>
           <div id="end-content">
-           <a class="return-link" href="http://www.aqua-vis.com/case_studies">Return to Case Studies</a>
+           <a class="return-link" href="http://www.aqua-vis.com/case-studies">Return to Case Studies</a>
            <a class="twitter-share-button" href="https://twitter.com/share" data-size="large" data-url="http://www.aqua-vis.com/case_studies/visualising_water_scarcity" data-via="batch21" data-text="Visualising Water Scarcity in Rural India">Tweet</a>
           </div>
           <div id="disqus_thread"></div>
@@ -199,13 +194,67 @@
             })();
           </script>
           <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>   
-  <script type="text/javascript" src="/assets/js/dhone_location_map.js"></script>
-  <script type="text/javascript" src="/assets/js/box.js"></script>
-	<script type="text/javascript" src="/assets/js/rainfall_vis.js"></script>
-	<script type="text/javascript" src="/assets/js/well_vis.js"></script>
-	<script type="text/javascript" src="/assets/js/rwh_vis.js"></script>
-  <script type="text/javascript" src="/assets/js/layout.js"></script>
+    </div>
+  <script type="text/javascript" src="/assets/js/libs/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/jquery.waypoints.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var waypoints = $('.chapter').waypoint({
+        handler: function(direction) {
+          var chapterList = $("#chapter-list li");
+          for (var i = 0; i < chapterList.length; i++) {
+            if(chapterList[i].className == this.element.className.split(/\s+/)[1]){
+              if(!$(chapterList[i]).hasClass('current')) {
+                $('#chapter-list li.current').removeClass('current');
+                $(chapterList[i]).addClass('current');
+              }
+            }else if($(chapterList[i]).hasClass('current') & this.element.className.split(/\s+/)[1] != "chap-1") {
+              $('#chapter-list li.current').removeClass('current');
+              $(chapterList[i-1]).addClass('current');
+            }
+          }
+        },
+        offset: '75%' 
+      });
+    });
+
+    var refs = $('#references li');
+
+    $('sup a').hover(function(){
+      
+      $(".container").append('<div id="ref-box"></div>');
+      
+      for (var i = 0; i < refs.length; i++) {
+        if(refs[i].className == this.className){
+          $("#ref-box").html(refs[i].textContent);
+        } 
+      }
+
+      var top = ($(this).position().top - 48) + "px"
+      var left = ($(this).position().left - 350) + "px"
+
+      $("#ref-box").css({
+        'top': top,
+        'left': left
+      })
+
+    }, function(){
+        $("#ref-box").remove();
+    });
+
+    $("#ref-title").click(function(){
+      $("#references").slideToggle();
+      //$('html, body').animate({scrollTop: $('#ref-title').offset().top}, 'slow');
+      $(this).text(function(i, text){
+              return text === "Show References" ? "Hide References" : "Show References";
+          })
+    });
+  </script>
+  <script type="text/javascript" src="/assets/js/libs/d3.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/d3.slider.js"></script>   
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+  <script type="text/javascript" src="/assets/js/libs/box.js"></script>
+	<script type="text/javascript" src="/assets/js/dhone.min.js"></script>
   <script>window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
     t = window.twttr || {};
