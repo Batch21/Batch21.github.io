@@ -20,7 +20,7 @@ One trend that is further heightening the importance of visualisation in hydrolo
 
 <figure>
  <img src="../assets/images/grace.jpg">
- <figcaption>Groundwater measurements derived from data collected by the GRACE satellites - <a href="http://www.jpl.nasa.gov/news/news.php?release=2013-054">Image source</a>.</figcaption>
+ <figcaption>Groundwater depletion estimates derived from data collected by the GRACE satellites - <a href="http://www.jpl.nasa.gov/news/news.php?release=2013-054">Image source</a>.</figcaption>
 </figure>
 
 While satellites are still the primary remote sensing platform, drones or UAVs are increasingly used to collect <a href="http://www.iwmi.cgiar.org/2015/09/elevated-learning/">high-resolution datasets at local scales</a> and at reduced cost. In addition to remote sensing, the rapid development of smart sensors and communication technology mean that ground-based hydrometric networks are collecting increasing amounts of real-time high-resolution data<sup>6</sup>. The rising prominence of citizen scientists is another growing source of data.<sup>7</sup>. 
@@ -32,13 +32,13 @@ Building on developments in web technology, web-portals and environmental virtua
  <figcaption>Screenshot of HydroShare's data viewer - <a href="https://www.hydroshare.org/resource/7be4a9c2f43b407f85aaf1154612d6a3/">data source</a>.</figcaption>
 </figure>
 
-More widely, news organisations, such as the New York Times, the Guardian, and the Economist, frequently employ interactive visualisations to support stories. <a href="https://en.wikipedia.org/wiki/Comparison_of_JavaScript_charting_frameworks">JavaScript charting libraries</a>, such as <a href="https://d3js.org/">D3</a>, are widely used to developed such visualisations. These libraries are also the basis of the visualisation component of many web portals and virtual observatories. Arguably, there is great potential for utilising the libraries more widely in less complex applications, such as blogs and project websites.
+More widely, news organisations, such as the New York Times, the Guardian, and the Economist, frequently support stories with visualisations, which are generally developed using <a href="https://en.wikipedia.org/wiki/Comparison_of_JavaScript_charting_frameworks">JavaScript charting libraries</a>, such as <a href="https://d3js.org/">D3</a>. These libraries are also the basis of the visualisation component of many web portals and virtual observatories. Arguably, there is great potential for utilising the libraries more widely in less complex applications, such as blogs and project websites.
 
 One of biggest advantages of web-based interactive visualisations for hydrology is that the temporal and spatial aspects of data can be more easily combined, particularly through the use of animation. Probably the most famous examples of this, although not hydrology, is the <a href="https://www.gapminder.org/tools/#_chart-type=bubbles">Gapminder visualisation</a> developed by Hans Rosling, which shows how the average income and life expectancy of countries has evolved over time. The interactivity that can be added to web-based visualisations allows users to explore the data and draw their own conclusions, which is in contrast to the purely explanatory nature of most visualisations<sup>3</sup>.  
 
 <figure>
  <img src="../assets/images/aqueduct.JPG">
- <figcaption><a href="http://www.wri.org/our-work/project/aqueduct">The Aqueduct tool </a> developed by The World Resources Institute visualises global water risks</figcaption>
+ <figcaption><a href="http://www.wri.org/our-work/project/aqueduct">The Aqueduct tool </a> developed by The World Resources Institute visualises global water risks.</figcaption>
 </figure>
 
 Beyond traditional data portals and virtual observatories, there are some great examples of hydrology-related visualisations on the web. Below is a list of a few of the best ones I’ve come across in the last year or so: 
@@ -47,13 +47,14 @@ Beyond traditional data portals and virtual observatories, there are some great 
 <li><a href="http://www.nytimes.com/interactive/2015/10/27/world/greenland-is-melting-away.html">Greenland is Melting Away</a> - This report by the New York Times includes some great interactive maps that support a story on monitoring the surface hydrology of the Greenland ice sheet.</li>
 <li>US <a href="http://vis.ecowest.org/interactive/precip.php#s=conus&m=regular&h=1">precipitation</a> and <a href=""> drought</a> - A couple of interesting visualisations by EcoWest that show  precipitation and drought variation across the US.</li> 
 <li><a href="http://www.nytimes.com/interactive/2012/08/11/sunday-review/drought-history.html">Drought and Deluge in the Lower 48</a> - A visualiation by the New York Times that shows how the proportion of US states in drought has varied over the last century.</li>
-<li><a href="http://salmonexplorer.ca/#skeena/">Salmon Explorer</a> - A great visualisation that explores salmon populations and habitats in the Skeena catchment, British Columbia.</li>
+<li><a href="http://salmonexplorer.ca/#skeena/">Salmon Explorer</a> - A great set of visualisations that explores salmon populations and habitats in the Skeena catchment, British Columbia.</li>
 <li><a href="http://projects.propublica.org/louisiana/#">Losing Ground</a> - A highly-detailed visualisation by ProPublica that investigates the challenges faced by the Mississippi Delta due to rising sea levels and erosion.</li>
 <li><a href="http://www.nationalgeographic.com/climate-change/explore-amazonia/#/Art/WaterCycle/?focus=WaterNutrients">Amazonia Under Threat</a> - A beautiful piece by National Geographic that illustrates, among other things, the water cycle of the Amazon rainforest.</li>
 <li><a href="http://www.nationalgeographic.com/clean-water-access-around-the-world/#select/TOT/total">See Where Access to Clean Water Is Getting Better—and Worse</a> - Another visualisation by National Geographic that shows how access to clean water has changed over time on a country-wise basis.</li>
 <li><a href="http://www.wateraid.org/what-we-do/the-crisis/statistics/world-wash-map">World WASH Map</a> - This visualisation, developed for WaterAid, documents country-wise progress towards achieving universal access to clean water and sanitation.</li>
 <li><a href="http://www.wri.org/applications/maps/aqueduct-atlas/#x=8.00&y=0.30&s=ws!20!28!c&t=waterrisk&w=def&g=0&i=BWS-16!WSV-4!SV-2!HFO-4!DRO-4!STOR-8!GW-8!WRI-4!ECOS-2!MC-4!WCG-8!ECOV-2!&tr=ind-1!prj-1&l=3&b=terrain&m=group">Aqueduct</a> - A mapping tool developed by the World Resources Institute that identifies various sources of water risks accross the world.</li>
 <li><a href="http://aqua-monitor.appspot.com/">Aqua Monitor</a> - A mapping application, developed by Deltares, that shows global changes in surface water over the last 30 years.</li>
+<li><a href="http://www.economist.com/news/essays/21689225-can-one-world-s-great-waterways-survive-its-development">The Mekong</a> - An essay by the Economist that makes nice use of maps and sound.</li>
 </ul>
 
 <h5 class="ref-title">Show References</h5>
