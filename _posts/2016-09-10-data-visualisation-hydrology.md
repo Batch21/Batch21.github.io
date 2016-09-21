@@ -59,7 +59,7 @@ Beyond traditional data portals and virtual observatories, there are some great 
 
 <h5 class="ref-title">Show References</h5>
 <ol class="references">
- <li> Heer, J., Bostoc, M. & Ogievetsky, V. 2010. A tour through the visualization zoo. <em>Communications of the ACM</em>. 53(6). <a href="http://dx.doi.org/10.1145/1743546.1743567">http://dx.doi.org/10.1145/1743546.1743567</a></li>
+ <li> Heer, J., Bostock, M. & Ogievetsky, V. 2010. A tour through the visualization zoo. <em>Communications of the ACM</em>. 53(6). <a href="http://dx.doi.org/10.1145/1743546.1743567">http://dx.doi.org/10.1145/1743546.1743567</a></li>
  <li> Karpouzoglou, T., Zulkafli, Z., Grainger, S., Dewulf, A., Buytaert, W. & Hannah, D.M. 2016. Environmental Virtual Observatories (EVOs): prospects for knowledge co-creation and resilience in the Information age. <em>Current Opinion in Environmental Sustainability</em>. 18. <a href="http://dx.doi.org/10.1016/j.cosust.2015.07.015">http://dx.doi.org/10.1016/j.cosust.2015.07.015</a></li>
  <li>McInerny, G., Chen, M., Freeman, R., Gavaaghan, D., Meyer, M., Rowland, F., Spiegelhalter, D., Stefaner, M., Tessarolo, G., & Hortal, J. 2014. Information visualisation for science and policy: Engaging users and avoiding bias. <em>Trends in Ecology & Evolution</em>. 29(3). <a href="http://dx.doi.org/10.1016/j.tree.2014.01.003">http://dx.doi.org/10.1016/j.tree.2014.01.003</a></li>
  <li>Buytaert, W., Baez, S., Bustamante, M., & Dewulf, A. 2012. Web-Based Environmental Simulation: Bridging the Gap between Scientific Modelling and Decision-Making. <em>Environmental Science & Technology</em>. 46. <a href="http://pubs.acs.org/doi/abs/10.1021/es2031278">http://dx.doi.org/10.1021/es2031278</a></li>
@@ -69,6 +69,7 @@ Beyond traditional data portals and virtual observatories, there are some great 
  <li>Vitolo, C. Elkhatib, Y., Reusser, D., Macleod, C.J.A & Buytaert, W. 2015. Web technologies for environmental big data. <em>Environmental Modelling & Software.</em> 63. <a href="http://dx.doi.org/10.1016/j.envsoft.2014.10.007">http://dx.doi.org/10.1016/j.envsoft.2014.10.007</a> </li>
 </ol>
 
+{% include Twitter.html %}
 <script type="text/javascript" src="/assets/js/libs/jquery-3.0.0.min.js"></script>
 {% include ref_display.html %}
 

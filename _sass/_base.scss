@@ -90,7 +90,7 @@ tbody tr:nth-child(odd) th {
 .ref-title{
   text-align: center;
   color: #737373;
-  margin-top: 20px;
+  margin-top: 0px;
   margin-right: auto;
   margin-left: auto;
   padding: 5px 0px 5px 0px;
@@ -105,6 +105,19 @@ tbody tr:nth-child(odd) th {
     border: 1px solid #999999;
     background-color:  #d9d9d9;
   }
+}
+
+.twitter-share-button{
+  display: inline;
+  float: left;
+}
+
+.twitter-follow-button{
+  display: inline;
+  float: right;
+}
+.twitter-links{
+  height: 30px;
 }
 
 
