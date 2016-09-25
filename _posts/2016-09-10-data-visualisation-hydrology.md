@@ -10,7 +10,7 @@ The analysis and visualisation of spatio-temporal data is fundamental to  the pr
 
 The temporal aspect is just as important. Too much rain over a short period of time can trigger floods, while too little over longer periods leads to droughts. Understanding trends in rainfall, streamflow, and other hydrological processes allows predictions to made of future conditions. Greater understanding results in more accurate predictions that have greater utility for water management decision-making and, for example, mitigating risks associated with climate change. To aid understanding, a range of methods, such as hydrographs, hyetographs, and Intensity-Duration-Frequency curves, have been developed to visualise time-series data in hydrology. 
 
-<iframe src="../visualisations/lyd-annual-hydrograph.html" style="border:none;" scrolling="no"></iframe>
+<iframe src="../figs/lyd-annual-hydrograph.html" style="border:none;" scrolling="no"></iframe>
 
 Hydrological data is often analysed and visualised alongside data from other disciplines. For example, combining hydrological and socio-economic data is key to providing people with a reliable supply of water. Along these lines, data visualisation has been recognised as a key component for accomplishing the recently agreed <a href="https://sustainabledevelopment.un.org/?menu=1300">Sustainable Development Goals</a>, of which the sixth is to ‘ensure availability and sustainable management of water and sanitation for all’. 
 

@@ -2,16 +2,20 @@
 //
 // Styles for managing the structural hierarchy of the site.
 
-.container,{
+.container{
   max-width: 48rem;
   padding-left:  1.5rem;
   padding-right: 1.5rem;
   margin-left:  auto;
   margin-right: auto;
+  .grid {
+    padding: 0rem;
+  }
 }
 
 footer {
   margin-bottom: 2rem;
+  margin-top: 1rem;
   margin-left: 1rem;
 }
 
@@ -33,8 +37,6 @@ footer {
 	max-width: 50%;
 	margin-top: 1rem;
 	text-align: center;
-
-	
 }
 
 .case-study h3{
@@ -77,6 +79,64 @@ footer {
   float: right;
   width: 40%;
   margin: 0px 0px 0px 20px;
+}
+
+.grid{
+  margin-top: 1.5rem;
+}
+
+.vis-con{
+  margin-top: 1.5rem;
+}
+
+.vis-example{
+  position: relative;
+  border: 1px solid #515151;
+  max-width: 302px;
+  margin: 0;
+
+  &:hover,
+  &:focus {
+       border: 2px solid black;
+       margin: -1px -1px -1px -1px;
+        
+       h3{
+         color: #4D74B3;
+       } 
+     }
+  img{
+    width: 298px;
+  }
+}
+
+.vis-title-con{
+  position: absolute;
+  bottom: 0px;
+  margin-right: 5px;
+  padding: 5px 5px 2px 5px;
+  width: 100%;
+
+}
+
+.vis-title{
+  text-decoration: none;
+  color: inherit;
+ 
+  &:hover,
+  &:focus {
+       text-decoration: none;
+     }
+
+  h3{
+    margin-bottom: 0px;
+    color: $gray-4;
+    margin-top: 0px;
+    
+    &:hover,
+    &:focus {
+       color: #4D74B3;
+     }
+  }  
 }
 
 iframe{
