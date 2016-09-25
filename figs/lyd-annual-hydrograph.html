@@ -153,7 +153,7 @@
            plt.append("path")
               .attr("class", "line")
               .attr("d", line(d.values))
-              .attr("id", "t" + d.key); //add letter as all numeric id not allowed
+              .attr("id", "t" + d.key); //add letter as numeric only id not allowed
 
             d3.select("#t2014").classed("selected", true)
 
@@ -199,7 +199,5 @@
            .attr("class", "source")  
 
       });
-  </script>
-  <script>
   </script>
  </html>
