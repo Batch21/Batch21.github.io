@@ -45,6 +45,14 @@
     	text-anchor: middle;
     }
 
+    .tooltip{
+    	user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none
+    }
+
     .tooltipText{
     	text-anchor: middle;
     	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
@@ -163,16 +171,16 @@
 	  			svg.append("rect")
 		  		   .attr("width", 60)
 		  		   .attr("height", 25)
-		  		   .attr("x", parseInt(this.getAttribute("x")) + margin.top)
-		  		   .attr("y", parseInt(this.getAttribute("y")) + margin.left)
+		  		   .attr("x", parseInt(this.getAttribute("x")) + margin.top + 20)
+		  		   .attr("y", parseInt(this.getAttribute("y")) + margin.left - 20)
 		  		   .classed("tooltip", true)
 		  		   .style("fill", "rgba(191, 191, 191, 0.9)")
 		  		   .style("stroke", "#333333")
 		  		   .style("storke-width", 1);
 
 		  		svg.append("text")
-		  		   .attr("x", parseInt(this.getAttribute("x")) + margin.top + 30)
-		  		   .attr("y", parseInt(this.getAttribute("y")) + margin.left + 18)
+		  		   .attr("x", parseInt(this.getAttribute("x")) + margin.top + 50)
+		  		   .attr("y", parseInt(this.getAttribute("y")) + margin.left - 2)
 		  		   .classed("tooltip tooltipText", true)
 		  		   .text(d.rainfall + " mm");	
 		  	})
