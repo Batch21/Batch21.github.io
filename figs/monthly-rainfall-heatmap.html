@@ -8,6 +8,49 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <style>
 
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; 
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        max-width: 1200px
+    }
+
+    .legendTitle{
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+        text-anchor: middle;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .label{
+    	font-size: 16px;
+    	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+    	color: black;
+    }
+
+    .legendLabel{
+    	font-size: 16px;
+    	font-family: 
+    	fill: black;
+    	text-anchor: middle;
+    }
+
+    .tooltipText{
+    	text-anchor: middle;
+    	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+    	font-size: 12px;
+    }
+
     </style>		
   </head>
   <body>
@@ -15,6 +58,160 @@
   </body>
   <script type="text/javascript" src="/assets/js/libs/d3.min.js"></script>
   <script type="text/javascript">
+
+  var margin = {top: 50, right: 40, bottom: 80, left: 50},
+  	  cellsize = 30,
+  	  legendWidth = 80,
+  	  rows = 12,
+  	  columns = 26,	 
+      width = cellsize * columns + columns,
+      height = cellsize * rows + rows,
+      months = ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"],
+      years = ["86/87", "87/88", "88/89", "89/90", "90/91", "91/92", "92/93", "93/94", "94/95", "95/96", "96/97", "97/98", "98/99", "99/00", "00/01", "01/02", "02/03", "03/04", "04/05", "05/06", "06/07", "07/08", "08/09", "09/10", "10/11", "11/12"],
+      colors = ["#ffffff", "#B3DFFC", "#7CC4F4", "#44A7EA", "#2487C9", "#136093", "#053A5E"],
+      bins = ["0", "0.1 - 10", "10 - 50", "50 - 100", "100 - 200", "200 - 400", "400+"];
+
+  svg = d3.select("#heatmap")
+            .append("div")
+            .classed("svg-container", true)
+            .append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", function(){
+            	var h = height + margin.top + margin.bottom;
+            	var w = width + margin.right + margin.left;
+            	return "0 0 " + w + " " + h
+            })   
+            .classed("svg-content-responsive", true); 
+
+  plt = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var yScale = d3.scale.ordinal().domain(months).range(d3.range(12));
+
+  var xScale = d3.scale.ordinal().domain(years).range(d3.range(26));
+
+  var colorScale = d3.scale.threshold()
+  						   .domain([0.01, 10, 50, 100, 200, 400, 650])
+  						   .range(colors)
+   
+  for (var i = 0; i < colors.length; i++) {
+
+  	var x = (i * legendWidth) + (width / 2) + margin.left - ((legendWidth * colors.length)/2); //center below grid
+  	var y = height + margin.top + (margin.bottom / 2); //position in bottom margin
+
+  	var legendCell = svg.append("g")
+
+  	legendCell.append("rect")
+  	   				.attr("y", y)
+				  	.attr("x", x)
+				  	.attr("width", legendWidth)
+				  	.attr("height", 25)
+				  	.attr("fill", function(){
+				  	     return colors[i];
+				  	})
+				  	.style("stroke", "black")
+				  	.style("stoke-width", 1);
+
+	legendCell.append("text")
+			  .attr("x", function(){
+			  	return x + (legendWidth/2);
+			  })
+			  .attr("y", function(){
+			  	return y + 40;
+			  })
+			  .text(bins[i])
+			  .classed("legendLabel", true);  
+  }
+
+  svg.append("text")
+  	 .text("Monthly Rainfall (mm)")
+  	 .classed("legendTitle", true)
+  	 .attr("x", function(){
+  	 	return (width / 2) + margin.left;
+  	 })
+  	 .attr("y", function(){
+  	 	return height + margin.top + 32;
+  	 }); 
+
+   d3.csv("/assets/data/monthly_rainfall.csv", function(data) {
+
+   	data.forEach(function(d) {
+                    d.rainfall = +d.rainfall;
+                });
+
+  	var cells = plt.selectAll("rect")
+			  	   .data(data)
+			  	   .enter()
+			  	   .append("rect")
+			  	   .attr("x", function(d){
+			  			return (xScale(d.year) * cellsize) + xScale(d.year);
+			  	   })
+			  	   .attr("y", function(d){
+			  	   		return (yScale(d.month) * cellsize) + yScale(d.month);
+			  	   })
+			  	   .attr("width", cellsize)
+			  	   .attr("height", cellsize)
+			  	   .attr("class", "cell")
+			  	   .style("fill", function(d){
+			  	   		return colorScale(d.rainfall);
+			  	   })
+			  	   .style("stroke", "#f2f2f2")
+			  	   .style("stroke-width", 1);
+
+	cells.on("mouseover", function(d){
+	  		d3.select(this).style("stroke", "black")
+
+	  			svg.append("rect")
+		  		   .attr("width", 60)
+		  		   .attr("height", 25)
+		  		   .attr("x", parseInt(this.getAttribute("x")) + margin.top)
+		  		   .attr("y", parseInt(this.getAttribute("y")) + margin.left)
+		  		   .classed("tooltip", true)
+		  		   .style("fill", "rgba(191, 191, 191, 0.9)")
+		  		   .style("stroke", "#333333")
+		  		   .style("storke-width", 1);
+
+		  		svg.append("text")
+		  		   .attr("x", parseInt(this.getAttribute("x")) + margin.top + 30)
+		  		   .attr("y", parseInt(this.getAttribute("y")) + margin.left + 18)
+		  		   .classed("tooltip tooltipText", true)
+		  		   .text(d.rainfall + " mm");	
+		  	})
+		  	.on("mouseout", function(){
+		  		d3.select(this).style("stroke", "#f2f2f2");
+		  		d3.selectAll(".tooltip").remove();
+		  	});
+  });
+
+  var xLabels = svg.selectAll("g.x")
+			     .data(years)
+			     .enter()
+			     .append("g")
+			     .attr("transform", function(d){
+			     	var x = (xScale(d) * cellsize) + margin.left + xScale(d) + 10;
+			     	return "translate("+ x +", 5)";
+			     });		     
+
+  xLabels.append("text")
+		 .text(function(d){
+	     	return d;
+	     })		     		
+		 .attr("transform", "rotate(90)")
+		 .attr("class", "label");
+
+  var yLabels = svg.selectAll("g.y")
+			       .data(months)
+			       .enter()
+			       .append("g")
+			       .attr("transform", function(d){
+			     	  	var y = (yScale(d) * cellsize) + margin.top + yScale(d) + 22;
+			     		return "translate(10, "+ y + ")";
+			       });
+
+  yLabels.append("text")
+  	     .text(function(d){
+  		 	return d;
+  	      })		
+  	     .classed("label", true);
 
 
   </script>

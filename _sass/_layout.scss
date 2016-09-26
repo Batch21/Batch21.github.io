@@ -86,7 +86,7 @@ footer {
 }
 
 .vis-con{
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .vis-example{
@@ -113,7 +113,7 @@ footer {
   position: absolute;
   bottom: 0px;
   margin-right: 5px;
-  padding: 5px 5px 2px 5px;
+  padding: 5px 5px 5px 10px;
   width: 100%;
 
 }
@@ -139,6 +139,10 @@ footer {
   }  
 }
 
+.col-md-4{
+  margin-top: 10px;
+}
+
 iframe{
 	width: 100%;
 	height: 420px;
@@ -147,25 +151,44 @@ iframe{
 }
 
 @media only screen and (max-width: 450px) {
-  iframe {
+  .iframe-lyd-hydro {
     height: 170px;
   }
 }
 
 @media only screen and (max-width: 650px) and (min-width: 450px ) {
-  iframe {
+  .iframe-lyd-hydro {
     height: 260px;
   }
 }
 
 @media only screen and (max-width: 780px) and (min-width: 650px) {
-  iframe {
+  .iframe-lyd-hydro {
     height: 320px;
   }
 }
 
 @media only screen and (max-width: 850px) and (min-width: 780px) {
-  iframe {
+  .iframe-lyd-hydro {
     height: 350px;
   }
+}
+
+.vis-example-title{
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.vis-example-text{
+  margin-bottom: 5px;
+}
+
+.iframe-rain-grid{
+  width: 100%;
+  height: 620px;
+  margin-top: 0px;
+}
+
+.iframe-lyd-hydro{
+  margin-top: 0px;
 }
