@@ -8,6 +8,14 @@ title: Visualisations
   <div class="row">
     <div class="col-md-4">
       <div class="vis-example">
+      <a href="../visualisations/annual-rainfall"><img src="../assets/images/annual-rainfall.JPG"></a>
+      <div class="vis-title-con">
+       <a href="../visualisations/annual-rainfall" class="vis-title"><h3>Annual Rainfall</h3></a>
+      </div>
+     </div>
+    </div>
+    <div class="col-md-4">
+      <div class="vis-example">
       <a href="../visualisations/monthly-rainfall-heatmap"><img src="../assets/images/monthly-rainfall-grid.JPG"></a>
       <div class="vis-title-con">
        <a href="../visualisations/monthly-rainfall-heatmap" class="vis-title"><h3>Rainfall Heatmap</h3></a>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Annual Rainfall for Dhone, Andhra Pradesh</title> 
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <style>
+
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; 
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        max-width: 1200px
+    }
+
+    .axis-title{
+        text-anchor: middle;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+    }
+
+    .tooltip{
+        text-anchor: middle;
+        font-size: 10px;
+        font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+        font-weight: bold;
+    }
+
+    .mean{
+        stroke: black;
+        stroke-width: 1.5;
+        shape-rendering: crispEdges;
+        stroke-dasharray: 8, 5;
+    }
+
+    .avText{
+       font-size: 14px;
+       font-weight: bold;
+       font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif; 
+    }
+
+    .hide{
+        display: none;
+    }
+
+    .buttonRect{
+        fill: #e6e6e6;
+        stroke: #808080;
+        stroke-width: 1;
+        cursor: pointer;
+    }
+
+    .selected{
+        stroke: black;
+        stroke-width: 2;
+    }
+
+    .buttonText{
+        text-anchor: middle;
+        font-size: 14px;
+        font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+        font-weight: bold;
+        pointer-events: none;
+    }
+
+    </style>		
+  </head>
+  <body>
+   <div id="barChart"> </div>
+  </body>
+  <script type="text/javascript" src="/assets/js/libs/d3.v4.min.js"></script>
+  <script type="text/javascript">
+
+    var margin = {top: 10, right: 10, bottom: 40, left: 50},
+    height = 400,
+    width = 800;
+
+    svg = d3.select("#barChart")
+            .append("div")
+            .classed("svg-container", true)
+            .append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", function(){
+                var h = height + margin.top + margin.bottom;
+                var w = width + margin.right + margin.left;
+                return "0 0 " + w + " " + h;
+            })   
+            .classed("svg-content-responsive", true); 
+
+    plt = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var xScale = d3.scaleBand()            
+                   .rangeRound([0 , width])
+                   .padding(0.1)
+
+    var yScale = d3.scaleLinear()
+                   .domain([0, 1400])
+                   .range([height, 0]);
+
+    d3.csv("/assets/data/dhone_rainfall_annual.csv", function(error, data) {
+        
+        data.forEach(function(d){
+            d.total_rainfall = +d.total_rainfall;
+            d.diff_from_mean = +d.diff_from_mean;
+        });
+
+        var mean_rainfall = d3.mean(data, function(d){ return d.total_rainfall});
+
+        xScale.domain(data.map(function(d) { return d.water_year; }));       
+    
+        var bars = plt.selectAll("rect")
+                       .data(data)       
+                       .enter()
+                       .append("rect")
+                       .attr("x", function(d) {
+                            return xScale(d.water_year);
+                       })
+                       .attr("y", function(d){
+                            return yScale(d.total_rainfall);
+                       })
+                       .attr("width", xScale.bandwidth())
+                       .attr("height", function(d) {
+                            return height - yScale(d.total_rainfall);
+                        })
+                       .classed("bar", true)
+                       .style("fill", "#4DBAD9")
+                       .style("stroke", "#dddddd")
+                       .style("stroke-width", 1)
+                       .on("mouseover", function(d){
+                            d3.select(this).style("fill", d3.color(d3.select(this).style("fill")).darker(0.5));
+
+                            var bar = this;
+
+                            plt.append("text")
+                               .attr("x", +d3.select(this).attr("x") + xScale.bandwidth()/2)
+                               .attr("y", function(d, i, j){
+                                 if (d3.select(bar).classed("diff"))
+                                    return +d3.select(bar).attr("y") + +d3.select(bar).attr("height") + 8;
+                                 else{
+                                    return d3.select(bar).attr("y");
+                                 }
+                               })
+                               .text(function(d){
+                                    if(d3.select(bar).classed("diff")){
+                                        return d3.select(bar).data()[0]["diff_from_mean"];
+                                    } else{
+                                        return d3.select(bar).data()[0]["total_rainfall"];
+                                    }
+                               })
+                               .classed("tooltip", true);
+
+                       })
+                       .on("mouseout", function(){
+                            
+                            if(d3.select(this).classed("diff")){
+                                d3.select(this).style("fill", "#F73737");
+                            } else{
+                                d3.select(this).style("fill", "#4DBAD9");  
+                            }
+
+                            d3.selectAll(".tooltip").remove();
+                       });
+
+        plt.append("line")
+           .attr("x1", 0)
+           .attr("x2", width)
+           .attr("y1", yScale(mean_rainfall))
+           .attr("y2", yScale(mean_rainfall))
+           .classed("mean", true);
+
+        var avText = plt.append("text")
+                        .attr("y", yScale(mean_rainfall) - 2)
+                        .attr("x", 100)
+                        .classed("avText", true)
+                        .text("Average: " + Math.floor(mean_rainfall) + " mm");
+
+        var xAxis = d3.axisBottom()
+                      .scale(xScale);
+            
+        var yAxis = d3.axisLeft()
+                      .scale(yScale)
+                      .ticks(15);
+
+        plt.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0)
+            .attr("x", 0)
+            .text("Rainfall (mm)")
+            .classed("axis-title", true);
+
+        ytext = svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 15)
+            .attr("x", -margin.top - height/2)
+            .text("Rainfall (mm)")
+            .classed("axis-title", true);        
+
+        plt.append("g")
+           .attr("class", "x axis")
+           .attr("transform", "translate(0," + (height) + ")")
+           .call(xAxis)
+
+        svg.append("text")
+            .attr("y", margin.top + height + 35)
+            .attr("x", margin.left + width/2)
+            .text("Year")
+            .classed("axis-title", true);
+
+        var buttonText = ["Show Total Rainfall", "Show Difference from Average"];
+
+        var buttons = svg.append("g").attr("transform", "translate(" + 200 + "," + 10 + ")")
+
+        buttons.selectAll("rect")
+               .data(buttonText)
+               .enter()
+               .append("rect")
+               .attr("width", 220)
+               .attr("height", 30)
+               .attr("y", 5)
+               .attr("x", function(d, i){
+                  return i * 220 + i * 10;
+               })
+               .attr("rx", 2)
+               .attr("ry", 2)
+               .classed("buttonRect", true)
+               .on("mouseover", function(){
+                    d3.select(this).style("fill",  " #bfbfbf");
+               })
+               .on("mouseout", function(){
+                    d3.select(this).style("fill",  "#e6e6e6");
+               })
+               .on("click", function(d){
+                    if(d === "Show Total Rainfall"){
+
+                        buttons.selectAll("rect").classed("selected", false);
+                        d3.select(this).classed("selected", true);
+
+                        ytext.text("Rainfall (mm)")
+
+                        avText.classed("hide", false);
+
+                        yScale.domain([0, 1400]);
+
+                        svg.selectAll(".y.axis").transition().duration(1000).call(yAxis);
+
+                        bars.transition()
+                           .duration(1000)
+                           .attr("y", function(d){
+                                return yScale(d.total_rainfall);
+                           })
+                           .attr("height", function(d){
+                              return height - yScale(d.total_rainfall); 
+                            })
+                           .style("fill", "#4DBAD9");
+
+                        bars.classed("diff", false);
+
+                           
+                    }else if(d === "Show Difference from Average"){
+
+                        buttons.selectAll("rect").classed("selected", false);
+                        d3.select(this).classed("selected", true);
+
+                        avText.classed("hide", true);
+
+                        yScale.domain([-mean_rainfall, 1400 - mean_rainfall]);
+
+                        ytext.text("Difference from Average (mm)")
+
+                        svg.selectAll(".y.axis").transition().duration(1000).call(yAxis);
+
+                        bars.transition()
+                            .duration(1000)
+                            .attr("y", function(d){
+                                if(d.diff_from_mean < 0){
+                                    return yScale(0);
+                                } else{
+                                    return yScale(d.diff_from_mean); 
+                                }  
+                            })
+                            .attr("height", function(d){
+                                if(d.diff_from_mean > 0){
+                                    return height - yScale(d.diff_from_mean) - (height - yScale(0));
+                                }else{
+                                    return yScale(d.diff_from_mean) - yScale(0);
+                                }
+                            })
+                            .style("fill", function(d){
+                                if(d.diff_from_mean > 0){
+                                    return "#4DBAD9";
+                                }else{
+                                    return "#F73737";
+                                }
+                            });
+
+                            bars.classed("diff", function(d){
+                                if(d.diff_from_mean < 0){
+                                    return true;
+                                }
+                            });
+
+
+                        
+
+                    }
+               });
+
+        //add selected class to first rect
+        buttons.select("rect").classed("selected", true);
+
+        buttons.selectAll("text")
+               .data(buttonText)
+               .enter()
+               .append("text")
+               .text(function(d){
+                    return d;
+               })
+               .attr("y", 26)
+               .attr("x", function(d, i){
+                  return 110 + i * 220 + i * 10;
+               })
+               .classed("buttonText", true);
+
+
+
+    });
+
+
+  </script>
+ </html>
