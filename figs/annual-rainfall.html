@@ -34,7 +34,7 @@
 
     .tooltip{
         text-anchor: middle;
-        font-size: 10px;
+        font-size: 11px;
         font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
         font-weight: bold;
     }
@@ -148,9 +148,9 @@
                                .attr("x", +d3.select(this).attr("x") + xScale.bandwidth()/2)
                                .attr("y", function(d, i, j){
                                  if (d3.select(bar).classed("diff"))
-                                    return +d3.select(bar).attr("y") + +d3.select(bar).attr("height") + 8;
+                                    return +d3.select(bar).attr("y") + +d3.select(bar).attr("height") + 9;
                                  else{
-                                    return d3.select(bar).attr("y");
+                                    return d3.select(bar).attr("y") - 2;
                                  }
                                })
                                .text(function(d){
@@ -185,7 +185,7 @@
                         .attr("y", yScale(mean_rainfall) - 2)
                         .attr("x", 100)
                         .classed("avText", true)
-                        .text("Average: " + Math.floor(mean_rainfall) + " mm");
+                        .text("Average: " + Math.round(mean_rainfall) + " mm");
 
         var xAxis = d3.axisBottom()
                       .scale(xScale);
@@ -208,7 +208,7 @@
             .attr("transform", "rotate(-90)")
             .attr("y", 15)
             .attr("x", -margin.top - height/2)
-            .text("Rainfall (mm)")
+            .text("Total Rainfall (mm)")
             .classed("axis-title", true);        
 
         plt.append("g")
@@ -219,12 +219,12 @@
         svg.append("text")
             .attr("y", margin.top + height + 35)
             .attr("x", margin.left + width/2)
-            .text("Year")
+            .text("Year (June - May)")
             .classed("axis-title", true);
 
         var buttonText = ["Show Total Rainfall", "Show Difference from Average"];
 
-        var buttons = svg.append("g").attr("transform", "translate(" + 200 + "," + 10 + ")")
+        var buttons = svg.append("g").attr("transform", "translate(" + 200 + "," + 0 + ")")
 
         buttons.selectAll("rect")
                .data(buttonText)
@@ -251,7 +251,7 @@
                         buttons.selectAll("rect").classed("selected", false);
                         d3.select(this).classed("selected", true);
 
-                        ytext.text("Rainfall (mm)")
+                        ytext.text("Total Rainfall (mm)")
 
                         avText.classed("hide", false);
 
