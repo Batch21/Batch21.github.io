@@ -6,6 +6,14 @@ title: Visualisations
 
 <div class="container grid">
   <div class="row">
+  <div class="col-md-4">
+      <div class="vis-example">
+      <a href="../visualisations/rainfall-intensity"><img src="../assets/images/rainfall-intensity.JPG"></a>
+      <div class="vis-title-con">
+       <a href="../visualisations/rainfall-intensity" class="vis-title"><h3>Rainfall Intensity</h3></a>
+      </div>
+     </div>
+    </div>
     <div class="col-md-4">
       <div class="vis-example">
       <a href="../visualisations/annual-rainfall"><img src="../assets/images/annual-rainfall.JPG"></a>
@@ -22,15 +30,16 @@ title: Visualisations
       </div>
      </div>
     </div>
-    <div class="col-md-4">
+  </div>  
+  <div class="row">
+   <div class="col-md-4">
       <div class="vis-example">
-    	<a href="../visualisations/lyd-annual-hydrograph"><img src="../assets/images/lyd-hydrograph.JPG"></a>
-    	<div class="vis-title-con">
-    	 <a href="../visualisations/lyd-annual-hydrograph" class="vis-title"><h3>Annual Hydrographs</h3></a>
-    	</div>
+      <a href="../visualisations/lyd-annual-hydrograph"><img src="../assets/images/lyd-hydrograph.JPG"></a>
+      <div class="vis-title-con">
+       <a href="../visualisations/lyd-annual-hydrograph" class="vis-title"><h3>Annual Hydrographs</h3></a>
+      </div>
      </div>
-    </div>
-    <div class="col-md-4"></div>
-    <div class="col-md-4"></div>
+   </div>
   </div>
+
 </div>

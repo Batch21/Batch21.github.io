@@ -37,6 +37,14 @@ footer {
 	max-width: 50%;
 	margin-top: 1rem;
 	text-align: center;
+  
+  &:hover,
+  &:focus {
+    h3{
+      color: #2e456b;
+    }
+  }
+
 }
 
 .case-study h3{
@@ -45,6 +53,11 @@ footer {
 	font-size: 22px;
   font-size: 2.3vw;
 	text-shadow: 1px 1px 0.5px #ffffff;
+
+  &:hover,
+  &:focus {
+    color: #2e456b;
+  }
 }
 
 .case-study img{

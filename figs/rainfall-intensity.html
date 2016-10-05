@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rainfall Intensity</title> 
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <style>
+
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; 
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        max-width: 1200px
+    }
+
+    .axis-title{
+        text-anchor: middle;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+    }
+
+    .tooltip{
+        text-anchor: middle;
+        font-size: 11px;
+        font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+        font-weight: bold;
+    }
+
+    .bar{
+      fill: #729FCF;
+      stroke: black;
+      stroke-width: 1;
+    }
+
+    .buttonTitle{
+      font-size: 15px;
+      font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+      font-weight: bold;
+    }
+
+    .button{
+      fill: #e6e6e6;
+      stroke: #808080;
+      stroke-width: 1;
+      cursor: pointer;
+    }
+
+    .selected{
+      stroke: black;
+      stroke-width: 2;
+    }
+
+    .buttonText{
+      text-anchor: middle;
+      font-size: 11px;
+      font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+
+    </style>		
+  </head>
+  <body>
+   <div id="chart"> </div>
+  </body>
+  <script type="text/javascript" src="/assets/js/libs/d3.v4.min.js"></script>
+  <script type="text/javascript">
+
+    var margin = {top: 20, right: 30, bottom: 40, left: 50},
+    height = 400,
+    width = 800,
+    bins = [1, 5, 10, 15, 30, 60],
+    binwidth = 1,
+    bars;
+
+    svg = d3.select("#chart")
+            .append("div")
+            .classed("svg-container", true)
+            .append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", function(){
+                var h = height + margin.top + margin.bottom;
+                var w = width + margin.right + margin.left;
+                return "0 0 " + w + " " + h;
+            })   
+            .classed("svg-content-responsive", true); 
+
+    plt = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var parseTime = d3.timeParse("%H:%M:%S");
+    var formatTime = d3.timeFormat("%H:%M");
+
+    var startTime = parseTime("16:00:00");
+    var endTime = parseTime("19:00:00");
+
+    var xScale = d3.scaleTime().range([0, width]).domain([startTime, endTime]);
+    var yScale = d3.scaleLinear().range([height, 0]).domain([0, 120]);
+
+    var xAxis = d3.axisBottom().scale(xScale).tickFormat(formatTime);
+    var yAxis = d3.axisLeft().scale(yScale).ticks(12);
+
+    svg.append("text")
+       .attr("y", margin.top + height + 35)
+       .attr("x", margin.left + width/2)
+       .text("Time")
+       .classed("axis-title", true);
+
+    svg.append("text")
+       .attr("transform", "rotate(-90)")
+       .attr("y", 15)
+       .attr("x", -margin.top - height/2)
+       .text("Rainfall Intensity (mm/hour)")
+       .classed("axis-title", true);
+
+    d3.csv("/assets/data/rainfall_event.csv", function(error, data) {
+        
+    data.forEach(function(d){
+      d.time = parseTime(d.time);
+    })
+
+    histogram = d3.histogram(data)
+                      .domain([startTime, endTime])
+                      .value(function(d){
+                        return d.time;
+                      })
+                      .thresholds(d3.timeMinute.range(startTime, endTime, binwidth));
+    
+    histData = histogram(data);
+
+    bars = plt.selectAll("rect")
+          .data(histData)
+          .enter()
+          .append("rect")
+          .classed("bar", true)
+          .attr("x", function(d) {
+            return xScale(d.x0);
+          })
+          .attr("width", function(d){
+            return xScale(d.x1) - xScale(d.x0);
+          })
+          .attr("y", function(d){
+            return yScale(d.length * 0.2 * 60/binwidth);
+          })
+          .attr("height", function(d){
+            return height - yScale(d.length * 0.2 * 60/binwidth);
+          });
+
+    addTooltip();
+          
+    plt.append("g")
+       .attr("class", "x axis")
+       .attr("transform", "translate(0," + (height) + ")")
+       .call(xAxis)
+
+    plt.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0)
+            .attr("x", 0)
+            .text("Rainfall Intensity (mm/hr)")
+            .classed("axis-title", true);
+
+    
+
+    svg.append("text")
+       .classed("buttonTitle", true)
+       .attr("x", 370)
+       .attr("y", 25)
+       .text("Select bin width:");
+    
+    var buttons = svg.selectAll("g.buttons")
+                     .data(bins)
+                     .enter()
+                     .append("g")
+                     .attr("transform", function(d, i){
+                        return "translate(" + (i * 60 + 500) + "," + 10 +")";
+                     });
+
+    buttons.append("rect")
+           .classed("button", true)
+           .attr("width", 50)
+           .attr("height", 18)
+           .classed("selected", function(d){
+              if(d === binwidth){
+                return true;
+              }else{
+                return false;
+              }
+           });
+           
+    buttons.append("text")
+           .classed("buttonText", true)
+           .attr("y", 13)
+           .attr("x", 25) 
+           .text(function(d){
+              return d + " mins"
+           });
+
+    buttons.on("mouseover", function(){
+              d3.select(this).select(".button").style("fill",  " #bfbfbf");
+           })
+           .on("mouseout", function(){
+              d3.select(this).select(".button").style("fill",  "#e6e6e6");
+           })
+           .on("click", function(){
+              update(d3.select(this).data()[0]);
+              d3.selectAll(".button").classed("selected", false);
+              d3.select(this).select(".button").classed("selected", true);
+           });
+               
+
+    function update(bin){
+
+      binwidth = bin;
+      
+      histogram.thresholds(d3.timeMinute.range(startTime, endTime, bin));
+
+      histData = histogram(data);
+
+      var newbars = plt.selectAll(".bar").data(histData);
+
+      newbars.exit()
+          .style("opacity", 0)
+          .remove();
+
+      newbars.enter()
+          .append("rect")
+          .classed("bar", true)
+          .attr("x", function(d) {
+            return xScale(d.x0);
+          })
+          .attr("width", function(d){
+            return xScale(d.x1) - xScale(d.x0);
+          })
+          .attr("y", function(d){
+            return yScale(d.length * 0.2 * 60/bin);
+          })
+          .attr("height", function(d){
+            return height - yScale(d.length * 0.2 * 60/bin);
+          })
+          .style("opacity", 0)
+          .transition()
+          .duration(1000)
+          .style("opacity", 1);
+        
+
+      newbars.attr("x", function(d) {
+            return xScale(d.x0);
+          })
+          .attr("width", function(d){
+            return xScale(d.x1) - xScale(d.x0);
+          })
+          .attr("y", function(d){
+            return yScale(d.length * 0.2 * 60/bin);
+          })
+          .attr("height", function(d){
+            return height - yScale(d.length * 0.2 * 60/bin);
+          })
+          .style("opacity", 0)
+          .classed("bar", true)
+          .transition()
+          .duration(1000)
+          .style("opacity", 1);
+
+      addTooltip();
+
+    }
+
+  function addTooltip(){
+
+    d3.selectAll(".bar")
+      .on("mouseover", function(d){
+
+        d3.select(this).style("fill", "#417dbe");
+
+        var bar = this;
+
+        plt.append("text")
+           .attr("x", +d3.select(this).attr("x") + +d3.select(this).attr("width")/2)
+           .attr("y", +d3.select(this).attr("y") - 2)
+           .text(Math.round(d3.select(this).data()[0].length * 0.2 * 60/binwidth))
+           .classed("tooltip", true);
+      })
+      .on("mouseout", function(){
+
+        d3.select(this).style("fill", "#729FCF");
+
+        d3.selectAll(".tooltip").remove();
+
+      });
+  }
+
+  });
+
+    
+
+  </script>
+ </html>
