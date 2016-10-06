@@ -29,13 +29,13 @@
         text-anchor: middle;
         font-size: 16px;
         font-weight: bold;
-        font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+        font-family: "Lato", Arial, sans-serif;
     }
 
     .tooltip{
         text-anchor: middle;
         font-size: 11px;
-        font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+        font-family: "Lato", Arial, sans-serif;
         font-weight: bold;
     }
 
@@ -47,7 +47,7 @@
 
     .buttonTitle{
       font-size: 15px;
-      font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+      font-family: "Lato", Arial, sans-serif;
       font-weight: bold;
     }
 
@@ -66,7 +66,7 @@
     .buttonText{
       text-anchor: middle;
       font-size: 11px;
-      font-family: Lato,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+      font-family: "Lato", Arial, sans-serif;
       font-weight: bold;
       pointer-events: none;
     }
@@ -219,7 +219,9 @@
               d3.select(this).select(".button").style("fill",  "#e6e6e6");
            })
            .on("click", function(){
-              update(d3.select(this).data()[0]);
+              if(d3.select(".selected").data()[0] != d3.select(this).data()[0]){
+                update(d3.select(this).data()[0]);
+              }
               d3.selectAll(".button").classed("selected", false);
               d3.select(this).select(".button").classed("selected", true);
            });
