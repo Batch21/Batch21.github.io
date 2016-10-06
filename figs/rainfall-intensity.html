@@ -32,6 +32,18 @@
         font-family: "Lato", Arial, sans-serif;
     }
 
+    .axis text{
+        font-size: 15px;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
+    .label{
+        text-anchor: middle;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
     .tooltip{
         text-anchor: middle;
         font-size: 11px;
@@ -80,10 +92,10 @@
   <script type="text/javascript" src="/assets/js/libs/d3.v4.min.js"></script>
   <script type="text/javascript">
 
-    var margin = {top: 20, right: 30, bottom: 40, left: 50},
+    var margin = {top: 10, right: 50, bottom: 40, left: 50},
     height = 400,
     width = 800,
-    bins = [1, 5, 10, 15, 30, 60],
+    bins = [1, 2, 5, 10, 15, 30, 60],
     binwidth = 1,
     bars;
 
@@ -109,12 +121,28 @@
 
     var xScale = d3.scaleTime().range([0, width]).domain([startTime, endTime]);
     var yScale = d3.scaleLinear().range([height, 0]).domain([0, 120]);
+    var yScale2 = d3.scaleLinear().range([height, 0]).domain([0, 60]);
 
     var xAxis = d3.axisBottom().scale(xScale).tickFormat(formatTime);
     var yAxis = d3.axisLeft().scale(yScale).ticks(12);
+    var yAxis2 = d3.axisRight().scale(yScale2).ticks(6);
+
+    plt.append("g")
+       .attr("class", "x axis")
+       .attr("transform", "translate(0," + (height) + ")")
+       .call(xAxis)
+
+    plt.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+    plt.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(" + (width) + ", 0)")
+            .call(yAxis2);
 
     svg.append("text")
-       .attr("y", margin.top + height + 35)
+       .attr("y", margin.top + height + 40)
        .attr("x", margin.left + width/2)
        .text("Time")
        .classed("axis-title", true);
@@ -126,70 +154,19 @@
        .text("Rainfall Intensity (mm/hour)")
        .classed("axis-title", true);
 
-    d3.csv("/assets/data/rainfall_event.csv", function(error, data) {
-        
-    data.forEach(function(d){
-      d.time = parseTime(d.time);
-    })
-
-    histogram = d3.histogram(data)
-                      .domain([startTime, endTime])
-                      .value(function(d){
-                        return d.time;
-                      })
-                      .thresholds(d3.timeMinute.range(startTime, endTime, binwidth));
-    
-    histData = histogram(data);
-
-    bars = plt.selectAll("rect")
-          .data(histData)
-          .enter()
-          .append("rect")
-          .classed("bar", true)
-          .attr("x", function(d) {
-            return xScale(d.x0);
-          })
-          .attr("width", function(d){
-            return xScale(d.x1) - xScale(d.x0);
-          })
-          .attr("y", function(d){
-            return yScale(d.length * 0.2 * 60/binwidth);
-          })
-          .attr("height", function(d){
-            return height - yScale(d.length * 0.2 * 60/binwidth);
-          });
-
-    addTooltip();
-          
-    plt.append("g")
-       .attr("class", "x axis")
-       .attr("transform", "translate(0," + (height) + ")")
-       .call(xAxis)
-
-    plt.append("g")
-            .attr("class", "y axis")
-            .call(yAxis)
-            .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 0)
-            .attr("x", 0)
-            .text("Rainfall Intensity (mm/hr)")
-            .classed("axis-title", true);
-
-    
-
     svg.append("text")
-       .classed("buttonTitle", true)
-       .attr("x", 370)
-       .attr("y", 25)
-       .text("Select bin width:");
-    
+       .attr("transform", "rotate(-90)")
+       .attr("y", width + margin.left + 45)
+       .attr("x", -margin.top - height/2)
+       .text("Cumulative Rainfall (mm)")
+       .classed("axis-title", true);
+
     var buttons = svg.selectAll("g.buttons")
                      .data(bins)
                      .enter()
                      .append("g")
                      .attr("transform", function(d, i){
-                        return "translate(" + (i * 60 + 500) + "," + 10 +")";
+                        return "translate(" + (i * 60 + 430) + "," + 12 +")";
                      });
 
     buttons.append("rect")
@@ -209,104 +186,189 @@
            .attr("y", 13)
            .attr("x", 25) 
            .text(function(d){
-              return d + " mins"
+              if(d === 1){
+                return d + " min";
+              }else{
+                return d + " mins";
+              }   
            });
 
-    buttons.on("mouseover", function(){
-              d3.select(this).select(".button").style("fill",  " #bfbfbf");
-           })
-           .on("mouseout", function(){
-              d3.select(this).select(".button").style("fill",  "#e6e6e6");
-           })
-           .on("click", function(){
-              if(d3.select(".selected").data()[0] != d3.select(this).data()[0]){
-                update(d3.select(this).data()[0]);
-              }
-              d3.selectAll(".button").classed("selected", false);
-              d3.select(this).select(".button").classed("selected", true);
-           });
-               
+    svg.append("text")
+       .classed("buttonTitle", true)
+       .attr("x", 305)
+       .attr("y", 27)
+       .text("Select bin width:");
 
-    function update(bin){
-
-      binwidth = bin;
-      
-      histogram.thresholds(d3.timeMinute.range(startTime, endTime, bin));
-
-      histData = histogram(data);
-
-      var newbars = plt.selectAll(".bar").data(histData);
-
-      newbars.exit()
-          .style("opacity", 0)
-          .remove();
-
-      newbars.enter()
-          .append("rect")
-          .classed("bar", true)
-          .attr("x", function(d) {
-            return xScale(d.x0);
-          })
-          .attr("width", function(d){
-            return xScale(d.x1) - xScale(d.x0);
-          })
-          .attr("y", function(d){
-            return yScale(d.length * 0.2 * 60/bin);
-          })
-          .attr("height", function(d){
-            return height - yScale(d.length * 0.2 * 60/bin);
-          })
-          .style("opacity", 0)
-          .transition()
-          .duration(1000)
-          .style("opacity", 1);
+    d3.csv("/assets/data/rainfall_event.csv", function(error, data) {
         
+      data.forEach(function(d){
+        d.time = parseTime(d.time);
+      })
 
-      newbars.attr("x", function(d) {
-            return xScale(d.x0);
-          })
-          .attr("width", function(d){
-            return xScale(d.x1) - xScale(d.x0);
-          })
-          .attr("y", function(d){
-            return yScale(d.length * 0.2 * 60/bin);
-          })
-          .attr("height", function(d){
-            return height - yScale(d.length * 0.2 * 60/bin);
-          })
-          .style("opacity", 0)
-          .classed("bar", true)
-          .transition()
-          .duration(1000)
-          .style("opacity", 1);
+      histogram = d3.histogram(data)
+                        .domain([startTime, endTime])
+                        .value(function(d){
+                          return d.time;
+                        })
+                        .thresholds(d3.timeMinute.range(startTime, endTime, binwidth));
+      
+      histData = histogram(data);
+     
+      bars = plt.selectAll("rect")
+            .data(histData)
+            .enter()
+            .append("rect")
+            .classed("bar", true)
+            .attr("x", function(d) {
+              return xScale(d.x0);
+            })
+            .attr("width", function(d){
+              return xScale(d.x1) - xScale(d.x0);
+            })
+            .attr("y", function(d){
+              return yScale(d.length * 0.2 * 60/binwidth);
+            })
+            .attr("height", function(d){
+              return height - yScale(d.length * 0.2 * 60/binwidth);
+            });
 
       addTooltip();
 
+      buttons.on("mouseover", function(){
+                d3.select(this).select(".button").style("fill",  " #bfbfbf");
+             })
+             .on("mouseout", function(){
+                d3.select(this).select(".button").style("fill",  "#e6e6e6");
+             })
+             .on("click", function(){
+                if(d3.select(".selected").data()[0] != d3.select(this).data()[0]){
+                  update(d3.select(this).data()[0]);
+                }
+                d3.selectAll(".button").classed("selected", false);
+                d3.select(this).select(".button").classed("selected", true);
+             });
+
+
+      var cumTotal = 0;
+      var cumRainfall = [];
+      for (var i = 0; i < histData.length; i++) {
+        cumTotal += histData[i].length * 0.2;
+        cumRainfall.push({"time": histData[i].x1, "rainfall": cumTotal}); 
+      }
+
+      var line = d3.line()
+                   .x(function(d) { return xScale(d.time); })
+                   .y(function(d) { return yScale2(d.rainfall); });
+
+      function drawLine(){
+
+        d3.select(".cumline").remove();
+
+        plt.append("path")
+           .datum(cumRainfall)
+           .attr("class", "line")
+           .attr("d", function(d){
+             return line(d);
+           })
+           .classed("cumline", true)
+           .style("fill", "none")
+           .style("stroke", "black")
+           .style("stroke-width", 2)
+           .style("stroke-dasharray", "8, 4");  
+
+      };
+
+      drawLine();
+
+      plt.append("text")
+         .attr("x", 500)
+         .attr("y", 198)
+         .attr("transform", "rotate(-8)")
+         .text("Cumulative Rainfall")
+         .classed("label", true);
+
+
+      function update(bin){
+
+        binwidth = bin;
+        
+        histogram.thresholds(d3.timeMinute.range(startTime, endTime, bin));
+
+        histData = histogram(data);
+
+        var newbars = plt.selectAll(".bar").data(histData);
+
+        newbars.exit()
+            .style("opacity", 0)
+            .remove();
+
+        newbars.enter()
+            .append("rect")
+            .classed("bar", true)
+            .attr("x", function(d) {
+              return xScale(d.x0);
+            })
+            .attr("width", function(d){
+              return xScale(d.x1) - xScale(d.x0);
+            })
+            .attr("y", function(d){
+              return yScale(d.length * 0.2 * 60/bin);
+            })
+            .attr("height", function(d){
+              return height - yScale(d.length * 0.2 * 60/bin);
+            })
+            .style("opacity", 0)
+            .transition()
+            .duration(1000)
+            .style("opacity", 1);
+          
+
+        newbars.attr("x", function(d) {
+              return xScale(d.x0);
+            })
+            .attr("width", function(d){
+              return xScale(d.x1) - xScale(d.x0);
+            })
+            .attr("y", function(d){
+              return yScale(d.length * 0.2 * 60/bin);
+            })
+            .attr("height", function(d){
+              return height - yScale(d.length * 0.2 * 60/bin);
+            })
+            .style("opacity", 0)
+            .classed("bar", true)
+            .transition()
+            .duration(1000)
+            .style("opacity", 1);
+
+        addTooltip();
+        drawLine();
+
+      }
+
+    function addTooltip(){
+
+      d3.selectAll(".bar")
+        .on("mouseover", function(d){
+
+          d3.select(this).style("fill", "#417dbe");
+
+          var bar = this;
+
+          plt.append("text")
+             .attr("x", +d3.select(this).attr("x") + +d3.select(this).attr("width")/2)
+             .attr("y", +d3.select(this).attr("y") - 2)
+             .text(Math.round(d3.select(this).data()[0].length * 0.2 * 60/binwidth))
+             .classed("tooltip", true);
+        })
+        .on("mouseout", function(){
+
+          d3.select(this).style("fill", "#729FCF");
+
+          d3.selectAll(".tooltip").remove();
+
+        });
     }
-
-  function addTooltip(){
-
-    d3.selectAll(".bar")
-      .on("mouseover", function(d){
-
-        d3.select(this).style("fill", "#417dbe");
-
-        var bar = this;
-
-        plt.append("text")
-           .attr("x", +d3.select(this).attr("x") + +d3.select(this).attr("width")/2)
-           .attr("y", +d3.select(this).attr("y") - 2)
-           .text(Math.round(d3.select(this).data()[0].length * 0.2 * 60/binwidth))
-           .classed("tooltip", true);
-      })
-      .on("mouseout", function(){
-
-        d3.select(this).style("fill", "#729FCF");
-
-        d3.selectAll(".tooltip").remove();
-
-      });
-  }
 
   });
 
