@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Annual Rainfall Trends</title> 
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <style>
+
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; 
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        max-width: 1200px
+    }
+
+    .axis-title{
+        text-anchor: middle;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
+    .axis text{
+        font-size: 15px;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
+    .label{
+        text-anchor: middle;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
+    .tooltip{
+        text-anchor: middle;
+        font-size: 11px;
+        font-family: "Lato", Arial, sans-serif;
+        font-weight: bold;
+    }
+
+    .bar{
+      fill: #729FCF;
+      stroke: black;
+      stroke-width: 1;
+    }
+
+    .buttonTitle{
+      font-size: 15px;
+      font-family: "Lato", Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    .button{
+      fill: #e6e6e6;
+      stroke: #808080;
+      stroke-width: 1;
+      cursor: pointer;
+    }
+
+    .selected{
+      stroke: black;
+      stroke-width: 2;
+    }
+
+    .buttonText{
+      text-anchor: middle;
+      font-size: 11px;
+      font-family: "Lato", Arial, sans-serif;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+
+    </style>		
+  </head>
+  <body>
+   <div id="chart"> </div>
+  </body>
+  <script type="text/javascript" src="/assets/js/libs/d3.v4.min.js"></script>
+  <script type="text/javascript">
+
+    var margin = {top: 10, right: 10, bottom: 40, left: 660},
+    height = 400,
+    width = 800,
+    bars;
+
+    svg = d3.select("#chart")
+            .append("div")
+            .classed("svg-container", true)
+            .append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", function(){
+                var h = height + margin.top + margin.bottom;
+                var w = width + margin.right + margin.left;
+                return "0 0 " + w + " " + h;
+            })   
+            .classed("svg-content-responsive", true); 
+
+    plt = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+    function gaus(x, sigma){
+
+
+      var weight = (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-(Math.pow(x, 2) / (2 * Math.pow(sigma, 2))));
+      return weight;
+    }
+    
+    var arr = [-3, -2, -1, 0, 1, 2, 3];
+    var position = [-3, -2, -1, 0, 1, 2, 3];
+    var weights = [];
+    var total = 0
+    for(var i = 0; i < arr.length; i++) {
+      weight = gaus(arr[i], 1.0);
+      weights.push(weight);
+      total += weight;
+    }
+
+    var newWeights = []; 
+    var newTotal = 0;
+    for (var i = 0; i < weights.length; i++) {
+      var newWeight = weights[i]/total;
+      newWeights.push(newWeight);
+      newTotal += newWeight;
+    }
+
+    data = [5, 6, 11, 2, 5, 3, 12, 4, 8, 2]
+
+    filtered = [];
+    for (var i = 0; i < data.length; i++) {
+      var total = 0;
+      for (var j = 0; j < weights.length; j++) {
+          //debugger;
+          if(data[i + position[j]]){
+            total += data[i + position[j]] * newWeights[j];
+          } else if (data[-i - position[j]]){
+            total += data[-i - position[j]] * newWeights[j];
+          } else if(data[data.length - 1 - position[j]]){
+            total += data[data.length - 1 - position[j]] * newWeights[j]
+          }
+      }
+      filtered.push(total);
+    }
+
+
+
+    debugger;
+
+  </script>
+ </html>
