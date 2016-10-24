@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Monthly Rainfall Boxplot for Dhone, Andhra Pradesh</title> 
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <style>
+
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 0px;
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 1200px
+    }
+
+    .title{
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
+    .axis-title{
+        text-anchor: middle;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
+    .axis text{
+        font-size: 15px;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
+    .label{
+        text-anchor: middle;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Lato", Arial, sans-serif;
+    }
+
+    .button{
+      fill: #e6e6e6;
+      stroke: #808080;
+      stroke-width: 1;
+      cursor: pointer;
+    }
+
+    .buttonText{
+      text-anchor: middle;
+      font-size: 14px;
+      font-family: "Lato", Arial, sans-serif;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    .y line{
+      stroke-dasharray: 3,6;
+      stroke: #cccccc;
+    }
+
+    .b line,
+    .b rect,
+    .b circle {
+      fill: #4DBAD9;
+      stroke: #000;
+      stroke-width: 1px;
+    }
+
+    .stats{
+      font-size: 10px;
+      font-family: "Lato", Arial, sans-serif;
+    }
+
+    .b .center {
+      stroke-dasharray: 6,3;
+    }
+
+    .b .outlier {
+      fill: none;
+      stroke: #000;
+    }
+
+    </style>		
+  </head>
+  <body>
+   <div id="chart"> </div>
+  </body>
+  <script type="text/javascript" src="/assets/js/libs/jquery-3.0.0.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/d3.v4.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/box.v4.js"></script>
+  <script type="text/javascript">
+
+    var margin = {top: 10, right: 10, bottom: 70, left: 65},
+    height = 400,
+    width = 800,
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    minRain = 0,
+    maxRain = 550,
+    zoomed = false,
+    labels = false;
+
+    svg = d3.select("#chart")
+            .append("div")
+            .classed("svg-container", true)
+            .append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", function(){
+                var h = height + margin.top + margin.bottom;
+                var w = width + margin.right + margin.left;
+                return "0 0 " + w + " " + h;
+            })   
+            .classed("svg-content-responsive", true);
+
+
+    plt = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                   
+
+    d3.csv("/assets/data/dhone_rainfall_monthly.csv", function(error, csv) {
+
+        var data = []
+        for (var i = 0; i < 12; i++) {
+          data[i] = [];
+          data[i][0] = months[i];
+          data[i][1] = [];   
+        }
+
+        csv.forEach(function(x) {
+          for (var i = 0; i < 12; i++) {
+              data[i][1].push(Math.round(x[i + 1]));
+          }
+
+        });
+
+        var chart = d3.box()
+                      .whiskers(iqr(1.5))
+                      .height(height) 
+                      .domain([minRain, maxRain])
+                      .showLabels(labels);
+
+        var xScale = d3.scaleBand()    
+                       .domain(data.map(function(d) {return d[0] } ) )      
+                       .rangeRound([0 , width])
+                       .padding(0.6);
+
+        var yScale = d3.scaleLinear()
+                       .domain([minRain, maxRain])
+                       .range([height, 0]);
+
+        var xAxis = d3.axisBottom()
+                      .scale(xScale)
+                      .tickSizeOuter(0);
+
+        var yAxis = d3.axisLeft()
+                      .tickSizeInner(-width)
+                      .tickSizeOuter(0)
+                      .scale(yScale);
+                       
+        plt.append("g")
+           .attr("class", "y axis")
+           .call(yAxis)
+      
+        var yText = svg.append("text") 
+                       .attr("transform", "rotate(-90)")
+                       .attr("y", 20)
+                       .attr("x",-margin.top - (height/ 2))
+                       .text("Rainfall (mm)")
+                       .classed("axis-title", true); 
+
+        plt.append("g")
+           .attr("class", "x axis")
+           .attr("transform", "translate(0," + (height) + ")")
+           .call(xAxis);
+    
+        svg.append("text")          
+           .attr("x", (margin.left + width / 2) )
+           .attr("y", height + margin.top + 40)
+           .text("Month")
+           .classed("axis-title", true);
+
+        var boxes = plt.selectAll(".box")     
+                       .data(data)
+                       .enter()
+                       .append("g")
+                       .attr("class", "b")
+                       .attr("transform", function(d) { return "translate(" +  xScale(d[0])  + "," + 0 + ")"; } )
+                       .call(chart.width(xScale.bandwidth()));
+
+
+        boxes.on("mouseover", function(d){
+
+          d3.select(this).selectAll(".box").style("fill", "#55d0f1");
+          d3.select(this).selectAll(".outlier").style("fill", "#55d0f1");
+
+          //show median value if room
+          if(Math.round(d[1].quartiles[1]) > 0){
+
+            plt.append("text")
+               .attr("class", "stats")
+               .attr("x", xScale(d3.select(this).data()[0][0]) + xScale.bandwidth() + 1)
+               .attr("y", yScale(d[1].quartiles[1]) + 5)
+               .text(Math.round(d[1].quartiles[1]) + " mm");
+          };
+
+          //show min/max values 
+          if(d3.select(this).selectAll(".whisker").data()[0] > 1){
+        
+            plt.append("text")
+               .attr("class", "stats")
+               .attr("x", xScale(d[0]) + xScale.bandwidth())
+               .attr("y", d3.select(this).selectAll(".whisker").nodes()[0].getAttribute("y2") - 1)
+               .text(d3.select(this).selectAll(".whisker").data()[0] + " mm");
+
+            plt.append("text")
+               .attr("class", "stats")
+               .attr("x", xScale(d[0]) + xScale.bandwidth())
+               .attr("y", d3.select(this).selectAll(".whisker").nodes()[1].getAttribute("y2") - 1)
+               .text(d3.select(this).selectAll(".whisker").data()[1] + " mm");
+           
+         };
+         
+         //label outliers if they are more that 5px apart starting with largest
+         var outliers = d3.select(this).selectAll(".outlier").nodes().reverse();
+         var position = 0
+         //debugger;
+         for (var i = 0; i < outliers.length; i++) {
+            if((position - parseInt(outliers[i].getAttribute("cy"))) < - 5){
+                d3.select(this).append("text")
+                        .attr("class", "stats")
+                        .attr("x", Math.round(outliers[i].getAttribute("cx")) + 3)
+                        .attr("y", Math.round(outliers[i].getAttribute("cy")))
+                        .text(Math.round(yScale.invert(+d3.select(outliers[i]).attr("cy"))) + "mm")
+
+            }
+            position = parseInt(outliers[i].getAttribute("cy"))
+          }
+
+        
+        })
+        .on("mouseout", function(d){
+
+          d3.select(this).selectAll(".box").style("fill", "#4DBAD9");
+          d3.select(this).selectAll(".outlier").style("fill", "none");
+
+          d3.selectAll(".stats").remove();
+
+        });
+
+        var zoomButton = svg.append("g").attr("transform", "translate(" + (margin.left + 10) + "," + (margin.top + 3) +")");
+
+        zoomButton.append("rect")
+                  .attr("width", 80)
+                  .attr("rx", 4)
+                  .attr("ry", 4)
+                  .attr("height", 25)
+                  .classed("button", true);
+
+        zoomButton.append("text")
+                  .classed("buttonText", true)
+                  .attr("y", 18)
+                  .attr("x", 40)
+                  .text("Zoom In");
+
+        zoomButton.on("mouseover", function(){
+                      zoomButton.select("rect")
+                                .style("stroke-width", 2)
+                                .style("fill", "#d3d3d3")
+                      zoomButton.select("text")
+                                .style("font-weight", "bold");
+                    })
+                  .on("mouseout", function(){
+                    zoomButton.select("rect")
+                              .style("stroke-width", 1.1)
+                              .style("fill", "#DDDDDD")
+                    zoomButton.select("text")
+                              .style("font-weight", "normal");
+                  })
+                  .on("click", function(){
+                    if(!zoomed){
+                       zoomed = true;    
+                       yScale.domain([0, 280]);
+                       yAxis.scale(yScale);
+                       svg.selectAll(".y.axis").transition().duration(1000).call(yAxis);
+                       chart.domain([0, 280]);
+                       boxes.call(chart.width(xScale.bandwidth()));
+                       d3.select(".buttonText").text("Zoom Out");
+                    }else{
+                       zoomed = false;   
+                       yScale.domain([0, 650]);
+                       yAxis.scale(yScale);
+                       svg.selectAll(".y.axis").transition().duration(1000).call(yAxis);
+                       chart.domain([0, 650]);
+                       boxes.call(chart.width(xScale.bandwidth()));
+                       d3.select(".buttonText").text("Zoom In");
+
+                    }    
+                  });
+
+    });
+
+    function iqr(k) {
+      return function(d, i) {
+        var q1 = d.quartiles[0],
+            q3 = d.quartiles[2],
+            iqr = (q3 - q1) * k,
+            i = -1,
+            j = d.length;
+        while (d[++i] < q1 - iqr);
+        while (d[--j] > q3 + iqr);
+        return [i, j];
+  };
+}
+
+    $('.svg-container').css('padding-bottom', ($('.svg-content-responsive').height() - 30) + 'px');
+
+    $(document).ready(function() {
+        $(window).resize(function(){
+           var height = $('.svg-content-responsive').height();
+           $('.svg-container').css('padding-bottom',  height + 'px');
+           parent.document.getElementById('rainfall-trends').style.height = height + 10 + 'px' 
+        });
+    });
+
+
+  </script>
+ </html>

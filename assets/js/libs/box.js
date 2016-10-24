@@ -274,7 +274,7 @@ d3.box = function() {
 
   box.domain = function(x) {
     if (!arguments.length) return domain;
-    domain = x == null ? x : d3.functor(x);
+    domain = x == null ? x : constant(x);
     return box;
   };
 
@@ -315,6 +315,12 @@ function boxQuartiles(d) {
     d3.quantile(d, .5),
     d3.quantile(d, .75)
   ];
+}
+
+function constant(x) {
+  return function() {
+    return x;
+  };
 }
 
 })();

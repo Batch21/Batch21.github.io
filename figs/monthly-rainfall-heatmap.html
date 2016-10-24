@@ -40,7 +40,7 @@
 
     .legendLabel{
     	font-size: 16px;
-    	font-family: 
+    	font-family: "Lato", Arial, sans-serif;
     	fill: black;
     	text-anchor: middle;
     }
@@ -64,7 +64,7 @@
   <body>
    <div id="heatmap"> </div>
   </body>
-  <script type="text/javascript" src="/assets/js/libs/d3.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/d3.v4.min.js"></script>
   <script type="text/javascript">
 
   var margin = {top: 50, right: 50, bottom: 80, left: 50},
@@ -93,11 +93,11 @@
 
   plt = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var yScale = d3.scale.ordinal().domain(months).range(d3.range(12));
+  var yScale = d3.scaleOrdinal().domain(months).range(d3.range(12));
 
-  var xScale = d3.scale.ordinal().domain(years).range(d3.range(26));
+  var xScale = d3.scaleOrdinal().domain(years).range(d3.range(26));
 
-  var colorScale = d3.scale.threshold()
+  var colorScale = d3.scaleThreshold()
   						   .domain([0.01, 10, 50, 100, 150, 250, 650])
   						   .range(colors)
    

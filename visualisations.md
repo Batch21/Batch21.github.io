@@ -6,6 +6,14 @@ title: Visualisations
 
 <div class="container grid">
   <div class="row">
+  <div class="col-md-4">
+      <div class="vis-example">
+      <a href="../visualisations/monthly-rainfall-boxplot"><img src="../assets/images/rainfall-boxplot.JPG"></a>
+      <div class="vis-title-con">
+       <a href="../visualisations/monthly-rainfall-boxplot" class="vis-title"><h3>Rainfall Box Plot</h3></a>
+      </div>
+     </div>
+    </div>
    <div class="col-md-4">
       <div class="vis-example">
       <a href="../visualisations/rainfall-annual-trends"><img src="../assets/images/annual-rainfall-trends.JPG"></a>
@@ -22,21 +30,13 @@ title: Visualisations
       </div>
      </div>
     </div>
-   <div class="col-md-4">
+  </div>  
+  <div class="row">
+  <div class="col-md-4">
       <div class="vis-example">
       <a href="../visualisations/rainfall-intensity"><img src="../assets/images/rainfall-intensity.JPG"></a>
       <div class="vis-title-con">
        <a href="../visualisations/rainfall-intensity" class="vis-title"><h3>Rainfall Intensity</h3></a>
-      </div>
-     </div>
-    </div>
-  </div>  
-  <div class="row">
-   <div class="col-md-4">
-      <div class="vis-example">
-      <a href="../visualisations/annual-rainfall"><img src="../assets/images/annual-rainfall.JPG"></a>
-      <div class="vis-title-con">
-       <a href="../visualisations/annual-rainfall" class="vis-title"><h3>Annual Rainfall</h3></a>
       </div>
      </div>
     </div>
@@ -48,7 +48,17 @@ title: Visualisations
       </div>
      </div>
     </div>
-   <div class="col-md-4">
+    <div class="col-md-4">
+      <div class="vis-example">
+      <a href="../visualisations/annual-rainfall"><img src="../assets/images/annual-rainfall.JPG"></a>
+      <div class="vis-title-con">
+       <a href="../visualisations/annual-rainfall" class="vis-title"><h3>Annual Rainfall</h3></a>
+      </div>
+     </div>
+   </div>
+  </div>
+  <div class="row">
+  <div class="col-md-4">
       <div class="vis-example">
       <a href="../visualisations/lyd-annual-hydrograph"><img src="../assets/images/lyd-hydrograph.JPG"></a>
       <div class="vis-title-con">

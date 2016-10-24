@@ -1,0 +1,95 @@
+.svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; 
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    max-width: 1200px
+}
+.fig{
+    margin: 0px;
+}
+
+.axis-title{
+    text-anchor: middle;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Lato", Arial, sans-serif;
+}
+
+.tooltip{
+    text-anchor: middle;
+    font-size: 11px;
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: bold;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none
+}
+
+.mean{
+    stroke: black;
+    stroke-width: 1.5;
+    shape-rendering: crispEdges;
+    stroke-dasharray: 8, 5;
+}
+
+.avText{
+   font-size: 14px;
+   font-weight: bold;
+   font-family: "Lato", Arial, sans-serif; 
+}
+
+.hide{
+    display: none;
+}
+
+.buttonRect{
+    fill: #e6e6e6;
+    stroke: #808080;
+    stroke-width: 1;
+    cursor: pointer;
+}
+
+.selected{
+    stroke: black;
+    stroke-width: 2;
+}
+
+.buttonText{
+    text-anchor: middle;
+    font-size: 14px;
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.label{
+    font-size: 16px;
+    font-family: "Lato", Arial, sans-serif;
+    color: black;
+}
+
+.legendLabel{
+    font-size: 16px;
+    font-family: "Lato", Arial, sans-serif;
+    fill: black;
+    text-anchor: middle;
+}
+
+.legendTitle{
+    font-family: "Lato", Arial, sans-serif;
+    text-anchor: middle;
+    font-size: 20px;
+    font-weight: bold;
+}
