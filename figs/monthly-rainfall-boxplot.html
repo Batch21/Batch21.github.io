@@ -297,10 +297,10 @@
                        d3.select(".buttonText").text("Zoom Out");
                     }else{
                        zoomed = false;   
-                       yScale.domain([0, 650]);
+                       yScale.domain([0, 550]);
                        yAxis.scale(yScale);
                        svg.selectAll(".y.axis").transition().duration(1000).call(yAxis);
-                       chart.domain([0, 650]);
+                       chart.domain([0, 550]);
                        boxes.call(chart.width(xScale.bandwidth()));
                        d3.select(".buttonText").text("Zoom In");
 
