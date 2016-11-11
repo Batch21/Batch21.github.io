@@ -93,3 +93,90 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.button{
+    fill: #e6e6e6;
+    stroke: #808080;
+    stroke-width: 1;
+    cursor: pointer;
+}
+
+.buttonTextBox{
+  text-anchor: middle;
+  font-size: 14px;
+  font-family: "Lato", Arial, sans-serif;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.box line{
+  stroke-dasharray: 3,6;
+  stroke: #cccccc;
+}
+
+.b line,
+.b rect,
+.b circle {
+  fill: #4DBAD9;
+  stroke: #000;
+  stroke-width: 1px;
+}
+
+.stats{
+  font-size: 10px;
+  font-family: "Lato", Arial, sans-serif;
+}
+
+.b .center {
+  stroke-dasharray: 6,3;
+}
+
+.b .outlier {
+  fill: none;
+  stroke: #000;
+}
+
+.tooltipDaily{
+    font-size: 14px;
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: bold;
+}
+
+.months text{
+    text-anchor: middle;
+    font-size: 11px;
+    font-family: "Lato", Arial, sans-serif;
+    cursor: pointer;
+}
+
+.svgDay circle {
+    fill: #4DBAD9;
+    stroke: #000;
+    stroke-width: 1px;
+}
+
+.svgDay .y path{
+    stroke: none;
+}
+
+.svgDay .y .tick line{
+  stroke: #cccccc;
+  stroke-width: 1px;
+}
+
+.svgDay #legend text{
+    font-size: 12px;
+    font-family: "Lato", Arial, sans-serif;
+}
+
+rect.tooltipDaily{
+    fill: rgba(220, 220, 217, 0.8);
+    stroke: black;
+    stroke-width: 1;
+}
+
+#instruc{
+    font-size: 20px;
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: bold;
+}

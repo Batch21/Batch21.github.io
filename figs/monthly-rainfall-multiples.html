@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Annual Hydrograph for the River Lyd</title> 
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <style>
+    
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; 
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        max-width: 1200px;
+        background-color: black;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+    }
+
+    .axis text{
+        font-size: 12px;
+        fill: white;
+    }
+
+    .year {
+        font: 18px Arial;
+        fill: white;
+        font-weight: bold;
+        text-align: left;
+        text-anchor: end;
+    }
+
+    .axis-label{
+        fill: white;
+        text-anchor: middle;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .bar{
+      stroke: #dddddd;
+      stroke-width: 1;
+    }
+
+    .tooltip{
+      fill: #083d91;
+      font-size: 14px;
+      text-anchor: middle;
+      font-weight: bold;
+    }
+
+   </style>		
+  </head>
+  <body>
+   <div id="chart"> </div>
+  </body>
+  <script type="text/javascript" src="/assets/js/libs/d3.v4.min.js"></script>
+  <script type="text/javascript">
+
+      var margin = {top: 5, right: 30, bottom: 30, left: 50},
+      cellMargin = {top: 10, right: 5, bottom: 10, left: 5}, 
+      width = 910 - margin.right - margin.left,
+      height = 590 - margin.top - margin.bottom,
+      months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      cellWidth = 170 - cellMargin.left - cellMargin.right,
+      cellHeight = 110 - cellMargin.top - cellMargin.bottom;
+
+      svg = d3.select("#chart")
+                .append("div")
+                .classed("svg-container", true)
+                .append("svg")
+                .attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("viewBox", "0 0 890 590")    
+                .classed("svg-content-responsive", true); 
+
+      plt = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"); 
+
+      yScale = d3.scaleLinear()
+                 .range([cellHeight, 0])
+                 .domain([0, 650])
+
+      xScale =  d3.scaleBand()
+                  .range([0, cellWidth])
+                  .domain(months);
+
+      var xAxis = d3.axisBottom()
+                    .scale(xScale)
+                    .tickSize(4)
+                    .tickSizeOuter(0)
+                    .tickFormat(function(d){
+                      return d[0];
+                    });
+
+      var xAxisEmpty = d3.axisBottom()
+                          .scale(xScale)
+                          .tickSize(4)
+                          .tickSizeOuter(0)
+                          .ticks(0)
+                          .tickFormat(function(){
+                            return null;
+                          });
+
+
+      var yAxis = d3.axisLeft()
+                        .scale(yScale)
+                        .tickSize(4)
+                        .tickSizeOuter(0)
+                        .ticks(4);
+
+      var yAxisEmpty = d3.axisLeft()
+                        .scale(yScale)
+                        .tickSize(4)
+                        .tickSizeOuter(0)
+                        .ticks(4)
+                        .tickFormat(function(){
+                            return null;
+                        });;
+
+      var xPos = d3.scaleBand()
+                   .range([0, width])
+                   .domain(d3.range(0, 5))
+
+      var yPos = d3.scaleBand()
+                   .range([0, height])
+                   .domain(d3.range(0, 5))
+
+
+
+      d3.csv("/assets/data/monthly_rainfall_edit.csv", function(data) {
+
+        data.forEach(function(d){
+            d.rainfall = +d.rainfall;
+        });   
+
+        var nestedData = d3.nest()
+                         .key(function(d) {return d.year;})
+                         .entries(data);
+
+        count = 0 
+        for (var i = 0; i < 5; i++) {
+           for (var j = 0; j < 5; j++) {
+
+                var chartArea = plt.append("g")
+                                   .attr("transform", "translate(" + (xPos(j) + cellMargin.left) + "," + (yPos(i) + cellMargin.top) + ")")
+                                   .classed("small-multiple", true);
+
+                chartArea.selectAll("rect")
+                         .data(nestedData[count]["values"])       
+                         .enter()
+                         .append("rect")
+                         .attr("x", function(d) {
+                            return xScale(d.month);
+                         })
+                         .attr("y", function(d){
+                            return yScale(d.rainfall);
+                         })
+                         .attr("width", xScale.bandwidth())
+                         .attr("height", function(d) {
+                              return cellHeight - yScale(d.rainfall);
+                          })
+                         .attr("fill", "#4DBAD9")
+                         .classed("bar", true);
+                         
+
+                if(j === 0){
+                  chartArea.append("g")
+                           .attr("class", "y axis")
+                           .call(yAxis)
+                }else{
+                  chartArea.append("g")
+                           .attr("class", "y axis")
+                           .call(yAxisEmpty)
+                }
+
+                if(i === 4){
+                  chartArea.append("g")
+                           .attr("class", "x axis")
+                           .attr("transform", "translate(0," + (cellHeight) + ")")
+                           .call(xAxis)
+                }else{
+                  chartArea.append("g")
+                           .attr("class", "x axis")
+                           .attr("transform", "translate(0," + (cellHeight) + ")")
+                           .call(xAxisEmpty)
+                }
+
+
+                chartArea.append("text")
+                         .attr("x", 60)
+                         .attr("y", 15)
+                         .classed("year", true)
+                         .text(nestedData[count]['key'])
+
+
+                count += 1
+            }
+        }
+
+        var charts = d3.selectAll(".small-multiple").nodes()
+
+        d3.selectAll(".bar")
+          .on("mouseover", function(d){
+            d3.select(this).attr("fill", "#96d7e9")
+            var year = d['year'];
+            var rainfall = d['rainfall'] + " mm";
+            var x = +d3.select(this).attr("x") + xScale.bandwidth()/2 - 40;
+            var y = +d3.select(this).attr("y") - 22;
+            charts.forEach(function(c){
+                 if(d3.select(c.children[0]).data()[0]["year"] === year){   
+                    
+                    var tooltip = d3.select(c).append("g")
+                                              .attr("transform", "translate(" + x + "," + y + ")")
+                                              .classed("tooltip", true)
+
+                    tooltip.append("rect")
+                           .attr("width", 80)
+                           .attr("height", 20)
+                           .style("fill", "#e6ffff")
+                           .style("stroke", "black")
+                    
+                    tooltip.append("text")
+                           .attr("x", 40)
+                           .attr("y", 15)
+                           .text(rainfall);
+                 }       
+            });
+          })
+          .on("mouseout", function(){
+            d3.selectAll(".tooltip").remove();
+            d3.select(this).attr("fill", "#4DBAD9")
+          })
+
+        svg.append("text")
+            .attr("y", margin.top + height + 25)
+            .attr("x", margin.left + width/2)
+            .text("Month")
+            .classed("axis-label", true);
+        
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 20)
+            .attr("x", -margin.top - height/2)
+            .text("Monthly Rainfall (mm)")
+            .classed("axis-label", true);
+
+      });
+  </script>
+ </html>

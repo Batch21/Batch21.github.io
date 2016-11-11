@@ -8,9 +8,9 @@ title: Visualisations
   <div class="row">
   <div class="col-md-4">
       <div class="vis-example">
-      <a href="../visualisations/monthly-rainfall-boxplot"><img src="../assets/images/rainfall-boxplot.JPG"></a>
+      <a href="../visualisations/monthly-rainfall-small-multiples"><img src="../assets/images/rainfall-small-multiples.JPG"></a>
       <div class="vis-title-con">
-       <a href="../visualisations/monthly-rainfall-boxplot" class="vis-title"><h3>Rainfall Box Plot</h3></a>
+       <a href="../visualisations/monthly-rainfall-small-multiples" class="vis-title"><h3>Rainfall - Multiples</h3></a>
       </div>
      </div>
     </div>
@@ -66,6 +66,13 @@ title: Visualisations
       </div>
      </div>
    </div>
+   <div class="col-md-4">
+      <div class="vis-example">
+      <a href="../visualisations/monthly-rainfall-boxplot"><img src="../assets/images/rainfall-boxplot.JPG"></a>
+      <div class="vis-title-con">
+       <a href="../visualisations/monthly-rainfall-boxplot" class="vis-title"><h3>Rainfall Box Plot</h3></a>
+      </div>
+     </div>
+    </div>
   </div>
-
 </div>
