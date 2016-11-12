@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Annual Hydrograph for the River Lyd</title> 
+	<title>Monthly Rainfall small multiples for Dhone, Andhra Pradesh</title> 
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <style>
@@ -213,38 +213,54 @@
             }
         }
 
-        var charts = d3.selectAll(".small-multiple").nodes()
+        var charts = d3.selectAll(".small-multiple").nodes();
+        var bars = d3.selectAll(".bar").nodes();
 
         d3.selectAll(".bar")
           .on("mouseover", function(d){
-            d3.select(this).attr("fill", "#96d7e9")
+            
             var year = d['year'];
-            var rainfall = d['rainfall'] + " mm";
-            var x = +d3.select(this).attr("x") + xScale.bandwidth()/2 - 40;
-            var y = +d3.select(this).attr("y") - 22;
-            charts.forEach(function(c){
-                 if(d3.select(c.children[0]).data()[0]["year"] === year){   
-                    
-                    var tooltip = d3.select(c).append("g")
-                                              .attr("transform", "translate(" + x + "," + y + ")")
-                                              .classed("tooltip", true)
+            var month = d['month']
 
-                    tooltip.append("rect")
-                           .attr("width", 80)
-                           .attr("height", 20)
-                           .style("fill", "#e6ffff")
-                           .style("stroke", "black")
-                    
-                    tooltip.append("text")
-                           .attr("x", 40)
-                           .attr("y", 15)
-                           .text(rainfall);
-                 }       
+            bars.forEach(function(b){
+              if(d3.select(b).data()[0]["month"] === month){
+                d3.select(b).attr("fill", "#1b697e").attr("stoke", "#404040");
+              }
             });
+
+            charts.forEach(function(c){
+                var chartBars = d3.select(c).selectAll(".bar").nodes()
+                chartBars.forEach(function(b){
+                    if(d3.select(b).data()[0]["month"] === month){
+
+                      var x = +d3.select(b).attr("x") + xScale.bandwidth()/2 - 35;
+                      var y = +d3.select(b).attr("y") - 25;
+                      var rainfall = d3.select(b).data()[0]["rainfall"] + " mm"
+
+                      var tooltip = d3.select(c).append("g")
+                                                .attr("transform", "translate(" + x + "," + y + ")")
+                                                .classed("tooltip", true)
+
+                      tooltip.append("rect")
+                                 .attr("width", 70)
+                                 .attr("height", 20)
+                                 .style("fill", "rgba(230, 255, 255, 0.7)")
+                                 .style("stroke", "black")
+                          
+                             tooltip.append("text")
+                                    .attr("x", 35)
+                                    .attr("y", 15)
+                                    .text(rainfall)
+                      
+                    }
+                })      
+            });
+
           })
+
           .on("mouseout", function(){
             d3.selectAll(".tooltip").remove();
-            d3.select(this).attr("fill", "#4DBAD9")
+            d3.selectAll(".bar").attr("fill", "#4DBAD9").attr("stoke", "#dddddd");
           })
 
         svg.append("text")

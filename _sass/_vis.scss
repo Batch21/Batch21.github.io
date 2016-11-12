@@ -180,3 +180,154 @@ rect.tooltipDaily{
     font-family: "Lato", Arial, sans-serif;
     font-weight: bold;
 }
+
+.svgMul .axis path,
+.svgMul .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+}
+
+.svgMul .axis text{
+    font-size: 12px;
+    fill: white;
+}
+
+.svgMul .year {
+    font: 18px Arial;
+    fill: white;
+    font-weight: bold;
+    text-align: left;
+    text-anchor: end;
+}
+
+.svgMul .axis-label{
+    fill: white;
+    text-anchor: middle;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.svgInt .label{
+    text-anchor: middle;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Lato", Arial, sans-serif;
+}
+
+.svgInt .tooltip{
+    text-anchor: middle;
+    font-size: 11px;
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: bold;
+}
+
+.svgInt .bar{
+  fill: #729FCF;
+  stroke: black;
+  stroke-width: 1;
+}
+
+.svgInt .buttonTitle{
+  font-size: 15px;
+  font-family: "Lato", Arial, sans-serif;
+  font-weight: bold;
+}
+
+.svgInt .button{
+  fill: #e6e6e6;
+  stroke: #808080;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.svgInt .selected{
+  stroke: black;
+  stroke-width: 2;
+}
+
+.svgInt .buttonText{
+  text-anchor: middle;
+  font-size: 11px;
+  font-family: "Lato", Arial, sans-serif;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.svgTre .tooltip{
+    font-size: 18px;
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: bold;
+    color: #124654;
+    pointer-events: none;
+    text-anchor: start;
+}
+
+.svgTre .bar{
+  fill: #729FCF;
+  stroke: black;
+  stroke-width: 1;
+}
+
+.svgTre .buttonTitle{
+  font-size: 15px;
+  font-family: "Lato", Arial, sans-serif;
+  font-weight: bold;
+}
+
+.svgTre .button{
+  fill: #e6e6e6;
+  stroke: #808080;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.svgTre .selected{
+  stroke: black;
+  stroke-width: 2;
+}
+
+.svgTre .buttonText{
+  text-anchor: middle;
+  font-size: 11px;
+  font-family: "Lato", Arial, sans-serif;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.svgTre .selection-container{
+  position: relative;
+  margin-left: 6%;
+  margin-top: 1.5%; 
+}
+
+.svgTre .selection-group{
+  display: inline;
+  margin-left: 0.5%; 
+}
+
+.svgTre .selection{
+  font-size: 12px;
+  font-family: "Lato", Arial, sans-serif;
+  display: inline-block;
+}
+
+.svgTre .selection-text{
+  display: inline-block;
+  margin: 0% 0% 0% 2.5%;
+  font-size: 14px;
+  font-family: "Lato", Arial, sans-serif;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 500px) {
+    .svgTre .selection{
+      font-size: 8px;
+    }
+
+    .svgTre .selection-text{
+      font-size: 8px;       
+    }
+
+}
