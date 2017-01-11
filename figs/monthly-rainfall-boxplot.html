@@ -22,7 +22,10 @@
         position: absolute;
         top: 0;
         left: 0;
-        max-width: 1200px
+        max-width: 1200px;
+        max-height: 500px;
+        min-width: 844px;
+        min-height: 484px;
     }
 
     .title{
@@ -319,8 +322,8 @@
         while (d[++i] < q1 - iqr);
         while (d[--j] > q3 + iqr);
         return [i, j];
-  };
-}
+     };
+    }
 
     $('.svg-container').css('padding-bottom', ($('.svg-content-responsive').height() - 30) + 'px');
 

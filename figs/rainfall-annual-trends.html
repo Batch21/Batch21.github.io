@@ -22,7 +22,11 @@
         position: absolute;
         top: 0;
         left: 0;
-        max-width: 1200px
+        max-width: 1200px;
+        max-height: 450px;
+        min-width: 884px;
+        min-height: 450px;
+
     }
 
     .title{
@@ -240,17 +244,22 @@
             d.rainfall = +d.rainfall;
         }); 
 
-        regions = new Set();
+        r = new Set();
         rainfallData = [];
         for (var i = 0; i < data.length; i++) {
-          regions.add(data[i].region);
+          r.add(data[i].region);
           if(data[i].region == selectedRegion){ 
               rainfallData.push({"year": data[i].year, "rainfall": data[i].rainfall});
           }
         }
 
-        regions = Array.from(regions).sort();
-        
+        //regions = Array.from(regions).sort();
+        var regions = [];
+        r.forEach(function(region){
+          regions.push(region);
+        });
+        regions.sort();
+      
         regionSelection.selectAll("option")
                        .data(regions)
                        .enter()
