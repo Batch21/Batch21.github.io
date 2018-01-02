@@ -23,14 +23,13 @@
 }
 .page-title,
 .post-title {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 // Meta data line below post title
 .post-date {
-  display: block;
-  margin-top: -.5rem;
-  margin-bottom: 1rem;
+  display: inline-block;
   color: #9a9a9a;
 }
 

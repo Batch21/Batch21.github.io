@@ -1,0 +1,64 @@
+body{
+  font-family: Lato, sans-serif;
+}
+
+.slider{
+  margin-top: 10px;
+}
+
+.ticks {
+  font-size: 10px;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: #000;
+  stroke-opacity: 0.3;
+  stroke-width: 10px;
+}
+
+.track-inset {
+  stroke: #ddd;
+  stroke-width: 8px;
+}
+
+.track-overlay {
+  pointer-events: stroke;
+  stroke-width: 50px;
+  stroke: transparent;
+  cursor: crosshair;
+}
+
+.handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1.25px;
+}
+
+.slider-title{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.slider-label{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.node-label{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.deficit-label{
+  font-size: 22px;
+  font-weight: bold;
+  fill: #930d0d;
+}
+
