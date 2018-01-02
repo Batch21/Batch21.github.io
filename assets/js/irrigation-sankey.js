@@ -275,7 +275,7 @@ function create_slider(id, dispatch_event, title, slider_height, start, end, ini
 
   var slider = svg.append("g")
       .attr("class", "slider")
-      .attr("transform", "translate(" + margin.left + "," + slider_height / 2 + ")");
+      .attr("transform", "translate(" + 30 + "," + slider_height / 2 + ")");
 
   var x = d3.scaleLinear()
       .domain([start, end])
