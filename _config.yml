@@ -28,7 +28,7 @@ github:
   repo:              https://github.com/poole/poole
 
 # Gems
-gems:
+plugins:
   - jekyll-paginate
   - jekyll-gist
 
